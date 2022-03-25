@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import React from 'react';
 import { styled } from 'linaria/react';
 import { CTAType } from './types';
 import CTA from './CTA';
@@ -32,6 +32,8 @@ const Container = styled.section`
   padding: 24px;
   &[data-desktop='true'] {
     flex-direction: row;
+    padding: 0px;
+    margin-bottom: 128px;
   }
   &[data-desktop='true'][data-reverse='true'] {
     flex-direction: row-reverse;
@@ -47,31 +49,47 @@ const ArticleStyled = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: unset;
+  ${media.lg} {
+    padding: 32px 0;
+    margin-bottom: unset;
+  }
 `;
 
 const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  &[data-desktop='true'][data-reverse='false'] {
+    margin-left: 24px;
+  }
 `;
 
 const Title = styled.h3`
+  font-family: ChivoBold;
   font-size: 28px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 32px;
   letter-spacing: -0.01em;
   margin-bottom: 16px;
   color: ${tm(({ colors }) => colors.neutral900)};
+  ${media.lg} {
+    font-size: 42px;
+    line-height: 45px;
+    letter-spacing: 0.5px;
+  }
 `;
 
 const Text = styled.h3`
+  font-family: ChivoLight;
   font-size: 18px;
-  font-style: normal;
-  font-weight: 100;
   line-height: 28px;
   letter-spacing: 0em;
   color: ${tm(({ colors }) => colors.neutral600)};
+  ${media.lg} {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0em;
+  }
 `;
 
 const Article = ({ title, text }: ArticleType) => {
@@ -84,7 +102,10 @@ const Article = ({ title, text }: ArticleType) => {
 };
 
 const CTAWrapper = styled.div`
-  margin-top: 32px;
+  margin-top: 8px;
+  ${media.lg} {
+    margin-top: 40px;
+  }
 `;
 
 const FeatureCard = ({ content, isReversed = false }: Props) => {
@@ -97,7 +118,7 @@ const FeatureCard = ({ content, isReversed = false }: Props) => {
       <ImageContainer>
         <Image src={getImgPath({ isDesktop })} alt={''} quality={100} />
       </ImageContainer>
-      <ContentContainer>
+      <ContentContainer data-desktop={isDesktop} data-reverse={isReversed}>
         <Article {...articleOne} />
         <Article {...articleTwo} />
         <CTAWrapper>
