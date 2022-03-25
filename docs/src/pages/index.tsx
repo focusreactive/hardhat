@@ -6,7 +6,7 @@ import WhyHardhatBlock from '../components/landingBlocks/WhyHardhatBlock';
 
 const Home: NextPage = () => {
   return (
-    <LandingLayout seo={{ title: 'Hardhat' }}>
+    <LandingLayout seo={{ title: 'Hardhat | Ethereum development environment for professionals by Nomic Foundation' }}>
       <HeroBlock />
       <WhyHardhatBlock />
 
