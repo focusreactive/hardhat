@@ -110,13 +110,11 @@ const Menu = (props: MenuProps) => {
       <MenuList>
         {menuItems.map((menuItem: MenuItemType) => {
           return (
-            <>
-              <MenuItem key={menuItem.label}>
-                <Link href={menuItem.href} passHref>
-                  <MenuButton data-current={router.pathname === menuItem.href}>{menuItem.label}</MenuButton>
-                </Link>
-              </MenuItem>
-            </>
+            <MenuItem key={menuItem.label}>
+              <Link href={menuItem.href} passHref>
+                <MenuButton data-current={router.pathname === menuItem.href}>{menuItem.label}</MenuButton>
+              </Link>
+            </MenuItem>
           );
         })}
       </MenuList>

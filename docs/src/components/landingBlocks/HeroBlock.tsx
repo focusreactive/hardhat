@@ -11,7 +11,7 @@ const { HeroPetsImage, HeroGraphicsImage } = Images;
 
 const content = {
   title: 'Ethereum development environment for professionals',
-  tagline: 'Flexible. Extensible. Fast.',
+  tagline: 'Flexible. Composable. Fast.',
   cta: {
     title: 'Get started',
     // TODO: switch to page reference later
@@ -28,6 +28,7 @@ const Container = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
   ${media.lg} {
     flex-direction: row;
     justify-content: space-between;
@@ -43,19 +44,22 @@ const Block = styled.div`
     margin: 0 auto;
   }
   ${media.lg} {
-    width: 50%;
+    width: 40%;
+    &:first-child {
+      width: 60%;
+    }
     padding: 0px;
     & svg {
       position: relative;
-      right: -236px;
+      right: -10%;
     }
   }
 `;
 
 const TagLine = styled.span`
+  font-family: ChivoLight;
   margin-bottom: 24px;
   font-size: 22px;
-  font-weight: 100;
   line-height: 32px;
   letter-spacing: -0.02em;
   text-align: left;

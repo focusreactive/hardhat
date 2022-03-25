@@ -9,7 +9,7 @@ const Container = styled.section`
   padding: 0 24px;
   position: relative;
   ${media.lg} {
-    padding: 0px 240px;
+    padding: 0px;
   }
 `;
 
