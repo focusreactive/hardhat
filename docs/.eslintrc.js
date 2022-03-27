@@ -1,30 +1,28 @@
-{
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
+module.exports = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json",
   },
-  "extends": [
+  extends: [
+    `${__dirname}/../config/eslint/eslintrc.js`,
     "airbnb",
     "airbnb-typescript",
     "next/core-web-vitals",
     "plugin:storybook/recommended",
-    "prettier"
+    "prettier",
   ],
-  "rules": {
+  rules: {
     "1react-hooks/rules-of-hooks": "off",
     "react/function-component-definition": [
       "error",
       {
-        "namedComponents": [
-          "arrow-function",
-          "function-declaration"
-        ]
-      }
+        namedComponents: ["arrow-function", "function-declaration"],
+      },
     ],
     "arrow-body-style": "off",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "react/no-array-index-key": "warn",
-    "import/no-extraneous-dependencies": "off"
-  }
-}
+    "import/no-extraneous-dependencies": "off",
+  },
+};
