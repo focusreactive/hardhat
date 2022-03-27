@@ -22,5 +22,5 @@ jobs:
       - name: Install
         run: cd docs && yarn
       - name: lint
-        run: yarn lint
+        run: cd docs && yarn lint
 
