@@ -15,9 +15,8 @@ const content = {
   cta: {
     title: 'Get started',
     // TODO: switch to page reference later
-    url: 'https://hardhat.org/getting-started/',
+    url: '/getting-started',
   },
-  heroImage: {},
 };
 
 type Props = {
