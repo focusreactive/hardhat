@@ -1,3 +1,5 @@
+const nextConfig = require('../next.config.js');
+
 module.exports = {
   stories: ["../src/components/**/*.stories.tsx"],
   addons: [
@@ -7,4 +9,17 @@ module.exports = {
     "@storybook/addon-interactions",
   ],
   framework: "@storybook/react",
+  webpackFinal: async (baseConfig) => {
+    return nextConfig.webpack(baseConfig, {});
+  },
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
+  },
 };
