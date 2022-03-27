@@ -1,16 +1,19 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 
 type Props = {
   seo: {
     title: string;
+    description: string;
   };
 };
 
 const SEO = ({ seo }: Props) => {
   return (
     <Head>
-      <title>{seo.title}</title>
+      <title>{`${seo.title} | ${seo.description}`}</title>
+      <meta name="description" content={seo.description}></meta>
+      <link rel="shortcut icon" href="/static/favicon.ico" />
     </Head>
   );
 };

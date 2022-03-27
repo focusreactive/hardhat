@@ -1,19 +1,16 @@
 import React from 'react';
 import Section from '../Section';
 import { styled } from 'linaria/react';
-import FeatureCard from '../ui/FeatureCard';
 import { tm, appTheme } from '../../themes';
-import { FeatureCards } from '../../config';
 const { media } = appTheme;
 
 const content = {
   title: 'Why hardhat',
-  ...FeatureCards,
 };
 
-type Props = {
+type Props = React.PropsWithChildren<{
   content: typeof content;
-};
+}>;
 
 const Container = styled.section`
   width: 100%;
@@ -72,16 +69,13 @@ const BottomBrackets = styled.div`
   }
 `;
 
-const WhyHardhatBlock = ({ content }: Props) => {
+const WhyHardhatBlock = ({ content, children }: Props) => {
   return (
     <Section>
       <Container>
         <TopBrackets />
         <Title>{content.title}</Title>
-        <FeatureCard content={content.featureCardOne} isReversed={true} />
-        <FeatureCard content={content.featureCardTwo} />
-        <FeatureCard content={content.featureCardThree} isReversed={true} />
-        <FeatureCard content={content.featureCardFour} />
+        {children}
         <BottomBrackets />
       </Container>
     </Section>

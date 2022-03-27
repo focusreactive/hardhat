@@ -27,6 +27,7 @@ const Container = styled.div`
 type Props = React.PropsWithChildren<{
   seo: {
     title: string;
+    description: string;
   };
 }>;
 
