@@ -1,6 +1,7 @@
-import React from 'react';
-import { styled } from 'linaria/react';
-import { appTheme } from '../themes';
+import React from "react";
+import { styled } from "linaria/react";
+import { appTheme, tm } from "../themes";
+
 const { media } = appTheme;
 
 const Container = styled.section`
@@ -21,7 +22,11 @@ type Props = React.PropsWithChildren<{
 }>;
 
 const Section = ({ children, clearPadding = false }: Props) => {
-  return <Container className={clearPadding ? 'clear-padding' : ''}>{children}</Container>;
+  return (
+    <Container className={clearPadding ? "clear-padding" : ""}>
+      {children}
+    </Container>
+  );
 };
 
 export default Section;
