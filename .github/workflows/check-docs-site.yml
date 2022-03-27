@@ -2,10 +2,8 @@ name: Lint Docs Site
 
 on:
   push:
-    branches: [$default-branch]
-  pull_request:
     branches:
-      - "*"
+      - "fr/**"
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
