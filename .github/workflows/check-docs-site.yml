@@ -6,6 +6,7 @@ on:
       - "fr/**"
     paths:
       - "docs"
+      - ".github"
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
