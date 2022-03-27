@@ -1,4 +1,4 @@
-name: Lint Docs Site
+name: Check Docs Site
 
 on:
   push:
