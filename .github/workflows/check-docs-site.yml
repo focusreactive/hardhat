@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - "fr/**"
-    paths:
-      - "docs"
-      - ".github"
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
