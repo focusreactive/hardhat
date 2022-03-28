@@ -11,7 +11,7 @@ import useWindowSize from "../hooks/useWindowSize";
 
 const { media, breakpoints } = appTheme;
 
-const Navigation = styled.nav<{ isMobileMenuOpen: boolean }>`
+const Navigation = styled.nav`
   position: sticky;
   margin-top: 40px;
   top: 0px;
@@ -77,12 +77,7 @@ const LandingNavigation: FC = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <Navigation
-      isMobileMenuOpen={isMobileMenuOpen}
-      onScroll={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <Navigation>
       <ControlsContainer>
         <Link href="/" passHref>
           <LogoContainer>
