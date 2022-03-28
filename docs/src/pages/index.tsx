@@ -6,14 +6,16 @@ import WhyHardhatBlock from "../components/landingBlocks/WhyHardhatBlock";
 
 const Home: NextPage = () => {
   return (
-    <LandingLayout seo={{ title: "Hardhat" }}>
+    <>
       <HeroBlock />
       <WhyHardhatBlock />
 
       {/* Required confirmation from customers */}
       {/* <ToolsBlock /> */}
-    </LandingLayout>
+    </>
   );
 };
+
+Home.layout = "landing";
 
 export default Home;

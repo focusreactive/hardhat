@@ -1,12 +1,22 @@
 import type { AppProps } from "next/app";
+import LandingLayout from "../components/LandingLayout";
 
 import "../styles/globals.css";
 import { ThemeProvider, appTheme } from "../themes";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
+  if (Component.layout !== "landing") {
+    return (
+      <div style={{ padding: 58 }}>
+        <Component {...pageProps} />
+      </div>
+    );
+  }
   return (
     <ThemeProvider theme={appTheme}>
-      <Component {...pageProps} />
+      <LandingLayout seo={{ title: "Hardhat" }}>
+        <Component {...pageProps} />
+      </LandingLayout>
     </ThemeProvider>
   );
 }
