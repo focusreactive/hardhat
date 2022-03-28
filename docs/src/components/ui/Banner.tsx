@@ -122,13 +122,7 @@ const BracesAnimation: React.FC<React.PropsWithChildren<{}>> = ({
 };
 
 const DefaultBanner = ({ content }: DefaultBannerProps) => {
-  return (
-    <BracesAnimation>
-      {content.text.split(" ").map((word: string, index: number) => (
-        <span key={`${word}-${index}`}>{word}</span>
-      ))}
-    </BracesAnimation>
-  );
+  return <BracesAnimation>{content.text}</BracesAnimation>;
 };
 
 const Banner = (props: BannerProps) => {
