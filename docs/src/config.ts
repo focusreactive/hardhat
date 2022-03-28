@@ -62,9 +62,8 @@ export enum Tools {
 
 export const FeatureCards = {
   featureCardOne: {
-    getImgPath: (props: { isDesktop: boolean }) => {
-      return props.isDesktop ? SolidityImageDesktop : SolidityImageMobile;
-    },
+    mobileImg: SolidityImageMobile,
+    desktopImg: SolidityImageDesktop,
     cta: { url: '/hardhat-network/#console-log', title: 'Get started with Solidity console.log' },
     articleOne: {
       title: 'Run Solidity locally',
@@ -76,9 +75,8 @@ export const FeatureCards = {
     },
   },
   featureCardTwo: {
-    getImgPath: (props: { isDesktop: boolean }) => {
-      return props.isDesktop ? FlexibilityImageDesktop : FlexibilityImageMobile;
-    },
+    mobileImg: FlexibilityImageMobile,
+    desktopImg: FlexibilityImageDesktop,
     cta: { url: '/guides/create-task.html', title: 'Learn more about extending Hardhat' },
     articleOne: {
       title: 'Extreme flexibility',
@@ -90,9 +88,8 @@ export const FeatureCards = {
     },
   },
   featureCardThree: {
-    getImgPath: (props: { isDesktop: boolean }) => {
-      return props.isDesktop ? ExtensibleImageDesktop : ExtensibleImageMobile;
-    },
+    mobileImg: ExtensibleImageMobile,
+    desktopImg: ExtensibleImageDesktop,
     cta: { url: '/plugins', title: 'Get started with plugins' },
     articleOne: {
       title: 'Fully extensible',
@@ -104,9 +101,8 @@ export const FeatureCards = {
     },
   },
   featureCardFour: {
-    getImgPath: (props: { isDesktop: boolean }) => {
-      return props.isDesktop ? FastIterationImageDesktop : FastIterationImageMobile;
-    },
+    mobileImg: FastIterationImageMobile,
+    desktopImg: FastIterationImageDesktop,
     cta: { url: '/guides/typescript.html', title: 'Get started with TypeScript' },
     articleOne: {
       title: 'Fast iteration',

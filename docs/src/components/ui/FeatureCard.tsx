@@ -13,7 +13,8 @@ type ArticleType = {
 };
 
 type ContentProps = {
-  getImgPath: (props: { isDesktop: boolean }) => StaticImageData;
+  mobileImg: StaticImageData;
+  desktopImg: StaticImageData;
   cta: CTAType;
   articleOne: ArticleType;
   articleTwo: ArticleType;
@@ -109,14 +110,14 @@ const CTAWrapper = styled.div`
 `;
 
 const FeatureCard = ({ content, isReversed = false }: Props) => {
-  const { getImgPath, cta, articleOne, articleTwo } = content;
+  const { mobileImg, desktopImg, cta, articleOne, articleTwo } = content;
   const windowSize = useWindowSize();
   const isDesktop = breakpoints.lg <= windowSize.width;
-
+  const imgPath = isDesktop ? desktopImg : mobileImg;
   return (
     <Container data-desktop={isDesktop} data-reverse={isReversed}>
       <ImageContainer>
-        <Image src={getImgPath({ isDesktop })} alt={''} quality={100} />
+        <Image src={imgPath} alt={''} quality={100} />
       </ImageContainer>
       <ContentContainer data-desktop={isDesktop} data-reverse={isReversed}>
         <Article {...articleOne} />
