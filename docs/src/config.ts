@@ -44,10 +44,3 @@ export const defaultMenuItemsList: MenuItemType[] = [
     href: "/tutorial",
   },
 ];
-
-export enum Tools {
-  RUNNER = "RUNNER",
-  IGNITION = "IGNITION",
-  NETWORK = "NETWORK",
-  VS_CODE = "VS_CODE",
-}

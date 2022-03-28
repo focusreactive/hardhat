@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import Section from "../Section";
 import { appTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
-import { Tools } from "../../config";
+import { Tools } from "../ui/types";
 import ToolsIcons from "../../assets/tools";
 
 const { media, breakpoints } = appTheme;

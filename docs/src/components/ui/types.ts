@@ -27,3 +27,10 @@ export interface CTAType {
   title: string;
   url: string;
 }
+
+export enum Tools {
+  RUNNER = "RUNNER",
+  IGNITION = "IGNITION",
+  NETWORK = "NETWORK",
+  VS_CODE = "VS_CODE",
+}
