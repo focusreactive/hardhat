@@ -37,8 +37,6 @@ const BannerContainer = styled.section`
   background-color: ${tm(({ colors }) => colors.neutral900)};
   color: ${tm(({ colors }) => colors.neutral0)};
   font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 15px;
   letter-spacing: 0.03em;
   cursor: pointer;
@@ -50,6 +48,7 @@ const BannerContainer = styled.section`
     margin-right: unset;
   }
 `;
+
 const BracesContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -64,58 +63,56 @@ const BracesContainer = styled.div`
   }
 `;
 
-const Brace = styled.div`
+const Brace = styled.div<{
+  fullAnimationDuration: number;
+  braceNumber: number;
+}>`
   display: inline;
-  &[data-highlighted="true"] {
-    color: ${tm(({ colors }) => colors.neutral900)};
-    transition: color ease-out 0.5s;
+  animation: highlight ease-out ${(props) => `${props.fullAnimationDuration}s`};
+  animation-iteration-count: 3;
+  animation-delay: ${(props) => `${props.braceNumber * 0.5}s`};
+  @keyframes highlight {
+    0%,
+    100% {
+      color: ${tm(({ colors }) => colors.accent900)};
+    }
+
+    10% {
+      color: ${tm(({ colors }) => colors.neutral900)};
+    }
+
+    20% {
+      color: ${tm(({ colors }) => colors.accent900)};
+    }
   }
 `;
 
 const BracesAnimation: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const [animationCounter, setAnimationCounter] = useState(0);
-  const [isAnimationPlaying, setAnimationState] = useState(true);
-
   const windowSize = useWindowSize();
   const { breakpoints } = appTheme;
+
   const bracesCount =
     windowSize.width >= breakpoints.lg
       ? 6
       : windowSize.width > breakpoints.sm
       ? 3
       : 2;
+
   const bracesString = Array(bracesCount)
     .fill(">")
     .map((brace: string, index: number) => {
       return (
         <Brace
           key={index}
-          data-highlighted={
-            isAnimationPlaying && index === animationCounter % bracesCount
-          }
+          fullAnimationDuration={bracesCount * 0.5}
+          braceNumber={index + 1}
         >
           {brace}
         </Brace>
       );
     });
-
-  useEffect(() => {
-    const interval = setInterval(
-      () =>
-        setAnimationCounter((currentCounter) => {
-          if (currentCounter + 1 - bracesCount * 3 >= 0) {
-            setAnimationState(false);
-            clearInterval(interval);
-          }
-          return currentCounter + 1;
-        }),
-      300
-    );
-
-    return () => clearInterval(interval);
-  }, [bracesCount]);
 
   return (
     <BracesContainer>
