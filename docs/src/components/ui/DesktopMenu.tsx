@@ -142,7 +142,7 @@ const Menu = (props: MenuProps) => {
   );
 };
 
-export default React.memo(Menu);
+export default Menu;
 
 Menu.defaultProps = {
   menuItems: defaultMenuItemsList,

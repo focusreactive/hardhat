@@ -190,7 +190,7 @@ const MobileMenu = (props: MenuProps) => {
   );
 };
 
-export default React.memo(MobileMenu);
+export default MobileMenu;
 
 MobileMenu.defaultProps = {
   menuItems: defaultMenuItemsList,

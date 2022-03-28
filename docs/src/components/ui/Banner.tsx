@@ -139,7 +139,7 @@ const Banner = (props: BannerProps) => {
   );
 };
 
-export default React.memo(Banner);
+export default Banner;
 
 Banner.defaultProps = {
   content: defaultBannerContent,

@@ -76,6 +76,6 @@ const WhyHardhatBlock = ({ content }: Props) => {
   );
 };
 
-export default React.memo(WhyHardhatBlock);
+export default WhyHardhatBlock;
 
 WhyHardhatBlock.defaultProps = { content: defaultContent };
