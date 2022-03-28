@@ -3,17 +3,22 @@ import { styled } from "linaria/react";
 import { appTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
 
-const defaultContent = {
+const defaultBannerContent = {
   text: "Join the Hardhat team! Nomic Labs is hiring",
   href: "https://www.notion.so/Nomic-Foundation-jobs-991b37c547554f75b89a95f437fd5056",
 };
 
-type BannerProps = React.PropsWithChildren<{
-  content: typeof defaultContent;
-}>;
+type BannerProps = {
+  content: typeof defaultBannerContent;
+  renderContent: ({
+    content,
+  }: {
+    content: typeof defaultBannerContent;
+  }) => JSX.Element;
+};
 
 interface DefaultBannerProps {
-  content: typeof defaultContent;
+  content: typeof defaultBannerContent;
 }
 
 const BannerContainer = styled.section`
@@ -121,21 +126,24 @@ const BracesAnimation: React.FC<React.PropsWithChildren<{}>> = ({
   );
 };
 
-const DefaultBanner = ({ content }: DefaultBannerProps) => {
+export const DefaultBanner = ({ content }: DefaultBannerProps) => {
   return <BracesAnimation>{content.text}</BracesAnimation>;
 };
 
 const Banner = (props: BannerProps) => {
-  const { children, content } = props;
+  const { content, renderContent } = props;
   return (
     <a target="_blank" rel="noreferrer" href={content.href}>
-      <BannerContainer>
-        {Array.isArray(children) && children[0]({ content })}
-      </BannerContainer>
+      <BannerContainer>{renderContent({ content })}</BannerContainer>
     </a>
   );
 };
 
 export default React.memo(Banner);
 
-Banner.defaultProps = { content: defaultContent, children: [DefaultBanner] };
+Banner.defaultProps = {
+  content: defaultBannerContent,
+  renderContent: ({ content }: DefaultBannerProps) => (
+    <DefaultBanner content={content} />
+  ),
+};
