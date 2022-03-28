@@ -9,7 +9,7 @@ import ToolsIcons from "../../assets/tools";
 const { media, breakpoints } = appTheme;
 const { RunnerIcon, IgnitionIcon, NetworkIcon, VSCodeIcon } = ToolsIcons;
 
-const content = {
+const defaultContent = {
   title: "Tools",
   tools: [
     {
@@ -40,7 +40,7 @@ const content = {
 };
 
 interface Props {
-  content: typeof content;
+  content: typeof defaultContent;
 }
 
 const Block = styled.section`
@@ -86,4 +86,4 @@ const HeroBlock = ({ content }: Props) => {
 
 export default HeroBlock;
 
-HeroBlock.defaultProps = { content };
+HeroBlock.defaultProps = { defaultContent };

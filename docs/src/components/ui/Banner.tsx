@@ -3,17 +3,17 @@ import { styled } from "linaria/react";
 import { appTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
 
-const content = {
+const defaultContent = {
   text: "Join the Hardhat team! Nomic Labs is hiring",
   href: "https://www.notion.so/Nomic-Foundation-jobs-991b37c547554f75b89a95f437fd5056",
 };
 
 type BannerProps = React.PropsWithChildren<{
-  content: typeof content;
+  content: typeof defaultContent;
 }>;
 
 interface DefaultBannerProps {
-  content: typeof content;
+  content: typeof defaultContent;
 }
 
 const BannerContainer = styled.section`
@@ -146,4 +146,4 @@ const Banner = (props: BannerProps) => {
 
 export default React.memo(Banner);
 
-Banner.defaultProps = { content, children: [DefaultBanner] };
+Banner.defaultProps = { content: defaultContent, children: [DefaultBanner] };

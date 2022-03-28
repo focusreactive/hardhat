@@ -9,7 +9,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 const { media, breakpoints } = appTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
 
-const content = {
+const defaultContent = {
   title: "Ethereum development environment for professionals",
   tagline: "Flexible. Extensible. Fast.",
   cta: {
@@ -21,7 +21,7 @@ const content = {
 };
 
 interface Props {
-  content: typeof content;
+  content: typeof defaultContent;
 }
 
 const Container = styled.section`
@@ -100,4 +100,4 @@ const HeroBlock = ({ content }: Props) => {
 
 export default HeroBlock;
 
-HeroBlock.defaultProps = { content };
+HeroBlock.defaultProps = { content: defaultContent };
