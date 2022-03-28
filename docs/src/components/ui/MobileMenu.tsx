@@ -1,17 +1,18 @@
 import React, { Fragment } from "react";
 import { styled } from "linaria/react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { tm } from "../../themes";
-
 import { MenuItemType, MenuProps, SocialsItem } from "./types";
 import { defaultSocialsItems } from "./default-props";
 import { defaultMenuItemsList } from "../../config";
+import { appTheme } from "../../themes";
+
+const { media } = appTheme;
 
 const MobileMenuContainer = styled.section`
   position: fixed;
   top: 40px;
-  right: -110vw;
+  right: -120vw;
   user-select: none;
   width: 100%;
   z-index: -1;
@@ -25,12 +26,17 @@ const MobileMenuContainer = styled.section`
   background-color: ${tm(({ colors }) => colors.neutral0)};
   opacity: 0.8;
   overflow-y: scroll;
+  visibility: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
   &[data-open="true"] {
     right: 0px;
     opacity: 1;
+    visibility: visible;
+  }
+  ${media.lg} {
+    display: none;
   }
 `;
 

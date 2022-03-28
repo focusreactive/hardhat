@@ -87,7 +87,7 @@ const LandingNavigation: FC = () => {
         <Menu />
       </ControlsContainer>
 
-      {!isDesktop && <MobileMenu isOpen={isMobileMenuOpen} />}
+      <MobileMenu isOpen={isMobileMenuOpen} />
     </Navigation>
   );
 };
