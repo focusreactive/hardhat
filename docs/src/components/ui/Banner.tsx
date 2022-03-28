@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { styled } from "linaria/react";
 import { appTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
+
+const { media, breakpoints } = appTheme;
 
 const defaultBannerContent = {
   text: "Join the Hardhat team! Nomic Labs is hiring",
@@ -37,8 +39,10 @@ const BannerContainer = styled.section`
   background-color: ${tm(({ colors }) => colors.neutral900)};
   color: ${tm(({ colors }) => colors.neutral0)};
   font-size: 13px;
+  font-weight: 400;
   line-height: 15px;
   letter-spacing: 0.03em;
+  white-space: nowrap;
   cursor: pointer;
   & span {
     margin-right: 2px;
@@ -46,6 +50,10 @@ const BannerContainer = styled.section`
   & span:last-child {
     text-decoration: underline;
     margin-right: unset;
+  }
+  ${media.lg} {
+    font-size: 18px;
+    line-height: 12px;
   }
 `;
 
@@ -91,7 +99,6 @@ const BracesAnimation: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   const windowSize = useWindowSize();
-  const { breakpoints } = appTheme;
 
   const bracesCount =
     windowSize.width >= breakpoints.lg
