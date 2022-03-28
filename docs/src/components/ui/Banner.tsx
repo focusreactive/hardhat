@@ -36,9 +36,7 @@ const BannerContainer = styled.section`
   font-weight: 400;
   line-height: 15px;
   letter-spacing: 0.03em;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
   & span {
     margin-right: 2px;
   }

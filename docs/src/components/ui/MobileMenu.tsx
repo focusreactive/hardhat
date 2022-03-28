@@ -68,8 +68,8 @@ const MobileMenuButton = styled.a`
   line-height: 24px;
   letter-spacing: 0.07em;
   text-align: center;
+  cursor: pointer;
   &:hover {
-    cursor: pointer;
     color: ${tm(({ colors }) => colors.neutral600)};
   }
 `;
@@ -101,6 +101,7 @@ const MobileMenuSubItemButton = styled.a`
   line-height: 24px;
   letter-spacing: 0.04em;
   text-align: center;
+  cursor: pointer;
   & .prefix {
     margin-right: 4px;
     color: ${tm(({ colors }) => colors.neutral600)};
@@ -109,7 +110,6 @@ const MobileMenuSubItemButton = styled.a`
     margin-bottom: unset;
   }
   &:hover {
-    cursor: pointer;
     opacity: 0.8;
   }
 `;

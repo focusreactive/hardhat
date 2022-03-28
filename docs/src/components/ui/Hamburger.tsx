@@ -19,9 +19,7 @@ const HamburgerContainer = styled.button`
   border: none;
   border-radius: 4px;
   background-color: ${tm(({ colors }) => colors.neutral0)};
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
   ${media.lg} {
     display: none;
   }

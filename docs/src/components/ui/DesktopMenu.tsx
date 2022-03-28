@@ -48,6 +48,7 @@ const MenuButton = styled.a`
   letter-spacing: 0.07em;
   text-align: center;
   position: relative;
+  cursor: pointer;
   &:after {
     transition: all ease-in-out 0.2s;
     position: absolute;
@@ -59,7 +60,6 @@ const MenuButton = styled.a`
     background-color: ${tm(({ colors }) => colors.neutral900)};
   }
   &:hover {
-    cursor: pointer;
     &:after {
       width: 100%;
     }

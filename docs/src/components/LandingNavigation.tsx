@@ -40,9 +40,7 @@ const ControlsContainer = styled.section`
   background-color: ${tm(({ colors }) => colors.neutral0)};
   padding: 4px 8px;
   box-sizing: border-box;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const LogoContainer = styled.a`
@@ -53,9 +51,7 @@ const LogoContainer = styled.a`
   box-sizing: border-box;
   background-color: ${tm(({ colors }) => colors.neutral0)};
   border: none;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const LandingNavigation: FC = () => {
