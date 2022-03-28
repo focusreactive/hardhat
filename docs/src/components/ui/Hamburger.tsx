@@ -25,27 +25,28 @@ const HamburgerContainer = styled.button`
   }
 `;
 
-const HamburgerLine = styled.div`
+const HamburgerLine = styled.div<{ isOpen: boolean }>`
   background-color: ${tm(({ colors }) => colors.neutral900)};
   height: 2px;
   width: 28px;
   transform-origin: left;
   user-select: none;
   transition: all 0.25s ease-in-out;
-  &[data-open="true"] {
-    &[data-position="top"] {
-      transform: rotate(45deg) translate(1px, -5px);
-    }
-    &[data-position="mid"] {
-      opacity: 0;
-    }
-    &[data-position="bot"] {
-      transform: rotate(-45deg) translate(1px, 5px);
-    }
-  }
-  &[data-position="mid"] {
+  &.mid {
     width: 19px;
     transition: all 0.1s ease-out;
+  }
+  &.top {
+    transform: ${({ isOpen }: { isOpen: boolean }) =>
+      isOpen ? "rotate(45deg) translate(1px, -5px)" : "none"};
+  }
+  &.mid {
+    opacity: 0;
+    opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "0" : "1")};
+  }
+  &.bot {
+    transform: ${({ isOpen }: { isOpen: boolean }) =>
+      isOpen ? "rotate(-45deg) translate(1px, 5px)" : "none"};
   }
 `;
 
@@ -54,9 +55,9 @@ const Hamburger = (props: HamburgerProps) => {
 
   return (
     <HamburgerContainer onClick={() => onClick()}>
-      <HamburgerLine data-open={isOpen} data-position="top" />
-      <HamburgerLine data-open={isOpen} data-position="mid" />
-      <HamburgerLine data-open={isOpen} data-position="bot" />
+      <HamburgerLine isOpen={isOpen} className="top" />
+      <HamburgerLine isOpen={isOpen} className="mid" />
+      <HamburgerLine isOpen={isOpen} className="bot" />
     </HamburgerContainer>
   );
 };
