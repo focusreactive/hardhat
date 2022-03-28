@@ -1,16 +1,16 @@
-import React from 'react';
-import { styled } from 'linaria/react';
-import { CTAType } from './types';
-import CTA from './CTA';
-import useWindowSize from '../../hooks/useWindowSize';
-import { appTheme, tm } from '../../themes';
-import Image from 'next/image';
+import React from "react";
+import { styled } from "linaria/react";
+import { CTAType } from "./types";
+import CTA from "./CTA";
+import useWindowSize from "../../hooks/useWindowSize";
+import { appTheme, tm } from "../../themes";
+import Image from "next/image";
 const { breakpoints, media } = appTheme;
 
-type ArticleType = {
+interface ArticleType {
   title: string;
   text: string;
-};
+}
 
 type ContentProps = {
   mobileImg: StaticImageData;
@@ -20,10 +20,10 @@ type ContentProps = {
   articleTwo: ArticleType;
 };
 
-type Props = {
+interface Props {
   content: ContentProps;
   isReversed?: boolean;
-};
+}
 
 const Container = styled.section`
   width: 100%;
@@ -31,12 +31,12 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   padding: 24px;
-  &[data-desktop='true'] {
+  &[data-desktop="true"] {
     flex-direction: row;
     padding: 0px;
     margin-bottom: 128px;
   }
-  &[data-desktop='true'][data-reverse='true'] {
+  &[data-desktop="true"][data-reverse="true"] {
     flex-direction: row-reverse;
   }
 `;
@@ -61,7 +61,7 @@ const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  &[data-desktop='true'][data-reverse='false'] {
+  &[data-desktop="true"][data-reverse="false"] {
     margin-left: 24px;
   }
 `;
@@ -117,7 +117,7 @@ const FeatureCard = ({ content, isReversed = false }: Props) => {
   return (
     <Container data-desktop={isDesktop} data-reverse={isReversed}>
       <ImageContainer>
-        <Image src={imgPath} alt={''} quality={100} />
+        <Image src={imgPath} alt={""} quality={100} />
       </ImageContainer>
       <ContentContainer data-desktop={isDesktop} data-reverse={isReversed}>
         <Article {...articleOne} />

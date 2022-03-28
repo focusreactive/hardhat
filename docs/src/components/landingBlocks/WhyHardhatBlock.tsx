@@ -1,11 +1,11 @@
-import React from 'react';
-import Section from '../Section';
-import { styled } from 'linaria/react';
-import { tm, appTheme } from '../../themes';
+import React from "react";
+import Section from "../Section";
+import { styled } from "linaria/react";
+import { tm, appTheme } from "../../themes";
 const { media } = appTheme;
 
 const content = {
-  title: 'Why hardhat',
+  title: "Why hardhat",
 };
 
 type Props = React.PropsWithChildren<{
