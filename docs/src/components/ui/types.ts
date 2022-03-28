@@ -6,7 +6,7 @@ export interface MenuItemType {
 }
 
 export enum SocialsEnum {
-  GIT_HUB = "GIT_HUB",
+  GITHUB = "GITHUB",
   TWITTER = "TWITTER",
   DISCORD = "DISCORD",
 }

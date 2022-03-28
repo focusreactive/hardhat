@@ -1,11 +1,11 @@
-import { MenuItemType, SocialsEnum } from "./types";
+import { SocialsEnum } from "./types";
 import GitHubLogo from "../../assets/socials/gh-logo";
 import TwitterLogo from "../../assets/socials/tw-logo";
 import DiscordLogo from "../../assets/socials/dc-logo";
 
 export const defaultSocialsItems = [
   {
-    name: SocialsEnum.GIT_HUB,
+    name: SocialsEnum.GITHUB,
     href: "https://github.com/NomicFoundation/hardhat",
     Icon: GitHubLogo,
   },
