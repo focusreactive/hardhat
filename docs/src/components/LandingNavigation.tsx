@@ -59,7 +59,7 @@ const LogoContainer = styled.a`
 `;
 
 const LandingNavigation: FC = () => {
-  const [isMobileMenuOpen, setMobileMenuState] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const windowSize = useWindowSize();
   const isDesktop = breakpoints.lg <= windowSize.width;
 
@@ -91,7 +91,7 @@ const LandingNavigation: FC = () => {
         </Link>
         <Hamburger
           isOpen={isMobileMenuOpen}
-          onClick={() => setMobileMenuState(!isMobileMenuOpen)}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         />
         <Menu />
       </ControlsContainer>
