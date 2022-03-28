@@ -26,13 +26,16 @@ export default function useWindowSize(): WindowSizeState {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.addEventListener("resize", () =>
-        handleResize({ setWindowSize, windowObject: window })
-      );
+      const listener = () =>
+        handleResize({ setWindowSize, windowObject: window });
+
+      window.addEventListener("resize", listener);
 
       handleResize({ setWindowSize, windowObject: window });
 
-      return () => window.removeEventListener("resize", () => handleResize);
+      return () => {
+        window.removeEventListener("resize", listener);
+      };
     }
   }, []);
 
