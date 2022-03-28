@@ -6,14 +6,20 @@ import { tm } from "../../themes";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
 import { defaultSocialsItems } from "./default-props";
 import { defaultMenuItemsList } from "../../config";
+import { appTheme } from "../../themes";
+
+const { media } = appTheme;
 
 const MenuContainer = styled.section`
   user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   width: 607px;
+  display: none;
   background-color: ${tm(({ colors }) => colors.neutral0)};
+  ${media.lg} {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 `;
 
 const MenuList = styled.ul`

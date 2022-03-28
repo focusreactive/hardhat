@@ -1,32 +1,29 @@
-import React, { FC } from "react";
+import React from "react";
 import { styled } from "linaria/react";
-import { css } from "linaria";
 import { tm } from "../../themes";
+import { appTheme } from "../../themes";
 
+const { media } = appTheme;
 interface HamburgerProps {
   isOpen: boolean;
   onClick: () => void;
-}
-
-type HamburgerLinePosition = "top" | "mid" | "bot";
-
-interface HamburgerLineProps {
-  isOpen: boolean;
-  position: HamburgerLinePosition;
 }
 
 const HamburgerContainer = styled.button`
   width: 44px;
   height: 32px;
   display: flex;
-  padding: 8px;
-  border: none;
   flex-direction: column;
   justify-content: space-between;
+  padding: 8px;
+  border: none;
   border-radius: 4px;
   background-color: ${tm(({ colors }) => colors.neutral0)};
   &:hover {
     cursor: pointer;
+  }
+  ${media.lg} {
+    display: none;
   }
 `;
 
@@ -66,4 +63,4 @@ const Hamburger = (props: HamburgerProps) => {
   );
 };
 
-export default React.memo(Hamburger);
+export default Hamburger;

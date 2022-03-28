@@ -89,15 +89,11 @@ const LandingNavigation: FC = () => {
             <HardhatLogo />
           </LogoContainer>
         </Link>
-
-        {!isDesktop ? (
-          <Hamburger
-            isOpen={isMobileMenuOpen}
-            onClick={() => setMobileMenuState(!isMobileMenuOpen)}
-          />
-        ) : (
-          <Menu />
-        )}
+        <Hamburger
+          isOpen={isMobileMenuOpen}
+          onClick={() => setMobileMenuState(!isMobileMenuOpen)}
+        />
+        <Menu />
       </ControlsContainer>
 
       {!isDesktop && <MobileMenu isOpen={isMobileMenuOpen} />}
