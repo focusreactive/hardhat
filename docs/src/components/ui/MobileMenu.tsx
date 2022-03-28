@@ -152,7 +152,7 @@ const MobileMenu = (props: MenuProps) => {
                   <MobileMenuButton>{menuItem.label}</MobileMenuButton>
                 </Link>
               </MobileMenuItem>
-              {menuItem.subItems && menuItem.subItems.length > 0 && (
+              {menuItem.subItems?.length && (
                 <MobileMenuSubContainer itemsCount={menuItem.subItems.length}>
                   {menuItem.subItems.map((subItem: MenuItemType) => {
                     return (
