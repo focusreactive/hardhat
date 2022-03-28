@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
+
 import LandingLayout from '../components/LandingLayout';
 import HeroBlock from '../components/landingBlocks/HeroBlock';
 import WhyHardhatBlock from '../components/landingBlocks/WhyHardhatBlock';
 import VibrantCommunityBlock from '../components/landingBlocks/VibrantCommunityBlock';
+import TrustedTeamsBlock from '../components/landingBlocks/TrustedTeamsBlock';
 // import ToolsBlock from '../components/landingBlocks/ToolsBlock';
 
 const Home: NextPage = () => {
@@ -11,6 +13,7 @@ const Home: NextPage = () => {
       <HeroBlock />
       <WhyHardhatBlock />
       <VibrantCommunityBlock />
+      <TrustedTeamsBlock />
 
       {/* Required confirmation from customers */}
       {/* <ToolsBlock /> */}
