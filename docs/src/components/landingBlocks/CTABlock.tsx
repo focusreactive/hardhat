@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
-import Section from '../Section';
-import { appTheme, tm } from '../../themes';
-import useWindowSize from '../../hooks/useWindowSize';
-import Images from '../../assets/images';
-import { styled } from 'linaria/react';
-import CTA from '../ui/CTA';
+import React from "react";
+import { styled } from "linaria/react";
+import { appTheme, tm } from "../../themes";
+import useWindowSize from "../../hooks/useWindowSize";
+import Images from "../../assets/images";
+import CTA from "../ui/CTA";
+import Section from "../Section";
+import defaultProps from "../ui/default-props";
 
+const { defaultCTAContent } = defaultProps;
 const { TextureBrick } = Images;
 const { media, breakpoints } = appTheme;
 
-const content = {
-  title: 'Hardhat is next- generation Ethereum tooling',
-  subtitle: 'Experience the new way of building Ethereum software.',
-  cta: {
-    title: 'Get started',
-    url: '/getting-started',
-  },
-};
-
-type Props = {
-  content: typeof content;
-};
+interface Props {
+  content: typeof defaultCTAContent;
+}
 
 const CTABlockStyled = styled.section`
   width: 100%;
@@ -102,7 +95,7 @@ const Background = () => {
   return (
     <StyledBackground>
       {isDesktop && (
-        <TextureBrickWrapper className={'left'}>
+        <TextureBrickWrapper className="left">
           <TextureBrick />
         </TextureBrickWrapper>
       )}
@@ -115,7 +108,7 @@ const Background = () => {
 
 const CTABlock = ({ content }: Props) => {
   return (
-    <Section clearPadding={true}>
+    <Section clearPadding>
       <CTABlockStyled>
         <Background />
         <ContentBlock>
@@ -129,5 +122,3 @@ const CTABlock = ({ content }: Props) => {
 };
 
 export default CTABlock;
-
-CTABlock.defaultProps = { content };

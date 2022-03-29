@@ -1,8 +1,15 @@
-import * as React from 'react';
-import { SVGProps, memo } from 'react';
+import * as React from "react";
+import { SVGProps, memo } from "react";
 
 const TextureBrick = (props: SVGProps<SVGSVGElement>) => (
-  <svg width={536} height={792} viewBox="0 0 536 792" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    width={536}
+    height={792}
+    viewBox="0 0 536 792"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <path
       d="M394.005 658.643L373.338 671.316V682.405L394.005 669.732V658.643Z"
       stroke="#F6F1FD"
