@@ -26,6 +26,7 @@ export const appTheme = {
     neutral900: '#0A0A0A',
     accent600: '#FFF04D',
     accent900: '#EDCF00',
+    cardBoxShadow: 'rgba(10, 10, 10, 0.08)',
     accentBackground: 'linear-gradient(256.6deg, #FFF100 0%, #FFF100 100%)',
   },
   media,
