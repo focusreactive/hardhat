@@ -5,6 +5,7 @@ import { styled } from 'linaria/react';
 import VibrantCommunityImage from '../../assets/images/vibrant_community.png';
 
 import { appTheme, tm } from '../../themes';
+import CTA from '../ui/CTA';
 
 const { media } = appTheme;
 
@@ -40,7 +41,7 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: center;
   }
-  box-shadow: 0 6px 50px rgba(10, 10, 10, 0.08);
+  box-shadow: 0 6px 50px ${tm(({ colors }) => colors.cardBoxShadow)};
 `;
 
 const Wrapper = styled.div`
@@ -94,30 +95,19 @@ const Text = styled.p`
   }
 `;
 
-const CTA = styled.a`
+const ButtonWrapper = styled.div`
   width: 232px;
   margin-bottom: 48px;
-  padding: 12px 0;
-  border: 1px solid ${tm(({ colors }) => colors.neutral700)};
-  border-radius: 4px;
   align-self: center;
-  text-align: center;
   font-size: 15px;
   line-height: 24px;
   font-weight: 400;
   font-family: ChivoRegular, sans-serif;
   color: ${tm(({ colors }) => colors.neutral900)};
-  transition: 0.5s;
 
-  &:focus {
-    border-color: ${tm(({ colors }) => colors.neutral100)};
-    background-color: ${tm(({ colors }) => colors.neutral100)};
-  }
-  
   ${media.lg} {
     align-self: start;
   }
-}
 `;
 
 const VibrantCommunityBlock = ({ content }: Props) => {
@@ -127,7 +117,11 @@ const VibrantCommunityBlock = ({ content }: Props) => {
         <Wrapper>
           <Title>{content.title}</Title>
           <Text>{content.text}</Text>
-          <CTA href={content.cta.url}>{content.cta.title}</CTA>
+          <ButtonWrapper>
+            <CTA href={content.cta.url} secondary={true}>
+              {content.cta.title}
+            </CTA>
+          </ButtonWrapper>
         </Wrapper>
         <ImageContainer>
           <Image src={VibrantCommunityImage} alt={'Vibrant community image'} />
