@@ -1,4 +1,3 @@
-import { MenuItemType } from "./components/ui/types";
 import SolidityImageDesktop from "./assets/feature-cards/Desktop/SolidityImage.png";
 import SolidityImageMobile from "./assets/feature-cards/Mobile/SolidityImage.png";
 import FlexibilityImageDesktop from "./assets/feature-cards/Desktop/FlexibilityImage.png";
@@ -7,6 +6,7 @@ import ExtensibleImageDesktop from "./assets/feature-cards/Desktop/ExtensibleIma
 import ExtensibleImageMobile from "./assets/feature-cards/Mobile/ExtensibleImage.png";
 import FastIterationImageDesktop from "./assets/feature-cards/Desktop/FastIterationImage.png";
 import FastIterationImageMobile from "./assets/feature-cards/Mobile/FastIterationImage.png";
+import { MenuItemType, SocialsEnum } from "./components/ui/types";
 
 export const defaultMenuItemsList: MenuItemType[] = [
   {
@@ -123,3 +123,11 @@ export const FeatureCards = {
     },
   },
 };
+export const SOCIALS_LINKS = {
+  [SocialsEnum.GITHUB]: "https://github.com/NomicFoundation/hardhat",
+  [SocialsEnum.TWITTER]: "https://twitter.com/HardhatHQ",
+  [SocialsEnum.DISCORD]: "https://discord.com/invite/TETZs2KK4k",
+};
+
+export const BANNER_LINK =
+  "https://www.notion.so/Nomic-Foundation-jobs-991b37c547554f75b89a95f437fd5056";

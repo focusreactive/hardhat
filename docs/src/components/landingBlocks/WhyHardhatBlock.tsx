@@ -4,12 +4,12 @@ import { styled } from "linaria/react";
 import { tm, appTheme } from "../../themes";
 const { media } = appTheme;
 
-const content = {
+export const defaultWhyHardhatContent = {
   title: "Why hardhat",
 };
 
 type Props = React.PropsWithChildren<{
-  content: typeof content;
+  content: typeof defaultWhyHardhatContent;
 }>;
 
 const Container = styled.section`
@@ -82,6 +82,4 @@ const WhyHardhatBlock = ({ content, children }: Props) => {
   );
 };
 
-export default React.memo(WhyHardhatBlock);
-
-WhyHardhatBlock.defaultProps = { content };
+export default WhyHardhatBlock;
