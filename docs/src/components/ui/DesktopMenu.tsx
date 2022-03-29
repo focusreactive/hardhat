@@ -2,12 +2,12 @@ import React from "react";
 import { styled } from "linaria/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { tm } from "../../themes";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
-import { defaultSocialsItems } from "./default-props";
+import defaultProps from "./default-props";
 import { defaultMenuItemsList } from "../../config";
-import { appTheme } from "../../themes";
+import { appTheme, tm } from "../../themes";
 
+const { defaultSocialsItems } = defaultProps;
 const { media } = appTheme;
 
 const MenuContainer = styled.section`
@@ -107,8 +107,7 @@ const SocialLinksItem = styled.li`
   }
 `;
 
-const Menu = (props: MenuProps) => {
-  const { menuItems, socialsItems } = props;
+const Menu = ({ menuItems, socialsItems }: MenuProps) => {
   const router = useRouter();
 
   return (

@@ -8,7 +8,7 @@ import { tm, appTheme } from "../../themes";
 
 const { media } = appTheme;
 
-const defaultContent = {
+export const defaultWhyHardhatContent = {
   title: "Why hardhat",
   featureCardOne: {
     getImgPath: (props: { isDesktop: boolean }) => {
@@ -30,7 +30,7 @@ const defaultContent = {
 };
 
 interface Props {
-  content: typeof defaultContent;
+  content: typeof defaultWhyHardhatContent;
 }
 
 const Container = styled.section`
@@ -77,5 +77,3 @@ const WhyHardhatBlock = ({ content }: Props) => {
 };
 
 export default WhyHardhatBlock;
-
-WhyHardhatBlock.defaultProps = { content: defaultContent };

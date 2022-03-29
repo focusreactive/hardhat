@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { tm } from "../../themes";
-import { appTheme } from "../../themes";
+import { tm, appTheme } from "../../themes";
 
 const { media } = appTheme;
 interface HamburgerProps {
@@ -50,9 +49,7 @@ const HamburgerLine = styled.div<{ isOpen: boolean }>`
   }
 `;
 
-const Hamburger = (props: HamburgerProps) => {
-  const { onClick, isOpen } = props;
-
+const Hamburger = ({ onClick, isOpen }: HamburgerProps) => {
   return (
     <HamburgerContainer onClick={() => onClick()}>
       <HamburgerLine isOpen={isOpen} className="top" />

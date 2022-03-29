@@ -34,3 +34,19 @@ export enum Tools {
   NETWORK = "NETWORK",
   VS_CODE = "VS_CODE",
 }
+
+interface DefaultBannerContent {
+  text: string;
+  href: string;
+}
+export interface BannerProps {
+  content: DefaultBannerContent;
+  renderContent: ({
+    content,
+  }: {
+    content: DefaultBannerContent;
+  }) => JSX.Element;
+}
+export interface DefaultBannerProps {
+  content: DefaultBannerContent;
+}

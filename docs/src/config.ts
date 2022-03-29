@@ -50,3 +50,6 @@ export const SOCIALS_LINKS = {
   [SocialsEnum.TWITTER]: "https://twitter.com/HardhatHQ",
   [SocialsEnum.DISCORD]: "https://discord.com/invite/TETZs2KK4k",
 };
+
+export const BANNER_LINK =
+  "https://www.notion.so/Nomic-Foundation-jobs-991b37c547554f75b89a95f437fd5056";

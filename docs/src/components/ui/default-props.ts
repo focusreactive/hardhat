@@ -2,9 +2,9 @@ import { SocialsEnum } from "./types";
 import GitHubLogo from "../../assets/socials/gh-logo";
 import TwitterLogo from "../../assets/socials/tw-logo";
 import DiscordLogo from "../../assets/socials/dc-logo";
-import { SOCIALS_LINKS } from "../../config";
+import { BANNER_LINK, SOCIALS_LINKS } from "../../config";
 
-export const defaultSocialsItems = [
+const defaultSocialsItems = [
   {
     name: SocialsEnum.GITHUB,
     href: SOCIALS_LINKS[SocialsEnum.GITHUB],
@@ -21,3 +21,25 @@ export const defaultSocialsItems = [
     Icon: DiscordLogo,
   },
 ];
+
+const defaultBannerContent = {
+  text: "Join the Hardhat team! Nomic Labs is hiring",
+  href: BANNER_LINK,
+};
+
+const defaultHeroBlockContent = {
+  title: "Ethereum development environment for professionals",
+  tagline: "Flexible. Extensible. Fast.",
+  cta: {
+    title: "Get started",
+    url: "/getting-started",
+  },
+};
+
+const defaultProps = {
+  defaultSocialsItems,
+  defaultBannerContent,
+  defaultHeroBlockContent,
+};
+
+export default defaultProps;

@@ -1,27 +1,10 @@
 import React from "react";
 import { styled } from "linaria/react";
 import { appTheme, tm } from "../../themes";
-import useWindowSize from "../../hooks/useWindowSize";
+import useWindowSize, { WindowSizeState } from "../../hooks/useWindowSize";
+import { BannerProps, DefaultBannerProps } from "./types";
 
 const { media, breakpoints } = appTheme;
-
-const defaultBannerContent = {
-  text: "Join the Hardhat team! Nomic Labs is hiring",
-  href: "https://www.notion.so/Nomic-Foundation-jobs-991b37c547554f75b89a95f437fd5056",
-};
-
-type BannerProps = {
-  content: typeof defaultBannerContent;
-  renderContent: ({
-    content,
-  }: {
-    content: typeof defaultBannerContent;
-  }) => JSX.Element;
-};
-
-interface DefaultBannerProps {
-  content: typeof defaultBannerContent;
-}
 
 const BannerContainer = styled.section`
   position: absolute;
@@ -95,24 +78,24 @@ const Brace = styled.div<{
   }
 `;
 
+const getBracesCount = (windowSize: WindowSizeState) => {
+  if (windowSize.width >= breakpoints.lg) return 6;
+  if (windowSize.width >= breakpoints.sm) return 3;
+  return 2;
+};
+
 const BracesAnimation: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   const windowSize = useWindowSize();
-
-  const bracesCount =
-    windowSize.width >= breakpoints.lg
-      ? 6
-      : windowSize.width > breakpoints.sm
-      ? 3
-      : 2;
+  const bracesCount = getBracesCount(windowSize);
 
   const bracesString = Array(bracesCount)
     .fill(">")
     .map((brace: string, index: number) => {
       return (
         <Brace
-          key={index}
+          key={Math.random()}
           fullAnimationDuration={bracesCount * 0.5}
           braceNumber={index + 1}
         >
@@ -134,8 +117,7 @@ export const DefaultBanner = ({ content }: DefaultBannerProps) => {
   return <BracesAnimation>{content.text}</BracesAnimation>;
 };
 
-const Banner = (props: BannerProps) => {
-  const { content, renderContent } = props;
+const Banner = ({ content, renderContent }: BannerProps) => {
   return (
     <a target="_blank" rel="noreferrer" href={content.href}>
       <BannerContainer>{renderContent({ content })}</BannerContainer>
@@ -144,10 +126,3 @@ const Banner = (props: BannerProps) => {
 };
 
 export default Banner;
-
-Banner.defaultProps = {
-  content: defaultBannerContent,
-  renderContent: ({ content }: DefaultBannerProps) => (
-    <DefaultBanner content={content} />
-  ),
-};

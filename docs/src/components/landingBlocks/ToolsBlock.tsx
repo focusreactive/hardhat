@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "linaria/react";
 import Section from "../Section";
 import { appTheme, tm } from "../../themes";
-import useWindowSize from "../../hooks/useWindowSize";
 import { Tools } from "../ui/types";
 import ToolsIcons from "../../assets/tools";
 
-const { media, breakpoints } = appTheme;
+const { media } = appTheme;
 const { RunnerIcon, IgnitionIcon, NetworkIcon, VSCodeIcon } = ToolsIcons;
 
 const defaultContent = {
@@ -39,10 +38,6 @@ const defaultContent = {
   ],
 };
 
-interface Props {
-  content: typeof defaultContent;
-}
-
 const Block = styled.section`
   display: flex;
   flex-direction: column;
@@ -69,11 +64,7 @@ const BotDivider = styled(MobileDivider)`
   border-bottom: unset;
 `;
 
-const HeroBlock = ({ content }: Props) => {
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.lg <= windowSize.width;
-  const [activeTool, setActiveTool] = useState<Tools>(Tools.RUNNER);
-
+const ToolsBlock = () => {
   return (
     <Section>
       <Block>
@@ -84,6 +75,6 @@ const HeroBlock = ({ content }: Props) => {
   );
 };
 
-export default HeroBlock;
+export default ToolsBlock;
 
-HeroBlock.defaultProps = { defaultContent };
+ToolsBlock.defaultProps = { content: defaultContent };

@@ -1,15 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
 import { styled } from "linaria/react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { appTheme, tm } from "../themes";
 import HardhatLogo from "../assets/hardhat-logo";
 import Hamburger from "./ui/Hamburger";
 import MobileMenu from "./ui/MobileMenu";
 import Menu from "./ui/DesktopMenu";
-import useWindowSize from "../hooks/useWindowSize";
 
-const { media, breakpoints } = appTheme;
+const { media } = appTheme;
 
 const Navigation = styled.nav`
   position: sticky;
@@ -56,8 +54,6 @@ const LogoContainer = styled.a`
 
 const LandingNavigation: FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.lg <= windowSize.width;
 
   useEffect(() => {
     const body = document.querySelector("body");
