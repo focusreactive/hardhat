@@ -8,12 +8,13 @@ const A = styled.a`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 12px 28px;
+  padding: 10px 22px;
   border-radius: 4px;
   width: fit-content;
   font-size: 12px;
   line-height: 24px;
   letter-spacing: 0em;
+  white-space: nowrap;
   text-align: center;
   color: ${tm(({ colors }) => colors.neutral900)};
   background: ${tm(({ colors }) => colors.accentBackground)};
@@ -27,6 +28,7 @@ const A = styled.a`
     line-height: 24px;
     letter-spacing: 0em;
     text-align: center;
+    padding: 12px 28px;
   }
 `;
 
