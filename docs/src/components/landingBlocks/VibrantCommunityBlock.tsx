@@ -6,21 +6,12 @@ import VibrantCommunityImage from "../../assets/images/vibrant_community.png";
 
 import { appTheme, tm } from "../../themes";
 import CTA from "../ui/CTA";
+import defaultProps from "../ui/default-props";
 
 const { media } = appTheme;
 
-const content = {
-  title: "Vibrant community",
-  text: "Great tech attracts great people. Join the Hardhat community to find answers to your problems and contribute to the plugin ecosystem.",
-  cta: {
-    title: "Join the Hardhat Discord",
-    // TODO: switch to page reference later
-    url: "https://hardhat.org/getting-started/",
-  },
-};
-
 interface Props {
-  content: typeof content;
+  content: typeof defaultProps.defaultVibrantCommunityBlockContent;
 }
 
 const Section = styled.section`
@@ -132,5 +123,3 @@ const VibrantCommunityBlock = ({ content }: Props) => {
 };
 
 export default VibrantCommunityBlock;
-
-VibrantCommunityBlock.defaultProps = { content };
