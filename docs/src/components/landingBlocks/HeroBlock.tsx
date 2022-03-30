@@ -5,29 +5,20 @@ import CTA from "../ui/CTA";
 import { appTheme } from "../../themes";
 import Images from "../../assets/images";
 import useWindowSize from "../../hooks/useWindowSize";
+import defaultProps from "../ui/default-props";
 
+const { defaultHeroBlockContent } = defaultProps;
 const { media, breakpoints } = appTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
-
-const content = {
-  title: "Ethereum development environment for professionals",
-  tagline: "Flexible. Extensible. Fast.",
-  cta: {
-    title: "Get started",
-    // TODO: switch to page reference later
-    url: "https://hardhat.org/getting-started/",
-  },
-  heroImage: {},
-};
-
 interface Props {
-  content: typeof content;
+  content: typeof defaultHeroBlockContent;
 }
 
 const Container = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
   ${media.lg} {
     flex-direction: row;
     justify-content: space-between;
@@ -43,26 +34,29 @@ const Block = styled.div`
     margin: 0 auto;
   }
   ${media.lg} {
-    width: 50%;
-    padding: 0px;
+    width: 40%;
+    &:first-child {
+      width: 60%;
+    }
+    padding: 0;
     & svg {
       position: relative;
-      right: -236px;
+      right: -10%;
     }
   }
 `;
 
 const TagLine = styled.span`
+  font-family: ChivoLight, sans-serif;
   margin-bottom: 24px;
   font-size: 22px;
-  font-weight: 100;
   line-height: 32px;
   letter-spacing: -0.02em;
   text-align: left;
   ${media.lg} {
     font-size: 32px;
     line-height: 32px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
     text-align: left;
     margin-top: 32px;
   }
@@ -77,7 +71,7 @@ const Title = styled.h1`
     margin-bottom: 64px;
     font-size: 72px;
     line-height: 72px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
   }
 `;
 
@@ -99,5 +93,3 @@ const HeroBlock = ({ content }: Props) => {
 };
 
 export default HeroBlock;
-
-HeroBlock.defaultProps = { content };

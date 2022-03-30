@@ -2,18 +2,24 @@ import React from "react";
 import { styled } from "linaria/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { tm } from "../../themes";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
-import { defaultSocialsItems } from "./default-props";
+import defaultProps from "./default-props";
 import { defaultMenuItemsList } from "../../config";
+import { appTheme, tm } from "../../themes";
+
+const { defaultSocialsItems } = defaultProps;
+const { media } = appTheme;
 
 const MenuContainer = styled.section`
   user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   width: 607px;
+  display: none;
   background-color: ${tm(({ colors }) => colors.neutral0)};
+  ${media.lg} {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 `;
 
 const MenuList = styled.ul`
@@ -25,7 +31,7 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
   margin-left: 32px;
-  padding: 8px 0px;
+  padding: 8px 0;
   &:first-child {
     margin-left: unset;
   }
@@ -40,20 +46,19 @@ const MenuButton = styled.a`
   font-size: 15px;
   line-height: 15px;
   letter-spacing: 0.07em;
-  text-align: center;
   position: relative;
+  cursor: pointer;
   &:after {
     transition: all ease-in-out 0.2s;
     position: absolute;
     bottom: -8px;
     left: 0;
     content: " ";
-    width: 0px;
+    width: 0;
     height: 1px;
     background-color: ${tm(({ colors }) => colors.neutral900)};
   }
   &:hover {
-    cursor: pointer;
     &:after {
       width: 100%;
     }
@@ -101,8 +106,7 @@ const SocialLinksItem = styled.li`
   }
 `;
 
-const Menu = (props: MenuProps) => {
-  const { menuItems, socialsItems } = props;
+const Menu = ({ menuItems, socialsItems }: MenuProps) => {
   const router = useRouter();
 
   return (
@@ -136,7 +140,7 @@ const Menu = (props: MenuProps) => {
   );
 };
 
-export default React.memo(Menu);
+export default Menu;
 
 Menu.defaultProps = {
   menuItems: defaultMenuItemsList,
