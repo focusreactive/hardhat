@@ -1,24 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
-import { styled } from 'linaria/react';
-import { appTheme, tm } from '../themes';
-import HardhatLogo from '../assets/hardhat-logo';
-import { useRouter } from 'next/router';
-import Hamburger from './ui/Hamburger';
-import MobileMenu from './ui/MobileMenu';
-import Menu from './ui/DesktopMenu';
-import useWindowSize from '../hooks/useWindowSize';
-import Link from 'next/link';
+import React, { FC, useEffect, useState } from "react";
+import { styled } from "linaria/react";
+import Link from "next/link";
+import { appTheme, tm } from "../themes";
+import HardhatLogo from "../assets/hardhat-logo";
+import Hamburger from "./ui/Hamburger";
+import MobileMenu from "./ui/MobileMenu";
+import Menu from "./ui/DesktopMenu";
 
-const { media, breakpoints } = appTheme;
+const { media } = appTheme;
 
-const Navigation = styled.nav<{ isMobileMenuOpen: boolean }>`
+const Navigation = styled.nav`
   position: sticky;
   margin-top: 40px;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 96px;
   box-sizing: border-box;
@@ -27,7 +25,7 @@ const Navigation = styled.nav<{ isMobileMenuOpen: boolean }>`
   background-color: ${tm(({ colors }) => colors.neutral0)};
   z-index: 10;
   ${media.lg} {
-    padding: 24px 240px;
+    padding: 24px 0;
   }
 `;
 
@@ -38,11 +36,9 @@ const ControlsContainer = styled.section`
   justify-content: space-between;
   align-items: center;
   background-color: ${tm(({ colors }) => colors.neutral0)};
-  padding: 4px 8px;
   box-sizing: border-box;
-  &:hover {
-    cursor: pointer;
-  }
+  max-width: 960px;
+  cursor: pointer;
 `;
 
 const LogoContainer = styled.a`
@@ -53,51 +49,41 @@ const LogoContainer = styled.a`
   box-sizing: border-box;
   background-color: ${tm(({ colors }) => colors.neutral0)};
   border: none;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const LandingNavigation: FC = () => {
-  const [isMobileMenuOpen, setMobileMenuState] = useState(false);
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.lg <= windowSize.width;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const body = document.querySelector('body');
+    const body = document.querySelector("body");
     if (!body) return;
 
     if (isMobileMenuOpen) {
       // Disable scroll
-      body.style.overflow = 'hidden';
+      body.style.overflow = "hidden";
     } else {
       // Enable scroll
-      body.style.overflow = 'auto';
+      body.style.overflow = "auto";
     }
   }, [isMobileMenuOpen]);
 
   return (
-    <Navigation
-      isMobileMenuOpen={isMobileMenuOpen}
-      onScroll={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <Navigation>
       <ControlsContainer>
-        <Link href={'/'} passHref>
+        <Link href="/" passHref>
           <LogoContainer>
             <HardhatLogo />
           </LogoContainer>
         </Link>
-
-        {!isDesktop ? (
-          <Hamburger isOpen={isMobileMenuOpen} onClick={() => setMobileMenuState(!isMobileMenuOpen)} />
-        ) : (
-          <Menu />
-        )}
+        <Hamburger
+          isOpen={isMobileMenuOpen}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        />
+        <Menu />
       </ControlsContainer>
 
-      {!isDesktop && <MobileMenu isOpen={isMobileMenuOpen} />}
+      <MobileMenu isOpen={isMobileMenuOpen} />
     </Navigation>
   );
 };
