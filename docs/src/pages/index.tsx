@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import LandingLayout from "../components/LandingLayout";
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import WhyHardhatBlock, {
   defaultWhyHardhatContent,
