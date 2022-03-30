@@ -1,12 +1,5 @@
 import type { NextPage } from "next";
-import HeroBlock from "../components/landingBlocks/HeroBlock";
-import FeatureCard from "../components/ui/FeatureCard";
-import CTABlock from "../components/landingBlocks/CTABlock";
-import WhyHardhatBlock, {
-  defaultWhyHardhatContent,
-} from "../components/landingBlocks/WhyHardhatBlock";
-import defaultProps from "../components/ui/default-props";
-import VibrantCommunityBlock from "../components/landingBlocks/VibrantCommunityBlock";
+
 import SolidityImageDesktop from "../assets/feature-cards/Desktop/SolidityImage.png";
 import SolidityImageMobile from "../assets/feature-cards/Mobile/SolidityImage.png";
 import FlexibilityImageDesktop from "../assets/feature-cards/Desktop/FlexibilityImage.png";
@@ -15,10 +8,19 @@ import ExtensibleImageDesktop from "../assets/feature-cards/Desktop/ExtensibleIm
 import ExtensibleImageMobile from "../assets/feature-cards/Mobile/ExtensibleImage.png";
 import FastIterationImageDesktop from "../assets/feature-cards/Desktop/FastIterationImage.png";
 import FastIterationImageMobile from "../assets/feature-cards/Mobile/FastIterationImage.png";
+
+import HeroBlock from "../components/landingBlocks/HeroBlock";
+import FeatureCard from "../components/ui/FeatureCard";
+import CTABlock from "../components/landingBlocks/CTABlock";
+import WhyHardhatBlock, {
+  defaultWhyHardhatContent,
+} from "../components/landingBlocks/WhyHardhatBlock";
+import defaultProps from "../components/ui/default-props";
+import VibrantCommunityBlock from "../components/landingBlocks/VibrantCommunityBlock";
 import TrustedTeamsBlock from "../components/landingBlocks/TrustedTeamsBlock";
+import BuiltByBlock from "../components/landingBlocks/BuiltByBlock";
 
 const { defaultHeroBlockContent, defaultCTAContent } = defaultProps;
-import BuiltByBlock from "../components/landingBlocks/BuiltByBlock";
 // import ToolsBlock from '../components/landingBlocks/ToolsBlock';
 
 export const FeatureCards = {
@@ -89,9 +91,6 @@ const Home: NextPage = () => {
   return (
     <>
       <HeroBlock content={defaultHeroBlockContent} />
-      <VibrantCommunityBlock
-        content={defaultProps.defaultVibrantCommunityBlockContent}
-      />
       {/* Required confirmation from customers */}
       {/* <ToolsBlock /> */}
       <WhyHardhatBlock content={defaultWhyHardhatContent}>
@@ -100,11 +99,14 @@ const Home: NextPage = () => {
         <FeatureCard content={FeatureCards.featureCardThree} isReversed />
         <FeatureCard content={FeatureCards.featureCardFour} />
       </WhyHardhatBlock>
+      <VibrantCommunityBlock
+        content={defaultProps.defaultVibrantCommunityBlockContent}
+      />
       <CTABlock content={defaultCTAContent} />
       <TrustedTeamsBlock
         content={defaultProps.defaultTrustedTeamsBlockContent}
       />
-      <BuiltByBlock />
+      <BuiltByBlock content={defaultProps.defaultBuiltByBlockContent} />
     </>
   );
 };

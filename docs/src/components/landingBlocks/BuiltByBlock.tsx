@@ -5,14 +5,11 @@ import NomicFoundationLogo from "../../assets/images/nomic-foundation-logo.png";
 
 import Section from "../Section";
 import { appTheme } from "../../themes";
+import defaultProps from "../ui/default-props";
 
-const content = {
-  title: "Built by",
-};
-
-type Props = {
-  content: typeof content;
-};
+interface Props {
+  content: typeof defaultProps.defaultBuiltByBlockContent;
+}
 
 const { media } = appTheme;
 
@@ -47,12 +44,10 @@ const BuiltByBlock = ({ content }: Props) => {
     <Section>
       <Container>
         <Title>{content.title}</Title>
-        <img src={NomicFoundationLogo.src} alt={"Nomic Foundation logo"} />
+        <img src={NomicFoundationLogo.src} alt="Nomic Foundation logo" />
       </Container>
     </Section>
   );
 };
 
 export default BuiltByBlock;
-
-BuiltByBlock.defaultProps = { content };
