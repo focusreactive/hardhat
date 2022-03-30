@@ -1,7 +1,8 @@
 import React from "react";
-import Section from "../Section";
 import { styled } from "linaria/react";
+import Section from "../Section";
 import { tm, appTheme } from "../../themes";
+
 const { media } = appTheme;
 
 export const defaultWhyHardhatContent = {

@@ -1,10 +1,11 @@
 import React from "react";
+import Image from "next/image";
 import { styled } from "linaria/react";
 import { CTAType } from "./types";
 import CTA from "./CTA";
 import useWindowSize from "../../hooks/useWindowSize";
 import { appTheme, tm } from "../../themes";
-import Image from "next/image";
+
 const { breakpoints, media } = appTheme;
 
 interface ArticleType {
@@ -12,13 +13,13 @@ interface ArticleType {
   text: string;
 }
 
-type ContentProps = {
+interface ContentProps {
   mobileImg: StaticImageData;
   desktopImg: StaticImageData;
   cta: CTAType;
   articleOne: ArticleType;
   articleTwo: ArticleType;
-};
+}
 
 interface Props {
   content: ContentProps;
@@ -117,7 +118,7 @@ const FeatureCard = ({ content, isReversed = false }: Props) => {
   return (
     <Container data-desktop={isDesktop} data-reverse={isReversed}>
       <ImageContainer>
-        <Image src={imgPath} alt={""} quality={100} />
+        <Image src={imgPath} alt="Feature card picture" quality={100} />
       </ImageContainer>
       <ContentContainer data-desktop={isDesktop} data-reverse={isReversed}>
         <Article {...articleOne} />

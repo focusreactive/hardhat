@@ -25,12 +25,9 @@ const Home: NextPage = () => {
       {/* Required confirmation from customers */}
       {/* <ToolsBlock /> */}
       <WhyHardhatBlock content={defaultWhyHardhatContent}>
-        <FeatureCard content={FeatureCards.featureCardOne} isReversed={true} />
+        <FeatureCard content={FeatureCards.featureCardOne} isReversed />
         <FeatureCard content={FeatureCards.featureCardTwo} />
-        <FeatureCard
-          content={FeatureCards.featureCardThree}
-          isReversed={true}
-        />
+        <FeatureCard content={FeatureCards.featureCardThree} isReversed />
         <FeatureCard content={FeatureCards.featureCardFour} />
       </WhyHardhatBlock>
     </LandingLayout>
