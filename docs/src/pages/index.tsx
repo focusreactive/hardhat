@@ -3,12 +3,13 @@ import LandingLayout from "../components/LandingLayout";
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import FeatureCard from "../components/ui/FeatureCard";
 import { FeatureCards } from "../config";
+import CTABlock from "../components/landingBlocks/CTABlock";
 import WhyHardhatBlock, {
   defaultWhyHardhatContent,
 } from "../components/landingBlocks/WhyHardhatBlock";
 import defaultProps from "../components/ui/default-props";
 
-const { defaultHeroBlockContent } = defaultProps;
+const { defaultHeroBlockContent, defaultCTAContent } = defaultProps;
 // import ToolsBlock from '../components/landingBlocks/ToolsBlock';
 
 const Home: NextPage = () => {
@@ -21,7 +22,6 @@ const Home: NextPage = () => {
       }}
     >
       <HeroBlock content={defaultHeroBlockContent} />
-
       {/* Required confirmation from customers */}
       {/* <ToolsBlock /> */}
       <WhyHardhatBlock content={defaultWhyHardhatContent}>
@@ -30,6 +30,7 @@ const Home: NextPage = () => {
         <FeatureCard content={FeatureCards.featureCardThree} isReversed />
         <FeatureCard content={FeatureCards.featureCardFour} />
       </WhyHardhatBlock>
+      <CTABlock content={defaultCTAContent} />
     </LandingLayout>
   );
 };

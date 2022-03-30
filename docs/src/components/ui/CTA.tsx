@@ -30,10 +30,14 @@ const A = styled.a`
   }
 `;
 
-type Props = React.PropsWithChildren<{ href: string }>;
+type Props = React.PropsWithChildren<{ href: string; variant?: string }>;
 
-const CTA = ({ children, href }: Props) => {
-  return <A href={href}>{children}</A>;
+const CTA = ({ children, href, variant = "" }: Props) => {
+  return (
+    <A className={variant} href={href}>
+      {children}
+    </A>
+  );
 };
 
 export default CTA;
