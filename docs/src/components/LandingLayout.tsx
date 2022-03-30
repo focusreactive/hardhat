@@ -21,8 +21,9 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     background-color: ${tm(({ colors }) => colors.neutral0)};
-    max-width: 960px;
+    width: 100%;
   }
   height: 100vh;
   min-width: 320px;
