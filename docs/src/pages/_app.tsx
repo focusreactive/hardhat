@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import { ThemeProvider, appTheme } from "../themes";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
       <div style={{ padding: 58 }}>
@@ -14,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   return (
     <ThemeProvider theme={appTheme}>
-      <LandingLayout seo={{ title: "Hardhat" }}>
+      <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>
     </ThemeProvider>
