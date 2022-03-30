@@ -1,33 +1,37 @@
-import React from 'react';
-import Section from '../Section';
-import { styled } from 'linaria/react';
+import React from "react";
+import { styled } from "linaria/react";
+import Section from "../Section";
 // import FeatureCard from '../ui/FeatureCard';
-import SolidityImageDesktop from '../../assets/feature-cards/Desktop/SolidityImage.png';
-import SolidityImageMobile from '../../assets/feature-cards/Mobile/SolidityImage.png';
-import { tm, appTheme } from '../../themes';
+import SolidityImageDesktop from "../../assets/feature-cards/Desktop/SolidityImage.png";
+import SolidityImageMobile from "../../assets/feature-cards/Mobile/SolidityImage.png";
+import { tm, appTheme } from "../../themes";
+
 const { media } = appTheme;
 
-const content = {
-  title: 'Why hardhat',
+export const defaultWhyHardhatContent = {
+  title: "Why hardhat",
   featureCardOne: {
     getImgPath: (props: { isDesktop: boolean }) => {
       return props.isDesktop ? SolidityImageDesktop : SolidityImageMobile;
     },
-    cta: { url: '/hardhat-network/#console-log', title: 'Get started with Solidity console.log' },
+    cta: {
+      url: "/hardhat-network/#console-log",
+      title: "Get started with Solidity console.log",
+    },
     articleOne: {
-      title: 'Run Solidity locally',
-      text: 'Easily deploy your contracts, run tests and debug Solidity code without dealing with live environments. Hardhat Network is a local Ethereum network designed for development.',
+      title: "Run Solidity locally",
+      text: "Easily deploy your contracts, run tests and debug Solidity code without dealing with live environments. Hardhat Network is a local Ethereum network designed for development.",
     },
     articleTwo: {
-      title: 'Debugging-first ',
-      text: 'Hardhat is the best choice for Solidity debugging. You get Solidity stack traces, console.log and explicit error messages when transactions fail.',
+      title: "Debugging-first ",
+      text: "Hardhat is the best choice for Solidity debugging. You get Solidity stack traces, console.log and explicit error messages when transactions fail.",
     },
   },
 };
 
-type Props = {
-  content: typeof content;
-};
+interface Props {
+  content: typeof defaultWhyHardhatContent;
+}
 
 const Container = styled.section`
   width: 100%;
@@ -72,6 +76,4 @@ const WhyHardhatBlock = ({ content }: Props) => {
   );
 };
 
-export default React.memo(WhyHardhatBlock);
-
-WhyHardhatBlock.defaultProps = { content };
+export default WhyHardhatBlock;

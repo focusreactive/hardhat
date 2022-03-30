@@ -1,27 +1,27 @@
-import React from 'react';
-import Image from 'next/image';
-import { styled } from 'linaria/react';
+import React from "react";
+import Image from "next/image";
+import { styled } from "linaria/react";
 
-import VibrantCommunityImage from '../../assets/images/vibrant_community.png';
+import VibrantCommunityImage from "../../assets/images/vibrant_community.png";
 
-import { appTheme, tm } from '../../themes';
-import CTA from '../ui/CTA';
+import { appTheme, tm } from "../../themes";
+import CTA from "../ui/CTA";
 
 const { media } = appTheme;
 
 const content = {
-  title: 'Vibrant community',
-  text: 'Great tech attracts great people. Join the Hardhat community to find answers to your problems and contribute to the plugin ecosystem.',
+  title: "Vibrant community",
+  text: "Great tech attracts great people. Join the Hardhat community to find answers to your problems and contribute to the plugin ecosystem.",
   cta: {
-    title: 'Join the Hardhat Discord',
+    title: "Join the Hardhat Discord",
     // TODO: switch to page reference later
-    url: 'https://hardhat.org/getting-started/',
+    url: "https://hardhat.org/getting-started/",
   },
 };
 
-type Props = {
+interface Props {
   content: typeof content;
-};
+}
 
 const Section = styled.section`
   margin: 0 24px;
@@ -118,13 +118,13 @@ const VibrantCommunityBlock = ({ content }: Props) => {
           <Title>{content.title}</Title>
           <Text>{content.text}</Text>
           <ButtonWrapper>
-            <CTA href={content.cta.url} secondary={true}>
+            <CTA href={content.cta.url} secondary>
               {content.cta.title}
             </CTA>
           </ButtonWrapper>
         </Wrapper>
         <ImageContainer>
-          <Image src={VibrantCommunityImage} alt={'Vibrant community image'} />
+          <Image src={VibrantCommunityImage} alt="Vibrant community image" />
         </ImageContainer>
       </Container>
     </Section>

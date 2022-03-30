@@ -1,46 +1,41 @@
-import React, { useState } from 'react';
-import Section from '../Section';
-import { appTheme, tm } from '../../themes';
-import useWindowSize from '../../hooks/useWindowSize';
-import { Tools } from '../../config';
-import ToolsIcons from '../../assets/tools';
-import { styled } from 'linaria/react';
+import React from "react";
+import { styled } from "linaria/react";
+import Section from "../Section";
+import { appTheme, tm } from "../../themes";
+import { Tools } from "../ui/types";
+import ToolsIcons from "../../assets/tools";
 
-const { media, breakpoints } = appTheme;
+const { media } = appTheme;
 const { RunnerIcon, IgnitionIcon, NetworkIcon, VSCodeIcon } = ToolsIcons;
 
-const content = {
-  title: 'Tools',
+const defaultContent = {
+  title: "Tools",
   tools: [
     {
       name: Tools.RUNNER,
-      title: 'Runner',
-      prefix: 'Hardhat',
+      title: "Runner",
+      prefix: "Hardhat",
       Icon: RunnerIcon,
     },
     {
       name: Tools.IGNITION,
-      title: 'Ignition',
-      prefix: 'Hardhat',
+      title: "Ignition",
+      prefix: "Hardhat",
       Icon: IgnitionIcon,
     },
     {
       name: Tools.NETWORK,
-      title: 'Network',
-      prefix: 'Hardhat',
+      title: "Network",
+      prefix: "Hardhat",
       Icon: NetworkIcon,
     },
     {
       name: Tools.VS_CODE,
-      title: 'VS Code',
-      prefix: 'Hardhat',
+      title: "VS Code",
+      prefix: "Hardhat",
       Icon: VSCodeIcon,
     },
   ],
-};
-
-type Props = {
-  content: typeof content;
 };
 
 const Block = styled.section`
@@ -69,11 +64,7 @@ const BotDivider = styled(MobileDivider)`
   border-bottom: unset;
 `;
 
-const HeroBlock = ({ content }: Props) => {
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.lg <= windowSize.width;
-  const [activeTool, setActiveTool] = useState<Tools>(Tools.RUNNER);
-
+const ToolsBlock = () => {
   return (
     <Section>
       <Block>
@@ -84,6 +75,6 @@ const HeroBlock = ({ content }: Props) => {
   );
 };
 
-export default HeroBlock;
+export default ToolsBlock;
 
-HeroBlock.defaultProps = { content };
+ToolsBlock.defaultProps = { content: defaultContent };

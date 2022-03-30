@@ -1,6 +1,6 @@
-import React from 'react';
-import { styled } from 'linaria/react';
-import { tm } from '../../themes';
+import React from "react";
+import { styled } from "linaria/react";
+import { tm } from "../../themes";
 
 const A = styled.a`
   display: inline-flex;
@@ -11,7 +11,7 @@ const A = styled.a`
   width: fit-content;
   background: ${tm(({ colors }) => colors.accentBackground)};
 
-  &[data-secondary='true'] {
+  &[data-secondary="true"] {
     width: 100%;
     padding: 12px 0;
     border: 1px solid ${tm(({ colors }) => colors.neutral700)};
@@ -26,7 +26,7 @@ const A = styled.a`
   }
 `;
 
-type Props = React.PropsWithChildren<{ href: string; secondary: boolean }>;
+type Props = React.PropsWithChildren<{ href: string; secondary?: boolean }>;
 
 const CTA = ({ children, href, secondary = false }: Props) => {
   return (

@@ -1,28 +1,18 @@
-import React from 'react';
-import Section from '../Section';
-import CTA from '../ui/CTA';
-import { styled } from 'linaria/react';
-import { appTheme } from '../../themes';
-import Images from '../../assets/images';
-import useWindowSize from '../../hooks/useWindowSize';
+import React from "react";
+import { styled } from "linaria/react";
+import Section from "../Section";
+import CTA from "../ui/CTA";
+import { appTheme } from "../../themes";
+import Images from "../../assets/images";
+import useWindowSize from "../../hooks/useWindowSize";
+import defaultProps from "../ui/default-props";
 
+const { defaultHeroBlockContent } = defaultProps;
 const { media, breakpoints } = appTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
-
-const content = {
-  title: 'Ethereum development environment for professionals',
-  tagline: 'Flexible. Extensible. Fast.',
-  cta: {
-    title: 'Get started',
-    // TODO: switch to page reference later
-    url: 'https://hardhat.org/getting-started/',
-  },
-  heroImage: {},
-};
-
-type Props = {
-  content: typeof content;
-};
+interface Props {
+  content: typeof defaultHeroBlockContent;
+}
 
 const Container = styled.section`
   width: 100%;
@@ -44,7 +34,7 @@ const Block = styled.div`
   }
   ${media.lg} {
     width: 50%;
-    padding: 0px;
+    padding: 0;
     & svg {
       position: relative;
       right: -236px;
@@ -62,7 +52,7 @@ const TagLine = styled.span`
   ${media.lg} {
     font-size: 32px;
     line-height: 32px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
     text-align: left;
     margin-top: 32px;
   }
@@ -77,7 +67,7 @@ const Title = styled.h1`
     margin-bottom: 64px;
     font-size: 72px;
     line-height: 72px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
   }
 `;
 
@@ -99,5 +89,3 @@ const HeroBlock = ({ content }: Props) => {
 };
 
 export default HeroBlock;
-
-HeroBlock.defaultProps = { content };

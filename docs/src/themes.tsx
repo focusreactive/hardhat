@@ -1,7 +1,7 @@
-import React from 'react';
-import { createTheming } from '@callstack/react-theme-provider';
+import React from "react";
+import { createTheming } from "@callstack/react-theme-provider";
 
-export { styled } from 'linaria/react';
+export { styled } from "linaria/react";
 
 const breakpoints = {
   sm: 360,
@@ -44,8 +44,7 @@ export const ThemeProvider = ({
   <theming.ThemeProvider theme={themeProp}>{children}</theming.ThemeProvider>
 );
 
-interface ThemeSelect {
-  (tm: typeof appTheme): string;
-}
+type ThemeSelect = (tm: typeof appTheme) => string;
 
-export const tm = (cb: ThemeSelect) => () => ((fn) => fn(theming.useTheme()))(cb);
+export const tm = (cb: ThemeSelect) => () =>
+  ((fn) => fn(theming.useTheme()))(cb);

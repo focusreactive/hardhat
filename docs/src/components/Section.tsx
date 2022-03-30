@@ -1,6 +1,7 @@
-import React from 'react';
-import { styled } from 'linaria/react';
-import { appTheme, tm } from '../themes';
+import React from "react";
+import { styled } from "linaria/react";
+import { appTheme } from "../themes";
+
 const { media } = appTheme;
 
 const Container = styled.section`
@@ -9,7 +10,7 @@ const Container = styled.section`
   padding: 0 24px;
   position: relative;
   ${media.lg} {
-    padding: 0px 240px;
+    padding: 0 240px;
   }
 `;
 
