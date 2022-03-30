@@ -108,7 +108,6 @@ const Home: NextPage = () => {
   );
 };
 
-
 /* @ts-ignore */
 Home.layout = "landing";
 export default Home;
