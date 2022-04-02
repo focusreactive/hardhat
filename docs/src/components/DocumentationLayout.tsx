@@ -48,10 +48,12 @@ const View = styled.section`
   flex-direction: column;
   align-items: center;
   padding-top: 24px;
-  padding-left: 367px;
   width: 100%;
   height: 85vh;
   overflow-y: scroll;
+  ${media.lg} {
+    padding-left: 366px;
+  }
 `;
 const Content = styled.section`
   display: flex;
