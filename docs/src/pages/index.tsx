@@ -107,7 +107,7 @@ const Home: NextPage = () => {
       <TrustedTeamsBlock
         content={defaultProps.defaultTrustedTeamsBlockContent}
       />
-      <ReviewsBlock />
+      <ReviewsBlock content={defaultProps.defaultReviewsBlockContent} />
       <BuiltByBlock content={defaultProps.defaultBuiltByBlockContent} />
     </>
   );

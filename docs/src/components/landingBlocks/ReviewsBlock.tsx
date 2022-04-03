@@ -10,6 +10,10 @@ import { appTheme, tm } from "../../themes";
 
 const { media } = appTheme;
 
+interface Props {
+  content: typeof defaultProps.defaultReviewsBlockContent;
+}
+
 const SliderWrapper = styled.div`
   margin-bottom: 240px;
 `;
@@ -137,10 +141,10 @@ const SliderArrow = styled.button`
   }
 `;
 
-const ReviewsBlock = () => {
+const ReviewsBlock = ({ content }: Props) => {
   const slides = useMemo(
     () =>
-      defaultProps.defaultReviewsBlockContent.map((item) => (
+      content.map((item) => (
         <SlideContainer key={item.name}>
           <ImageWithCaptionContainer>
             <PersonImage src={item.personImage.src} alt={item.name} />
@@ -154,7 +158,7 @@ const ReviewsBlock = () => {
           <CommentContainer>{item.comment}</CommentContainer>
         </SlideContainer>
       )),
-    []
+    [content]
   );
 
   return (
