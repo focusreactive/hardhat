@@ -28,6 +28,8 @@ export const appTheme = {
     accent900: "#EDCF00",
     accentBackground: "linear-gradient(256.6deg, #FFF100 0%, #FFF100 100%)",
     cardBoxShadow: "rgba(10, 10, 10, 0.08)",
+    sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
+    sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
     textureBackground:
       "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
     neutralBackground:

@@ -2,6 +2,8 @@ import type { AppProps } from "next/app";
 import LandingLayout from "../components/LandingLayout";
 
 import "../styles/globals.css";
+import "../styles/carousel.css";
+
 import { ThemeProvider, appTheme } from "../themes";
 
 function MyApp({ Component, pageProps }: AppProps) {
