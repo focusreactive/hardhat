@@ -147,6 +147,7 @@ const ReviewsBlock = () => {
             <PersonCaption>
               <p>{item.name},</p>
               <p> {item.position}</p>
+              {/* eslint-disable-next-line */}
               <img src={item.companyImage.src} alt={item.alt} />
             </PersonCaption>
           </ImageWithCaptionContainer>
@@ -171,6 +172,7 @@ const ReviewsBlock = () => {
                 title={label}
                 className="right"
               >
+                {/* eslint-disable-next-line */}
                 <img src={CarouselArrowLeft.src} alt="Carousel next button" />
               </SliderArrow>
             )
@@ -182,6 +184,7 @@ const ReviewsBlock = () => {
                 title={label}
                 className="left"
               >
+                {/* eslint-disable-next-line */}
                 <img src={CarouselArrowLeft.src} alt="Carousel next button" />
               </SliderArrow>
             )
