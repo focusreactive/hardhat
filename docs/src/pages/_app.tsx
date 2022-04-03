@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
+import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
-
 import "../styles/globals.css";
 import "../styles/carousel.css";
 
@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <div style={{ padding: 58 }}>
+      <MDXProvider components={{}}>
         <Component {...pageProps} />
-      </div>
+      </MDXProvider>
     );
   }
   return (
