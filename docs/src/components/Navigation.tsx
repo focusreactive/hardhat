@@ -45,7 +45,7 @@ const LogoContainer = styled.a`
   align-items: center;
   padding: 4px 8px;
   box-sizing: border-box;
-  background-color: ${tm(({ colors }) => colors.neutral0)};
+  background-color: ${tm(({ colors }) => colors.transparent)};
   border: none;
   cursor: pointer;
 `;
