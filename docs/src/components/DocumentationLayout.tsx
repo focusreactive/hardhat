@@ -6,6 +6,7 @@ import Banner, { DefaultBanner } from "./ui/Banner";
 import { tm, appTheme } from "../themes";
 import defaultProps from "./ui/default-props";
 import { DefaultBannerProps } from "./ui/types";
+import { ISeo } from "./types";
 
 const { defaultBannerContent } = defaultProps;
 const { media } = appTheme;
@@ -63,10 +64,7 @@ const Content = styled.section`
 `;
 
 type Props = React.PropsWithChildren<{
-  seo: {
-    title: string;
-    description: string;
-  };
+  seo: ISeo;
 }>;
 
 const DocumentationLayout = ({ children, seo }: Props) => {
