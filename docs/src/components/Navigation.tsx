@@ -50,6 +50,11 @@ const LogoContainer = styled.a`
   cursor: pointer;
 `;
 
+const HamburgerLogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Navigation: FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -69,15 +74,18 @@ const Navigation: FC = () => {
   return (
     <NavigationStyled>
       <ControlsContainer>
-        <Link href="/" passHref>
-          <LogoContainer>
-            <HardhatLogo />
-          </LogoContainer>
-        </Link>
-        <Hamburger
-          isOpen={isSidebarOpen}
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        />
+        <HamburgerLogoWrapper>
+          <Hamburger
+            isOpen={isSidebarOpen}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          />
+          <Link href="/" passHref>
+            <LogoContainer>
+              <HardhatLogo />
+            </LogoContainer>
+          </Link>
+        </HamburgerLogoWrapper>
+
         <Menu />
         <div>Theme</div>
       </ControlsContainer>

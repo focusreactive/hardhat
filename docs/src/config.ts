@@ -39,7 +39,7 @@ export const defaultMenuItemsList: MenuItemType[] = [
     href: "/plugins",
   },
   {
-    label: "Documents",
+    label: "Documentation",
     href: "/getting-started",
   },
   {
