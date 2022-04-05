@@ -85,7 +85,7 @@ const Sidebar = ({ elementsList }: Props) => {
     <Container>
       {elementsList.map((sidebarItem) => {
         const isLinkActive: boolean =
-          Boolean(sidebarItem.href) && router.pathname === sidebarItem.href;
+          Boolean(sidebarItem.href) && router?.pathname === sidebarItem.href;
         return (
           <SidebarItem key={sidebarItem.label} className={sidebarItem.type}>
             {sidebarItem.href !== undefined ? (
@@ -99,8 +99,8 @@ const Sidebar = ({ elementsList }: Props) => {
             {sidebarItem?.children && (
               <SidebarSubLinksList>
                 {sidebarItem.children.map((subItem) => {
-                  const isSubLinkActive = router.asPath === subItem.href;
-                  const isAnchor = router.asPath.indexOf("#") > -1;
+                  const isSubLinkActive = router?.asPath === subItem.href;
+                  const isAnchor = router?.asPath.indexOf("#") > -1;
                   return (
                     <li key={subItem.label}>
                       <SidebarLinkWrapper
