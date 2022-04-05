@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { default as DocumentsNavigation } from "./Navigation";
+import DocumentsNavigation from "./Navigation";
 
 export default {
   title: "Common/Documents Navigation",
 };
 
-export const Navigation = () => <DocumentsNavigation />;
+export const Navigation = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  return (
+    <DocumentsNavigation
+      isSidebarOpen={isSidebarOpen}
+      setIsSidebarOpen={setIsSidebarOpen}
+    />
+  );
+};

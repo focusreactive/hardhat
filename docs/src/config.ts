@@ -72,15 +72,15 @@ export const DocumentationSidebarStructure = [
     children: [
       {
         label: "Overview",
-        href: "/getting-started/#overview",
+        href: "/getting-started#overview",
       },
       {
         label: "Installation",
-        href: "/getting-started/#installation",
+        href: "/getting-started#installation",
       },
       {
         label: "Quick start",
-        href: "/getting-started/#quick-start",
+        href: "/getting-started#quick-start",
       },
     ],
   },
@@ -95,7 +95,7 @@ export const DocumentationSidebarStructure = [
     children: [
       {
         label: "What is it?",
-        href: "/hardhat-network/",
+        href: "/hardhat-network",
       },
       {
         label: "Mainnet Forking",
@@ -279,8 +279,8 @@ export const DocumentationSidebarStructure = [
     ],
   },
   {
-    label: "Buidler documentation",
-    href: "/buidler-documentation",
+    label: "Community Plugins",
+    href: "/plugins/#community-plugins",
     type: "default",
   },
 ];
