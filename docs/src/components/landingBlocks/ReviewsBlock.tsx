@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import { styled } from "linaria/react";
 
@@ -16,6 +16,62 @@ interface Props {
 
 const SliderWrapper = styled.div`
   margin-bottom: 240px;
+
+  ${media.lg} {
+    & .carousel:before,
+    .carousel:after {
+      content: "";
+      border: 0.1rem solid #d4d4d4;
+      width: 5rem;
+      position: absolute;
+      top: 0;
+      min-height: 480px;
+    }
+
+    & .carousel:after {
+      left: 0;
+      border-right: none;
+    }
+
+    & .carousel:before {
+      right: 0;
+      border-left: none;
+    }
+  }
+
+  & .carousel {
+    position: relative;
+    width: 100%;
+  }
+
+  & .carousel .slider-wrapper {
+    overflow: hidden;
+    margin: auto;
+    width: 100%;
+    -webkit-transition: height 0.15s ease-in;
+    -moz-transition: height 0.15s ease-in;
+    -ms-transition: height 0.15s ease-in;
+    -o-transition: height 0.15s ease-in;
+    transition: height 0.15s ease-in;
+  }
+
+  & .carousel .slider-wrapper.axis-horizontal .slider {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  & .carousel .slide {
+    min-width: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    list-style: none;
+  }
 `;
 
 const SlideContainer = styled.div`
@@ -29,6 +85,7 @@ const SlideContainer = styled.div`
 `;
 
 const ImageWithCaptionContainer = styled.div`
+  margin-bottom: 42px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -41,14 +98,17 @@ const ImageWithCaptionContainer = styled.div`
   }
 `;
 
-const PersonImage = styled.img`
+const PersonImage = styled.div`
   width: 110px;
   height: 110px;
+  background-size: 110px;
+  background-repeat: no-repeat;
   border-radius: 100px;
 
   ${media.lg} {
     width: 150px;
     height: 150px;
+    background-size: 150px;
     margin-bottom: 10px;
   }
 `;
@@ -73,6 +133,18 @@ const PersonCaption = styled.div`
       display: block;
       margin: 16px auto 0;
     }
+  }
+`;
+
+const CompanyLogo = styled.div`
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  ${media.lg} {
+    min-height: 30px;
+    background-position: center;
   }
 `;
 
@@ -142,25 +214,6 @@ const SliderArrow = styled.button`
 `;
 
 const ReviewsBlock = ({ content }: Props) => {
-  const slides = useMemo(
-    () =>
-      content.map((item) => (
-        <SlideContainer key={item.name}>
-          <ImageWithCaptionContainer>
-            <PersonImage src={item.personImage.src} alt={item.name} />
-            <PersonCaption>
-              <p>{item.name},</p>
-              <p> {item.position}</p>
-              {/* eslint-disable-next-line */}
-              <img src={item.companyImage.src} alt={item.alt} />
-            </PersonCaption>
-          </ImageWithCaptionContainer>
-          <CommentContainer>{item.comment}</CommentContainer>
-        </SlideContainer>
-      )),
-    [content]
-  );
-
   return (
     <Section>
       <SliderWrapper>
@@ -194,7 +247,25 @@ const ReviewsBlock = ({ content }: Props) => {
             )
           }
         >
-          {slides}
+          {content.map((item) => (
+            <SlideContainer key={item.name}>
+              <ImageWithCaptionContainer>
+                <PersonImage
+                  style={{ backgroundImage: `url(${item.personImage.src})` }}
+                />
+                <PersonCaption>
+                  <p>{item.name},</p>
+                  <p> {item.position}</p>
+                  <CompanyLogo
+                    style={{
+                      backgroundImage: `url(${item.companyImage.src})`,
+                    }}
+                  />
+                </PersonCaption>
+              </ImageWithCaptionContainer>
+              <CommentContainer>{item.comment}</CommentContainer>
+            </SlideContainer>
+          ))}
         </Carousel>
       </SliderWrapper>
     </Section>

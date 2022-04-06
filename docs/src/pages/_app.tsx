@@ -2,7 +2,6 @@ import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
-import "../styles/carousel.css";
 
 import { ThemeProvider, appTheme } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
