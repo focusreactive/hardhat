@@ -84,7 +84,7 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           </Link>
         </HamburgerLogoWrapper>
 
-        <Menu isDocumentation={true} />
+        <Menu isDocumentation />
         <div>Theme</div>
       </ControlsContainer>
     </NavigationStyled>
