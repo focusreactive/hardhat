@@ -1,9 +1,6 @@
-import GitHubLogo from "../assets/socials/gh-logo";
-import TwitterLogo from "../assets/socials/tw-logo";
-import DiscordLogo from "../assets/socials/dc-logo";
 import VictorImage from "../assets/images/victor.png";
 import KyberImage from "../assets/images/trustedTeamsLogos/kyber.png";
-import JustimImage from "../assets/images/justin.jpg";
+import JustinImage from "../assets/images/justin.jpg";
 import SynthetixImage from "../assets/images/trustedTeamsLogos/synthetix.png";
 import BrettImage from "../assets/images/brett.jpg";
 import AragoneOneImage from "../assets/images/trustedTeamsLogos/aragonOne.png";
@@ -12,8 +9,6 @@ import ConnextImage from "../assets/images/trustedTeamsLogos/connext.png";
 import EstebanImage from "../assets/images/esteban.png";
 import DecentralandImage from "../assets/images/trustedTeamsLogos/decentraland.png";
 
-import { SocialsEnum } from "../components/ui/types";
-import { BANNER_LINK, SOCIALS_LINKS, Tools } from "../config";
 import VSCodeIcon from "../assets/tools/vs-code";
 import RunnerIcon from "../assets/tools/runner";
 import IgnitionIcon from "../assets/tools/ignition";
@@ -26,24 +21,7 @@ import ExtensibleImageMobile from "../assets/feature-cards/Mobile/ExtensibleImag
 import ExtensibleImageDesktop from "../assets/feature-cards/Desktop/ExtensibleImage.png";
 import FastIterationImageMobile from "../assets/feature-cards/Mobile/FastIterationImage.png";
 import FastIterationImageDesktop from "../assets/feature-cards/Desktop/FastIterationImage.png";
-
-const defaultSocialsItems = [
-  {
-    name: SocialsEnum.GITHUB,
-    href: SOCIALS_LINKS[SocialsEnum.GITHUB],
-    Icon: GitHubLogo,
-  },
-  {
-    name: SocialsEnum.TWITTER,
-    href: SOCIALS_LINKS[SocialsEnum.TWITTER],
-    Icon: TwitterLogo,
-  },
-  {
-    name: SocialsEnum.DISCORD,
-    href: SOCIALS_LINKS[SocialsEnum.DISCORD],
-    Icon: DiscordLogo,
-  },
-];
+import { Tools } from "../components/ui/types";
 
 const whyHardhatContent = {
   title: "Why hardhat",
@@ -113,11 +91,6 @@ const featureCardsContent = {
   },
 };
 
-const bannerContent = {
-  text: "Join the Hardhat team! Nomic Labs is hiring",
-  href: BANNER_LINK,
-};
-
 const heroBlockContent = {
   title: "Ethereum development environment for professionals",
   tagline: "Flexible. Extensible. Fast.",
@@ -127,7 +100,7 @@ const heroBlockContent = {
   },
 };
 
-const ctaContent = {
+const getStartedHardhat = {
   title: "Hardhat is next- generation Ethereum tooling",
   subtitle: "Experience the new way of building Ethereum software.",
   cta: {
@@ -141,8 +114,7 @@ const vibrantCommunityBlockContent = {
   text: "Great tech attracts great people. Join the Hardhat community to find answers to your problems and contribute to the plugin ecosystem.",
   cta: {
     title: "Join the Hardhat Discord",
-    // TODO: switch to page reference later
-    url: "https://hardhat.org/getting-started/",
+    url: "https://discord.com/invite/TETZs2KK4k",
   },
 };
 
@@ -167,7 +139,7 @@ const reviewsBlockContent = [
   {
     name: "Justin J. Moses",
     position: "CTO  at  SYNTHETIX",
-    personImage: JustimImage,
+    personImage: JustinImage,
     companyImage: SynthetixImage,
     alt: "Synthetix logo",
     comment:
@@ -248,10 +220,8 @@ const toolsBlockContent = {
 const homepageContent = {
   whyHardhatContent,
   featureCardsContent,
-  defaultSocialsItems,
-  bannerContent,
   heroBlockContent,
-  ctaContent,
+  getStartedHardhat,
   vibrantCommunityBlockContent,
   trustedTeamsBlockContent,
   builtByBlockContent,

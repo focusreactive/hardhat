@@ -6,7 +6,7 @@ import Banner, { DefaultBanner } from "./ui/Banner";
 import { tm, appTheme } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
-import homepageContent from "../content/home";
+import { bannerContent } from "../config";
 
 const { media } = appTheme;
 
@@ -70,7 +70,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
   return (
     <Container>
       <Banner
-        content={homepageContent.bannerContent}
+        content={bannerContent}
         renderContent={({ content }: DefaultBannerProps) => (
           <DefaultBanner content={content} />
         )}

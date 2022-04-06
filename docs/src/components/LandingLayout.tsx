@@ -1,14 +1,13 @@
 import React from "react";
 import { styled } from "linaria/react";
+
 import SEO from "./SEO";
 import LandingNavigation from "./LandingNavigation";
 import LandingFooter from "./LandingFooter";
 import Banner, { DefaultBanner } from "./ui/Banner";
 import { tm } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import homepageContent from "../content/home";
-
-const { bannerContent } = homepageContent;
+import { bannerContent } from "../config";
 
 const Container = styled.div`
   position: relative;

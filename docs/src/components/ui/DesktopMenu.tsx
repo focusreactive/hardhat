@@ -3,9 +3,7 @@ import { styled } from "linaria/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
-import { defaultMenuItemsList } from "../../config";
 import { appTheme, tm } from "../../themes";
-import homepageContent from "../../content/home";
 
 const { media } = appTheme;
 
@@ -140,8 +138,3 @@ const Menu = ({ menuItems, socialsItems }: MenuProps) => {
 };
 
 export default Menu;
-
-Menu.defaultProps = {
-  menuItems: defaultMenuItemsList,
-  socialsItems: homepageContent.defaultSocialsItems,
-};

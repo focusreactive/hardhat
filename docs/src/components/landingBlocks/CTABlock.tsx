@@ -11,7 +11,7 @@ const { TextureBrick } = Images;
 const { media, breakpoints } = appTheme;
 
 interface Props {
-  content: typeof homepageContent.ctaContent;
+  content: typeof homepageContent.getStartedHardhat;
 }
 
 const CTABlockStyled = styled.section`

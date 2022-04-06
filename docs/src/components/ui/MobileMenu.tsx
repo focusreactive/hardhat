@@ -2,9 +2,7 @@ import React, { Fragment } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
 import { MenuItemType, MenuProps, SocialsItem } from "./types";
-import { defaultMenuItemsList } from "../../config";
 import { appTheme, tm } from "../../themes";
-import homepageContent from "../../content/home";
 
 const { media } = appTheme;
 
@@ -182,8 +180,3 @@ const MobileMenu = ({ menuItems, isOpen = false, socialsItems }: MenuProps) => {
 };
 
 export default MobileMenu;
-
-MobileMenu.defaultProps = {
-  menuItems: defaultMenuItemsList,
-  socialsItems: homepageContent.defaultSocialsItems,
-};
