@@ -4,10 +4,10 @@ import Link from "next/link";
 
 import { styled } from "linaria/react";
 import { tm } from "../themes";
-import { DocumentationSidebarStructure } from "../config";
+import { IDocumentationSidebarStructure } from "./types";
 
 interface Props {
-  elementsList: typeof DocumentationSidebarStructure;
+  elementsList: IDocumentationSidebarStructure;
 }
 
 const Container = styled.ul`
@@ -25,11 +25,9 @@ const Container = styled.ul`
 `;
 
 const SidebarLinkWrapper = styled.div`
-  & > a {
-    cursor: pointer;
-    &:hover {
-      color: ${tm(({ colors }) => colors.accent700)};
-    }
+  cursor: pointer;
+  &:hover {
+    color: ${tm(({ colors }) => colors.accent700)};
   }
   &[data-active="true"] {
     color: ${tm(({ colors }) => colors.accent700)};
@@ -47,7 +45,6 @@ const SidebarItem = styled.li`
       border-color: ${tm(({ colors }) => colors.accent700)};
     }
   }
-
   &.group {
     margin-top: 16px;
   }
@@ -69,7 +66,7 @@ const SidebarSubLinksList = styled.ul`
   & ${SidebarLinkWrapper} {
     padding: 0.5px 16px 0.5px 64px;
     &[data-active="true"] {
-      font-family: ChivoLight;
+      font-family: ChivoRegular;
       font-weight: 500;
     }
     &[data-anchor="true"] {
@@ -80,7 +77,6 @@ const SidebarSubLinksList = styled.ul`
 
 const Sidebar = ({ elementsList }: Props) => {
   const router = useRouter();
-
   return (
     <Container>
       {elementsList.map((sidebarItem) => {
@@ -89,9 +85,11 @@ const Sidebar = ({ elementsList }: Props) => {
         return (
           <SidebarItem key={sidebarItem.label} className={sidebarItem.type}>
             {sidebarItem.href !== undefined ? (
-              <SidebarLinkWrapper data-active={isLinkActive}>
-                <Link href={sidebarItem.href}>{sidebarItem.label}</Link>
-              </SidebarLinkWrapper>
+              <Link passHref href={sidebarItem.href}>
+                <SidebarLinkWrapper data-active={isLinkActive}>
+                  {sidebarItem.label}
+                </SidebarLinkWrapper>
+              </Link>
             ) : (
               <SidebarHeading>{sidebarItem.label}</SidebarHeading>
             )}
@@ -100,15 +98,17 @@ const Sidebar = ({ elementsList }: Props) => {
               <SidebarSubLinksList>
                 {sidebarItem.children.map((subItem) => {
                   const isSubLinkActive = router?.asPath === subItem.href;
-                  const isAnchor = router?.asPath.indexOf("#") > -1;
+                  const isAnchor = subItem.href.includes("#");
                   return (
                     <li key={subItem.label}>
-                      <SidebarLinkWrapper
-                        data-active={isSubLinkActive}
-                        data-anchor={isAnchor}
-                      >
-                        <Link href={subItem.href}>{subItem.label}</Link>
-                      </SidebarLinkWrapper>
+                      <Link passHref href={subItem.href}>
+                        <SidebarLinkWrapper
+                          data-active={isSubLinkActive}
+                          data-anchor={isAnchor}
+                        >
+                          {subItem.label}
+                        </SidebarLinkWrapper>
+                      </Link>
                     </li>
                   );
                 })}

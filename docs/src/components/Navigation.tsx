@@ -10,7 +10,7 @@ const { media } = appTheme;
 
 interface Props {
   isSidebarOpen: boolean;
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NavigationStyled = styled.nav`
@@ -59,16 +59,24 @@ const HamburgerLogoWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+const HamburgerWrapper = styled.div`
+  ${media.md} {
+    display: none;
+  }
+`;
 
-const Navigation: FC<Props> = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   return (
     <NavigationStyled>
       <ControlsContainer>
         <HamburgerLogoWrapper>
-          <Hamburger
-            isOpen={isSidebarOpen}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          />
+          <HamburgerWrapper>
+            <Hamburger
+              isOpen={isSidebarOpen}
+              onClick={() => onSidebarOpen(!isSidebarOpen)}
+            />
+          </HamburgerWrapper>
+
           <Link href="/" passHref>
             <LogoContainer>
               <HardhatLogo />
@@ -76,7 +84,7 @@ const Navigation: FC<Props> = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </Link>
         </HamburgerLogoWrapper>
 
-        <Menu />
+        <Menu isDocumentation={true} />
         <div>Theme</div>
       </ControlsContainer>
     </NavigationStyled>

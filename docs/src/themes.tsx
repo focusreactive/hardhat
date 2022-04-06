@@ -4,12 +4,14 @@ import { createTheming } from "@callstack/react-theme-provider";
 export { styled } from "linaria/react";
 
 const breakpoints = {
-  sm: 360,
-  md: 412,
+  xs: 360,
+  sm: 412,
+  md: 1020,
   lg: 1440,
 };
 
 const media = {
+  xs: `@media screen and (min-width: ${breakpoints.xs}px)`,
   sm: `@media screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media screen and (min-width: ${breakpoints.md}px)`,
   lg: `@media screen and (min-width: ${breakpoints.lg}px)`,

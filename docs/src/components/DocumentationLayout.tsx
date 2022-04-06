@@ -61,18 +61,16 @@ const SidebarContainer = styled.aside`
   height: 85vh;
   display: flex;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  z-index: 1;
   ${SidebarMask} {
     display: none;
-    ${media.lg} {
+    ${media.md} {
       display: flex;
     }
   }
   ${MobileSidebarMenuMask} {
     display: flex;
-    ${media.lg} {
+    ${media.md} {
       display: none;
     }
   }
@@ -86,7 +84,7 @@ const View = styled.section`
   width: 100%;
   height: 85vh;
   overflow-y: scroll;
-  ${media.lg} {
+  ${media.md} {
     padding-left: 366px;
   }
 `;
@@ -117,6 +115,18 @@ const DocumentationLayout = ({ children, seo }: Props) => {
     }
   }, [isSidebarOpen]);
 
+  useEffect(() => {
+    const listener = () => {
+      if (isSidebarOpen) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("click", listener);
+
+    return () => document.removeEventListener("click", listener);
+  }, [isSidebarOpen]);
+
   return (
     <Container>
       <Banner
@@ -127,12 +137,16 @@ const DocumentationLayout = ({ children, seo }: Props) => {
       />
       <Navigation
         isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
+        onSidebarOpen={setIsSidebarOpen}
       />
       <SEO seo={seo} />
 
       <main>
-        <SidebarContainer>
+        <SidebarContainer
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <SidebarMask>
             <Sidebar elementsList={DocumentationSidebarStructure} />
           </SidebarMask>

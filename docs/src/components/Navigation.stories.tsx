@@ -30,7 +30,7 @@ export const Navigation = () => {
   return (
     <DocumentationNavigation
       isSidebarOpen={isSidebarOpen}
-      setIsSidebarOpen={setIsSidebarOpen}
+      onSidebarOpen={setIsSidebarOpen}
     />
   );
 };
