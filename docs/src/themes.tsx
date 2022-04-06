@@ -17,17 +17,22 @@ const media = {
 
 export const appTheme = {
   colors: {
+    transparent: "transparent",
     neutral0: "#FFFFFF",
     neutral100: "#F2F2F2",
+    neutral200: "#FCFCF1",
     neutral400: "#C4C4C4",
     neutral500: "#4B4D4D",
     neutral600: "#6E6F70",
     neutral700: "#9B9FA8",
     neutral900: "#0A0A0A",
+    accent100: "#FBFCDB",
     accent600: "#FFF04D",
+    accent800: "#FFF100",
     accent900: "#EDCF00",
+    complementary600: "#E9DEFA",
     accentBackground: "linear-gradient(256.6deg, #FFF100 0%, #FFF100 100%)",
-    cardBoxShadow: "rgba(10, 10, 10, 0.08)",
+    cardBoxShadow: "#0A0A0A14",
     sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
     sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
     textureBackground:
