@@ -2,11 +2,10 @@ import React, { Fragment } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
 import { MenuItemType, MenuProps, SocialsItem } from "./types";
-import defaultProps from "./default-props";
 import { defaultMenuItemsList } from "../../config";
 import { appTheme, tm } from "../../themes";
+import homepageContent from "../../content/home";
 
-const { defaultSocialsItems } = defaultProps;
 const { media } = appTheme;
 
 const MobileMenuContainer = styled.section<{ isOpen: boolean }>`
@@ -186,5 +185,5 @@ export default MobileMenu;
 
 MobileMenu.defaultProps = {
   menuItems: defaultMenuItemsList,
-  socialsItems: defaultSocialsItems,
+  socialsItems: homepageContent.defaultSocialsItems,
 };

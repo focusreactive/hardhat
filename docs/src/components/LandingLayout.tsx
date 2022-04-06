@@ -5,10 +5,10 @@ import LandingNavigation from "./LandingNavigation";
 import LandingFooter from "./LandingFooter";
 import Banner, { DefaultBanner } from "./ui/Banner";
 import { tm } from "../themes";
-import defaultProps from "./ui/default-props";
 import { DefaultBannerProps } from "./ui/types";
+import homepageContent from "../content/home";
 
-const { defaultBannerContent } = defaultProps;
+const { bannerContent } = homepageContent;
 
 const Container = styled.div`
   position: relative;
@@ -40,7 +40,7 @@ const LandingLayout = ({ children, seo }: Props) => {
   return (
     <Container>
       <Banner
-        content={defaultBannerContent}
+        content={bannerContent}
         renderContent={({ content }: DefaultBannerProps) => (
           <DefaultBanner content={content} />
         )}
