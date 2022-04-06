@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
 import { appTheme, tm } from "../themes";
@@ -7,6 +7,11 @@ import Hamburger from "./ui/Hamburger";
 import Menu from "./ui/DesktopMenu";
 
 const { media } = appTheme;
+
+interface Props {
+  isSidebarOpen: boolean;
+  onSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const NavigationStyled = styled.nav`
   position: relative;
@@ -54,31 +59,24 @@ const HamburgerLogoWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+const HamburgerWrapper = styled.div`
+  ${media.md} {
+    display: none;
+  }
+`;
 
-const Navigation: FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (!body) return;
-
-    if (isSidebarOpen) {
-      // Disable scroll
-      body.style.overflow = "hidden";
-    } else {
-      // Enable scroll
-      body.style.overflow = "auto";
-    }
-  }, [isSidebarOpen]);
-
+const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   return (
     <NavigationStyled>
       <ControlsContainer>
         <HamburgerLogoWrapper>
-          <Hamburger
-            isOpen={isSidebarOpen}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          />
+          <HamburgerWrapper>
+            <Hamburger
+              isOpen={isSidebarOpen}
+              onClick={() => onSidebarOpen(!isSidebarOpen)}
+            />
+          </HamburgerWrapper>
+
           <Link href="/" passHref>
             <LogoContainer>
               <HardhatLogo />
@@ -86,7 +84,7 @@ const Navigation: FC = () => {
           </Link>
         </HamburgerLogoWrapper>
 
-        <Menu />
+        <Menu isDocumentation />
         <div>Theme</div>
       </ControlsContainer>
     </NavigationStyled>
