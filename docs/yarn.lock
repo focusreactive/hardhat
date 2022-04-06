@@ -2643,6 +2643,13 @@
   "resolved" "https://registry.npmjs.org/@types/mdurl/-/mdurl-1.0.2.tgz"
   "version" "1.0.2"
 
+"@types/mdx-js__react@^1.5.5":
+  "integrity" "sha512-k8pnaP6JXVlQh18HgL5X6sYFNC/qZnzO7R2+HsmwrwUd+JnnsU0d9lyyT0RQrHg1anxDU36S98TI/fsGtmYqqg=="
+  "resolved" "https://registry.npmjs.org/@types/mdx-js__react/-/mdx-js__react-1.5.5.tgz"
+  "version" "1.5.5"
+  dependencies:
+    "@types/react" "*"
+
 "@types/mdx@^2.0.0":
   "integrity" "sha512-JPEv4iAl0I+o7g8yVWDwk30es8mfVrjkvh5UeVR2sYPpZCK44vrAPsbJpIS+rJAUxLgaSAMKTEH5Vn5qd9XsrQ=="
   "resolved" "https://registry.npmjs.org/@types/mdx/-/mdx-2.0.1.tgz"
