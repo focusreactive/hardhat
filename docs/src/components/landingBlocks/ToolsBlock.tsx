@@ -26,7 +26,7 @@ interface BlockProps {
   content: {
     title: string;
     companyName: string;
-    infoItems: {
+    infoItems: Array<{
       icon: React.MemoExoticComponent<
         (props: React.SVGProps<SVGSVGElement>) => JSX.Element
       >;
@@ -35,7 +35,7 @@ interface BlockProps {
       mottos: string[];
       description: string;
       link: string;
-    }[];
+    }>;
   };
 }
 

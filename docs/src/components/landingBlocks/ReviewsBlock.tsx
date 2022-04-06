@@ -10,14 +10,14 @@ import { appTheme, tm } from "../../themes";
 const { media } = appTheme;
 
 interface Props {
-  content: {
+  content: Array<{
     name: string;
     position: string;
     personImage: StaticImageData;
     companyImage: StaticImageData;
     alt: string;
     comment: string;
-  }[];
+  }>;
 }
 
 const SliderWrapper = styled.div`
