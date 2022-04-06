@@ -203,6 +203,10 @@ const SliderArrow = styled.button`
         ${tm(({ colors }) => colors.sliderButtonHoverShadow)};
     }
 
+    &:active {
+      background-color: ${tm(({ colors }) => colors.neutral100)};
+    }
+
     &.right {
       right: -80px;
     }
