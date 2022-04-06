@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Section from "../Section";
 import { Tools } from "../ui/types";
 import ToolsBlockStyled from "./ToolsBlock.styled";
-import homepageContent from "../../content/home";
 
 const {
   Container,
@@ -24,11 +23,35 @@ const {
 } = ToolsBlockStyled;
 
 interface BlockProps {
-  content: typeof homepageContent.toolsBlockContent;
+  content: {
+    title: string;
+    companyName: string;
+    infoItems: {
+      icon: React.MemoExoticComponent<
+        (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+      >;
+      title: string;
+      value: Tools;
+      mottos: string[];
+      description: string;
+      link: string;
+    }[];
+  };
 }
 
 interface ToolProps {
-  content: typeof homepageContent.toolsBlockContent.infoItems[0] | undefined;
+  content:
+    | {
+        icon: React.MemoExoticComponent<
+          (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+        >;
+        title: string;
+        value: Tools;
+        mottos: string[];
+        description: string;
+        link: string;
+      }
+    | undefined;
   companyName: string;
 }
 

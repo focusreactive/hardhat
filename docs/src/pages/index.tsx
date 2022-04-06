@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import FeatureCard from "../components/ui/FeatureCard";
-import GetStartedHardhat from "../components/landingBlocks/CTABlock";
+import GetStartedHardhat from "../components/landingBlocks/GetStartedBlock";
 import WhyHardhatBlock from "../components/landingBlocks/WhyHardhatBlock";
 import VibrantCommunityBlock from "../components/landingBlocks/VibrantCommunityBlock";
 import TrustedTeamsBlock from "../components/landingBlocks/TrustedTeamsBlock";
