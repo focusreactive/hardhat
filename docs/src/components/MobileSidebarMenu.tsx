@@ -4,16 +4,17 @@ import { useRouter } from "next/router";
 import { styled } from "linaria/react";
 import { tm } from "../themes";
 import Sidebar from "./Sidebar";
-import { defaultMenuItemsList, DocumentationSidebarStructure } from "../config";
-import defaultProps from "./ui/default-props";
+import {
+  menuItemsList,
+  DocumentationSidebarStructure,
+  socialsItems,
+} from "../config";
 import ExternalLinkIcon from "../assets/icons/external-link-icon";
-
-const { defaultSocialsItems } = defaultProps;
 
 interface Props {
   sidebarElementsList: typeof DocumentationSidebarStructure;
-  menuItems: typeof defaultMenuItemsList;
-  socialsItems: typeof defaultSocialsItems;
+  menuItems: typeof menuItemsList;
+  socialsItems: typeof socialsItems;
 }
 
 const MobileSidebarContainer = styled.section`

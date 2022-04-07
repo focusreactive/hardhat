@@ -4,14 +4,18 @@ import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
 import { tm, appTheme } from "../themes";
-import defaultProps from "./ui/default-props";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
 import Sidebar from "./Sidebar";
-import { defaultMenuItemsList, DocumentationSidebarStructure } from "../config";
+import {
+  DocumentationSidebarStructure,
+  menuItemsList,
+  socialsItems,
+} from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
 
-const { defaultBannerContent, defaultSocialsItems } = defaultProps;
+import { bannerContent } from "../config";
+
 const { media } = appTheme;
 
 const Container = styled.div`
@@ -130,7 +134,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
   return (
     <Container>
       <Banner
-        content={defaultBannerContent}
+        content={bannerContent}
         renderContent={({ content }: DefaultBannerProps) => (
           <DefaultBanner content={content} />
         )}
@@ -152,8 +156,8 @@ const DocumentationLayout = ({ children, seo }: Props) => {
           </SidebarMask>
           <MobileSidebarMenuMask data-open={isSidebarOpen}>
             <MobileSidebarMenu
-              menuItems={defaultMenuItemsList}
-              socialsItems={defaultSocialsItems}
+              menuItems={menuItemsList}
+              socialsItems={socialsItems}
               sidebarElementsList={DocumentationSidebarStructure}
             />
           </MobileSidebarMenuMask>
