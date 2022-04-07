@@ -6,6 +6,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import Images from "../../assets/images";
 import CTA from "../ui/CTA";
 import Section from "../Section";
+import { CTAType } from "../ui/types";
 
 const { TextureBrick } = Images;
 const { media, breakpoints } = appTheme;
@@ -14,10 +15,7 @@ interface Props {
   content: {
     title: string;
     subtitle: string;
-    cta: {
-      title: string;
-      url: string;
-    };
+    cta: CTAType;
   };
 }
 

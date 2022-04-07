@@ -5,6 +5,7 @@ import CTA from "../ui/CTA";
 import { appTheme } from "../../themes";
 import Images from "../../assets/images";
 import useWindowSize from "../../hooks/useWindowSize";
+import { CTAType } from "../ui/types";
 
 const { media, breakpoints } = appTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
@@ -13,10 +14,7 @@ interface Props {
   content: {
     title: string;
     tagline: string;
-    cta: {
-      title: string;
-      url: string;
-    };
+    cta: CTAType;
   };
 }
 
