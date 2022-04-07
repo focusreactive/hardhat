@@ -11,10 +11,9 @@ import {
   DocumentationSidebarStructure,
   menuItemsList,
   socialsItems,
+  bannerContent,
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
-
-import { bannerContent } from "../config";
 
 const { media } = appTheme;
 

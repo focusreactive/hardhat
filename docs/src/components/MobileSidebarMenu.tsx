@@ -7,14 +7,14 @@ import Sidebar from "./Sidebar";
 import {
   menuItemsList,
   DocumentationSidebarStructure,
-  socialsItems,
+  socialsItems as defaultSocialItems,
 } from "../config";
 import ExternalLinkIcon from "../assets/icons/external-link-icon";
 
 interface Props {
   sidebarElementsList: typeof DocumentationSidebarStructure;
   menuItems: typeof menuItemsList;
-  socialsItems: typeof socialsItems;
+  socialsItems: typeof defaultSocialItems;
 }
 
 const MobileSidebarContainer = styled.section`

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { defaultMenuItemsList, DocumentationSidebarStructure } from "../config";
+import {
+  menuItemsList,
+  DocumentationSidebarStructure,
+  socialsItems,
+} from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
-import defaultProps from "./ui/default-props";
 
 import DocumentationNavigation from "./Navigation";
 import Sidebar from "./Sidebar";
-
-const { defaultSocialsItems } = defaultProps;
 
 export default {
   title: "Documentation/ Navigation",
@@ -14,8 +15,8 @@ export default {
 
 export const MobileSidebar = () => (
   <MobileSidebarMenu
-    menuItems={defaultMenuItemsList}
-    socialsItems={defaultSocialsItems}
+    menuItems={menuItemsList}
+    socialsItems={socialsItems}
     sidebarElementsList={DocumentationSidebarStructure}
   />
 );
