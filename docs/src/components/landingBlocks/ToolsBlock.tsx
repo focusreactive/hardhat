@@ -121,9 +121,7 @@ const ToolDescription = ({ content, companyName }: ToolProps) => {
       </DescriptionHeaderContainer>
       <div>
         <DescriptionText>{content.description}</DescriptionText>
-        <DescriptionLink>
-          <DescriptionLink href={content.link}>Learn more </DescriptionLink>
-        </DescriptionLink>
+        <DescriptionLink href={content.link}>Learn more </DescriptionLink>
       </div>
     </DescriptionContainer>
   ) : null;
