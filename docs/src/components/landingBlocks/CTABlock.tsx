@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
 import Images from "../../assets/images";
 import CTA from "../ui/CTA";
@@ -8,7 +8,7 @@ import Section from "../Section";
 import homepageContent from "../../content/home";
 
 const { TextureBrick } = Images;
-const { media, breakpoints } = appTheme;
+const { media, breakpoints } = lightTheme;
 
 interface Props {
   content: typeof homepageContent.getStartedHardhat;

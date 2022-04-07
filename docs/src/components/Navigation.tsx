@@ -1,17 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
-import { appTheme, tm } from "../themes";
+import { darkTheme, lightTheme, ThemeContext, ThemesEnum, tm } from "../themes";
 import HardhatLogo from "../assets/hardhat-logo";
 import Hamburger from "./ui/Hamburger";
 import Menu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
+import ThemeSwitcher from "../assets/icons/theme-switcher";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 interface Props {
   isSidebarOpen: boolean;
   onSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onChangeTheme(): void;
 }
 
 const NavigationStyled = styled.nav`
@@ -26,11 +28,15 @@ const NavigationStyled = styled.nav`
   height: 96px;
   box-sizing: border-box;
   padding: 32px 24px;
-  transition: all ease-in-out 0.5s;
+  transition: all ease-in-out 0.25s;
   background-color: ${tm(({ colors }) => colors.neutral200)};
+  border-bottom: 1px solid ${tm(({ colors }) => colors.transparent)};
   z-index: 10;
   ${media.lg} {
     padding: 24px;
+  }
+  &[data-theme="DARK"] {
+    border-bottom: 1px solid ${tm(({ colors }) => colors.neutral400)};
   }
 `;
 
@@ -42,7 +48,6 @@ const ControlsContainer = styled.section`
   align-items: center;
   background-color: ${tm(({ colors }) => colors.transparent)};
   box-sizing: border-box;
-  cursor: pointer;
 `;
 
 const LogoContainer = styled.a`
@@ -66,9 +71,32 @@ const HamburgerWrapper = styled.div`
   }
 `;
 
-const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
+const ThemeButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${tm(({ colors }) => colors.transparent)};
+  border: none;
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform ease-in-out 0.25s;
+  &:hover {
+    opacity: 0.8;
+  }
+  &[data-theme="DARK"] {
+    transform: scaleX(-1);
+  }
+`;
+
+const Navigation: FC<Props> = ({
+  isSidebarOpen,
+  onSidebarOpen,
+  onChangeTheme,
+}) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <NavigationStyled>
+    <NavigationStyled data-theme={theme}>
       <ControlsContainer>
         <HamburgerLogoWrapper>
           <HamburgerWrapper>
@@ -80,7 +108,11 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
 
           <Link href="/" passHref>
             <LogoContainer>
-              <HardhatLogo />
+              <HardhatLogo
+                fill={
+                  theme === ThemesEnum.DARK ? darkTheme.colors.neutral900 : ""
+                }
+              />
             </LogoContainer>
           </Link>
         </HamburgerLogoWrapper>
@@ -90,7 +122,9 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           menuItems={menuItemsList}
           socialsItems={socialsItems}
         />
-        <div>Theme</div>
+        <ThemeButton onClick={() => onChangeTheme()} data-theme={theme}>
+          <ThemeSwitcher />
+        </ThemeButton>
       </ControlsContainer>
     </NavigationStyled>
   );

@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
-import { tm, appTheme } from "../themes";
+import { tm, lightTheme } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
 import Sidebar from "./Sidebar";
@@ -15,7 +15,7 @@ import {
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const Container = styled.div`
   position: relative;
@@ -31,6 +31,7 @@ const Container = styled.div`
     background-color: ${tm(({ colors }) => colors.neutral0)};
     width: 100%;
     position: relative;
+    transition: background-color ease-in-out 0.25s;
   }
   height: 100vh;
   min-width: 320px;
@@ -96,13 +97,15 @@ const Content = styled.section`
   flex-direction: column;
   max-width: 774px;
   padding-left: 34px;
+  color: ${tm(({ colors }) => colors.neutral900)};
 `;
 
 type Props = React.PropsWithChildren<{
   seo: ISeo;
+  onChangeTheme(): void;
 }>;
 
-const DocumentationLayout = ({ children, seo }: Props) => {
+const DocumentationLayout = ({ children, seo, onChangeTheme }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -141,6 +144,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
       <Navigation
         isSidebarOpen={isSidebarOpen}
         onSidebarOpen={setIsSidebarOpen}
+        onChangeTheme={onChangeTheme}
       />
       <SEO seo={seo} />
 

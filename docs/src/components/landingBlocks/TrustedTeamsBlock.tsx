@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 
 import TrustedTeamsLogos from "./TrustedTeamsBlock.model";
 
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 import Section from "../Section";
 import homepageContent from "../../content/home";
 
@@ -11,7 +11,7 @@ interface Props {
   content: typeof homepageContent.trustedTeamsBlockContent;
 }
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const Container = styled.section`
   width: 100%;

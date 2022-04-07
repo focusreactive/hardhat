@@ -5,10 +5,10 @@ import { styled } from "linaria/react";
 import CarouselArrowLeft from "../../assets/images/carrusel-arrow-left.png";
 
 import Section from "../Section";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 import homepageContent from "../../content/home";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 interface Props {
   content: typeof homepageContent.reviewsBlockContent;

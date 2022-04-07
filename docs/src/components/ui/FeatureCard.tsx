@@ -4,9 +4,9 @@ import { styled } from "linaria/react";
 import { CTAType } from "./types";
 import CTA from "./CTA";
 import useWindowSize from "../../hooks/useWindowSize";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 
-const { breakpoints, media } = appTheme;
+const { breakpoints, media } = lightTheme;
 
 interface ArticleType {
   title: string;

@@ -4,12 +4,12 @@ import { styled } from "linaria/react";
 
 import VibrantCommunityImage from "../../assets/images/vibrant_community.png";
 
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 import CTA from "../ui/CTA";
 import Section from "../Section";
 import homepageContent from "../../content/home";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 interface Props {
   content: typeof homepageContent.vibrantCommunityBlockContent;

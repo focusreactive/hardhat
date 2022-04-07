@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
 import { MenuItemType, MenuProps, SocialsItem } from "./types";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const MobileMenuContainer = styled.section<{ isOpen: boolean }>`
   position: fixed;

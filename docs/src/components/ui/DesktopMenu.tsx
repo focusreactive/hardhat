@@ -3,9 +3,9 @@ import { styled } from "linaria/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const MenuContainer = styled.section<{ isDocumentation: boolean }>`
   user-select: none;

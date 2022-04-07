@@ -2,12 +2,12 @@ import React from "react";
 import { styled } from "linaria/react";
 import Section from "../Section";
 import CTA from "../ui/CTA";
-import { appTheme } from "../../themes";
+import { lightTheme } from "../../themes";
 import Images from "../../assets/images";
 import useWindowSize from "../../hooks/useWindowSize";
 import homepageContent from "../../content/home";
 
-const { media, breakpoints } = appTheme;
+const { media, breakpoints } = lightTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
 interface Props {
   content: typeof homepageContent.heroBlockContent;

@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 import useWindowSize, { WindowSizeState } from "../../hooks/useWindowSize";
 import { BannerProps, DefaultBannerProps } from "./types";
 
-const { media, breakpoints } = appTheme;
+const { media, breakpoints } = lightTheme;
 
 const BannerContainer = styled.section`
   position: absolute;

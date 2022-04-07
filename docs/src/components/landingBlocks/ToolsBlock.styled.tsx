@@ -1,7 +1,7 @@
 import { styled } from "linaria/react";
-import { appTheme, tm } from "../../themes";
+import { lightTheme, tm } from "../../themes";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const Container = styled.div`
   margin-top: 70px;

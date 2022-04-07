@@ -4,14 +4,14 @@ import Image from "next/image";
 import NomicFoundationLogo from "../../assets/images/nomic-foundation-logo.png";
 
 import Section from "../Section";
-import { appTheme } from "../../themes";
+import { lightTheme } from "../../themes";
 import homepageContent from "../../content/home";
 
 interface Props {
   content: typeof homepageContent.builtByBlockContent;
 }
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const Container = styled.div`
   margin-bottom: 234px;

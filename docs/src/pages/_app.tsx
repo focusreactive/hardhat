@@ -1,17 +1,20 @@
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
-import { ThemeProvider, appTheme } from "../themes";
+import { ThemesEnum, getNextTheme, ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [theme, setTheme] = useState<ThemesEnum>(ThemesEnum.LIGHT);
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <ThemeProvider theme={appTheme}>
+      <ThemeProvider theme={theme}>
         <DocumentationLayout
+          onChangeTheme={() => setTheme(ThemesEnum[getNextTheme(theme)])}
           seo={{ title: "Overview", description: "Hardhat" }}
         >
           <MDXProvider components={{}}>
@@ -22,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={ThemesEnum.LIGHT}>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>

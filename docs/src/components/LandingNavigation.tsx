@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
-import { appTheme, tm } from "../themes";
+import { lightTheme, tm } from "../themes";
 import HardhatLogo from "../assets/hardhat-logo";
 import Hamburger from "./ui/Hamburger";
 import MobileMenu from "./ui/MobileMenu";
 import Menu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
 
-const { media } = appTheme;
+const { media } = lightTheme;
 
 const Navigation = styled.nav`
   position: sticky;
@@ -39,7 +39,6 @@ const ControlsContainer = styled.section`
   background-color: ${tm(({ colors }) => colors.transparent)};
   box-sizing: border-box;
   max-width: 960px;
-  cursor: pointer;
 `;
 
 const LogoContainer = styled.a`
