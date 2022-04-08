@@ -105,19 +105,29 @@ export const getNextTheme = (currentTheme: ThemesEnum): ThemesEnum => {
 
 const theming = createTheming(lightTheme);
 
-export const ThemeContext = React.createContext<{ theme: ThemesEnum }>({
+interface IThemeContext {
+  theme: ThemesEnum;
+  onChangeTheme: () => void;
+}
+
+export const ThemeContext = React.createContext<IThemeContext>({
   theme: LIGHT,
+  onChangeTheme: () => {},
 });
 
 export const ThemeProvider = ({
   children,
-  theme: themeName,
-}: React.PropsWithChildren<{ theme: ThemesEnum }>): JSX.Element => {
-  const initialContext = useMemo(() => ({ theme: themeName }), [themeName]);
+  theme,
+  onChangeTheme,
+}: React.PropsWithChildren<IThemeContext>): JSX.Element => {
+  const initialContext = useMemo(
+    () => ({ theme, onChangeTheme }),
+    [theme, onChangeTheme]
+  );
 
   return (
     <ThemeContext.Provider value={initialContext}>
-      <theming.ThemeProvider theme={mapTheme[themeName]}>
+      <theming.ThemeProvider theme={mapTheme[theme]}>
         {children}
       </theming.ThemeProvider>
     </ThemeContext.Provider>

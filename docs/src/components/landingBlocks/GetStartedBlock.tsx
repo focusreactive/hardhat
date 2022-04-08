@@ -5,16 +5,20 @@ import useWindowSize from "../../hooks/useWindowSize";
 import Images from "../../assets/images";
 import CTA from "../ui/CTA";
 import Section from "../Section";
-import homepageContent from "../../content/home";
+import { CTAType } from "../ui/types";
 
 const { TextureBrick } = Images;
 const { media, breakpoints } = lightTheme;
 
 interface Props {
-  content: typeof homepageContent.getStartedHardhat;
+  content: {
+    title: string;
+    subtitle: string;
+    cta: CTAType;
+  };
 }
 
-const CTABlockStyled = styled.section`
+const GetStartedBlockStyled = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -108,19 +112,19 @@ const Background = () => {
   );
 };
 
-const CTABlock = ({ content }: Props) => {
+const GetStartedBlock = ({ content }: Props) => {
   return (
     <Section clearPadding>
-      <CTABlockStyled>
+      <GetStartedBlockStyled>
         <Background />
         <ContentBlock>
           <Title>{content.title}</Title>
           <Subtitle>{content.subtitle}</Subtitle>
           <CTA href={content.cta.url}>{content.cta.title}</CTA>
         </ContentBlock>
-      </CTABlockStyled>
+      </GetStartedBlockStyled>
     </Section>
   );
 };
 
-export default CTABlock;
+export default GetStartedBlock;

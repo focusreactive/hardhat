@@ -13,7 +13,6 @@ const { media } = lightTheme;
 interface Props {
   isSidebarOpen: boolean;
   onSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onChangeTheme(): void;
 }
 
 const NavigationStyled = styled.nav`
@@ -88,12 +87,8 @@ const ThemeButton = styled.button`
   }
 `;
 
-const Navigation: FC<Props> = ({
-  isSidebarOpen,
-  onSidebarOpen,
-  onChangeTheme,
-}) => {
-  const { theme } = useContext(ThemeContext);
+const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
+  const { theme, onChangeTheme } = useContext(ThemeContext);
 
   return (
     <NavigationStyled data-theme={theme}>

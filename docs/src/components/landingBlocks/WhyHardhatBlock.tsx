@@ -1,13 +1,13 @@
 import React from "react";
 import { styled } from "linaria/react";
+
 import Section from "../Section";
 import { tm, lightTheme } from "../../themes";
-import homepageContent from "../../content/home";
 
 const { media } = lightTheme;
 
 type Props = React.PropsWithChildren<{
-  content: typeof homepageContent.whyHardhatContent;
+  content: { title: string };
 }>;
 
 const Container = styled.section`

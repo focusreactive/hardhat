@@ -102,10 +102,9 @@ const Content = styled.section`
 
 type Props = React.PropsWithChildren<{
   seo: ISeo;
-  onChangeTheme(): void;
 }>;
 
-const DocumentationLayout = ({ children, seo, onChangeTheme }: Props) => {
+const DocumentationLayout = ({ children, seo }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -144,7 +143,6 @@ const DocumentationLayout = ({ children, seo, onChangeTheme }: Props) => {
       <Navigation
         isSidebarOpen={isSidebarOpen}
         onSidebarOpen={setIsSidebarOpen}
-        onChangeTheme={onChangeTheme}
       />
       <SEO seo={seo} />
 

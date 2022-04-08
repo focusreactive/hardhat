@@ -12,9 +12,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider
+        theme={theme}
+        onChangeTheme={() => setTheme(ThemesEnum[getNextTheme(theme)])}
+      >
         <DocumentationLayout
-          onChangeTheme={() => setTheme(ThemesEnum[getNextTheme(theme)])}
           seo={{ title: "Overview", description: "Hardhat" }}
         >
           <MDXProvider components={{}}>
@@ -25,7 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider theme={ThemesEnum.LIGHT}>
+    <ThemeProvider
+      theme={ThemesEnum.LIGHT}
+      onChangeTheme={() => setTheme(ThemesEnum[getNextTheme(theme)])}
+    >
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>
