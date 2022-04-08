@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { styled } from "linaria/react";
 
 import { appTheme, tm } from "../../themes";
@@ -50,6 +49,11 @@ const ImageContainer = styled.div`
   left: calc(50% - 320px / 2);
   top: -20.5px;
   position: absolute;
+
+  & > img {
+    width: 100%;
+  }
+
   ${media.lg} {
     margin-top: 43px;
     width: 530px;
@@ -117,11 +121,8 @@ const VibrantCommunityBlock = ({ content }: Props) => {
             </ButtonWrapper>
           </Wrapper>
           <ImageContainer>
-            <Image
-              src={content.imageUrl}
-              layout="fill"
-              alt="Vibrant community image"
-            />
+            {/* eslint-disable-next-line */}
+            <img src={content.imageUrl} alt="Vibrant community image" />
           </ImageContainer>
         </Container>
       </CardWrapper>
