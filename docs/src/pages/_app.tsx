@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
-import { ThemesEnum, getNextTheme, ThemeProvider } from "../themes";
+import { ThemesEnum, ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -17,18 +17,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     setTheme(currentTheme);
   }, []);
 
-  const changeTheme = useCallback(() => {
-    const newTheme = ThemesEnum[getNextTheme(theme)];
-    localStorage.setItem("theme", newTheme);
-
-    setTheme(newTheme);
-  }, [theme]);
-
   if (!mounted) return null;
+
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <ThemeProvider theme={theme} onChangeTheme={changeTheme}>
+      <ThemeProvider theme={theme} onChangeTheme={setTheme}>
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
@@ -40,10 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider
-      theme={ThemesEnum.LIGHT}
-      onChangeTheme={() => setTheme(ThemesEnum[getNextTheme(theme)])}
-    >
+    <ThemeProvider theme={ThemesEnum.LIGHT} onChangeTheme={setTheme}>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>

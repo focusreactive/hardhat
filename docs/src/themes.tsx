@@ -1,5 +1,12 @@
-import React, { useMemo } from "react";
+import React, {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { createTheming } from "@callstack/react-theme-provider";
+import useThemeDetector from "./hooks/useThemeDetector";
 
 export { styled } from "linaria/react";
 
@@ -7,10 +14,11 @@ export { styled } from "linaria/react";
 export enum ThemesEnum {
   LIGHT = "LIGHT",
   DARK = "DARK",
+  AUTO = "AUTO",
 }
 /* eslint-enable */
 
-const { LIGHT, DARK } = ThemesEnum;
+const { LIGHT, DARK, AUTO } = ThemesEnum;
 
 const breakpoints = {
   xs: 360,
@@ -43,6 +51,7 @@ export const lightTheme = {
     accent700: "#CCB200",
     accent800: "#FFF100",
     accent900: "#EDCF00",
+    border: "transparent",
     complementary600: "#E9DEFA",
     cardBoxShadow: "#0A0A0A14",
     sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -74,6 +83,7 @@ export const darkTheme = {
     accent700: "#CCB200",
     accent800: "#FFF100",
     accent900: "#EDCF00",
+    border: "#4B4D4D",
     complementary600: "#E9DEFA",
     cardBoxShadow: "#0A0A0A14",
     sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -88,7 +98,8 @@ export const darkTheme = {
   breakpoints,
 };
 
-export const mapTheme = {
+export const mapTheme: { [key in ThemesEnum]: typeof lightTheme } = {
+  [AUTO]: darkTheme,
   [LIGHT]: lightTheme,
   [DARK]: darkTheme,
 };
@@ -107,27 +118,50 @@ const theming = createTheming(lightTheme);
 
 interface IThemeContext {
   theme: ThemesEnum;
-  onChangeTheme: () => void;
+  changeTheme: () => void;
+}
+
+interface IThemeProvider {
+  theme: ThemesEnum;
+  onChangeTheme: React.Dispatch<SetStateAction<ThemesEnum>>;
 }
 
 export const ThemeContext = React.createContext<IThemeContext>({
   theme: LIGHT,
-  onChangeTheme: () => {},
+  changeTheme: () => {},
 });
 
 export const ThemeProvider = ({
   children,
   theme,
   onChangeTheme,
-}: React.PropsWithChildren<IThemeContext>): JSX.Element => {
+}: React.PropsWithChildren<IThemeProvider>): JSX.Element => {
+  const [currentThemeObject, setCurrentThemeObject] = useState(lightTheme);
+
+  const changeTheme = useCallback(() => {
+    const newTheme = ThemesEnum[getNextTheme(theme)];
+    localStorage.setItem("theme", newTheme);
+    onChangeTheme(newTheme);
+  }, [theme, onChangeTheme]);
+
+  const isAutoThemeDark = useThemeDetector();
+
+  useEffect(() => {
+    mapTheme[AUTO] = isAutoThemeDark ? darkTheme : lightTheme;
+  }, [isAutoThemeDark]);
+
+  useEffect(() => {
+    setCurrentThemeObject(mapTheme[theme]);
+  }, [theme]);
+
   const initialContext = useMemo(
-    () => ({ theme, onChangeTheme }),
-    [theme, onChangeTheme]
+    () => ({ theme, changeTheme }),
+    [theme, changeTheme]
   );
 
   return (
     <ThemeContext.Provider value={initialContext}>
-      <theming.ThemeProvider theme={mapTheme[theme]}>
+      <theming.ThemeProvider theme={currentThemeObject}>
         {children}
       </theming.ThemeProvider>
     </ThemeContext.Provider>
