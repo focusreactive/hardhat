@@ -45,8 +45,27 @@ const StyledBackground = styled.div`
     ({ colors }) =>
       `linear-gradient(254.24deg, ${colors.complementary600} 0%, ${colors.accent100} 100%, ${colors.accent100} 100%)`
   )};
-  height: 100%;
+  height: 99%;
   width: 100%;
+`;
+
+const StyledTopGradient = styled.div`
+  width: 100%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: ${tm(({ colors }) => colors.getStartedTopBackground)};
+`;
+
+const StyledBottomGradient = styled.div`
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background: ${tm(({ colors }) => colors.getStartedBottomBackground)};
+  transform: rotate(180deg);
 `;
 
 const TextureBrickWrapper = styled.div`
@@ -109,6 +128,8 @@ const Background = () => {
       <TextureBrickWrapper>
         <TextureBrick />
       </TextureBrickWrapper>
+      <StyledTopGradient />
+      <StyledBottomGradient />
     </StyledBackground>
   );
 };
