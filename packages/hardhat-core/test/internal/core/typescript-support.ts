@@ -55,7 +55,7 @@ describe("Typescript support", function () {
 
       assert.deepEqual(tests.sort(), [
         await fsExtra.realpath("test/js-test.js"),
-        await fsExtra.realpath("test/ts-test.ts"),
+        await fsExtra.realpath("test/ts-cnva.js"),
       ]);
     });
   });
