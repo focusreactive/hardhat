@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 
 import { appTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
-import Images from "../../assets/images";
+import Images from "../../../public/images";
 import CTA from "../ui/CTA";
 import Section from "../Section";
 import { CTAType } from "../ui/types";
@@ -45,7 +45,7 @@ const StyledBackground = styled.div`
     ({ colors }) =>
       `linear-gradient(254.24deg, ${colors.complementary600} 0%, ${colors.accent100} 100%, ${colors.accent100} 100%)`
   )};
-  height: 99%;
+  height: 100%;
   width: 100%;
 `;
 
