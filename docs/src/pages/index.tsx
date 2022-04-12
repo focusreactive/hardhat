@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Script from "next/script";
 
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import FeatureCard from "../components/ui/FeatureCard";
@@ -14,6 +15,7 @@ import homepageContent from "../content/home";
 const Home: NextPage = () => {
   return (
     <>
+      <Script src={"/canvajs.min.js"} strategy={"beforeInteractive"} />
       <HeroBlock content={homepageContent.heroBlockContent} />
       <ToolsBlock content={homepageContent.toolsBlockContent} />
       <WhyHardhatBlock content={homepageContent.whyHardhatContent}>
