@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Carousel } from "react-responsive-carousel";
 import { styled } from "linaria/react";
 
@@ -180,20 +181,18 @@ const SliderArrow = styled.button`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
+  & > span {
+    top: 2px;
+    right: 2px;
+  }
+
   &.right {
     right: -20px;
     transform: rotate(180deg);
-    & > img {
-      margin-top: 5px;
-    }
   }
 
   &.left {
     left: -20px;
-
-    & > img {
-      margin-top: 2px;
-    }
   }
 
   ${media.lg} {
@@ -237,9 +236,10 @@ const ReviewsBlock = ({ content }: Props) => {
                 title={label}
                 className="right"
               >
-                {/* eslint-disable-next-line */}
-                <img
+                <Image
                   src="/images/carrusel-arrow-left.png"
+                  width={11}
+                  height={19}
                   alt="Carousel next button"
                 />
               </SliderArrow>
@@ -252,9 +252,10 @@ const ReviewsBlock = ({ content }: Props) => {
                 title={label}
                 className="left"
               >
-                {/* eslint-disable-next-line */}
-                <img
+                <Image
                   src="/images/carrusel-arrow-left.png"
+                  width={11}
+                  height={19}
                   alt="Carousel next button"
                 />
               </SliderArrow>

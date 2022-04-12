@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
+import Image from "next/image";
 
 import Section from "../Section";
 import { appTheme } from "../../themes";
@@ -41,8 +42,12 @@ const BuiltByBlock = ({ content }: Props) => {
     <Section>
       <Container>
         <Title>{content.title}</Title>
-        {/* eslint-disable-next-line */}
-        <img src={content.imageUrl} alt="Nomic Foundation logo" />
+        <Image
+          src={content.imageUrl}
+          width={194}
+          height={51}
+          alt="Nomic Foundation logo"
+        />
       </Container>
     </Section>
   );
