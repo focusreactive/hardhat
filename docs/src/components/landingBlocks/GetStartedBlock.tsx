@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "linaria/react";
 import { lightTheme, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
-import Images from "../../assets/images";
+import Images from "../../../public/images";
 import CTA from "../ui/CTA";
 import Section from "../Section";
 import { CTAType } from "../ui/types";
@@ -46,6 +46,25 @@ const StyledBackground = styled.div`
   )};
   height: 100%;
   width: 100%;
+`;
+
+const StyledTopGradient = styled.div`
+  width: 100%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: ${tm(({ colors }) => colors.getStartedTopBackground)};
+`;
+
+const StyledBottomGradient = styled.div`
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background: ${tm(({ colors }) => colors.getStartedBottomBackground)};
+  transform: rotate(180deg);
 `;
 
 const TextureBrickWrapper = styled.div`
@@ -108,6 +127,8 @@ const Background = () => {
       <TextureBrickWrapper>
         <TextureBrick />
       </TextureBrickWrapper>
+      <StyledTopGradient />
+      <StyledBottomGradient />
     </StyledBackground>
   );
 };

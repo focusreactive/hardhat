@@ -61,6 +61,14 @@ export const lightTheme = {
     mottoNetworkBackground: "#f6edd1",
     mottoIgnitionBackground: "#f3ecf3",
     mottoVscodeBackground: "#f0e7fb",
+    getStartedTopBackground:
+      "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
+    getStartedBottomBackground:
+      "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
+    textureBackground:
+      "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
+    neutralBackground:
+      "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   },
   media,
   breakpoints,
@@ -93,6 +101,14 @@ export const darkTheme = {
     mottoNetworkBackground: "#f6edd1",
     mottoIgnitionBackground: "#f3ecf3",
     mottoVscodeBackground: "#f0e7fb",
+    getStartedTopBackground:
+      "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
+    getStartedBottomBackground:
+      "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
+    textureBackground:
+      "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
+    neutralBackground:
+      "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   },
   media,
   breakpoints,
