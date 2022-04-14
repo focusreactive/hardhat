@@ -5,6 +5,13 @@ import "../styles/globals.css";
 
 import { ThemeProvider, appTheme } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
+import Title from "../components/mdxComponents/Title";
+
+const components = {
+  h2: Title.H2,
+};
+
+//FIXME: there is a hover bug happening because of <aside /> have higher z-index rather then items under it even if aside is closed
 
 function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
@@ -14,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
-          <MDXProvider components={{}}>
+          <MDXProvider components={components}>
             <Component {...pageProps} />
           </MDXProvider>
         </DocumentationLayout>
