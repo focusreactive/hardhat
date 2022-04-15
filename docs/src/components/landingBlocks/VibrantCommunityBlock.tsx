@@ -2,12 +2,12 @@ import React from "react";
 import { styled } from "linaria/react";
 import Image from "next/image";
 
-import { lightTheme, tm } from "../../themes";
+import { appTheme, tm } from "../../themes";
 import CTA from "../ui/CTA";
 import Section from "../Section";
 import { CTAType } from "../ui/types";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 
 interface Props {
   content: { title: string; text: string; imageUrl: string; cta: CTAType };

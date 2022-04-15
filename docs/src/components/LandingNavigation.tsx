@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
-import { lightTheme, tm } from "../themes";
+import { appTheme, tm } from "../themes";
 import HardhatLogo from "../assets/hardhat-logo";
 import Hamburger from "./ui/Hamburger";
 import MobileMenu from "./ui/MobileMenu";
 import Menu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 
 const Navigation = styled.nav`
   position: sticky;

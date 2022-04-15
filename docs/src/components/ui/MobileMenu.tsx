@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
 import { MenuItemType, MenuProps, SocialsItem } from "./types";
-import { lightTheme, tm } from "../../themes";
+import { appTheme, tm } from "../../themes";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 
 const MobileMenuContainer = styled.section<{ isOpen: boolean }>`
   position: fixed;
@@ -94,7 +94,7 @@ const MobileMenuSubItemButton = styled.a`
   border: none;
   color: ${tm(({ colors }) => colors.neutral900)};
   font-size: 15px;
-  background-color: transparent;
+  background-color: ${tm(({ colors }) => colors.transparent)};
   line-height: 24px;
   letter-spacing: 0.04em;
   cursor: pointer;

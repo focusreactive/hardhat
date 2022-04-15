@@ -2,12 +2,12 @@ import React from "react";
 import { styled } from "linaria/react";
 import Section from "../Section";
 import CTA from "../ui/CTA";
-import { lightTheme } from "../../themes";
+import { appTheme } from "../../themes";
 import Images from "../../../public/images";
 import useWindowSize from "../../hooks/useWindowSize";
 import { CTAType } from "../ui/types";
 
-const { media, breakpoints } = lightTheme;
+const { media, breakpoints } = appTheme;
 const { HeroPetsImage, HeroGraphicsImage } = Images;
 
 interface Props {

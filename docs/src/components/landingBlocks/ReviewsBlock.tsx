@@ -4,9 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import { styled } from "linaria/react";
 
 import Section from "../Section";
-import { lightTheme, tm } from "../../themes";
+import { appTheme, tm } from "../../themes";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 
 interface Props {
   content: Array<{

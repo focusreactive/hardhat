@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { tm, lightTheme } from "../../themes";
+import { tm, appTheme } from "../../themes";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 
 const A = styled.a`
   display: inline-flex;
@@ -36,7 +36,7 @@ const A = styled.a`
     padding: 12px 0;
     border: 1px solid ${tm(({ colors }) => colors.neutral700)};
     text-align: center;
-    background: transparent;
+    background: ${tm(({ colors }) => colors.transparent)};
     transition: 0.3s;
 
     &:hover {

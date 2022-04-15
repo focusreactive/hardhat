@@ -1,12 +1,5 @@
-import React, {
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createTheming } from "@callstack/react-theme-provider";
-import useThemeDetector from "./hooks/useThemeDetector";
 
 export { styled } from "linaria/react";
 
@@ -14,11 +7,10 @@ export { styled } from "linaria/react";
 export enum ThemesEnum {
   LIGHT = "LIGHT",
   DARK = "DARK",
+  HC_DARK = "HC_DARK",
   AUTO = "AUTO",
 }
 /* eslint-enable */
-
-const { LIGHT, DARK, AUTO } = ThemesEnum;
 
 const breakpoints = {
   xs: 360,
@@ -32,92 +24,138 @@ const media = {
   sm: `@media screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media screen and (min-width: ${breakpoints.md}px)`,
   lg: `@media screen and (min-width: ${breakpoints.lg}px)`,
+  mqDark: "@media (prefers-color-scheme: dark)",
 };
 
-export const lightTheme = {
-  colors: {
-    transparent: "transparent",
-    neutral0: "#FFFFFF",
-    neutral100: "#F2F2F2",
-    neutral200: "#FCFCF1",
-    neutral400: "#C4C4C4",
-    neutral500: "#4B4D4D",
-    neutral600: "#6E6F70",
-    neutral700: "#9B9FA8",
-    neutral800: "#16181D",
-    neutral900: "#0A0A0A",
-    accent100: "#FBFCDB",
-    accent600: "#FFF04D",
-    accent700: "#CCB200",
-    accent800: "#FFF100",
-    accent900: "#EDCF00",
-    border: "transparent",
-    complementary600: "#E9DEFA",
-    cardBoxShadow: "#0A0A0A14",
-    sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
-    sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
-    toolsBlockBorder: "#d4d4d4",
-    mottoRunnerBackground: "#F8F4CB",
-    mottoNetworkBackground: "#f6edd1",
-    mottoIgnitionBackground: "#f3ecf3",
-    mottoVscodeBackground: "#f0e7fb",
-    getStartedTopBackground:
-      "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
-    getStartedBottomBackground:
-      "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
-    textureBackground:
-      "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
-    neutralBackground:
-      "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
+export const tmSelectors = {
+  dark: "body.DARK &",
+  hcDark: "body.HC_DARK &",
+  auto: "body.AUTO &",
+};
+
+export const lightPalette = {
+  transparent: "transparent",
+  neutral0: "#FFFFFF",
+  neutral100: "#F2F2F2",
+  neutral200: "#FCFCF1",
+  neutral400: "#C4C4C4",
+  neutral500: "#4B4D4D",
+  neutral600: "#6E6F70",
+  neutral700: "#9B9FA8",
+  neutral800: "#16181D",
+  neutral900: "#0A0A0A",
+  accent100: "#FBFCDB",
+  accent600: "#FFF04D",
+  accent700: "#CCB200",
+  accent800: "#FFF100",
+  accent900: "#EDCF00",
+  border: "#4B4D4D",
+  complementary600: "#E9DEFA",
+  cardBoxShadow: "#0A0A0A14",
+  sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
+  sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
+  toolsBlockBorder: "#d4d4d4",
+  mottoRunnerBackground: "#F8F4CB",
+  mottoNetworkBackground: "#f6edd1",
+  mottoIgnitionBackground: "#f3ecf3",
+  mottoVscodeBackground: "#f0e7fb",
+  getStartedTopBackground:
+    "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
+  getStartedBottomBackground:
+    "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
+  textureBackground:
+    "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
+  neutralBackground:
+    "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
+};
+
+export const darkPalette = {
+  transparent: "transparent",
+  neutral0: "#20232A",
+  neutral100: "#F2F2F2",
+  neutral200: "#20232A",
+  neutral400: "#4B4D4D",
+  neutral500: "#4B4D4D",
+  neutral600: "#6E6F70",
+  neutral700: "#9B9FA8",
+  neutral800: "#B0B2B5",
+  neutral900: "#FFFFFF",
+  accent100: "#FBFCDB",
+  accent600: "#FFF04D",
+  accent700: "#CCB200",
+  accent800: "#FFF100",
+  accent900: "#EDCF00",
+  border: "#4B4D4D",
+  complementary600: "#E9DEFA",
+  cardBoxShadow: "#0A0A0A14",
+  sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
+  sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
+  toolsBlockBorder: "#d4d4d4",
+  mottoRunnerBackground: "#F8F4CB",
+  mottoNetworkBackground: "#f6edd1",
+  mottoIgnitionBackground: "#f3ecf3",
+  mottoVscodeBackground: "#f0e7fb",
+  getStartedTopBackground:
+    "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
+  getStartedBottomBackground:
+    "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
+  textureBackground:
+    "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
+  neutralBackground:
+    "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
+};
+
+export const hcDarkPalette = {
+  transparent: "transparent",
+  neutral0: "#16181D",
+  neutral100: "#F2F2F2",
+  neutral200: "#16181D",
+  neutral400: "#4B4D4D",
+  neutral500: "#4B4D4D",
+  neutral600: "#6E6F70",
+  neutral700: "#9B9FA8",
+  neutral800: "#B0B2B5",
+  neutral900: "#FFFFFF",
+  accent100: "#FBFCDB",
+  accent600: "#FFF04D",
+  accent700: "#CCB200",
+  accent800: "#FFF100",
+  accent900: "#EDCF00",
+  border: "#4B4D4D",
+  complementary600: "#E9DEFA",
+  cardBoxShadow: "#0A0A0A14",
+  sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
+  sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
+  toolsBlockBorder: "#d4d4d4",
+  mottoRunnerBackground: "#F8F4CB",
+  mottoNetworkBackground: "#f6edd1",
+  mottoIgnitionBackground: "#f3ecf3",
+  mottoVscodeBackground: "#f0e7fb",
+  getStartedTopBackground:
+    "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
+  getStartedBottomBackground:
+    "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
+  textureBackground:
+    "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
+  neutralBackground:
+    "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
+};
+
+type Palette = typeof lightPalette;
+
+export const appTheme = {
+  light: {
+    colors: lightPalette,
+  },
+  dark: {
+    colors: darkPalette,
+  },
+  hcDark: {
+    colors: hcDarkPalette,
   },
   media,
   breakpoints,
-};
-
-export const darkTheme = {
-  colors: {
-    transparent: "transparent",
-    neutral0: "#16181D",
-    neutral100: "#F2F2F2",
-    neutral200: "#16181D",
-    neutral400: "#4B4D4D",
-    neutral500: "#4B4D4D",
-    neutral600: "#6E6F70",
-    neutral700: "#9B9FA8",
-    neutral800: "#B0B2B5",
-    neutral900: "#FFFFFF",
-    accent100: "#FBFCDB",
-    accent600: "#FFF04D",
-    accent700: "#CCB200",
-    accent800: "#FFF100",
-    accent900: "#EDCF00",
-    border: "#4B4D4D",
-    complementary600: "#E9DEFA",
-    cardBoxShadow: "#0A0A0A14",
-    sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
-    sliderButtonHoverShadow: "hsl(0deg 0% 83% / 50%)",
-    toolsBlockBorder: "#d4d4d4",
-    mottoRunnerBackground: "#F8F4CB",
-    mottoNetworkBackground: "#f6edd1",
-    mottoIgnitionBackground: "#f3ecf3",
-    mottoVscodeBackground: "#f0e7fb",
-    getStartedTopBackground:
-      "linear-gradient(180deg, #ffffff 3.12%, rgba(255, 255, 255, 0) 67.71%)",
-    getStartedBottomBackground:
-      "linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 55.73%)",
-    textureBackground:
-      "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
-    neutralBackground:
-      "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
-  },
-  media,
-  breakpoints,
-};
-
-export const mapTheme: { [key in ThemesEnum]: typeof lightTheme } = {
-  [AUTO]: darkTheme,
-  [LIGHT]: lightTheme,
-  [DARK]: darkTheme,
+  tmSelectors,
 };
 
 const themesArray = Object.values(ThemesEnum);
@@ -130,61 +168,56 @@ export const getNextTheme = (currentTheme: ThemesEnum): ThemesEnum => {
   return nextTheme;
 };
 
-const theming = createTheming(lightTheme);
+const theming = createTheming(appTheme);
 
 interface IThemeContext {
   theme: ThemesEnum;
   changeTheme: () => void;
 }
 
-interface IThemeProvider {
-  theme: ThemesEnum;
-  onChangeTheme: React.Dispatch<SetStateAction<ThemesEnum>>;
-}
-
 export const ThemeContext = React.createContext<IThemeContext>({
-  theme: LIGHT,
+  theme: ThemesEnum.AUTO,
   changeTheme: () => {},
 });
 
 export const ThemeProvider = ({
   children,
-  theme,
-  onChangeTheme,
-}: React.PropsWithChildren<IThemeProvider>): JSX.Element => {
-  const [currentThemeObject, setCurrentThemeObject] = useState(lightTheme);
+  overrideTheme,
+}: React.PropsWithChildren<{ overrideTheme?: ThemesEnum }>): JSX.Element => {
+  const [theme, setTheme] = useState<ThemesEnum>(ThemesEnum.AUTO);
 
   const changeTheme = useCallback(() => {
-    const newTheme = ThemesEnum[getNextTheme(theme)];
+    const body = document.querySelector("body") as Element;
+    const newTheme = overrideTheme || ThemesEnum[getNextTheme(theme)];
+    body.className = `${newTheme}`;
     localStorage.setItem("theme", newTheme);
-    onChangeTheme(newTheme);
-  }, [theme, onChangeTheme]);
-
-  const isAutoThemeDark = useThemeDetector();
-
-  useEffect(() => {
-    mapTheme[AUTO] = isAutoThemeDark ? darkTheme : lightTheme;
-  }, [isAutoThemeDark]);
-
-  useEffect(() => {
-    setCurrentThemeObject(mapTheme[theme]);
-  }, [theme]);
+    setTheme(newTheme);
+  }, [theme, setTheme]);
 
   const initialContext = useMemo(
     () => ({ theme, changeTheme }),
     [theme, changeTheme]
   );
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as ThemesEnum;
+    setTheme(savedTheme);
+  }, []);
+
   return (
     <ThemeContext.Provider value={initialContext}>
-      <theming.ThemeProvider theme={currentThemeObject}>
-        {children}
-      </theming.ThemeProvider>
+      <theming.ThemeProvider theme={appTheme}>{children}</theming.ThemeProvider>
     </ThemeContext.Provider>
   );
 };
 
-type ThemeSelect = (tm: typeof lightTheme) => string;
+type ThemeSelect<T> = (tm: T) => string;
 
-export const tm = (cb: ThemeSelect) => () =>
-  ((fn) => fn(theming.useTheme()))(cb);
+export const tm = (cb: ThemeSelect<{ colors: Palette }>) => () =>
+  ((fn) => fn(theming.useTheme().light))(cb);
+
+export const tmDark = (cb: ThemeSelect<{ colors: Palette }>) => () =>
+  ((fn) => fn(theming.useTheme().dark))(cb);
+
+export const tmHCDark = (cb: ThemeSelect<{ colors: Palette }>) => () =>
+  ((fn) => fn(theming.useTheme().hcDark))(cb);

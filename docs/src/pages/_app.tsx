@@ -8,21 +8,10 @@ import { ThemesEnum, ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = useState<ThemesEnum>(ThemesEnum.LIGHT);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const currentTheme = localStorage.getItem("theme") as ThemesEnum;
-    setTheme(currentTheme);
-  }, []);
-
-  if (!mounted) return null;
-
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <ThemeProvider theme={theme} onChangeTheme={setTheme}>
+      <ThemeProvider>
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
@@ -34,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider theme={ThemesEnum.LIGHT} onChangeTheme={setTheme}>
+    <ThemeProvider overrideTheme={ThemesEnum.LIGHT}>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>

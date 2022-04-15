@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { tm, lightTheme } from "../../themes";
+import { tm, appTheme } from "../../themes";
 
-const { media } = lightTheme;
+const { media } = appTheme;
 interface HamburgerProps {
   isOpen: boolean;
   onClick: () => void;
