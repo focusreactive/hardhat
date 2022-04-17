@@ -192,7 +192,7 @@ export const ThemeProvider = ({
     body.className = `${newTheme}`;
     localStorage.setItem("theme", newTheme);
     setTheme(newTheme);
-  }, [theme, setTheme]);
+  }, [theme, setTheme, overrideTheme]);
 
   const initialContext = useMemo(
     () => ({ theme, changeTheme }),

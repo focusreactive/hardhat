@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
