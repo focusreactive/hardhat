@@ -90,8 +90,7 @@ export const darkPalette = {
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
 };
 
-type LightPalette = typeof lightPalette;
-type DarkPalette = typeof darkPalette;
+type Palette = typeof lightPalette;
 
 export const appTheme = {
   light: {
@@ -117,8 +116,8 @@ export const ThemeProvider = ({
 
 type ThemeSelect<T> = (tm: T) => string;
 
-export const tm = (cb: ThemeSelect<{ colors: LightPalette }>) => () =>
+export const tm = (cb: ThemeSelect<{ colors: Palette }>) => () =>
   ((fn) => fn(theming.useTheme().light))(cb);
 
-export const tmDark = (cb: ThemeSelect<{ colors: DarkPalette }>) => () =>
+export const tmDark = (cb: ThemeSelect<{ colors: Palette }>) => () =>
   ((fn) => fn(theming.useTheme().dark))(cb);
