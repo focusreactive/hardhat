@@ -47,11 +47,11 @@ const MobileSidebarMenuMask = styled.div`
   position: absolute;
   width: 100%;
   left: -100%;
-  top: 0px;
+  top: 0;
   transition: all 0.25s ease-in-out;
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
   &[data-open="true"] {
-    left: 0px;
+    left: 0;
   }
 `;
 
@@ -59,7 +59,7 @@ const SidebarContainer = styled.aside`
   flex-direction: column;
   width: 366px;
   position: fixed;
-  left: 0px;
+  left: 0;
   top: 136px;
   height: 85vh;
   display: flex;
@@ -95,7 +95,15 @@ const Content = styled.section`
   display: flex;
   flex-direction: column;
   max-width: 774px;
-  padding-left: 34px;
+  padding: 0 40px;
+  
+  & h2:not(:first-of-type) {
+    padding-top: 80px;
+  }
+  
+  & h2 + p {
+    margin-top: 32px;
+  }
 `;
 
 type Props = React.PropsWithChildren<{

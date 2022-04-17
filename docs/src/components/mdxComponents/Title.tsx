@@ -10,7 +10,7 @@ interface Props {
 
 const StyledH2 = styled.h2`
   display: block;
-  margin-block-start: 24px;
+  padding-top: 40px;
   padding-bottom: 16px;
   border-bottom: 1px solid ${tm(({ colors }) => colors.neutral400)};
   font-family: ChivoRegular, sans-serif;
