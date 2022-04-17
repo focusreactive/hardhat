@@ -1,5 +1,7 @@
 import React from "react"
 import {styled} from "linaria/react";
+import {NextComponentType} from "next";
+
 import {appTheme, tm, tmDark} from "../../themes";
 
 const { media } = appTheme;
@@ -16,10 +18,9 @@ const StyledP = styled.p`
   }
 `
 
-const Paragraph = (props: any) => {
-  console.log(props);
+const Paragraph: NextComponentType = ({children}) => {
   
-  return <StyledP>{props.children}</StyledP>
+  return <StyledP>{children}</StyledP>
 }
 
 export default Paragraph

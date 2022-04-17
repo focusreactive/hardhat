@@ -7,10 +7,12 @@ import { ThemeProvider, appTheme } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
+import Code from "../components/mdxComponents/Code";
 
 const components = {
   h2: Title.H2,
-  p: Paragraph
+  p: Paragraph,
+  code: Code,
 };
 
 //FIXME: there is a hover bug happening because of <aside /> have higher z-index rather then items under it even if aside is closed

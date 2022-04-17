@@ -35,6 +35,8 @@ export const lightPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  codeBackground: "rgba(27,31,35,.05)",
+  codeColor: "#4A4D54",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
   sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -71,6 +73,7 @@ export const darkPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  codeColor: "#8e9094",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
   sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -91,7 +94,7 @@ export const darkPalette = {
 };
 
 type LightPalette = typeof lightPalette;
-type DarkPalette = typeof darkPalette
+type DarkPalette = typeof darkPalette;
 
 export const appTheme = {
   light: {
