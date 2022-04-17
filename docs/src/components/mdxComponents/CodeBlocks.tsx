@@ -22,8 +22,40 @@ const StyledCode = styled.code`
   }
 `;
 
+const StyledPre = styled.pre`
+  margin-top: 16px;
+  padding: 20px 24px;
+  background-color: ${tm(({ colors }) => colors.codeBlockBackground)};
+  border-radius: 6px;
+  overflow: auto;
+
+  & code {
+    padding: 0;
+    color: ${tm(({ colors }) => colors.neutral0)};
+    line-height: 1.4;
+    font-size: 14px;
+    font-family: Menlo, sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  ${media.darkTheme} {
+    background-color: ${tmDark(({ colors }) => colors.neutral200)};
+    border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
+  }
+`;
+
 const Code: NextComponentType = ({ children }) => {
   return <StyledCode>{children}</StyledCode>;
 };
 
-export default Code;
+const Pre: NextComponentType = ({ children }) => {
+  return <StyledPre>{children}</StyledPre>;
+};
+
+const CodeBlocks = {
+  Code,
+  Pre,
+};
+
+export default CodeBlocks;
