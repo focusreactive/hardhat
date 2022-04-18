@@ -140,19 +140,19 @@ const Content = styled.section`
     margin-top: 32px;
   }
 
-  color: ${tm(({colors}) => colors.neutral900)};
+  color: ${tm(({ colors }) => colors.neutral900)};
 
   ${tmSelectors.hcDark} {
-    color: ${tmHCDark(({colors}) => colors.neutral900)};
+    color: ${tmHCDark(({ colors }) => colors.neutral900)};
   }
 
   ${tmSelectors.dark} {
-    color: ${tmDark(({colors}) => colors.neutral900)};
+    color: ${tmDark(({ colors }) => colors.neutral900)};
   }
 
   ${media.mqDark} {
     ${tmSelectors.auto} {
-      color: ${tmDark(({colors}) => colors.neutral900)};
+      color: ${tmDark(({ colors }) => colors.neutral900)};
     }
   }
 `;

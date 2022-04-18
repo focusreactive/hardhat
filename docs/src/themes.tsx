@@ -51,8 +51,9 @@ export const lightPalette = {
   accent900: "#EDCF00",
   border: "#4B4D4D",
   codeBackground: "rgba(27,31,35,.05)",
-  codeBlockBackground: "#282c34",
   codeColor: "#4A4D54",
+  codeBlockBackground: "#282c34",
+  codeBlockBorder: "#282c34",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
   sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -89,7 +90,9 @@ export const darkPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  codeBackground: "#20232A",
   codeColor: "#8e9094",
+  codeBlockBackground: "#20232A",
   codeBlockBorder: "#6c6f74",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
@@ -127,6 +130,10 @@ export const hcDarkPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  codeBackground: "#20232a",
+  codeColor: "#8e9094",
+  codeBlockBackground: "#20232a",
+  codeBlockBorder: "#6c6f74",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
   sliderButtonShadow: "rgba(0, 0, 0, 0.102)",
@@ -169,8 +176,7 @@ export const getNextTheme = (currentTheme: ThemesEnum): ThemesEnum => {
   const currentThemeIndex = themesArray.indexOf(currentTheme);
   const nextThemeIndex =
     currentThemeIndex === themesArray.length - 1 ? 0 : currentThemeIndex + 1;
-  const nextTheme = themesArray[nextThemeIndex];
-  return nextTheme;
+  return themesArray[nextThemeIndex];
 };
 
 const theming = createTheming(appTheme);

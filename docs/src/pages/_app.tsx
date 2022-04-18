@@ -17,7 +17,7 @@ const components = {
   pre: CodeBlocks.Pre,
 };
 
-//FIXME: there is a hover bug happening because of <aside /> have higher z-index rather then items under it even if aside is closed
+// FIXME: there is a hover bug happening because of <aside /> have higher z-index rather then items under it even if aside is closed
 
 function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */

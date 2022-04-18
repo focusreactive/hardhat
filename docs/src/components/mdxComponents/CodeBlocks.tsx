@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "linaria/react";
 import { NextComponentType } from "next";
-import { appTheme, tm, tmDark } from "../../themes";
+import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 const { media } = appTheme;
 
@@ -16,9 +16,21 @@ const StyledCode = styled.code`
   letter-spacing: 2px;
   color: ${tm(({ colors }) => colors.codeColor)};
 
-  ${media.darkTheme} {
+  ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.neutral200)};
     color: ${tmDark(({ colors }) => colors.codeColor)};
+  }
+
+  ${tmSelectors.hcDark} {
+    background-color: ${tmHCDark(({ colors }) => colors.neutral200)};
+    color: ${tmHCDark(({ colors }) => colors.codeColor)};
+  }
+
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      background-color: ${tmDark(({ colors }) => colors.neutral200)};
+      color: ${tmDark(({ colors }) => colors.codeColor)};
+    }
   }
 `;
 
@@ -39,9 +51,21 @@ const StyledPre = styled.pre`
     letter-spacing: 2px;
   }
 
-  ${media.darkTheme} {
+  ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.neutral200)};
-    border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
+    color: ${tmDark(({ colors }) => colors.codeColor)};
+  }
+
+  ${tmSelectors.hcDark} {
+    background-color: ${tmHCDark(({ colors }) => colors.neutral200)};
+    border: 1px solid ${tmHCDark(({ colors }) => colors.codeBlockBorder)};
+  }
+
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      background-color: ${tmDark(({ colors }) => colors.neutral200)};
+      border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
+    }
   }
 `;
 

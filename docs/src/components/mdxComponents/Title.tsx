@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { appTheme, tm, tmDark } from "../../themes";
+import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 const { media } = appTheme;
 
@@ -35,17 +35,28 @@ const StyledH2 = styled.h2`
       text-decoration: underline;
     }
   }
-
-  ${media.darkTheme} {
+  ${tmSelectors.dark} {
     border-bottom-color: ${tmDark(({ colors }) => colors.border)};
     color: ${tmDark(({ colors }) => colors.neutral800)};
+  }
+
+  ${tmSelectors.hcDark} {
+    border-bottom-color: ${tmHCDark(({ colors }) => colors.border)};
+    color: ${tmHCDark(({ colors }) => colors.neutral800)};
+  }
+
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      border-bottom-color: ${tmDark(({ colors }) => colors.border)};
+      color: ${tmDark(({ colors }) => colors.neutral800)};
+    }
   }
 `;
 
 const H2 = ({ children }: Props) => {
   return (
     <StyledH2>
-      <a href={`#${children.toLowerCase().replace(" ", "-")}`}>#</a>
+      <a href={`#${children}`.toLowerCase().replace(" ", "-")}>#</a>
       {` ${children}`}
     </StyledH2>
   );
