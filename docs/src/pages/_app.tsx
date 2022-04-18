@@ -1,9 +1,10 @@
+import React from "react";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
-import { ThemeProvider, appTheme } from "../themes";
+import { ThemesEnum, ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
@@ -22,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
-      <ThemeProvider theme={appTheme}>
+      <ThemeProvider>
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
@@ -34,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider overrideTheme={ThemesEnum.LIGHT}>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>

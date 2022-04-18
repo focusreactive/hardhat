@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
-import { tm, appTheme } from "../themes";
+import { tm, appTheme, tmSelectors, tmHCDark, tmDark } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
 import Sidebar from "./Sidebar";
@@ -31,6 +31,18 @@ const Container = styled.div`
     background-color: ${tm(({ colors }) => colors.neutral0)};
     width: 100%;
     position: relative;
+    transition: background-color ease-in-out 0.25s;
+    ${tmSelectors.hcDark} {
+      background-color: ${tmHCDark(({ colors }) => colors.neutral0)};
+    }
+    ${tmSelectors.dark} {
+      background-color: ${tmDark(({ colors }) => colors.neutral0)};
+    }
+    ${media.mqDark} {
+      ${tmSelectors.auto} {
+        background-color: ${tmDark(({ colors }) => colors.neutral0)};
+      }
+    }
   }
   height: 100vh;
   min-width: 320px;
@@ -40,6 +52,17 @@ const SidebarMask = styled.div`
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
+  ${tmSelectors.hcDark} {
+    border-right: 1px solid ${tmHCDark(({ colors }) => colors.border)};
+  }
+  ${tmSelectors.dark} {
+    border-right: 1px solid ${tmDark(({ colors }) => colors.border)};
+  }
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      border-right: 1px solid ${tmDark(({ colors }) => colors.border)};
+    }
+  }
 `;
 const MobileSidebarMenuMask = styled.div`
   display: flex;
@@ -52,6 +75,17 @@ const MobileSidebarMenuMask = styled.div`
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
   &[data-open="true"] {
     left: 0;
+  }
+  ${tmSelectors.hcDark} {
+    border-right: ${tmHCDark(({ colors }) => colors.neutral400)};
+  }
+  ${tmSelectors.dark} {
+    border-right: ${tmDark(({ colors }) => colors.neutral400)};
+  }
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      border-right: ${tmDark(({ colors }) => colors.neutral400)};
+    }
   }
 `;
 
@@ -96,7 +130,7 @@ const Content = styled.section`
   flex-direction: column;
   width: 100%;
   max-width: 774px;
-  padding: 0 40px;
+  padding: 0 40px 0 34px;
 
   & h2:not(:first-of-type) {
     padding-top: 80px;
@@ -104,6 +138,22 @@ const Content = styled.section`
 
   & h2 + p {
     margin-top: 32px;
+  }
+
+  color: ${tm(({colors}) => colors.neutral900)};
+
+  ${tmSelectors.hcDark} {
+    color: ${tmHCDark(({colors}) => colors.neutral900)};
+  }
+
+  ${tmSelectors.dark} {
+    color: ${tmDark(({colors}) => colors.neutral900)};
+  }
+
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      color: ${tmDark(({colors}) => colors.neutral900)};
+    }
   }
 `;
 
