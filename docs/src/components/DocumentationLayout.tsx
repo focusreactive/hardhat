@@ -94,13 +94,14 @@ const View = styled.section`
 const Content = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 774px;
   padding: 0 40px;
-  
+
   & h2:not(:first-of-type) {
     padding-top: 80px;
   }
-  
+
   & h2 + p {
     margin-top: 32px;
   }
