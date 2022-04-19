@@ -6,23 +6,23 @@ export default function Document() {
       <Head>
         <link
           rel="preload"
-          href="/fonts/Chivo-Bold.ttf"
+          href="/fonts/Chivo-Bold.woff2"
           as="font"
-          type="font/ttf"
+          type="font/woff2"
           crossOrigin="true"
         />
         <link
           rel="preload"
-          href="/fonts/Chivo-Regular.ttf"
+          href="/fonts/Chivo-Regular.woff2"
           as="font"
-          type="font/ttf"
+          type="font/woff2"
           crossOrigin="true"
         />
         <link
           rel="preload"
-          href="/fonts/Chivo-Light.ttf"
+          href="/fonts/Chivo-Light.woff2"
           as="font"
-          type="font/ttf"
+          type="font/woff2"
           crossOrigin="true"
         />
       </Head>
