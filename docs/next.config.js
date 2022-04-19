@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const path = require("path");
 const withLinaria = require("next-linaria");
+const withPlugins = require("next-compose-plugins");
+
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: true, // process.env.ANALYZE === "true",
+});
 
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
@@ -34,4 +39,10 @@ const linariaConfig = withLinaria({
 const nextConfig = withMDX(linariaConfig);
 nextConfig.linariaConfig = linariaConfig;
 
-module.exports = nextConfig;
+module.exports = withPlugins([
+  [nextConfig],
+  [withBundleAnalyzer],
+  // your other plugins here
+]);
+
+// module.exports = nextConfig;
