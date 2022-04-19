@@ -68,11 +68,22 @@ const MobileSidebarMenuMask = styled.div`
   position: absolute;
   width: 100%;
   left: -100%;
-  top: 0px;
+  top: 0;
   transition: all 0.25s ease-in-out;
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
   &[data-open="true"] {
-    left: 0px;
+    left: 0;
+  }
+  ${tmSelectors.hcDark} {
+    border-right: ${tmHCDark(({ colors }) => colors.neutral400)};
+  }
+  ${tmSelectors.dark} {
+    border-right: ${tmDark(({ colors }) => colors.neutral400)};
+  }
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      border-right: ${tmDark(({ colors }) => colors.neutral400)};
+    }
   }
   ${tmSelectors.hcDark} {
     border-right: ${tmHCDark(({ colors }) => colors.neutral400)};
@@ -91,7 +102,7 @@ const SidebarContainer = styled.aside`
   flex-direction: column;
   width: 366px;
   position: fixed;
-  left: 0px;
+  left: 0;
   top: 136px;
   height: 85vh;
   display: flex;
@@ -126,15 +137,30 @@ const View = styled.section`
 const Content = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 774px;
   padding-left: 34px;
   color: ${tm(({ colors }) => colors.neutral900)};
+  padding: 0 40px 0 34px;
+
+  & h2:not(:first-of-type) {
+    padding-top: 80px;
+  }
+
+  & h2 + p {
+    margin-top: 32px;
+  }
+
+  color: ${tm(({ colors }) => colors.neutral900)};
+
   ${tmSelectors.hcDark} {
     color: ${tmHCDark(({ colors }) => colors.neutral900)};
   }
+
   ${tmSelectors.dark} {
     color: ${tmDark(({ colors }) => colors.neutral900)};
   }
+
   ${media.mqDark} {
     ${tmSelectors.auto} {
       color: ${tmDark(({ colors }) => colors.neutral900)};

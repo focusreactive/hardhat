@@ -40,7 +40,6 @@ const NavigationStyled = styled.nav`
   ${media.lg} {
     padding: 24px;
   }
-
   ${tmSelectors.hcDark} {
     background-color: ${tmHCDark(({ colors }) => colors.neutral200)};
     border-bottom: 1px solid ${tmHCDark(({ colors }) => colors.border)};
