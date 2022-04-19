@@ -1,6 +1,5 @@
 import React from "react";
 import type { AppProps } from "next/app";
-import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
@@ -27,9 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
-          <MDXProvider components={components}>
-            <Component {...pageProps} />
-          </MDXProvider>
+          <Component {...pageProps} />
         </DocumentationLayout>
       </ThemeProvider>
     );
