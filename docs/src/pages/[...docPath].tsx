@@ -8,7 +8,12 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import path from "path";
-import { DOCS_PATH, getMDPaths } from "../model/md-generate";
+import {
+  DOCS_PATH,
+  getMDPaths,
+  withIndexFile,
+  withIndexURL,
+} from "../model/md-generate";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
@@ -24,6 +29,7 @@ const DocPage: NextPage<{ source: any; frontMatter: {} }> = ({
   source,
   frontMatter,
 }) => {
+  // TODO: move here DocumentationLayout from the _app and pass frontMatter fields to appropriate props
   return <MDXRemote {...source} components={components} />;
 };
 
@@ -31,8 +37,8 @@ export default DocPage;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // @ts-ignore
-  const postFilePath = path.join(DOCS_PATH, `${params?.docPath?.join("/")}.md`);
-  const source = fs.readFileSync(postFilePath);
+  const fullName = withIndexFile(params.docPath);
+  const source = fs.readFileSync(fullName);
 
   const { content, data } = matter(source);
 
@@ -57,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getMDPaths
     .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((docPath) => ({ params: { docPath: docPath.split("/") } }));
+    .map((path) => ({ params: { docPath: withIndexURL(path) } }));
 
   return {
     paths,
