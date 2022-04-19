@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
-import { ThemesEnum, ThemeProvider } from "../themes";
+import { ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
