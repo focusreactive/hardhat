@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider overrideTheme={ThemesEnum.LIGHT}>
+    <ThemeProvider>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         <Component {...pageProps} />
       </LandingLayout>

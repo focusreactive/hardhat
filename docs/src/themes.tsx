@@ -179,17 +179,16 @@ export const ThemeContext = React.createContext<IThemeContext>({
 
 export const ThemeProvider = ({
   children,
-  overrideTheme,
-}: React.PropsWithChildren<{ overrideTheme?: ThemesEnum }>): JSX.Element => {
+}: React.PropsWithChildren<{}>): JSX.Element => {
   const [theme, setTheme] = useState<ThemesEnum>(ThemesEnum.AUTO);
 
   const changeTheme = useCallback(() => {
     const body = document.querySelector("body") as Element;
-    const newTheme = overrideTheme || ThemesEnum[getNextTheme(theme)];
+    const newTheme = ThemesEnum[getNextTheme(theme)];
     body.className = newTheme;
     localStorage.setItem("theme", newTheme);
     setTheme(newTheme);
-  }, [theme, setTheme, overrideTheme]);
+  }, [theme, setTheme]);
 
   const initialContext = useMemo(
     () => ({ theme, changeTheme }),
