@@ -8,6 +8,10 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import path from "path";
+import remarkDirective from "remark-directive";
+import { visit } from "unist-util-visit";
+import { h } from "hastscript";
+
 import {
   DOCS_PATH,
   getMDPaths,
@@ -24,6 +28,31 @@ const components = {
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,
 };
+
+// This plugin is an example to let users write HTML with directives.
+// It’s informative but rather useless.
+// See below for others examples.
+/** @type {import('unified').Plugin<[], import('mdast').Root>} */
+function myRemarkPlugin() {
+  // @ts-ignore
+  return (tree) => {
+    visit(tree, (node) => {
+      if (
+        node.type === "textDirective" ||
+        node.type === "leafDirective" ||
+        node.type === "containerDirective"
+      ) {
+        const data = node.data || (node.data = {});
+        console.log("🚀 ~ file: [...docPath].tsx ~ line 46 ~ visit ~ node", node)
+        const hast = h(node.name, node.attributes);
+        // @ts-ignore
+        data.hName = hast.tagName;
+        // @ts-ignore
+        data.hProperties = hast.properties;
+      }
+    });
+  };
+}
 
 const DocPage: NextPage<{ source: any; frontMatter: {} }> = ({
   source,
@@ -46,7 +75,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const mdxSource = await serialize(content.replace(/<<<|</g, ""), {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
-      remarkPlugins: [],
+      remarkPlugins: [remarkDirective, myRemarkPlugin],
       rehypePlugins: [],
     },
     scope: data,
