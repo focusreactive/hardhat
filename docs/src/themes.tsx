@@ -3,23 +3,20 @@ import { createTheming } from "@callstack/react-theme-provider";
 
 export { styled } from "linaria/react";
 
-/* eslint-disable */
 export enum ThemesEnum {
   LIGHT = "LIGHT",
   DARK = "DARK",
   HC_DARK = "HC_DARK",
   AUTO = "AUTO",
 }
-/* eslint-enable */
-
-const breakpoints = {
+export const breakpoints = {
   xs: 360,
   sm: 412,
   md: 1020,
   lg: 1440,
 };
 
-const media = {
+export const media = {
   xs: `@media screen and (min-width: ${breakpoints.xs}px)`,
   sm: `@media screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media screen and (min-width: ${breakpoints.md}px)`,
@@ -103,7 +100,7 @@ export const darkPalette = {
     "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
-};
+} as Palette;
 
 export const hcDarkPalette = {
   transparent: "transparent",
@@ -139,7 +136,7 @@ export const hcDarkPalette = {
     "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
-};
+} as Palette;
 
 type Palette = typeof lightPalette;
 
@@ -189,7 +186,7 @@ export const ThemeProvider = ({
   const changeTheme = useCallback(() => {
     const body = document.querySelector("body") as Element;
     const newTheme = overrideTheme || ThemesEnum[getNextTheme(theme)];
-    body.className = `${newTheme}`;
+    body.className = newTheme;
     localStorage.setItem("theme", newTheme);
     setTheme(newTheme);
   }, [theme, setTheme, overrideTheme]);

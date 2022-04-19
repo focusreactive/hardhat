@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
-import { tm, appTheme, tmSelectors, tmHCDark, tmDark } from "../themes";
+import { tm, tmSelectors, tmHCDark, tmDark, media } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
 import Sidebar from "./Sidebar";
@@ -14,8 +14,6 @@ import {
   bannerContent,
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
-
-const { media } = appTheme;
 
 const Container = styled.div`
   position: relative;
