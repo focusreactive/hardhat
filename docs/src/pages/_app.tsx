@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <DocumentationLayout
           seo={{ title: "Overview", description: "Hardhat" }}
         >
+          {/* @ts-ignore */}
           <Component {...pageProps} />
         </DocumentationLayout>
       </ThemeProvider>
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider overrideTheme={ThemesEnum.LIGHT}>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
+        {/* @ts-ignore */}
         <Component {...pageProps} />
       </LandingLayout>
     </ThemeProvider>

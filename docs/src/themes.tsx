@@ -217,6 +217,7 @@ export const ThemeProvider = ({
 
   return (
     <ThemeContext.Provider value={initialContext}>
+      {/* @ts-ignore */}
       <theming.ThemeProvider theme={appTheme}>{children}</theming.ThemeProvider>
     </ThemeContext.Provider>
   );
