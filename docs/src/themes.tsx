@@ -12,14 +12,14 @@ export enum ThemesEnum {
 }
 /* eslint-enable */
 
-const breakpoints = {
+export const breakpoints = {
   xs: 360,
   sm: 412,
   md: 1020,
   lg: 1440,
 };
 
-const media = {
+export const media = {
   xs: `@media screen and (min-width: ${breakpoints.xs}px)`,
   sm: `@media screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media screen and (min-width: ${breakpoints.md}px)`,
@@ -50,6 +50,12 @@ export const lightPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  tipBorderColor: "#42B983",
+  tipBackgroundColor: "#F3F5F7",
+  warningColorTitle: "#B29400",
+  warningColorText: "#6B5900",
+  warningBorderColor: "#E7C000",
+  warningBackgroundColor: "#FFE5644D",
   codeBackground: "rgba(27,31,35,.05)",
   codeColor: "#4A4D54",
   codeBlockBackground: "#282c34",
@@ -90,9 +96,15 @@ export const darkPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  tipBorderColor: "#42B983",
+  tipBackgroundColor: "#16181D",
+  warningColorTitle: "#B29400",
+  warningColorText: "#6B5900",
+  warningBorderColor: "#F08D49",
+  warningBackgroundColor: "#FFE5644D",
   codeBackground: "#20232A",
   codeColor: "#8e9094",
-  codeBlockBackground: "#20232A",
+  codeBlockBackground: "#16181D",
   codeBlockBorder: "#6c6f74",
   complementary600: "#E9DEFA",
   cardBoxShadow: "#0A0A0A14",
@@ -130,6 +142,12 @@ export const hcDarkPalette = {
   accent800: "#FFF100",
   accent900: "#EDCF00",
   border: "#4B4D4D",
+  tipBorderColor: "#42B983",
+  tipBackgroundColor: "#212329",
+  warningColorTitle: "#B29400",
+  warningColorText: "#6B5900",
+  warningBorderColor: "#F08D49",
+  warningBackgroundColor: "#FFE5644D",
   codeBackground: "#20232a",
   codeColor: "#8e9094",
   codeBlockBackground: "#20232a",

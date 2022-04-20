@@ -21,23 +21,18 @@ import {
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
+import Admonition from "../components/mdxComponents/Admonition";
 
 const components = {
   h2: Title.H2,
+  h3: Title.H3,
   p: Paragraph,
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,
-  tip: (props: any) => (
-    <div style={{ background: "green" }}>{props.children}</div>
-  ),
-  warning: (props: any) => (
-    <div style={{ background: "red" }}>{props.children}</div>
-  ),
+  tip: Admonition.Tip,
+  warning: Admonition.Warning,
 };
 
-// This plugin is an example to let users write HTML with directives.
-// It’s informative but rather useless.
-// See below for others examples.
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
 function myRemarkPlugin() {
   // @ts-ignore
@@ -49,10 +44,6 @@ function myRemarkPlugin() {
         node.type === "containerDirective"
       ) {
         const data = node.data || (node.data = {});
-        console.log(
-          "🚀 ~ file: [...docPath].tsx ~ line 46 ~ visit ~ node",
-          node
-        );
         const hast = h(node.name, node.attributes);
         // @ts-ignore
         data.hName = hast.tagName;

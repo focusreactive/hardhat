@@ -89,16 +89,20 @@ const MobileSidebarMenuMask = styled.div`
   }
 `;
 
-const SidebarContainer = styled.aside`
+const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   flex-direction: column;
   width: 366px;
   position: fixed;
-  left: 0;
   top: 136px;
+  left: ${(props) => (props.isSidebarOpen ? "0px" : "-120vw")};
   height: 85vh;
   display: flex;
   overflow-y: scroll;
+  transition: all ease-out 0.25s;
   z-index: 1;
+  ${media.md} {
+    left: 0;
+  }
   ${SidebarMask} {
     display: none;
     ${media.md} {
@@ -208,6 +212,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
           onClick={(e) => {
             e.stopPropagation();
           }}
+          isSidebarOpen={isSidebarOpen}
         >
           <SidebarMask>
             <Sidebar elementsList={DocumentationSidebarStructure} />
