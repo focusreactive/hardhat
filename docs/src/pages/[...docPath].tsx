@@ -27,6 +27,12 @@ const components = {
   p: Paragraph,
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,
+  tip: (props: any) => (
+    <div style={{ background: "green" }}>{props.children}</div>
+  ),
+  warning: (props: any) => (
+    <div style={{ background: "red" }}>{props.children}</div>
+  ),
 };
 
 // This plugin is an example to let users write HTML with directives.
@@ -36,14 +42,17 @@ const components = {
 function myRemarkPlugin() {
   // @ts-ignore
   return (tree) => {
-    visit(tree, (node) => {
+    visit(tree, (node: any) => {
       if (
         node.type === "textDirective" ||
         node.type === "leafDirective" ||
         node.type === "containerDirective"
       ) {
         const data = node.data || (node.data = {});
-        console.log("🚀 ~ file: [...docPath].tsx ~ line 46 ~ visit ~ node", node)
+        console.log(
+          "🚀 ~ file: [...docPath].tsx ~ line 46 ~ visit ~ node",
+          node
+        );
         const hast = h(node.name, node.attributes);
         // @ts-ignore
         data.hName = hast.tagName;
