@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import glob from "glob";
 
@@ -9,17 +8,15 @@ export const getMDPaths = glob
   .filter((path) => /\.mdx?$/.test(path))
   .map((path) => path.replace(DOCS_PATH, ""));
 
-  // TODO: update this solution to work with any number of nested levels. (withIndexURL and withIndexFile)
 export const withIndexURL = (path: string): string[] => {
   const docPath = path.split("/");
-  if (docPath[1] === "index") {
-    return [docPath[0]];
+  if (docPath[docPath.length - 1] === "index") {
+    return [...docPath.slice(0, docPath.length - 1)];
   }
   return docPath;
 };
 
 export const withIndexFile = (docPath: string[]): string => {
-  const actualPath = docPath.length > 1 ? docPath : [docPath[0], "index"];
-  const mdFilePath = path.join(DOCS_PATH, `${actualPath.join("/")}.md`);
+  const mdFilePath = path.join(DOCS_PATH, `${docPath.join("/")}.md`);
   return mdFilePath;
 };
