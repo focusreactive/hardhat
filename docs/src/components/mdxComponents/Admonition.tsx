@@ -35,7 +35,16 @@ const StyledAdmonition = styled.div`
     background-color: ${tmDark(({ colors }) => colors.tipBackgroundColor)};
     color: ${tmDark(({ colors }) => colors.neutral900)};
     &.warning {
+      & .title {
+        color: ${tmDark(({ colors }) => colors.warningColorTitle)};
+      }
+      & p {
+        color: ${tmDark(({ colors }) => colors.warningColorText)};
+      }
       border-color: ${tmDark(({ colors }) => colors.warningBorderColor)};
+      background-color: ${tmDark(
+        ({ colors }) => colors.warningBackgroundColor
+      )};
     }
   }
 
@@ -43,7 +52,16 @@ const StyledAdmonition = styled.div`
     background-color: ${tmHCDark(({ colors }) => colors.tipBackgroundColor)};
     color: ${tmHCDark(({ colors }) => colors.neutral900)};
     &.warning {
+      & .title {
+        color: ${tmHCDark(({ colors }) => colors.warningColorTitle)};
+      }
+      & p {
+        color: ${tmHCDark(({ colors }) => colors.warningColorText)};
+      }
       border-color: ${tmHCDark(({ colors }) => colors.warningBorderColor)};
+      background-color: ${tmHCDark(
+        ({ colors }) => colors.warningBackgroundColor
+      )};
     }
   }
 
@@ -52,7 +70,16 @@ const StyledAdmonition = styled.div`
       background-color: ${tmDark(({ colors }) => colors.tipBackgroundColor)};
       color: ${tmDark(({ colors }) => colors.neutral900)};
       &.warning {
+        & .title {
+          color: ${tmDark(({ colors }) => colors.warningColorTitle)};
+        }
+        & p {
+          color: ${tmDark(({ colors }) => colors.warningColorText)};
+        }
         border-color: ${tmDark(({ colors }) => colors.warningBorderColor)};
+        background-color: ${tmDark(
+          ({ colors }) => colors.warningBackgroundColor
+        )};
       }
     }
   }
