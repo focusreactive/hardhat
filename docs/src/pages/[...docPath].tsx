@@ -17,6 +17,7 @@ import {
   getMDPaths,
   withIndexFile,
   withIndexURL,
+  withInsertedCodeFromLinks,
 } from "../model/md-generate";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
@@ -96,8 +97,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { content, data } = matter(source);
 
-  // FIXME: `content.replace` is temporary until we support all used syntax
-  const mdxSource = await serialize(content.replace(/<<<|</g, ""), {
+  const mdxSource = await serialize(withInsertedCodeFromLinks(content), {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [remarkDirective, myRemarkPlugin],

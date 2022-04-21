@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Hardhat is a development environment
+title: Overview
+description:
 anchors:
   - overview
   - installation

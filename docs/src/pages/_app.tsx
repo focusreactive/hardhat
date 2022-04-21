@@ -4,8 +4,6 @@ import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
 
 import { ThemesEnum, ThemeProvider } from "../themes";
-import DocumentationLayout from "../components/DocumentationLayout";
-import DocPage from "./[...docPath]";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
