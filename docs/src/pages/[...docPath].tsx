@@ -1,23 +1,18 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import { useRouter } from "next/router";
 import fs from "fs";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import Link from "next/link";
-import path from "path";
 import remarkDirective from "remark-directive";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 
 import {
-  DOCS_PATH,
   getMDPaths,
   withIndexFile,
   withIndexURL,
   withInsertedCodeFromLinks,
+  withoutComments,
 } from "../model/md-generate";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
@@ -39,13 +34,13 @@ const components = {
 function myRemarkPlugin() {
   // @ts-ignore
   return (tree) => {
-    visit(tree, (node: any) => {
+    visit(tree, (node) => {
       if (
         node.type === "textDirective" ||
         node.type === "leafDirective" ||
         node.type === "containerDirective"
       ) {
-        const data = node.data || (node.data = {});
+        const data = node.data || {};
         const hast = h(node.name, node.attributes);
         // @ts-ignore
         data.hName = hast.tagName;
@@ -70,7 +65,9 @@ const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
   return (
     <DocumentationLayout
       seo={{
-        title: frontMatter.title ? frontMatter.title + " | Hardhat" : "Hardhat",
+        title: frontMatter.title
+          ? frontMatter.title.concat(" | Hardhat")
+          : "Hardhat",
         description:
           frontMatter.description ||
           "Ethereum development environment for professionals by Nomic Foundation",
@@ -84,9 +81,10 @@ const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
 
 export default DocPage;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async (props) => {
+  const { params } = props;
   // @ts-ignore
-  const fullName = withIndexFile(params.docPath);
+  const fullName = withIndexFile(params.docPath, params.isIndex);
 
   let source;
   try {
@@ -97,7 +95,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { content, data } = matter(source);
 
-  const mdxSource = await serialize(withInsertedCodeFromLinks(content), {
+  const formattedContent = withoutComments(withInsertedCodeFromLinks(content));
+
+  const mdxSource = await serialize(formattedContent, {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [remarkDirective, myRemarkPlugin],
@@ -117,7 +117,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getMDPaths
     .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((path) => ({ params: { docPath: withIndexURL(path) } }));
+    .map((path) => ({
+      params: {
+        docPath: withIndexURL(path),
+      },
+    }));
 
   return {
     paths,

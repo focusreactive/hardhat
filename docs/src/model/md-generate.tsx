@@ -6,19 +6,22 @@ export const DOCS_PATH = path.join(process.cwd(), "src/content/");
 
 export const getMDPaths = glob
   .sync(`${DOCS_PATH}**/*.md`)
-  .filter((path) => /\.mdx?$/.test(path))
-  .map((path) => path.replace(DOCS_PATH, ""));
+  .filter((pathname) => /\.mdx?$/.test(pathname))
+  .map((pathname) => pathname.replace(DOCS_PATH, ""));
 
-export const withIndexURL = (path: string): string[] => {
-  const docPath = path.split("/");
+export const withIndexURL = (pathname: string): string[] => {
+  const docPath = pathname.split("/");
   if (docPath[docPath.length - 1] === "index") {
     return [...docPath.slice(0, docPath.length - 1)];
   }
   return docPath;
 };
 
-export const withIndexFile = (docPath: string[]): string => {
-  const mdFilePath = path.join(DOCS_PATH, `${docPath.join("/")}.md`);
+export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
+  const mdFilePath = path.join(
+    DOCS_PATH,
+    `${docPath.join("/")}${isIndex ? "/index" : ""}.md`
+  );
   return mdFilePath;
 };
 
@@ -39,7 +42,7 @@ export const withInsertedCodeFromLinks = (content: string) => {
       const lineNumbersTuple: [number, number] | null = line.includes("{")
         ? (line
             .substring(line.indexOf("{"))
-            .replace(/[\{\}]/g, "")
+            .replace(/[{}]/g, "")
             .split("-")
             .map((lineNumberString) => Number(lineNumberString)) as [
             number,
@@ -47,12 +50,12 @@ export const withInsertedCodeFromLinks = (content: string) => {
           ])
         : null;
 
-      const path = lineNumbersTuple
+      const filePath = lineNumbersTuple
         ? line.substring(0, line.indexOf("{"))
         : line;
 
       const fileContent = fs
-        .readFileSync(path.replace("<<< @/", ""))
+        .readFileSync(filePath.replace("<<< @/", ""))
         .toString();
 
       if (!lineNumbersTuple) {
@@ -75,4 +78,8 @@ export const withInsertedCodeFromLinks = (content: string) => {
       return withCodeElementWrapper(partOfFile);
     })
     .join("\n");
+};
+
+export const withoutComments = (content: string) => {
+  return content.replaceAll(/<!--[\s\S]*?-->/gm, "");
 };
