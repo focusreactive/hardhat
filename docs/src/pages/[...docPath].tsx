@@ -22,6 +22,7 @@ import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
+import DocumentationLayout from "../components/DocumentationLayout";
 
 const components = {
   h2: Title.H2,
@@ -54,12 +55,30 @@ function myRemarkPlugin() {
   };
 }
 
-const DocPage: NextPage<{ source: any; frontMatter: {} }> = ({
-  source,
-  frontMatter,
-}) => {
-  // TODO: move here DocumentationLayout from the _app and pass frontMatter fields to appropriate props
-  return <MDXRemote {...source} components={components} />;
+interface IFrontMatter {
+  title: string;
+  description: string;
+  anchors?: string[];
+}
+interface IDocPage {
+  source: string;
+  frontMatter: IFrontMatter;
+}
+
+const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
+  return (
+    <DocumentationLayout
+      seo={{
+        title: frontMatter.title ? frontMatter.title + " | Hardhat" : "Hardhat",
+        description:
+          frontMatter.description ||
+          "Ethereum development environment for professionals by Nomic Foundation",
+      }}
+    >
+      {/* @ts-ignore */}
+      <MDXRemote {...source} components={components} />;
+    </DocumentationLayout>
+  );
 };
 
 export default DocPage;
@@ -67,7 +86,13 @@ export default DocPage;
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // @ts-ignore
   const fullName = withIndexFile(params.docPath);
-  const source = fs.readFileSync(fullName);
+
+  let source;
+  try {
+    source = fs.readFileSync(fullName);
+  } catch (err) {
+    source = fs.readFileSync(fullName.replace(".md", "/index.md"));
+  }
 
   const { content, data } = matter(source);
 

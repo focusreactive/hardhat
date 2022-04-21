@@ -5,18 +5,15 @@ import "../styles/globals.css";
 
 import { ThemesEnum, ThemeProvider } from "../themes";
 import DocumentationLayout from "../components/DocumentationLayout";
+import DocPage from "./[...docPath]";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
   if (Component.layout !== "landing") {
     return (
       <ThemeProvider>
-        <DocumentationLayout
-          seo={{ title: "Overview", description: "Hardhat" }}
-        >
-          {/* @ts-ignore */}
-          <Component {...pageProps} />
-        </DocumentationLayout>
+        {/* @ts-ignore */}
+        <Component {...pageProps} />
       </ThemeProvider>
     );
   }
