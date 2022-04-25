@@ -81,5 +81,5 @@ export const withInsertedCodeFromLinks = (content: string) => {
 };
 
 export const withoutComments = (content: string) => {
-  return content.replaceAll(/<!--[\s\S]*?-->/gm, "");
+  return content.replace(/<!--[\s\S]*?-->/gm, "");
 };
