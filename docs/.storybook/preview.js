@@ -65,9 +65,22 @@ const providerFn = ({ theme, children }) => {
   );
 };
 
+export const onThemeSwitch = (context) => {
+  const { theme } = context;
+  const background = theme.neutral0 || null;
+  const parameters = {
+    backgrounds: {
+      default: background,
+    },
+  };
+  return {
+    parameters,
+  };
+};
+
 const themingDecorator = withThemes(
   null,
   [lightPalette, darkPalette, hcDarkPalette],
-  { providerFn }
+  { providerFn, onThemeSwitch }
 );
 export const decorators = [themingDecorator];
