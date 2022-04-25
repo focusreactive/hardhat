@@ -5,18 +5,6 @@ import fs from "fs";
 export const DOCS_PATH = path.join(process.cwd(), "src/content/");
 export const newLineDividerRegEx = /\r\n|\n/;
 
-export const getMDPaths = () =>
-  glob
-    .sync(`${DOCS_PATH}**/*.md`)
-    .filter((pathname) => /\.mdx?$/.test(pathname))
-    .map((pathname) => pathname.replace(DOCS_PATH, ""))
-    .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((path) => ({
-      params: {
-        docPath: withIndexURL(path),
-      },
-    }));
-
 export const withIndexURL = (pathname: string): string[] => {
   const docPath = pathname.split("/");
   if (docPath[docPath.length - 1] === "index") {
@@ -73,9 +61,7 @@ export const withInsertedCodeFromLinks = (content: string) => {
 
       const partOfFile = fileContent
         .split(newLineDividerRegEx)
-        .filter((_, index) => {
-          return index >= startLineNumber - 1 && index <= endLineNumber - 1;
-        })
+        .slice(startLineNumber, endLineNumber)
         .join("\n");
 
       return withCodeElementWrapper(partOfFile);
@@ -98,3 +84,15 @@ export const readMDFileFromPathOrIndex = (pathname: string) => {
 export const generateFrontMatterTitleFromContent = (content: string) => {
   return content.split(newLineDividerRegEx)[0].replace(/[#]*/g, "").trim();
 };
+
+export const getMDPaths = () =>
+  glob
+    .sync(`${DOCS_PATH}**/*.md`)
+    .filter((pathname) => /\.mdx?$/.test(pathname))
+    .map((pathname) => pathname.replace(DOCS_PATH, ""))
+    .map((pathname) => pathname.replace(/\.mdx?$/, ""))
+    .map((pathname) => ({
+      params: {
+        docPath: withIndexURL(pathname),
+      },
+    }));

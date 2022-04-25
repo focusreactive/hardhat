@@ -40,6 +40,7 @@ function createCustomNodes() {
         node.type === "leafDirective" ||
         node.type === "containerDirective"
       ) {
+        // eslint-disable-next-line
         const data = node.data || (node.data = {});
         const hast = h(node.name, node.attributes);
         // Create custom nodes from extended MD syntax. E.g. "tip"/"warning"

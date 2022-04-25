@@ -122,7 +122,6 @@ const MenuItem = styled.li`
     }
   }
 `;
-// ExternalLinkIcon
 
 const MobileSidebarMenu: FC<Props> = ({
   sidebarElementsList,
