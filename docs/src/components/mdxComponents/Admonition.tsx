@@ -12,7 +12,6 @@ const StyledAdmonition = styled.div`
   background-color: ${tm(({ colors }) => colors.tipBackgroundColor)};
   border-left: 0.5rem solid ${tm(({ colors }) => colors.tipBorderColor)};
   font-size: 14px;
-  font-family: ChivoRegular;
   font-weight: 600;
   line-height: 1.7;
   letter-spacing: 2px;

@@ -3,7 +3,14 @@ import { styled } from "linaria/react";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
-import { tm, tmSelectors, tmHCDark, tmDark, media } from "../themes";
+import {
+  tm,
+  tmSelectors,
+  tmHCDark,
+  tmDark,
+  media,
+  ThemeProvider,
+} from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { ISeo } from "./types";
 import Sidebar from "./Sidebar";
@@ -205,42 +212,44 @@ const DocumentationLayout = ({ children, seo }: Props) => {
   }, [isSidebarOpen]);
 
   return (
-    <Container>
-      <Banner
-        content={bannerContent}
-        renderContent={({ content }: DefaultBannerProps) => (
-          <DefaultBanner content={content} />
-        )}
-      />
-      <Navigation
-        isSidebarOpen={isSidebarOpen}
-        onSidebarOpen={setIsSidebarOpen}
-      />
-      <SEO seo={seo} />
-
-      <main>
-        <SidebarContainer
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+    <ThemeProvider>
+      <Container>
+        <Banner
+          content={bannerContent}
+          renderContent={({ content }: DefaultBannerProps) => (
+            <DefaultBanner content={content} />
+          )}
+        />
+        <Navigation
           isSidebarOpen={isSidebarOpen}
-        >
-          <SidebarMask>
-            <Sidebar elementsList={DocumentationSidebarStructure} />
-          </SidebarMask>
-          <MobileSidebarMenuMask data-open={isSidebarOpen}>
-            <MobileSidebarMenu
-              menuItems={menuItemsList}
-              socialsItems={socialsItems}
-              sidebarElementsList={DocumentationSidebarStructure}
-            />
-          </MobileSidebarMenuMask>
-        </SidebarContainer>
-        <View>
-          <Content>{children}</Content>
-        </View>
-      </main>
-    </Container>
+          onSidebarOpen={setIsSidebarOpen}
+        />
+        <SEO seo={seo} />
+
+        <main>
+          <SidebarContainer
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            isSidebarOpen={isSidebarOpen}
+          >
+            <SidebarMask>
+              <Sidebar elementsList={DocumentationSidebarStructure} />
+            </SidebarMask>
+            <MobileSidebarMenuMask data-open={isSidebarOpen}>
+              <MobileSidebarMenu
+                menuItems={menuItemsList}
+                socialsItems={socialsItems}
+                sidebarElementsList={DocumentationSidebarStructure}
+              />
+            </MobileSidebarMenuMask>
+          </SidebarContainer>
+          <View>
+            <Content>{children}</Content>
+          </View>
+        </main>
+      </Container>
+    </ThemeProvider>
   );
 };
 

@@ -3,11 +3,19 @@ import glob from "glob";
 import fs from "fs";
 
 export const DOCS_PATH = path.join(process.cwd(), "src/content/");
+export const newLineDividerRegEx = /\r\n|\n/;
 
-export const getMDPaths = glob
-  .sync(`${DOCS_PATH}**/*.md`)
-  .filter((pathname) => /\.mdx?$/.test(pathname))
-  .map((pathname) => pathname.replace(DOCS_PATH, ""));
+export const getMDPaths = () =>
+  glob
+    .sync(`${DOCS_PATH}**/*.md`)
+    .filter((pathname) => /\.mdx?$/.test(pathname))
+    .map((pathname) => pathname.replace(DOCS_PATH, ""))
+    .map((path) => path.replace(/\.mdx?$/, ""))
+    .map((path) => ({
+      params: {
+        docPath: withIndexURL(path),
+      },
+    }));
 
 export const withIndexURL = (pathname: string): string[] => {
   const docPath = pathname.split("/");
@@ -33,7 +41,6 @@ export const withCodeElementWrapper = (content: string) =>
   `;
 
 export const withInsertedCodeFromLinks = (content: string) => {
-  const newLineDividerRegEx = /\r\n|\n/;
   return content
     .split(newLineDividerRegEx)
     .map((line: string) => {
@@ -65,13 +72,9 @@ export const withInsertedCodeFromLinks = (content: string) => {
       const [startLineNumber, endLineNumber] = lineNumbersTuple;
 
       const partOfFile = fileContent
-        .toString()
         .split(newLineDividerRegEx)
         .filter((_, index) => {
-          return (
-            index >= Number(startLineNumber) - 1 &&
-            index <= Number(endLineNumber) - 1
-          );
+          return index >= startLineNumber - 1 && index <= endLineNumber - 1;
         })
         .join("\n");
 
@@ -82,4 +85,16 @@ export const withInsertedCodeFromLinks = (content: string) => {
 
 export const withoutComments = (content: string) => {
   return content.replace(/<!--[\s\S]*?-->/gm, "");
+};
+
+export const readMDFileFromPathOrIndex = (pathname: string) => {
+  try {
+    return fs.readFileSync(pathname);
+  } catch (err) {
+    return fs.readFileSync(pathname.replace(".md", "/index.md"));
+  }
+};
+
+export const generateFrontMatterTitleFromContent = (content: string) => {
+  return content.split(newLineDividerRegEx)[0].replace(/[#]*/g, "").trim();
 };

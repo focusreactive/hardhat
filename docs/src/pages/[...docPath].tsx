@@ -1,5 +1,4 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import fs from "fs";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -8,9 +7,10 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 
 import {
+  generateFrontMatterTitleFromContent,
   getMDPaths,
+  readMDFileFromPathOrIndex,
   withIndexFile,
-  withIndexURL,
   withInsertedCodeFromLinks,
   withoutComments,
 } from "../model/md-generate";
@@ -31,7 +31,7 @@ const components = {
 };
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
-function myRemarkPlugin() {
+function createCustomNodes() {
   // @ts-ignore
   return (tree) => {
     visit(tree, (node) => {
@@ -40,8 +40,9 @@ function myRemarkPlugin() {
         node.type === "leafDirective" ||
         node.type === "containerDirective"
       ) {
-        const data = node.data || {};
+        const data = node.data || (node.data = {});
         const hast = h(node.name, node.attributes);
+        // Create custom nodes from extended MD syntax. E.g. "tip"/"warning"
         // @ts-ignore
         data.hName = hast.tagName;
         // @ts-ignore
@@ -85,43 +86,31 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const { params } = props;
   // @ts-ignore
   const fullName = withIndexFile(params.docPath, params.isIndex);
-
-  let source;
-  try {
-    source = fs.readFileSync(fullName);
-  } catch (err) {
-    source = fs.readFileSync(fullName.replace(".md", "/index.md"));
-  }
-
+  const source = readMDFileFromPathOrIndex(fullName);
   const { content, data } = matter(source);
-
   const formattedContent = withoutComments(withInsertedCodeFromLinks(content));
 
   const mdxSource = await serialize(formattedContent, {
-    // Optionally pass remark/rehype plugins
     mdxOptions: {
-      remarkPlugins: [remarkDirective, myRemarkPlugin],
+      remarkPlugins: [remarkDirective, createCustomNodes],
       rehypePlugins: [],
     },
-    scope: data,
   });
 
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: {
+        title:
+          data.title ?? generateFrontMatterTitleFromContent(formattedContent),
+        ...data,
+      },
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getMDPaths
-    .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((path) => ({
-      params: {
-        docPath: withIndexURL(path),
-      },
-    }));
+  const paths = getMDPaths();
 
   return {
     paths,
