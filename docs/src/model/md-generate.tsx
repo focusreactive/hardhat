@@ -28,43 +28,60 @@ export const withCodeElementWrapper = (content: string) =>
     \`\`\`
   `;
 
+export const getEntriesInfo = (
+  line: string
+): {
+  pathname: string;
+  rowsNumbers: [number, number] | null;
+} => {
+  const rowsNumbers: [number, number] | null = line.includes("{")
+    ? (line
+        .substring(line.indexOf("{"))
+        .replace(/[{}]/g, "")
+        .split("-")
+        .map((lineNumberString) => Number(lineNumberString)) as [
+        number,
+        number
+      ])
+    : null;
+
+  const pathname = (
+    rowsNumbers ? line.substring(0, line.indexOf("{")) : line
+  ).replace("<<< @/", "");
+
+  return {
+    pathname,
+    rowsNumbers,
+  };
+};
+
+export const getContentFromRange = (
+  content: string,
+  rowsNumbers: [number, number]
+) => {
+  const [startLineNumber, endLineNumber] = rowsNumbers;
+
+  return content
+    .split(newLineDividerRegEx)
+    .slice(startLineNumber, endLineNumber)
+    .join("\n");
+};
+
 export const withInsertedCodeFromLinks = (content: string) => {
   return content
     .split(newLineDividerRegEx)
     .map((line: string) => {
       if (!line.startsWith("<<<")) return line;
 
-      const lineNumbersTuple: [number, number] | null = line.includes("{")
-        ? (line
-            .substring(line.indexOf("{"))
-            .replace(/[{}]/g, "")
-            .split("-")
-            .map((lineNumberString) => Number(lineNumberString)) as [
-            number,
-            number
-          ])
-        : null;
+      const { pathname, rowsNumbers } = getEntriesInfo(line);
 
-      const filePath = lineNumbersTuple
-        ? line.substring(0, line.indexOf("{"))
-        : line;
+      const fileContent = fs.readFileSync(pathname).toString();
 
-      const fileContent = fs
-        .readFileSync(filePath.replace("<<< @/", ""))
-        .toString();
+      if (!rowsNumbers) return withCodeElementWrapper(fileContent);
 
-      if (!lineNumbersTuple) {
-        return withCodeElementWrapper(fileContent);
-      }
+      const contentFromRange = getContentFromRange(fileContent, rowsNumbers);
 
-      const [startLineNumber, endLineNumber] = lineNumbersTuple;
-
-      const partOfFile = fileContent
-        .split(newLineDividerRegEx)
-        .slice(startLineNumber, endLineNumber)
-        .join("\n");
-
-      return withCodeElementWrapper(partOfFile);
+      return withCodeElementWrapper(contentFromRange);
     })
     .join("\n");
 };
