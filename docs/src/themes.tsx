@@ -3,15 +3,12 @@ import { createTheming } from "@callstack/react-theme-provider";
 
 export { styled } from "linaria/react";
 
-/* eslint-disable */
 export enum ThemesEnum {
   LIGHT = "LIGHT",
   DARK = "DARK",
   HC_DARK = "HC_DARK",
   AUTO = "AUTO",
 }
-/* eslint-enable */
-
 export const breakpoints = {
   xs: 360,
   sm: 412,
@@ -34,6 +31,7 @@ export const tmSelectors = {
 };
 
 export const lightPalette = {
+  name: "Light",
   transparent: "transparent",
   neutral0: "#FFFFFF",
   neutral100: "#F2F2F2",
@@ -80,6 +78,7 @@ export const lightPalette = {
 };
 
 export const darkPalette = {
+  name: "Dark",
   transparent: "transparent",
   neutral0: "#20232A",
   neutral100: "#F2F2F2",
@@ -123,9 +122,10 @@ export const darkPalette = {
     "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
-};
+} as Palette;
 
 export const hcDarkPalette = {
+  name: "Dark HC",
   transparent: "transparent",
   neutral0: "#16181D",
   neutral100: "#F2F2F2",
@@ -169,7 +169,7 @@ export const hcDarkPalette = {
     "linear-gradient(254.24deg, #E9DEFA 0%, #FBFCDB 100%, #FBFCDB 100%);",
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
-};
+} as Palette;
 
 type Palette = typeof lightPalette;
 
@@ -194,10 +194,11 @@ export const getNextTheme = (currentTheme: ThemesEnum): ThemesEnum => {
   const currentThemeIndex = themesArray.indexOf(currentTheme);
   const nextThemeIndex =
     currentThemeIndex === themesArray.length - 1 ? 0 : currentThemeIndex + 1;
-  return themesArray[nextThemeIndex];
+  const nextTheme = themesArray[nextThemeIndex];
+  return nextTheme;
 };
 
-const theming = createTheming(appTheme);
+export const theming = createTheming(appTheme);
 
 interface IThemeContext {
   theme: ThemesEnum;
@@ -211,17 +212,16 @@ export const ThemeContext = React.createContext<IThemeContext>({
 
 export const ThemeProvider = ({
   children,
-  overrideTheme,
-}: React.PropsWithChildren<{ overrideTheme?: ThemesEnum }>): JSX.Element => {
+}: React.PropsWithChildren<{}>): JSX.Element => {
   const [theme, setTheme] = useState<ThemesEnum>(ThemesEnum.AUTO);
 
   const changeTheme = useCallback(() => {
     const body = document.querySelector("body") as Element;
-    const newTheme = overrideTheme || ThemesEnum[getNextTheme(theme)];
-    body.className = `${newTheme}`;
+    const newTheme = ThemesEnum[getNextTheme(theme)];
+    body.className = newTheme;
     localStorage.setItem("theme", newTheme);
     setTheme(newTheme);
-  }, [theme, setTheme, overrideTheme]);
+  }, [theme, setTheme]);
 
   const initialContext = useMemo(
     () => ({ theme, changeTheme }),

@@ -2,8 +2,7 @@ import React from "react";
 import type { AppProps } from "next/app";
 import LandingLayout from "../components/LandingLayout";
 import "../styles/globals.css";
-
-import { ThemesEnum, ThemeProvider } from "../themes";
+import { ThemeProvider } from "../themes";
 
 function MyApp({ Component, pageProps }: AppProps) {
   /* @ts-ignore */
@@ -16,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
   return (
-    <ThemeProvider overrideTheme={ThemesEnum.LIGHT}>
+    <ThemeProvider>
       <LandingLayout seo={{ title: "Hardhat", description: "Hardhat" }}>
         {/* @ts-ignore */}
         <Component {...pageProps} />
