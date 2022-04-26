@@ -23,7 +23,7 @@ export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
 
 export const withCodeElementWrapper = (content: string) =>
   `
-   \`\`\` 
+   \`\`\`js 
     ${content}   
     \`\`\`
   `;

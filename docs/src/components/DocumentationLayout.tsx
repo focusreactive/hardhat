@@ -244,7 +244,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
               />
             </MobileSidebarMenuMask>
           </SidebarContainer>
-          <View>
+          <View id="documentation-view">
             <Content>{children}</Content>
           </View>
         </main>

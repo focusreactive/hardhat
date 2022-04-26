@@ -1,9 +1,10 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { NextComponentType } from "next";
-import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
+import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
-const { media } = appTheme;
+interface Props {
+  children: string;
+}
 
 const StyledCode = styled.code`
   padding: 4px 8px;
@@ -72,11 +73,11 @@ const StyledPre = styled.pre`
   }
 `;
 
-const Code: NextComponentType = ({ children }) => {
-  return <StyledCode>{children}</StyledCode>;
+const Code = ({ children }: Props) => {
+  return <StyledCode lang="js">{children}</StyledCode>;
 };
 
-const Pre: NextComponentType = ({ children }) => {
+const Pre = ({ children }: Props) => {
   return <StyledPre>{children}</StyledPre>;
 };
 

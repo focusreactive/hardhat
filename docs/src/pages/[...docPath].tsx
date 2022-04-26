@@ -5,7 +5,8 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkDirective from "remark-directive";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
-
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import {
   generateFrontMatterTitleFromContent,
   getMDPaths,
@@ -21,8 +22,10 @@ import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
 
 const components = {
+  h1: Title.H1,
   h2: Title.H2,
   h3: Title.H3,
+  h4: Title.H4,
   p: Paragraph,
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,
@@ -64,6 +67,16 @@ interface IDocPage {
 }
 
 const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const documentationView = document?.getElementById(
+      "documentation-view"
+    ) as Element;
+
+    documentationView.scrollTo(0, 0);
+  }, [router.asPath]);
+
   return (
     <DocumentationLayout
       seo={{
