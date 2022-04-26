@@ -7,7 +7,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 
 import {
-  generateFrontMatterTitleFromContent,
+  generateTitleFromContent,
   getMDPaths,
   readMDFileFromPathOrIndex,
   withIndexFile,
@@ -102,9 +102,8 @@ export const getStaticProps: GetStaticProps = async (props) => {
     props: {
       source: mdxSource,
       frontMatter: {
-        title:
-          data.title ?? generateFrontMatterTitleFromContent(formattedContent),
         ...data,
+        title: data.title ?? generateTitleFromContent(formattedContent),
       },
     },
   };

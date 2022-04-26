@@ -57,14 +57,15 @@ export const getEntriesInfo = (
 
 export const getContentFromRange = (
   content: string,
-  rowsNumbers: [number, number]
+  rowsNumbers: [number, number] | null
 ) => {
-  const [startLineNumber, endLineNumber] = rowsNumbers;
+  const linesArray = content.split(newLineDividerRegEx);
+  const [startLineNumber, endLineNumber] = rowsNumbers || [
+    0,
+    linesArray.length,
+  ];
 
-  return content
-    .split(newLineDividerRegEx)
-    .slice(startLineNumber, endLineNumber)
-    .join("\n");
+  return linesArray.slice(startLineNumber, endLineNumber).join("\n");
 };
 
 export const withInsertedCodeFromLinks = (content: string) => {
@@ -75,12 +76,13 @@ export const withInsertedCodeFromLinks = (content: string) => {
 
       const { pathname, rowsNumbers } = getEntriesInfo(line);
 
-      const fileContent = fs.readFileSync(pathname).toString();
-
-      if (!rowsNumbers) return withCodeElementWrapper(fileContent);
-
+      let fileContent;
+      try {
+        fileContent = fs.readFileSync(pathname).toString();
+      } catch (err) {
+        return "";
+      }
       const contentFromRange = getContentFromRange(fileContent, rowsNumbers);
-
       return withCodeElementWrapper(contentFromRange);
     })
     .join("\n");
@@ -98,7 +100,7 @@ export const readMDFileFromPathOrIndex = (pathname: string) => {
   }
 };
 
-export const generateFrontMatterTitleFromContent = (content: string) => {
+export const generateTitleFromContent = (content: string) => {
   return content.split(newLineDividerRegEx)[0].replace(/[#]*/g, "").trim();
 };
 
