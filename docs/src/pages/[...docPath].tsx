@@ -22,6 +22,7 @@ import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
 import UnorderedList from "../components/mdxComponents/UnorderedList";
 import HorizontalRule from "../components/mdxComponents/HorizontalRule";
+import MDLink from "../components/mdxComponents/MDLink";
 
 const components = {
   h1: Title.H1,
@@ -35,6 +36,7 @@ const components = {
   warning: Admonition.Warning,
   ul: UnorderedList,
   hr: HorizontalRule,
+  a: MDLink,
 };
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */

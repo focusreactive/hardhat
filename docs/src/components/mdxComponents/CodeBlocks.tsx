@@ -10,7 +10,7 @@ const StyledCode = styled.code`
   padding: 4px 8px;
   background-color: ${tm(({ colors }) => colors.codeBackground)};
   border-radius: 3px;
-  font-size: 14px;
+  font-size: 13.6px;
   font-family: ChivoLight, sans-serif;
   font-weight: 600;
   line-height: 1.7;

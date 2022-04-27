@@ -1,8 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
-
-const { media } = appTheme;
+import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
   children: string;
