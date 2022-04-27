@@ -29,6 +29,7 @@ const components = {
   h2: Title.H2,
   h3: Title.H3,
   h4: Title.H4,
+  h5: Title.H5,
   p: Paragraph,
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,

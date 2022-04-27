@@ -10,6 +10,7 @@ const StyledH1 = styled.h1`
   margin-top: 48px;
   margin-bottom: 16px;
   font-size: 32px;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
@@ -52,7 +53,6 @@ const StyledH2 = styled.h2`
   padding-top: 40px;
   padding-bottom: 16px;
   border-bottom: 1px solid ${tm(({ colors }) => colors.neutral400)};
-  font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 1.25;
@@ -93,6 +93,10 @@ const StyledH2 = styled.h2`
 const StyledH3 = styled.h3`
   font-size: 1.35rem;
   margin-top: 32px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
   & > a > span {
     margin-left: -24px;
@@ -124,6 +128,44 @@ const StyledH3 = styled.h3`
 const StyledH4 = styled.h4`
   font-size: 16px;
   margin-top: 32px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  color: ${tm(({ colors }) => colors.neutral800)};
+  & > a > span {
+    margin-left: -16px;
+    margin-right: 4px;
+    opacity: 0;
+    cursor: pointer;
+    color: ${tm(({ colors }) => colors.accent700)};
+  }
+  &:hover > a > span {
+    opacity: 1;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  ${tmSelectors.dark} {
+    color: ${tmDark(({ colors }) => colors.neutral800)};
+  }
+
+  ${tmSelectors.hcDark} {
+    color: ${tmHCDark(({ colors }) => colors.neutral800)};
+  }
+
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      color: ${tmDark(({ colors }) => colors.neutral800)};
+    }
+  }
+`;
+const StyledH5 = styled.h5`
+  margin-top: 24px;
+  font-weight: 600;
+  font-size: 13.2px;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
   & > a > span {
     margin-left: -16px;
@@ -213,11 +255,23 @@ const H4 = ({ children }: Props) => {
   );
 };
 
+const H5 = ({ children }: Props) => {
+  return (
+    <StyledH5 id={buildIdFromChildren(children)}>
+      <a href={`#${buildIdFromChildren(children)}`}>
+        <span>#</span>
+        {children}
+      </a>
+    </StyledH5>
+  );
+};
+
 const Title = {
   H1,
   H2,
   H3,
   H4,
+  H5,
 };
 
 export default Title;
