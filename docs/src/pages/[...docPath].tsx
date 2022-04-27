@@ -20,6 +20,7 @@ import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
+import UnorderedList from "../components/mdxComponents/UnorderedList";
 
 const components = {
   h1: Title.H1,
@@ -31,6 +32,7 @@ const components = {
   pre: CodeBlocks.Pre,
   tip: Admonition.Tip,
   warning: Admonition.Warning,
+  ul: UnorderedList,
 };
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
