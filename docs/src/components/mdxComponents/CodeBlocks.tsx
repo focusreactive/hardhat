@@ -17,6 +17,13 @@ const StyledCode = styled.code`
   letter-spacing: 2px;
   color: ${tm(({ colors }) => colors.codeColor)};
 
+  h3 & {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
   ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
 

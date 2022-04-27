@@ -2,9 +2,7 @@ import React from "react";
 import { styled } from "linaria/react";
 import { NextComponentType } from "next";
 
-import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
-
-const { media } = appTheme;
+import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 const StyledP = styled.p`
   margin: 16px 0 0;

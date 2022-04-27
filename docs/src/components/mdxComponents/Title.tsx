@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSXElementConstructor, ReactElement } from "react";
 import { styled } from "linaria/react";
 import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
@@ -14,8 +14,10 @@ const StyledH1 = styled.h1`
   font-size: 32px;
   line-height: 1.25;
   letter-spacing: 0.5px;
+  color: ${tm(({ colors }) => colors.neutral800)};
   & > a > span {
     margin-left: -30px;
+    margin-right: 7px;
     opacity: 0;
     cursor: pointer;
     color: ${tm(({ colors }) => colors.accent700)};
@@ -23,6 +25,7 @@ const StyledH1 = styled.h1`
 
   &:hover > a > span {
     opacity: 1;
+
     &:hover {
       text-decoration: underline;
     }
@@ -64,10 +67,8 @@ const StyledH2 = styled.h2`
     cursor: pointer;
     color: ${tm(({ colors }) => colors.accent700)};
   }
-
   &:hover > a > span {
     opacity: 1;
-
     &:hover {
       text-decoration: underline;
     }
@@ -94,6 +95,20 @@ const StyledH2 = styled.h2`
 const StyledH3 = styled.h3`
   font-size: 1.35rem;
   margin-top: 32px;
+  color: ${tm(({ colors }) => colors.neutral800)};
+  & > a > span {
+    margin-left: -24px;
+    margin-right: 8px;
+    opacity: 0;
+    cursor: pointer;
+    color: ${tm(({ colors }) => colors.accent700)};
+  }
+  &:hover > a > span {
+    opacity: 1;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   ${tmSelectors.dark} {
     color: ${tmDark(({ colors }) => colors.neutral800)};
   }
@@ -110,7 +125,21 @@ const StyledH3 = styled.h3`
 `;
 const StyledH4 = styled.h4`
   font-size: 16px;
-  margin-top: 24px;
+  margin-top: 32px;
+  color: ${tm(({ colors }) => colors.neutral800)};
+  & > a > span {
+    margin-left: -16px;
+    margin-right: 4px;
+    opacity: 0;
+    cursor: pointer;
+    color: ${tm(({ colors }) => colors.accent700)};
+  }
+  &:hover > a > span {
+    opacity: 1;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   ${tmSelectors.dark} {
     color: ${tmDark(({ colors }) => colors.neutral800)};
   }
@@ -126,16 +155,18 @@ const StyledH4 = styled.h4`
   }
 `;
 
-const createIdFromString = (str: string) => {
-  return str.toLowerCase().replace(/\s+/g, "-");
+const getIdFromChildren = function getId(
+  children: string | ReactElement
+): string {
+  return children.toString().toLowerCase().replace(/\s+/g, "-");
 };
 
 const H1 = ({ children }: Props) => {
   return (
-    <StyledH1 id={createIdFromString(children)}>
-      <a href={`#${createIdFromString(children)}`}>
+    <StyledH1 id={getIdFromChildren(children)}>
+      <a href={`#${getIdFromChildren(children)}`}>
         <span>#</span>
-        {` ${children}`}
+        {children}
       </a>
     </StyledH1>
   );
@@ -143,10 +174,9 @@ const H1 = ({ children }: Props) => {
 
 const H2 = ({ children }: Props) => {
   return (
-    <StyledH2 id={createIdFromString(children)}>
-      <a href={`#${createIdFromString(children)}`}>
-        <span>#</span>
-        {` ${children}`}
+    <StyledH2 id={getIdFromChildren(children)}>
+      <a href={`#${getIdFromChildren(children)}`}>
+        <span>#</span> {children}
       </a>
     </StyledH2>
   );
@@ -154,10 +184,10 @@ const H2 = ({ children }: Props) => {
 
 const H3 = ({ children }: Props) => {
   return (
-    <StyledH3 id={createIdFromString(children)}>
-      <a href={`#${createIdFromString(children)}`}>
+    <StyledH3 id={getIdFromChildren(children)}>
+      <a href={`#${getIdFromChildren(children)}`}>
         <span>#</span>
-        {` ${children}`}
+        {children}
       </a>
     </StyledH3>
   );
@@ -165,10 +195,10 @@ const H3 = ({ children }: Props) => {
 
 const H4 = ({ children }: Props) => {
   return (
-    <StyledH4 id={createIdFromString(children)}>
-      <a href={`#${createIdFromString(children)}`}>
+    <StyledH4 id={getIdFromChildren(children)}>
+      <a href={`#${getIdFromChildren(children)}`}>
         <span>#</span>
-        {` ${children}`}
+        {children}
       </a>
     </StyledH4>
   );
