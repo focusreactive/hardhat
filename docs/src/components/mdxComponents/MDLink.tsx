@@ -42,7 +42,7 @@ const MDLink = ({ children }: Props) => {
   return (
     <StyledMdLink>
       {children}
-      {<ExternalLinkIcon />}
+      <ExternalLinkIcon />
     </StyledMdLink>
   );
 };
