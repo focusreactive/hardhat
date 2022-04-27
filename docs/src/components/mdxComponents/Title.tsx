@@ -1,8 +1,6 @@
-import React, { JSXElementConstructor, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { styled } from "linaria/react";
-import { appTheme, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
-
-const { media } = appTheme;
+import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
   children: string;
@@ -155,16 +153,27 @@ const StyledH4 = styled.h4`
   }
 `;
 
-const getIdFromChildren = function getId(
+const buildIdFromChildren = function getId(
   children: string | ReactElement
 ): string {
-  return children.toString().toLowerCase().replace(/\s+/g, "-");
+  if (typeof children === "string") {
+    return children.toString().toLowerCase().replace(/\s+/g, "-");
+  }
+  if (Array.isArray(children)) {
+    return children
+      .map((child) => {
+        return getId(child);
+      })
+      .join("-");
+  }
+
+  return getId(children.props.children);
 };
 
 const H1 = ({ children }: Props) => {
   return (
-    <StyledH1 id={getIdFromChildren(children)}>
-      <a href={`#${getIdFromChildren(children)}`}>
+    <StyledH1 id={buildIdFromChildren(children)}>
+      <a href={`#${buildIdFromChildren(children)}`}>
         <span>#</span>
         {children}
       </a>
@@ -174,8 +183,8 @@ const H1 = ({ children }: Props) => {
 
 const H2 = ({ children }: Props) => {
   return (
-    <StyledH2 id={getIdFromChildren(children)}>
-      <a href={`#${getIdFromChildren(children)}`}>
+    <StyledH2 id={buildIdFromChildren(children)}>
+      <a href={`#${buildIdFromChildren(children)}`}>
         <span>#</span> {children}
       </a>
     </StyledH2>
@@ -184,8 +193,8 @@ const H2 = ({ children }: Props) => {
 
 const H3 = ({ children }: Props) => {
   return (
-    <StyledH3 id={getIdFromChildren(children)}>
-      <a href={`#${getIdFromChildren(children)}`}>
+    <StyledH3 id={buildIdFromChildren(children)}>
+      <a href={`#${buildIdFromChildren(children)}`}>
         <span>#</span>
         {children}
       </a>
@@ -195,8 +204,8 @@ const H3 = ({ children }: Props) => {
 
 const H4 = ({ children }: Props) => {
   return (
-    <StyledH4 id={getIdFromChildren(children)}>
-      <a href={`#${getIdFromChildren(children)}`}>
+    <StyledH4 id={buildIdFromChildren(children)}>
+      <a href={`#${buildIdFromChildren(children)}`}>
         <span>#</span>
         {children}
       </a>
