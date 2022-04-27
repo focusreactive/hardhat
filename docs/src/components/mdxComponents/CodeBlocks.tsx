@@ -44,7 +44,7 @@ const StyledCode = styled.code`
 `;
 
 const StyledPre = styled.pre`
-  margin-top: 16px;
+  margin: 16px 0;
   padding: 20px 24px;
   background-color: ${tm(({ colors }) => colors.codeBlockBackground)};
   border-radius: 6px;
