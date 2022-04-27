@@ -23,7 +23,11 @@ export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
 
 export const withCodeElementWrapper = (content: string) =>
   `
+<<<<<<< HEAD
    \`\`\`js 
+=======
+   \`\`\` 
+>>>>>>> fr/develop
     ${content}   
     \`\`\`
   `;
@@ -68,6 +72,14 @@ export const getContentFromRange = (
   return linesArray.slice(startLineNumber, endLineNumber).join("\n");
 };
 
+export const readFileContent = (pathname: string) => {
+  try {
+    return fs.readFileSync(pathname).toString();
+  } catch (err) {
+    throw new Error(`Cannot read file from: ${pathname}`);
+  }
+};
+
 export const withInsertedCodeFromLinks = (content: string) => {
   return content
     .split(newLineDividerRegEx)
@@ -76,12 +88,8 @@ export const withInsertedCodeFromLinks = (content: string) => {
 
       const { pathname, rowsNumbers } = getEntriesInfo(line);
 
-      let fileContent;
-      try {
-        fileContent = fs.readFileSync(pathname).toString();
-      } catch (err) {
-        return "";
-      }
+      const fileContent = readFileContent(pathname);
+
       const contentFromRange = getContentFromRange(fileContent, rowsNumbers);
       return withCodeElementWrapper(contentFromRange);
     })

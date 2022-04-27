@@ -91,7 +91,7 @@ const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
       }}
     >
       {/* @ts-ignore */}
-      <MDXRemote {...source} components={components} />;
+      <MDXRemote {...source} components={components} />
     </DocumentationLayout>
   );
 };
@@ -104,6 +104,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const fullName = withIndexFile(params.docPath, params.isIndex);
   const source = readMDFileFromPathOrIndex(fullName);
   const { content, data } = matter(source);
+
   const formattedContent = withoutComments(withInsertedCodeFromLinks(content));
 
   const mdxSource = await serialize(formattedContent, {
