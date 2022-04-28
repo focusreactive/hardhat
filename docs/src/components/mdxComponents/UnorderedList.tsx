@@ -8,6 +8,7 @@ interface Props {
 
 const StyledUnorderedList = styled.ul`
   padding-left: 1.2em;
+  margin-top: 16px;
   line-height: 1.7;
   color: ${tm(({ colors }) => colors.neutral800)};
 

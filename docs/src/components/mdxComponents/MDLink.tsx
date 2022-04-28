@@ -1,17 +1,21 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 import ExternalLinkIcon from "../../assets/icons/external-link-icon";
+import Link from "next/link";
 
 interface Props {
-  children: string;
+  children: string | ReactElement;
+  href: string;
 }
 
-const StyledMdLink = styled.a`
+const StyledMdLinkContainer = styled.span`
+  & > a {
+    color: ${tm(({ colors }) => colors.link)};
+  }
   margin: 0 2px;
   display: inline-flex;
   align-items: center;
-  color: ${tm(({ colors }) => colors.link)};
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -21,7 +25,7 @@ const StyledMdLink = styled.a`
     color: ${tm(({ colors }) => colors.link)};
   }
 
-  & > svg {
+  & svg {
     margin-left: 2px;
     stroke: ${tmDark(({ colors }) => colors.neutral800)};
     ${tmSelectors.hcDark} {
@@ -38,12 +42,28 @@ const StyledMdLink = styled.a`
   }
 `;
 
-const MDLink = ({ children }: Props) => {
+const getPathFromHref = (href: string) => {
+  return href
+    .split("/")
+    .filter((hrefPart: string) => ![".", ".."].includes(hrefPart))
+    .join("/")
+    .toLowerCase();
+};
+
+const MDLink = ({ children, href }: Props) => {
+  const isExternalLink = href.startsWith("http");
+
   return (
-    <StyledMdLink>
-      {children}
-      <ExternalLinkIcon />
-    </StyledMdLink>
+    <StyledMdLinkContainer>
+      {isExternalLink ? (
+        <a href={href} target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      ) : (
+        <a href={getPathFromHref(href)}>{children}</a>
+      )}
+      {isExternalLink && <ExternalLinkIcon />}
+    </StyledMdLinkContainer>
   );
 };
 
