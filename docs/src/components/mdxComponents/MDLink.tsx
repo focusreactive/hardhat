@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 import ExternalLinkIcon from "../../assets/icons/external-link-icon";
-import Link from "next/link";
 
 interface Props {
   children: string | ReactElement;
