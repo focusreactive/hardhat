@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
+import remarkUnwrapImages from "remark-unwrap-images";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import { useEffect } from "react";
@@ -25,6 +26,7 @@ import UnorderedList from "../components/mdxComponents/UnorderedList";
 import HorizontalRule from "../components/mdxComponents/HorizontalRule";
 import MDLink from "../components/mdxComponents/MDLink";
 import Table from "../components/mdxComponents/Table";
+import MDImage from "../components/mdxComponents/MDImage";
 
 const components = {
   h1: Title.H1,
@@ -41,6 +43,7 @@ const components = {
   hr: HorizontalRule,
   a: MDLink,
   table: Table,
+  img: MDImage,
 };
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
@@ -117,7 +120,12 @@ export const getStaticProps: GetStaticProps = async (props) => {
 
   const mdxSource = await serialize(formattedContent, {
     mdxOptions: {
-      remarkPlugins: [remarkGfm, remarkDirective, createCustomNodes],
+      remarkPlugins: [
+        remarkGfm,
+        remarkDirective,
+        createCustomNodes,
+        remarkUnwrapImages,
+      ],
       rehypePlugins: [],
     },
   });

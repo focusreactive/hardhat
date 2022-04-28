@@ -5,7 +5,7 @@ import { NextComponentType } from "next";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 const StyledP = styled.p`
-  margin: 16px 0 0;
+  margin: 16px 0;
   line-height: 1.7;
   font-size: 16px;
   font-family: ChivoLight, sans-serif;
