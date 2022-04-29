@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
+import { useRouter } from "next/router";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
@@ -21,7 +22,6 @@ import {
   bannerContent,
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
-import { useRouter } from "next/router";
 
 const Container = styled.div`
   position: relative;

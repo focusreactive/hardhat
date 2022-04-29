@@ -7,8 +7,6 @@ import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import {
   generateTitleFromContent,
   getMDPaths,
