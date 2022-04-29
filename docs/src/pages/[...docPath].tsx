@@ -19,6 +19,7 @@ import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
+import { createTocs, getDirInfoFiles, getFoldersInfo } from "../model/toc-generate";
 
 const components = {
   h2: Title.H2,
@@ -112,6 +113,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getMDPaths();
+  createTocs();
 
   return {
     paths,

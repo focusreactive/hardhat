@@ -1,0 +1,15 @@
+documentation:
+  title: documentation
+  folders:
+    - getting-started
+    - config
+    - hardhat-network
+    - guides
+    - advanced
+    - troubleshooting
+    - reference
+
+tutorial:
+  title: tutorial
+  folders:
+    - tutorial

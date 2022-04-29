@@ -10,7 +10,7 @@ interface IDocumentationSidebarSectionChild {
 interface IDocumentationSidebarSection {
   label: string;
   href?: string;
-  type: "default" | "group";
+  type: "single" | "group";
   children?: IDocumentationSidebarSectionChild[];
 }
 

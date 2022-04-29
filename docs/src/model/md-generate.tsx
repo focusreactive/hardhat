@@ -23,8 +23,8 @@ export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
 
 export const withCodeElementWrapper = (content: string) =>
   `
-   \`\`\` 
-    ${content}   
+   \`\`\`
+    ${content}
     \`\`\`
   `;
 
@@ -108,11 +108,14 @@ export const generateTitleFromContent = (content: string) => {
   return content.split(newLineDividerRegEx)[0].replace(/[#]*/g, "").trim();
 };
 
-export const getMDPaths = () =>
+export const getMDFiles = (): string[] =>
   glob
     .sync(`${DOCS_PATH}**/*.md`)
     .filter((pathname) => /\.mdx?$/.test(pathname))
-    .map((pathname) => pathname.replace(DOCS_PATH, ""))
+    .map((pathname) => pathname.replace(DOCS_PATH, ""));
+
+export const getMDPaths = (): Array<{ params: { docPath: string[] } }> =>
+  getMDFiles()
     .map((pathname) => pathname.replace(/\.mdx?$/, ""))
     .map((pathname) => ({
       params: {

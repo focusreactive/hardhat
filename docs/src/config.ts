@@ -77,7 +77,7 @@ export const DocumentationSidebarStructure: IDocumentationSidebarStructure = [
   {
     label: "Getting started",
     href: "/getting-started",
-    type: "default",
+    type: "single",
     children: [
       {
         label: "Overview",
@@ -96,7 +96,7 @@ export const DocumentationSidebarStructure: IDocumentationSidebarStructure = [
   {
     label: "Configuration",
     href: "/config",
-    type: "default",
+    type: "single",
   },
   {
     label: "Hardhat Network",
@@ -235,7 +235,7 @@ export const DocumentationSidebarStructure: IDocumentationSidebarStructure = [
   {
     label: "Buidler documentation",
     href: "/buidler-documentation",
-    type: "default",
+    type: "single",
   },
   {
     label: "Plugins",
@@ -290,7 +290,7 @@ export const DocumentationSidebarStructure: IDocumentationSidebarStructure = [
   {
     label: "Community Plugins",
     href: "/plugins/#community-plugins",
-    type: "default",
+    type: "single",
   },
 ];
 
