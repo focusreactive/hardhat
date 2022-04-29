@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { styled } from "linaria/react";
+import Link from "next/link";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 import ExternalLinkIcon from "../../assets/icons/external-link-icon";
 
@@ -59,7 +60,9 @@ const MDLink = ({ children, href }: Props) => {
           {children}
         </a>
       ) : (
-        <a href={getPathFromHref(href)}>{children}</a>
+        <Link href={getPathFromHref(href.replace(/\.md$/, ''))}>
+          <a>{children}</a>
+        </Link>
       )}
       {isExternalLink && <ExternalLinkIcon />}
     </StyledMdLinkContainer>
