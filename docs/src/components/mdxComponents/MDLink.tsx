@@ -60,7 +60,8 @@ const MDLink = ({ children, href }: Props) => {
           {children}
         </a>
       ) : (
-        <Link href={getPathFromHref(href.replace(/\.md$/, ''))}>
+        <Link href={getPathFromHref(href.replace(/\.md$/, ""))}>
+          {/* eslint-disable-next-line */}
           <a>{children}</a>
         </Link>
       )}
