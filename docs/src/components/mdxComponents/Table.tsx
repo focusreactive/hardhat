@@ -3,12 +3,14 @@ import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
-  children: string;
+  children: string | JSX.Element[] | JSX.Element;
 }
 
 const StyledTable = styled.table`
   margin: 16px 0;
+  width: 100%;
   border-collapse: collapse;
+  color: ${tm(({ colors }) => colors.neutral800)};
   border-color: ${tm(({ colors }) => colors.neutral800)};
   overflow-x: auto;
   & thead {
@@ -21,6 +23,7 @@ const StyledTable = styled.table`
   & td {
     border: 1px solid ${tm(({ colors }) => colors.tableBorder)};
     padding: 9.6px 16px;
+    color: inherit;
   }
 
   ${tmSelectors.dark} {

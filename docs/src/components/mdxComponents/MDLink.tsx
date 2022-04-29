@@ -43,11 +43,13 @@ const StyledMdLinkContainer = styled.span`
 `;
 
 const getPathFromHref = (href: string) => {
-  return href
+  const pathname = href
     .split("/")
     .filter((hrefPart: string) => ![".", ".."].includes(hrefPart))
     .join("/")
     .toLowerCase();
+
+  return pathname.startsWith("/") ? pathname : `/${pathname}`;
 };
 
 const MDLink = ({ children, href }: Props) => {

@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
-  children: string;
+  children: string | JSX.Element[] | JSX.Element;
 }
 
 const StyledCode = styled.code`
@@ -70,12 +70,14 @@ const StyledPre = styled.pre`
   ${tmSelectors.hcDark} {
     background-color: ${tmHCDark(({ colors }) => colors.codeBlockBackground)};
     border: 1px solid ${tmHCDark(({ colors }) => colors.codeBlockBorder)};
+    color: ${tmHCDark(({ colors }) => colors.codeColor)};
   }
 
   ${media.mqDark} {
     ${tmSelectors.auto} {
       background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
       border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
+      color: ${tmDark(({ colors }) => colors.codeColor)};
     }
   }
 `;

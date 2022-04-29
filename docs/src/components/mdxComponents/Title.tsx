@@ -94,7 +94,7 @@ const StyledH3 = styled.h3`
   font-size: 1.35rem;
   margin-top: 32px;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 21.6px;
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
@@ -129,7 +129,7 @@ const StyledH4 = styled.h4`
   font-size: 16px;
   margin-top: 32px;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};

@@ -25,6 +25,7 @@ import HorizontalRule from "../components/mdxComponents/HorizontalRule";
 import MDLink from "../components/mdxComponents/MDLink";
 import Table from "../components/mdxComponents/Table";
 import MDImage from "../components/mdxComponents/MDImage";
+import OrderedList from "../components/mdxComponents/OrderedList";
 
 const components = {
   h1: Title.H1,
@@ -38,6 +39,7 @@ const components = {
   tip: Admonition.Tip,
   warning: Admonition.Warning,
   ul: UnorderedList,
+  ol: OrderedList,
   hr: HorizontalRule,
   a: MDLink,
   table: Table,
