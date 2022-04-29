@@ -5,10 +5,16 @@ import yaml from "js-yaml";
 
 import { DOCS_PATH, getMDFiles } from "./md-generate";
 
+export enum SectionType {
+  SINGLE = "single",
+  GROUP = "group",
+  HIDDEN = "hidden",
+  PLUGINS = "plugins",
+}
+
 type DirInfo = {
-  "section-type": "single" | "group";
+  "section-type": SectionType;
   "section-title": string;
-  layout: string;
   order: string[];
 };
 
@@ -27,14 +33,13 @@ type FolderInfo = {
 const toCapitalCase = (str: string): string => {
   // @ts-ignore
   const [c, ...rest] = str;
-  return `${c.toUpperCase()}${rest.join()}`;
+  return `${c.toUpperCase()}${rest.join("")}`;
 };
 
 const getDefaultConfig = (folder: FolderInfo): DirInfo => {
   return {
-    "section-type": "group",
+    "section-type": SectionType.GROUP,
     "section-title": toCapitalCase(folder.path),
-    layout: "default",
     order: folder.files,
   };
 };
@@ -88,20 +93,87 @@ export const getAllFolders = (mdFiles: string[]): FolderInfo[] => {
   return folders;
 };
 
+const matchFoldersToLayouts = (folders: FolderInfo[], layouts: LayoutsInfo) => {
+  const layoutsList = Object.entries(layouts).map(([layoutKey, lt]) => ({
+    layoutKey,
+    ...lt,
+  }));
+
+  return folders.map((fld) => {
+    const lt = layoutsList.find(({ folders }) => folders.includes(fld.path));
+    if (!lt) {
+      throw new Error(
+        `Folder ${fld.path} isn't included to any layout. Please specify it in ${DOCS_PATH}/layouts.yaml file. If you don't want to list it in the sidebar, use "section-type: hidden" in _dirinfo.yaml`
+      );
+    }
+    return {
+      ...fld,
+      layout: lt,
+    };
+  });
+};
+
+const getSubitems = (path, order) => {
+  const items = order.map((item) => {
+    if (typeof item === "object") {
+      return {
+        label: item.title,
+        href: `/${path}${item.href}`,
+      };
+    }
+    return {
+      href: `/${path}${item}`,
+      label: `get from /${path}${item}.md`,
+    };
+  });
+  return items;
+};
+
+const generateTocItem = (fld) => {
+  console.log("🚀 fld", fld);
+  if (!fld) {
+    return null;
+  }
+  const tocItem = {
+    label: fld["section-title"],
+    href:
+      fld["section-type"] === SectionType.SINGLE ? `/${fld.path}` : undefined,
+    type: fld["section-type"],
+    children: fld.order?.length ? getSubitems(fld.path, fld.order) : undefined,
+  };
+
+  console.log("🚀 tocItem", tocItem);
+  return tocItem;
+};
+
+const getLayoutToc = (layout: any, foldersStructure: any) => {
+  const tocItems = layout.folders
+    .map((fldName: any) => {
+      const fld = foldersStructure.find(({ path }) => path === fldName);
+      return fld;
+    })
+    .map(generateTocItem);
+
+  return tocItems;
+};
+
 export const createTocs = () => {
   const infoFiles = getDirInfoFiles();
   const foldersInfo = getFoldersInfo(infoFiles);
   const mdFiles = getMDFiles();
   const folders = getAllFolders(mdFiles);
-  const foldersStructure = folders.map((fld) => ({
+
+  const layouts = getLayoutsInfo();
+  console.log(
+    "🚀 ~ file: toc-generate.tsx ~ line 124 ~ createTocs ~ layouts",
+    layouts
+  );
+  const foldersWithLayouts = matchFoldersToLayouts(folders, layouts);
+  const foldersStructure = foldersWithLayouts.map((fld) => ({
     ...fld,
     ...(foldersInfo.find(({ folder }) => folder === fld.path)?.config ||
       getDefaultConfig(fld)),
   }));
-  const layouts = getLayoutsInfo();
-  console.log("🚀 ~ file: toc-generate.tsx ~ line 102 ~ createTocs ~ layouts", layouts)
-  console.log(
-    "🚀 ~ file: toc-generate.tsx ~ line 60 ~ createToc ~ folders",
-    foldersStructure
-  );
+  const docToc = getLayoutToc(layouts.documentation, foldersStructure);
+  console.log("🍏🍏🍏", docToc[3]);
 };
