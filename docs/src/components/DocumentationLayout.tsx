@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
@@ -21,6 +21,7 @@ import {
   bannerContent,
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   position: relative;
@@ -185,6 +186,12 @@ type Props = React.PropsWithChildren<{
 
 const DocumentationLayout = ({ children, seo }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const router = useRouter();
+  const docViewRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    docViewRef.current.scrollTo(0, 0);
+  }, [router.asPath]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -244,7 +251,7 @@ const DocumentationLayout = ({ children, seo }: Props) => {
               />
             </MobileSidebarMenuMask>
           </SidebarContainer>
-          <View id="documentation-view">
+          <View ref={docViewRef}>
             <Content>{children}</Content>
           </View>
         </main>

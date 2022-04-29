@@ -80,16 +80,6 @@ interface IDocPage {
 }
 
 const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const documentationView = document?.getElementById(
-      "documentation-view"
-    ) as Element;
-
-    documentationView.scrollTo(0, 0);
-  }, [router.asPath]);
-
   return (
     <DocumentationLayout
       seo={{
