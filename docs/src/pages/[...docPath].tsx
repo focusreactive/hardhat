@@ -7,8 +7,6 @@ import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import {
   generateTitleFromContent,
   getMDPaths,
@@ -80,16 +78,6 @@ interface IDocPage {
 }
 
 const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const documentationView = document?.getElementById(
-      "documentation-view"
-    ) as Element;
-
-    documentationView.scrollTo(0, 0);
-  }, [router.asPath]);
-
   return (
     <DocumentationLayout
       seo={{
