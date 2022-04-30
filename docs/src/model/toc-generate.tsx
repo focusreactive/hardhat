@@ -3,7 +3,13 @@ import glob from "glob";
 import fs from "fs";
 import yaml from "js-yaml";
 
-import { DOCS_PATH, getMDFiles } from "./md-generate";
+import {
+  DOCS_PATH,
+  getMDFiles,
+  parseMdContent,
+  parseMdFile,
+  readMDFileFromPathOrIndex,
+} from "./md-generate";
 
 export enum SectionType {
   SINGLE = "single",
@@ -37,11 +43,15 @@ const toCapitalCase = (str: string): string => {
 };
 
 const getDefaultConfig = (folder: FolderInfo): DirInfo => {
-  return {
+  const config = {
     "section-type": SectionType.GROUP,
     "section-title": toCapitalCase(folder.path),
-    order: folder.files,
+    order: folder.files.map((fl) =>
+      fl.replace(/\.mdx?$/, "").replace(new RegExp(`^${folder.path}`), "")
+    ),
   };
+
+  return config;
 };
 
 const getLayoutsInfo = (): LayoutsInfo => {
@@ -113,7 +123,10 @@ const matchFoldersToLayouts = (folders: FolderInfo[], layouts: LayoutsInfo) => {
   });
 };
 
-const getSubitems = (path, order) => {
+const getSubitems = (
+  path: string,
+  order: Array<{ title: string; href: string } | string>
+) => {
   const items = order.map((item) => {
     if (typeof item === "object") {
       return {
@@ -121,16 +134,28 @@ const getSubitems = (path, order) => {
         href: `/${path}${item.href}`,
       };
     }
+
+    const fullName = `${path}${item}.md`;
+    const source = readMDFileFromPathOrIndex(`${DOCS_PATH}${fullName}`);
+
+    const { tocTitle } = parseMdFile(source);
+
     return {
       href: `/${path}${item}`,
-      label: `get from /${path}${item}.md`,
+      label: tocTitle || item,
     };
   });
   return items;
 };
 
-const generateTocItem = (fld) => {
-  console.log("🚀 fld", fld);
+const generateTocItem = (
+  fld: null | {
+    "section-title": string;
+    "section-type": SectionType;
+    path: string;
+    order: Array<{ title: string; href: string } | string>;
+  }
+) => {
   if (!fld) {
     return null;
   }
@@ -142,38 +167,53 @@ const generateTocItem = (fld) => {
     children: fld.order?.length ? getSubitems(fld.path, fld.order) : undefined,
   };
 
-  console.log("🚀 tocItem", tocItem);
   return tocItem;
 };
 
 const getLayoutToc = (layout: any, foldersStructure: any) => {
   const tocItems = layout.folders
-    .map((fldName: any) => {
-      const fld = foldersStructure.find(({ path }) => path === fldName);
+    .map((fldName: string) => {
+      const fld = foldersStructure.find(
+        ({ path }: { path: string }) => path === fldName
+      );
+      if (!fld || fld["section-type"] === SectionType.HIDDEN) {
+        return null;
+      }
       return fld;
     })
+    .filter(Boolean)
     .map(generateTocItem);
 
   return tocItems;
 };
 
-export const createTocs = () => {
+export const createLayouts = () => {
   const infoFiles = getDirInfoFiles();
   const foldersInfo = getFoldersInfo(infoFiles);
   const mdFiles = getMDFiles();
   const folders = getAllFolders(mdFiles);
 
   const layouts = getLayoutsInfo();
-  console.log(
-    "🚀 ~ file: toc-generate.tsx ~ line 124 ~ createTocs ~ layouts",
-    layouts
-  );
   const foldersWithLayouts = matchFoldersToLayouts(folders, layouts);
   const foldersStructure = foldersWithLayouts.map((fld) => ({
     ...fld,
     ...(foldersInfo.find(({ folder }) => folder === fld.path)?.config ||
       getDefaultConfig(fld)),
   }));
-  const docToc = getLayoutToc(layouts.documentation, foldersStructure);
-  console.log("🍏🍏🍏", docToc[3]);
+  const layoutConfigs = Object.entries(layouts)
+    .map(([key, l]) => ({
+      [key]: getLayoutToc(l, foldersStructure),
+    }))
+    .reduce(
+      (acc, obj) => ({
+        ...acc,
+        ...obj,
+      }),
+      {}
+    );
+
+  console.log(
+    "🚀 ~ file: toc-generate.tsx ~ line 196 ~ createTocs ~ docToc",
+    layoutConfigs
+  );
 };

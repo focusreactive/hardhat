@@ -1,14 +1,12 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
-import remarkDirective from "remark-directive";
-import { visit } from "unist-util-visit";
-import { h } from "hastscript";
 
 import {
   generateTitleFromContent,
   getMDPaths,
+  parseMdContent,
+  prepareMdContent,
   readMDFileFromPathOrIndex,
   withIndexFile,
   withInsertedCodeFromLinks,
@@ -19,7 +17,11 @@ import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
-import { createTocs, getDirInfoFiles, getFoldersInfo } from "../model/toc-generate";
+import {
+  createLayouts,
+  getDirInfoFiles,
+  getFoldersInfo,
+} from "../model/toc-generate";
 
 const components = {
   h2: Title.H2,
@@ -31,53 +33,28 @@ const components = {
   warning: Admonition.Warning,
 };
 
-/** @type {import('unified').Plugin<[], import('mdast').Root>} */
-function createCustomNodes() {
-  // @ts-ignore
-  return (tree) => {
-    visit(tree, (node) => {
-      if (
-        node.type === "textDirective" ||
-        node.type === "leafDirective" ||
-        node.type === "containerDirective"
-      ) {
-        // eslint-disable-next-line
-        const data = node.data || (node.data = {});
-        const hast = h(node.name, node.attributes);
-        // Create custom nodes from extended MD syntax. E.g. "tip"/"warning"
-        // @ts-ignore
-        data.hName = hast.tagName;
-        // @ts-ignore
-        data.hProperties = hast.properties;
-      }
-    });
-  };
-}
-
 interface IFrontMatter {
-  title: string;
-  description: string;
-  anchors?: string[];
+  seoTitle: string;
+  seoDescription: string;
 }
 interface IDocPage {
-  source: string;
+  mdxSource: string;
   frontMatter: IFrontMatter;
 }
 
-const DocPage: NextPage<IDocPage> = ({ source, frontMatter }): JSX.Element => {
+const DocPage: NextPage<IDocPage> = ({
+  mdxSource,
+  frontMatter,
+}): JSX.Element => {
   return (
     <DocumentationLayout
       seo={{
-        title: frontMatter.title
-          ? frontMatter.title.concat(" | Hardhat")
-          : "Hardhat",
-        description:
-          frontMatter.description ||
-          "Ethereum development environment for professionals by Nomic Foundation",
+        title: frontMatter.seoTitle,
+        description: frontMatter.seoDescription,
       }}
     >
       {/* @ts-ignore */}
-      <MDXRemote {...source} components={components} />
+      <MDXRemote {...mdxSource} components={components} />
     </DocumentationLayout>
   );
 };
@@ -89,23 +66,18 @@ export const getStaticProps: GetStaticProps = async (props) => {
   // @ts-ignore
   const fullName = withIndexFile(params.docPath, params.isIndex);
   const source = readMDFileFromPathOrIndex(fullName);
-  const { content, data } = matter(source);
 
-  const formattedContent = withoutComments(withInsertedCodeFromLinks(content));
-
-  const mdxSource = await serialize(formattedContent, {
-    mdxOptions: {
-      remarkPlugins: [remarkDirective, createCustomNodes],
-      rehypePlugins: [],
-    },
-  });
+  const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
+    source
+  );
 
   return {
     props: {
-      source: mdxSource,
+      mdxSource,
       frontMatter: {
         ...data,
-        title: data.title ?? generateTitleFromContent(formattedContent),
+        seoTitle,
+        seoDescription,
       },
     },
   };
@@ -113,7 +85,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getMDPaths();
-  createTocs();
+  createLayouts();
 
   return {
     paths,
