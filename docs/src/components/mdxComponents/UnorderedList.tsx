@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
-  children: string;
+  children: JSX.Element[] | JSX.Element;
 }
 
 const StyledUnorderedList = styled.ul`

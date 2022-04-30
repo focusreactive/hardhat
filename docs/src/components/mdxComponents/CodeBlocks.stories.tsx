@@ -7,11 +7,12 @@ export default {
   decorators: [mdWrapper],
 };
 
-export const Code = () => <CodeBlocks.Code>{"console.log(1)"}</CodeBlocks.Code>;
+export const Code = () => <CodeBlocks.Code>console.log(1)</CodeBlocks.Code>;
 
 export const Pre = () => (
   <CodeBlocks.Pre>
-    {`
+    <code>
+      {`
     $ npx hardhat
     888    888                      888 888               888
     888    888                      888 888               888
@@ -31,5 +32,6 @@ export const Pre = () => (
       Create an empty hardhat.config.js
       Quit
     `}
+    </code>
   </CodeBlocks.Pre>
 );

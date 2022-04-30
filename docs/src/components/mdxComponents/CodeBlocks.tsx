@@ -53,7 +53,7 @@ const StyledPre = styled.pre`
 
   & code {
     padding: 0;
-    color: ${tm(({ colors }) => colors.neutral0)};
+    color: ${tm(({ colors }) => colors.codeColor)};
     line-height: 1.4;
     font-size: 14px;
     font-family: Menlo, sans-serif;
@@ -63,21 +63,27 @@ const StyledPre = styled.pre`
 
   ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
-    color: ${tmDark(({ colors }) => colors.codeColor)};
     border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
+    & code {
+      color: ${tmDark(({ colors }) => colors.codeColor)};
+    }
   }
 
   ${tmSelectors.hcDark} {
     background-color: ${tmHCDark(({ colors }) => colors.codeBlockBackground)};
     border: 1px solid ${tmHCDark(({ colors }) => colors.codeBlockBorder)};
-    color: ${tmHCDark(({ colors }) => colors.codeColor)};
+    & code {
+      color: ${tmHCDark(({ colors }) => colors.codeColor)};
+    }
   }
 
   ${media.mqDark} {
     ${tmSelectors.auto} {
       background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
       border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
-      color: ${tmDark(({ colors }) => colors.codeColor)};
+      & code {
+        color: ${tmDark(({ colors }) => colors.codeColor)};
+      }
     }
   }
 `;

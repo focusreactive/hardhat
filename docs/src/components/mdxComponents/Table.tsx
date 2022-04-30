@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
 interface Props {
-  children: string | JSX.Element[] | JSX.Element;
+  children: JSX.Element[] | JSX.Element;
 }
 
 const StyledTable = styled.table`

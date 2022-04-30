@@ -1,8 +1,11 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { NextComponentType } from "next";
 
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
+
+interface Props {
+  children: string | JSX.Element[] | JSX.Element;
+}
 
 const StyledP = styled.p`
   margin: 16px 0;
@@ -26,7 +29,7 @@ const StyledP = styled.p`
   }
 `;
 
-const Paragraph: NextComponentType = ({ children }) => {
+const Paragraph = ({ children }: Props) => {
   return <StyledP>{children}</StyledP>;
 };
 
