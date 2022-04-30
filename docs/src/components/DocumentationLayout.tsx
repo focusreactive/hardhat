@@ -12,7 +12,7 @@ import {
   ThemeProvider,
 } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import { ISeo } from "./types";
+import { IDocumentationSidebarStructure, ISeo } from "./types";
 import Sidebar from "./Sidebar";
 import {
   DocumentationSidebarStructure,
@@ -181,9 +181,10 @@ const Content = styled.section`
 
 type Props = React.PropsWithChildren<{
   seo: ISeo;
+  sidebarLayout: IDocumentationSidebarStructure;
 }>;
 
-const DocumentationLayout = ({ children, seo }: Props) => {
+const DocumentationLayout = ({ children, seo, sidebarLayout }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -234,13 +235,13 @@ const DocumentationLayout = ({ children, seo }: Props) => {
             isSidebarOpen={isSidebarOpen}
           >
             <SidebarMask>
-              <Sidebar elementsList={DocumentationSidebarStructure} />
+              <Sidebar elementsList={sidebarLayout} />
             </SidebarMask>
             <MobileSidebarMenuMask data-open={isSidebarOpen}>
               <MobileSidebarMenu
                 menuItems={menuItemsList}
                 socialsItems={socialsItems}
-                sidebarElementsList={DocumentationSidebarStructure}
+                sidebarElementsList={sidebarLayout}
               />
             </MobileSidebarMenuMask>
           </SidebarContainer>

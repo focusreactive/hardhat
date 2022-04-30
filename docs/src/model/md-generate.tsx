@@ -8,6 +8,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 
 export const DOCS_PATH = path.join(process.cwd(), "src/content/");
+export const TEMP_PATH = path.join(process.cwd(), "temp/");
 export const newLineDividerRegEx = /\r\n|\n/;
 
 export const withIndexURL = (pathname: string): string[] => {
@@ -101,11 +102,22 @@ export const withoutComments = (content: string) => {
   return content.replace(/<!--[\s\S]*?-->/gm, "");
 };
 
-export const readMDFileFromPathOrIndex = (pathname: string): string => {
+export const readMDFileFromPathOrIndex = (
+  fileName: string
+): { source: string; fileName: string } => {
   try {
-    return fs.readFileSync(pathname).toString();
+    const source = fs.readFileSync(fileName).toString();
+    return {
+      source,
+      fileName,
+    };
   } catch (err) {
-    return fs.readFileSync(pathname.replace(".md", "/index.md")).toString();
+    const file = fileName.replace(".md", "/index.md");
+    const source = fs.readFileSync(file).toString();
+    return {
+      source,
+      fileName: file,
+    };
   }
 };
 
@@ -185,3 +197,30 @@ export const getMDPaths = (): Array<{ params: { docPath: string[] } }> =>
         docPath: withIndexURL(pathname),
       },
     }));
+
+export const getSidebarConfig = () => {
+  try {
+    const sidebarConfigPath = `${TEMP_PATH}sidebarConfig.json`;
+    const configText = fs.readFileSync(sidebarConfigPath).toString();
+    const config = JSON.parse(configText);
+    const { layoutConfigs, layoutsMap } = config;
+    return { layoutConfigs, layoutsMap };
+  } catch (err) {
+    console.error(err);
+    throw new Error(`Can't read sidebar configs`);
+  }
+};
+
+export const getLayout = (fileName: string) => {
+  /**
+   * Layout configs is generated from content folder based on .yaml and .md files.
+   * The config contains information for all pages at once
+   * This happens by executing `createLayouts` function from `getStaticPaths`.
+   * In order to optimize build time we store that config in a temporary file
+   * (as getStaticPaths and getStaticProps executed in isolated environments, so it's the only way to pass information)
+   */
+  const { layoutConfigs, layoutsMap } = getSidebarConfig();
+  const fileNameKey = fileName.replace(DOCS_PATH, "");
+  const { layout } = layoutsMap[fileNameKey];
+  return layoutConfigs[layout];
+};

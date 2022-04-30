@@ -1,27 +1,20 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 
 import {
-  generateTitleFromContent,
+  getLayout,
   getMDPaths,
-  parseMdContent,
   prepareMdContent,
   readMDFileFromPathOrIndex,
   withIndexFile,
-  withInsertedCodeFromLinks,
-  withoutComments,
 } from "../model/md-generate";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
-import {
-  createLayouts,
-  getDirInfoFiles,
-  getFoldersInfo,
-} from "../model/toc-generate";
+import { createLayouts } from "../model/toc-generate";
+import { IDocumentationSidebarStructure } from "../components/types";
 
 const components = {
   h2: Title.H2,
@@ -40,11 +33,13 @@ interface IFrontMatter {
 interface IDocPage {
   mdxSource: string;
   frontMatter: IFrontMatter;
+  layout: IDocumentationSidebarStructure;
 }
 
 const DocPage: NextPage<IDocPage> = ({
   mdxSource,
   frontMatter,
+  layout,
 }): JSX.Element => {
   return (
     <DocumentationLayout
@@ -52,6 +47,7 @@ const DocPage: NextPage<IDocPage> = ({
         title: frontMatter.seoTitle,
         description: frontMatter.seoDescription,
       }}
+      sidebarLayout={layout}
     >
       {/* @ts-ignore */}
       <MDXRemote {...mdxSource} components={components} />
@@ -65,11 +61,12 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const { params } = props;
   // @ts-ignore
   const fullName = withIndexFile(params.docPath, params.isIndex);
-  const source = readMDFileFromPathOrIndex(fullName);
+  const { source, fileName } = readMDFileFromPathOrIndex(fullName);
 
   const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
     source
   );
+  const layout = getLayout(fileName);
 
   return {
     props: {
@@ -79,6 +76,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
         seoTitle,
         seoDescription,
       },
+      layout,
     },
   };
 };

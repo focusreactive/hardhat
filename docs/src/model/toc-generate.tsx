@@ -1,4 +1,3 @@
-import path from "path";
 import glob from "glob";
 import fs from "fs";
 import yaml from "js-yaml";
@@ -6,9 +5,9 @@ import yaml from "js-yaml";
 import {
   DOCS_PATH,
   getMDFiles,
-  parseMdContent,
   parseMdFile,
   readMDFileFromPathOrIndex,
+  TEMP_PATH,
 } from "./md-generate";
 
 export enum SectionType {
@@ -136,7 +135,7 @@ const getSubitems = (
     }
 
     const fullName = `${path}${item}.md`;
-    const source = readMDFileFromPathOrIndex(`${DOCS_PATH}${fullName}`);
+    const { source } = readMDFileFromPathOrIndex(`${DOCS_PATH}${fullName}`);
 
     const { tocTitle } = parseMdFile(source);
 
@@ -200,6 +199,7 @@ export const createLayouts = () => {
     ...(foldersInfo.find(({ folder }) => folder === fld.path)?.config ||
       getDefaultConfig(fld)),
   }));
+
   const layoutConfigs = Object.entries(layouts)
     .map(([key, l]) => ({
       [key]: getLayoutToc(l, foldersStructure),
@@ -212,8 +212,31 @@ export const createLayouts = () => {
       {}
     );
 
-  console.log(
-    "🚀 ~ file: toc-generate.tsx ~ line 196 ~ createTocs ~ docToc",
-    layoutConfigs
+  const layoutsMap = foldersWithLayouts
+    .map((folder) =>
+      folder.files.map((file) => ({
+        file,
+        folder: folder.path,
+        layout: folder.layout.layoutKey,
+      }))
+    )
+    .flat()
+    .reduce(
+      (acc, obj) => ({
+        ...acc,
+        [obj.file]: obj,
+      }),
+      {}
+    );
+
+  /**
+   * We generating this config once per build from `getStaticPaths`.
+   * After that we writing the config to a temporary file for reusing this data from `getStaticProps` on page generations.
+   * So each single page don't need to execute this function again
+   */
+  const sidebarConfigPath = `${TEMP_PATH}sidebarConfig.json`;
+  fs.writeFileSync(
+    sidebarConfigPath,
+    JSON.stringify({ layoutConfigs, layoutsMap })
   );
 };
