@@ -8,7 +8,7 @@ import {
   parseMdFile,
   readMDFileFromPathOrIndex,
   TEMP_PATH,
-} from "./md-generate";
+} from "./markdown";
 
 export enum SectionType {
   SINGLE = "single",
@@ -23,17 +23,28 @@ type DirInfo = {
   order: string[];
 };
 
+type Layout = {
+  title: string;
+  folders: string[];
+  layoutKey?: string;
+};
+
 type LayoutsInfo = {
-  [layoutKey: string]: {
-    title: string;
-    folders: string[];
-  };
+  [layoutKey: string]: Layout;
 };
 
 type FolderInfo = {
   path: string;
   files: string[];
 };
+
+type FoldersConfig = Array<{
+  path: string;
+  folder: string;
+  config: {
+    [key: string]: any;
+  };
+}>;
 
 const toCapitalCase = (str: string): string => {
   // @ts-ignore
@@ -78,7 +89,7 @@ export const getYamlData = (relativePath: string): DirInfo => {
   return yamlData;
 };
 
-export const getFoldersInfo = (infoFiles: InfoFiles) =>
+export const getFoldersInfo = (infoFiles: InfoFiles): FoldersConfig =>
   infoFiles.map(({ path }) => ({
     path,
     folder: path.replace("/_dirinfo.yaml", ""),
@@ -105,8 +116,8 @@ export const getAllFolders = (mdFiles: string[]): FolderInfo[] => {
 const matchFoldersToLayouts = (
   folders: FolderInfo[],
   layouts: LayoutsInfo,
-  foldersInfo
-) => {
+  foldersInfo: FoldersConfig
+): Array<FolderInfo & { layout: Layout }> => {
   const layoutsList = Object.entries(layouts).map(([layoutKey, lt]) => ({
     layoutKey,
     ...lt,
@@ -116,11 +127,6 @@ const matchFoldersToLayouts = (
     ...folders.map(({ path }) => path),
     ...foldersInfo.map(({ folder }) => folder),
   ]);
-
-  console.log(
-    "🚀 ~ file: toc-generate.tsx ~ line 121 ~ allFolderPaths",
-    allFolderPaths
-  );
 
   // @ts-ignore
   return [...allFolderPaths].map((path) => {

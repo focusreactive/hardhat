@@ -7,13 +7,13 @@ import {
   prepareMdContent,
   readMDFileFromPathOrIndex,
   withIndexFile,
-} from "../model/md-generate";
+} from "../model/markdown";
 import Title from "../components/mdxComponents/Title";
 import Paragraph from "../components/mdxComponents/Paragraph";
 import CodeBlocks from "../components/mdxComponents/CodeBlocks";
 import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
-import { createLayouts } from "../model/toc-generate";
+import { createLayouts } from "../model/layout";
 import { IDocumentationSidebarStructure } from "../components/types";
 import UnorderedList from "../components/mdxComponents/UnorderedList";
 import HorizontalRule from "../components/mdxComponents/HorizontalRule";
