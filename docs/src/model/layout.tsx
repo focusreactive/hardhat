@@ -255,7 +255,15 @@ const generateTocItem = (fld: null | FolderType): TocItem | null => {
   return sectionGenerator(fld);
 };
 
-const getLayoutToc = (layout: Layout, foldersStructure: FoldersConfig) => {
+const getItemByHref =
+  (flatTocList: TocItem[]) =>
+  (href: string): TocItem | TocSubitem | {} =>
+    flatTocList.find((item) => item.href === href) || {};
+
+const getLayoutToc = (
+  layout: Layout,
+  foldersStructure: FoldersConfig
+): { tocItems: TocItem[]; flatTocList: TocItem[] } => {
   const tocItems = layout.folders
     .map((fldName: string) => {
       const fld = foldersStructure.find(
@@ -284,33 +292,7 @@ const getLayoutToc = (layout: Layout, foldersStructure: FoldersConfig) => {
       };
     });
 
-  const getItemByHref = (href: string): TocItem | TocSubitem | {} =>
-    flatTocList.find((item) => item.href === href) || {};
-
-  const tocItemsWithNextPrev = tocItems.map((item) => {
-    if (!item.children) {
-      const { next, prev } = getItemByHref(item.href);
-      return {
-        ...item,
-        next,
-        prev,
-      };
-    }
-
-    return {
-      ...item,
-      children: item.children.map((subItem) => {
-        const { next, prev } = getItemByHref(subItem.href);
-        return {
-          ...subItem,
-          next,
-          prev,
-        };
-      }),
-    };
-  });
-
-  return tocItemsWithNextPrev;
+  return { tocItems, flatTocList };
 };
 
 export const createLayouts = () => {
@@ -331,26 +313,44 @@ export const createLayouts = () => {
       getDefaultConfig(fld)),
   }));
 
-  const layoutConfigs = Object.entries(layouts)
-    .map(([key, l]) => ({
-      [key]: getLayoutToc(l, foldersStructure),
-    }))
-    .reduce(
-      (acc, obj) => ({
-        ...acc,
-        ...obj,
-      }),
-      {}
-    );
+  const layoutConfigAndNavigation = Object.entries(layouts).map(([key, l]) => {
+    const layoutToc = getLayoutToc(l, foldersStructure);
+    return {
+      config: {
+        [key]: layoutToc.tocItems,
+      },
+      navigation: layoutToc.flatTocList,
+    };
+  });
+
+  const layoutConfigs = layoutConfigAndNavigation.reduce(
+    (acc, obj) => ({
+      ...acc,
+      ...obj.config,
+    }),
+    {}
+  );
+
+  const layoutNavigations = layoutConfigAndNavigation.flatMap(
+    (l) => l.navigation
+  );
+
+  const getNavigation = getItemByHref(layoutNavigations);
 
   const layoutsMap = foldersWithLayouts
     .map((folder) =>
-      folder.files?.map((fileEntry) => ({
-        file: fileEntry.file,
-        href: fileEntry.href,
-        folder: folder.path,
-        layout: folder.layout.layoutKey,
-      }))
+      folder.files?.map((fileEntry) => {
+        const navigation = getNavigation(`/${fileEntry.href}`);
+        const { prev, next } = navigation;
+        return {
+          file: fileEntry.file,
+          href: fileEntry.href,
+          folder: folder.path,
+          layout: folder.layout.layoutKey,
+          prev,
+          next,
+        };
+      })
     )
     .filter(Boolean)
     .flat()

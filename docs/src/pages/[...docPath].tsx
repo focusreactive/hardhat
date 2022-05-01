@@ -45,16 +45,25 @@ interface IFrontMatter {
   seoTitle: string;
   seoDescription: string;
 }
+
+interface IFooterNavigation {
+  href: string;
+  label: string;
+}
 interface IDocPage {
   mdxSource: string;
   frontMatter: IFrontMatter;
   layout: IDocumentationSidebarStructure;
+  prev: IFooterNavigation;
+  next: IFooterNavigation;
 }
 
 const DocPage: NextPage<IDocPage> = ({
   mdxSource,
   frontMatter,
   layout,
+  prev,
+  next,
 }): JSX.Element => {
   return (
     <DocumentationLayout
@@ -63,6 +72,7 @@ const DocPage: NextPage<IDocPage> = ({
         description: frontMatter.seoDescription,
       }}
       sidebarLayout={layout}
+      footerNavigation={{ prev, next }}
     >
       {/* @ts-ignore */}
       <MDXRemote {...mdxSource} components={components} />
@@ -81,7 +91,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
     source
   );
-  const layout = getLayout(fileName);
+  const { layout, next, prev } = getLayout(fileName);
 
   return {
     props: {
@@ -92,6 +102,8 @@ export const getStaticProps: GetStaticProps = async (props) => {
         seoDescription,
       },
       layout,
+      next,
+      prev,
     },
   };
 };

@@ -22,6 +22,7 @@ import {
   bannerContent,
 } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
+import DocumentationFooter from "./DocumentationFooter";
 
 const Container = styled.div`
   position: relative;
@@ -185,7 +186,12 @@ type Props = React.PropsWithChildren<{
   sidebarLayout: IDocumentationSidebarStructure;
 }>;
 
-const DocumentationLayout = ({ children, seo, sidebarLayout }: Props) => {
+const DocumentationLayout = ({
+  children,
+  seo,
+  sidebarLayout,
+  footerNavigation,
+}: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter();
   const docViewRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -253,7 +259,13 @@ const DocumentationLayout = ({ children, seo, sidebarLayout }: Props) => {
             </MobileSidebarMenuMask>
           </SidebarContainer>
           <View ref={docViewRef}>
-            <Content>{children}</Content>
+            <Content>
+              {children}
+              <DocumentationFooter
+                next={footerNavigation.next}
+                prev={footerNavigation.prev}
+              />
+            </Content>
           </View>
         </main>
       </Container>

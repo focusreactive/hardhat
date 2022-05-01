@@ -236,6 +236,6 @@ export const getLayout = (fileName: string) => {
    */
   const { layoutConfigs, layoutsMap } = getSidebarConfig();
   const fileNameKey = fileName.replace(DOCS_PATH, "");
-  const { layout } = layoutsMap[fileNameKey];
-  return layoutConfigs[layout];
+  const { layout, prev = null, next = null } = layoutsMap[fileNameKey];
+  return { layout: layoutConfigs[layout], prev, next };
 };
