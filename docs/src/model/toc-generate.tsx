@@ -102,21 +102,39 @@ export const getAllFolders = (mdFiles: string[]): FolderInfo[] => {
   return folders;
 };
 
-const matchFoldersToLayouts = (folders: FolderInfo[], layouts: LayoutsInfo) => {
+const matchFoldersToLayouts = (
+  folders: FolderInfo[],
+  layouts: LayoutsInfo,
+  foldersInfo
+) => {
   const layoutsList = Object.entries(layouts).map(([layoutKey, lt]) => ({
     layoutKey,
     ...lt,
   }));
 
-  return folders.map((fld) => {
-    const lt = layoutsList.find(({ folders }) => folders.includes(fld.path));
+  const allFolderPaths = new Set([
+    ...folders.map(({ path }) => path),
+    ...foldersInfo.map(({ folder }) => folder),
+  ]);
+
+  console.log(
+    "🚀 ~ file: toc-generate.tsx ~ line 121 ~ allFolderPaths",
+    allFolderPaths
+  );
+
+  // @ts-ignore
+  return [...allFolderPaths].map((path) => {
+    const lt = layoutsList.find(({ folders }) => folders.includes(path));
     if (!lt) {
       throw new Error(
-        `Folder ${fld.path} isn't included to any layout. Please specify it in ${DOCS_PATH}/layouts.yaml file. If you don't want to list it in the sidebar, use "section-type: hidden" in _dirinfo.yaml`
+        `Folder ${path} isn't included to any layout. Please specify it in ${DOCS_PATH}/layouts.yaml file. If you don't want to list it in the sidebar, use "section-type: hidden" in _dirinfo.yaml`
       );
     }
+    const fld = folders.find((f) => f.path === path);
+    const files = fld?.files || null;
     return {
-      ...fld,
+      path,
+      files,
       layout: lt,
     };
   });
@@ -147,26 +165,69 @@ const getSubitems = (
   return items;
 };
 
-const generateTocItem = (
-  fld: null | {
-    "section-title": string;
-    "section-type": SectionType;
-    path: string;
-    order: Array<{ title: string; href: string } | string>;
-  }
-) => {
-  if (!fld) {
-    return null;
-  }
+type FolderType = {
+  "section-title": string;
+  "section-type": SectionType;
+  path: string;
+  order: Array<{ title: string; href: string } | string>;
+};
+
+const generateGroupSection = (folder: FolderType) => {
   const tocItem = {
-    label: fld["section-title"],
-    href:
-      fld["section-type"] === SectionType.SINGLE ? `/${fld.path}` : undefined,
-    type: fld["section-type"],
-    children: fld.order?.length ? getSubitems(fld.path, fld.order) : undefined,
+    label: folder["section-title"],
+    type: folder["section-type"],
+    children: folder.order?.length
+      ? getSubitems(folder.path, folder.order)
+      : undefined,
   };
 
   return tocItem;
+};
+
+const generateSingleSection = (folder: FolderType) => {
+  const tocItem = {
+    label: folder["section-title"],
+    href: `/${folder.path}`,
+    type: folder["section-type"],
+    children: folder.order?.length
+      ? getSubitems(folder.path, folder.order)
+      : undefined,
+  };
+
+  return tocItem;
+};
+
+const generateHiddenSection = () => null;
+
+const generatePluginsSection = (folder: FolderType) => {
+  const tocItem = {
+    label: folder["section-title"] || toCapitalCase(folder.path),
+    type: folder["section-type"],
+    children: undefined,
+  };
+
+  return tocItem;
+};
+
+const sectionTypeGeneratorsMap = {
+  [SectionType.GROUP]: generateGroupSection,
+  [SectionType.SINGLE]: generateSingleSection,
+  [SectionType.HIDDEN]: generateHiddenSection,
+  [SectionType.PLUGINS]: generatePluginsSection,
+};
+
+const generateTocItem = (fld: null | FolderType) => {
+  if (!fld) {
+    return null;
+  }
+  const sectionType = fld["section-type"];
+  const sectionGenerator = sectionTypeGeneratorsMap[sectionType];
+
+  if (!sectionGenerator) {
+    throw new Error(`wrong section-type - ${sectionType} (see ${fld.path})`);
+  }
+
+  return sectionGenerator(fld);
 };
 
 const getLayoutToc = (layout: any, foldersStructure: any) => {
@@ -175,13 +236,10 @@ const getLayoutToc = (layout: any, foldersStructure: any) => {
       const fld = foldersStructure.find(
         ({ path }: { path: string }) => path === fldName
       );
-      if (!fld || fld["section-type"] === SectionType.HIDDEN) {
-        return null;
-      }
       return fld;
     })
-    .filter(Boolean)
-    .map(generateTocItem);
+    .map(generateTocItem)
+    .filter(Boolean);
 
   return tocItems;
 };
@@ -193,7 +251,11 @@ export const createLayouts = () => {
   const folders = getAllFolders(mdFiles);
 
   const layouts = getLayoutsInfo();
-  const foldersWithLayouts = matchFoldersToLayouts(folders, layouts);
+  const foldersWithLayouts = matchFoldersToLayouts(
+    folders,
+    layouts,
+    foldersInfo
+  );
   const foldersStructure = foldersWithLayouts.map((fld) => ({
     ...fld,
     ...(foldersInfo.find(({ folder }) => folder === fld.path)?.config ||
@@ -214,12 +276,13 @@ export const createLayouts = () => {
 
   const layoutsMap = foldersWithLayouts
     .map((folder) =>
-      folder.files.map((file) => ({
+      folder.files?.map((file) => ({
         file,
         folder: folder.path,
         layout: folder.layout.layoutKey,
       }))
     )
+    .filter(Boolean)
     .flat()
     .reduce(
       (acc, obj) => ({
