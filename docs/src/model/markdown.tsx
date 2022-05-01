@@ -196,14 +196,22 @@ export const getMDFiles = (): string[] =>
     .filter((pathname) => /\.mdx?$/.test(pathname))
     .map((pathname) => pathname.replace(DOCS_PATH, ""));
 
+export const getPathParamsByFile = (pathname: string): string[] => {
+  const fileBase = pathname.replace(/\.mdx?$/, "");
+  return withIndexURL(fileBase);
+};
+
+export const getHrefByFile = (pathname: string): string => {
+  const params = getPathParamsByFile(pathname);
+  return path.join(...params);
+};
+
 export const getMDPaths = (): Array<{ params: { docPath: string[] } }> =>
-  getMDFiles()
-    .map((pathname) => pathname.replace(/\.mdx?$/, ""))
-    .map((pathname) => ({
-      params: {
-        docPath: withIndexURL(pathname),
-      },
-    }));
+  getMDFiles().map((pathname) => ({
+    params: {
+      docPath: getPathParamsByFile(pathname),
+    },
+  }));
 
 export const getSidebarConfig = () => {
   try {

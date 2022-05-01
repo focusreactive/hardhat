@@ -4,6 +4,7 @@ import yaml from "js-yaml";
 
 import {
   DOCS_PATH,
+  getHrefByFile,
   getMDFiles,
   parseMdFile,
   readMDFileFromPathOrIndex,
@@ -35,7 +36,14 @@ type LayoutsInfo = {
 
 type FolderInfo = {
   path: string;
-  files: string[];
+  files: Array<{ file: string; href: string }>;
+};
+
+type FolderType = {
+  "section-title": string;
+  "section-type": SectionType;
+  path: string;
+  order: Array<{ title: string; href: string } | string>;
 };
 
 type FoldersConfig = Array<{
@@ -45,6 +53,23 @@ type FoldersConfig = Array<{
     [key: string]: any;
   };
 }>;
+
+type TocSubitem = {
+  label: string;
+  href: string;
+  type?: SectionType;
+  next?: TocSubitem;
+  prev?: TocSubitem;
+};
+
+type TocItem = {
+  label: string;
+  type: SectionType;
+  href?: string;
+  children?: TocSubitem[];
+  next?: TocSubitem;
+  prev?: TocSubitem;
+};
 
 const toCapitalCase = (str: string): string => {
   // @ts-ignore
@@ -56,8 +81,8 @@ const getDefaultConfig = (folder: FolderInfo): DirInfo => {
   const config = {
     "section-type": SectionType.GROUP,
     "section-title": toCapitalCase(folder.path),
-    order: folder.files.map((fl) =>
-      fl.replace(/\.mdx?$/, "").replace(new RegExp(`^${folder.path}`), "")
+    order: folder.files.map(({ file }) =>
+      file.replace(/\.mdx?$/, "").replace(new RegExp(`^${folder.path}`), "")
     ),
   };
 
@@ -137,7 +162,8 @@ const matchFoldersToLayouts = (
       );
     }
     const fld = folders.find((f) => f.path === path);
-    const files = fld?.files || null;
+    const files =
+      fld?.files?.map((file) => ({ file, href: getHrefByFile(file) })) || null;
     return {
       path,
       files,
@@ -149,7 +175,7 @@ const matchFoldersToLayouts = (
 const getSubitems = (
   path: string,
   order: Array<{ title: string; href: string } | string>
-) => {
+): TocSubitem[] => {
   const items = order.map((item) => {
     if (typeof item === "object") {
       return {
@@ -169,13 +195,6 @@ const getSubitems = (
     };
   });
   return items;
-};
-
-type FolderType = {
-  "section-title": string;
-  "section-type": SectionType;
-  path: string;
-  order: Array<{ title: string; href: string } | string>;
 };
 
 const generateGroupSection = (folder: FolderType) => {
@@ -222,7 +241,7 @@ const sectionTypeGeneratorsMap = {
   [SectionType.PLUGINS]: generatePluginsSection,
 };
 
-const generateTocItem = (fld: null | FolderType) => {
+const generateTocItem = (fld: null | FolderType): TocItem | null => {
   if (!fld) {
     return null;
   }
@@ -236,7 +255,7 @@ const generateTocItem = (fld: null | FolderType) => {
   return sectionGenerator(fld);
 };
 
-const getLayoutToc = (layout: any, foldersStructure: any) => {
+const getLayoutToc = (layout: Layout, foldersStructure: FoldersConfig) => {
   const tocItems = layout.folders
     .map((fldName: string) => {
       const fld = foldersStructure.find(
@@ -244,10 +263,54 @@ const getLayoutToc = (layout: any, foldersStructure: any) => {
       );
       return fld;
     })
+    // @ts-ignore
     .map(generateTocItem)
-    .filter(Boolean);
+    .filter(Boolean) as TocItem[];
 
-  return tocItems;
+  const flatTocList = tocItems
+    .flatMap((item: TocItem) => {
+      if (item.children) {
+        return item.children;
+      }
+      return [item];
+    })
+    .map((item, index, list) => {
+      const prev = index > 0 ? list[index - 1] : null;
+      const next = index < list.length - 1 ? list[index + 1] : null;
+      return {
+        ...item,
+        prev,
+        next,
+      };
+    });
+
+  const getItemByHref = (href: string): TocItem | TocSubitem | {} =>
+    flatTocList.find((item) => item.href === href) || {};
+
+  const tocItemsWithNextPrev = tocItems.map((item) => {
+    if (!item.children) {
+      const { next, prev } = getItemByHref(item.href);
+      return {
+        ...item,
+        next,
+        prev,
+      };
+    }
+
+    return {
+      ...item,
+      children: item.children.map((subItem) => {
+        const { next, prev } = getItemByHref(subItem.href);
+        return {
+          ...subItem,
+          next,
+          prev,
+        };
+      }),
+    };
+  });
+
+  return tocItemsWithNextPrev;
 };
 
 export const createLayouts = () => {
@@ -282,8 +345,9 @@ export const createLayouts = () => {
 
   const layoutsMap = foldersWithLayouts
     .map((folder) =>
-      folder.files?.map((file) => ({
-        file,
+      folder.files?.map((fileEntry) => ({
+        file: fileEntry.file,
+        href: fileEntry.href,
         folder: folder.path,
         layout: folder.layout.layoutKey,
       }))
