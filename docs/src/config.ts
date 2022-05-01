@@ -214,7 +214,7 @@ export const DocumentationSidebarStructure: IDocumentationSidebarStructure = [
       },
       {
         label: "Error codes",
-        href: "/errors",
+        href: "/errors/buidler-errors",
       },
     ],
   },

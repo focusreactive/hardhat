@@ -15,15 +15,30 @@ import Admonition from "../components/mdxComponents/Admonition";
 import DocumentationLayout from "../components/DocumentationLayout";
 import { createLayouts } from "../model/toc-generate";
 import { IDocumentationSidebarStructure } from "../components/types";
+import UnorderedList from "../components/mdxComponents/UnorderedList";
+import HorizontalRule from "../components/mdxComponents/HorizontalRule";
+import MDLink from "../components/mdxComponents/MDLink";
+import Table from "../components/mdxComponents/Table";
+import MDImage from "../components/mdxComponents/MDImage";
+import OrderedList from "../components/mdxComponents/OrderedList";
 
 const components = {
+  h1: Title.H1,
   h2: Title.H2,
   h3: Title.H3,
+  h4: Title.H4,
+  h5: Title.H5,
   p: Paragraph,
   code: CodeBlocks.Code,
   pre: CodeBlocks.Pre,
   tip: Admonition.Tip,
   warning: Admonition.Warning,
+  ul: UnorderedList,
+  ol: OrderedList,
+  hr: HorizontalRule,
+  a: MDLink,
+  table: Table,
+  img: MDImage,
 };
 
 interface IFrontMatter {

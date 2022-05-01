@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
+import { useRouter } from "next/router";
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
@@ -186,6 +187,12 @@ type Props = React.PropsWithChildren<{
 
 const DocumentationLayout = ({ children, seo, sidebarLayout }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const router = useRouter();
+  const docViewRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    docViewRef.current.scrollTo(0, 0);
+  }, [router.asPath]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -245,7 +252,7 @@ const DocumentationLayout = ({ children, seo, sidebarLayout }: Props) => {
               />
             </MobileSidebarMenuMask>
           </SidebarContainer>
-          <View>
+          <View ref={docViewRef}>
             <Content>{children}</Content>
           </View>
         </main>

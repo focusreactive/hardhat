@@ -6,6 +6,8 @@ import remarkDirective from "remark-directive";
 import { serialize } from "next-mdx-remote/serialize";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
+import remarkGfm from "remark-gfm";
+import remarkUnwrapImages from "remark-unwrap-images";
 
 export const DOCS_PATH = path.join(process.cwd(), "src/content/");
 export const TEMP_PATH = path.join(process.cwd(), "temp/");
@@ -172,7 +174,12 @@ export const prepareMdContent = async (source: string) => {
   const { formattedContent, ...props } = parseMdFile(source);
   const mdxSource = await serialize(formattedContent, {
     mdxOptions: {
-      remarkPlugins: [remarkDirective, createCustomNodes],
+      remarkPlugins: [
+        remarkGfm,
+        remarkDirective,
+        createCustomNodes,
+        remarkUnwrapImages,
+      ],
       rehypePlugins: [],
     },
   });
