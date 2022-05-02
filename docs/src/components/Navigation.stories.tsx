@@ -15,12 +15,18 @@ export const MobileSidebar = () => (
   <MobileSidebarMenu
     menuItems={menuItemsList}
     socialsItems={socialsItems}
-    sidebarElementsList={DocumentationSidebarStructure as IDocumentationSidebarStructure}
+    sidebarElementsList={
+      DocumentationSidebarStructure as IDocumentationSidebarStructure
+    }
   />
 );
 
 export const SidebarMenu = () => (
-  <Sidebar elementsList={DocumentationSidebarStructure as IDocumentationSidebarStructure} />
+  <Sidebar
+    elementsList={
+      DocumentationSidebarStructure as IDocumentationSidebarStructure
+    }
+  />
 );
 
 export const Navigation = () => {

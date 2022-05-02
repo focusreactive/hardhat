@@ -14,7 +14,7 @@ const DocumentationFooter = ({ next, prev }: Props) => {
         padding: "100px 8px",
       }}
     >
-      {prev?.href ? (
+      {prev?.href !== undefined ? (
         <div>
           <Link href={prev.href}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -25,7 +25,7 @@ const DocumentationFooter = ({ next, prev }: Props) => {
           </Link>
         </div>
       ) : null}
-      {next?.href ? (
+      {next?.href !== undefined ? (
         <div>
           <Link href={next.href}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

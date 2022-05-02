@@ -322,14 +322,14 @@ const getItemByHref =
 
 const getLayoutToc = (
   layout: Layout,
-  foldersStructure: {
+  foldersStructure: Array<{
     path: string;
     files: Array<{
       file: string;
       href: string;
     }>;
     layout: Layout;
-  }[]
+  }>
 ): { tocItems: TocItem[]; flatTocList: FlatTocItem[] } => {
   const tocItems = layout.folders
     .map((fldName: string) => {
