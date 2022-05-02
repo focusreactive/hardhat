@@ -8,9 +8,8 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
+import { DOCS_PATH } from "../config";
 
-export const DOCS_PATH = path.join(process.cwd(), "src/content/");
-export const TEMP_PATH = path.join(process.cwd(), "temp/");
 export const newLineDividerRegEx = /\r\n|\n/;
 
 export const withIndexURL = (pathname: string): string[] => {

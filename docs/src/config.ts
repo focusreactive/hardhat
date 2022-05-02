@@ -1,3 +1,4 @@
+import path from "path";
 import { MenuItemType, SocialsEnum } from "./components/ui/types";
 import GitHubLogo from "./assets/socials/gh-logo";
 import TwitterLogo from "./assets/socials/tw-logo";
@@ -16,6 +17,9 @@ export const bannerContent = {
   text: "Join the Hardhat team! Nomic Labs is hiring",
   href: BANNER_LINK,
 };
+
+export const DOCS_PATH = path.join(process.cwd(), "src/content/");
+export const TEMP_PATH = path.join(process.cwd(), "temp/");
 
 export const menuItemsList: MenuItemType[] = [
   {
@@ -89,3 +93,14 @@ export const socialsItems = [
     Icon: DiscordLogo,
   },
 ];
+
+export enum DirInfoConfigKeys {
+  SECTION_TYPE = "section-type",
+  SECTION_TITLE = "section-title",
+  ORDER = "order",
+}
+
+export enum LayoutsConfigKeys {
+  TITLE = "title",
+  FOLDERS = "folders",
+}

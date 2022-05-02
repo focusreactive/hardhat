@@ -13,7 +13,11 @@ import {
   ThemeProvider,
 } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import { FooterNavigation, IDocumentationSidebarStructure, ISeo } from "./types";
+import {
+  FooterNavigation,
+  IDocumentationSidebarStructure,
+  ISeo,
+} from "./types";
 import Sidebar from "./Sidebar";
 import { menuItemsList, socialsItems, bannerContent } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";

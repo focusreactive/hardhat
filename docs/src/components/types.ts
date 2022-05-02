@@ -19,10 +19,10 @@ export interface NavOption {
   label: string;
 }
 
-export interface FooterNavigation  {
+export interface FooterNavigation {
   next?: NavOption;
   prev?: NavOption;
-};
+}
 
 // TODO: Check do we need this type for UI components. If not - remove it.
 export type IDocumentationSidebarStructure = IDocumentationSidebarSection[];

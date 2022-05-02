@@ -3,13 +3,17 @@ import fs from "fs";
 import yaml from "js-yaml";
 
 import {
-  DOCS_PATH,
   getHrefByFile,
   getMDFiles,
   parseMdFile,
   readMDFileFromPathOrIndex,
-  TEMP_PATH,
 } from "./markdown";
+import {
+  DirInfoConfigKeys,
+  DOCS_PATH,
+  LayoutsConfigKeys,
+  TEMP_PATH,
+} from "../config";
 
 export enum SectionType {
   SINGLE = "single",
@@ -18,33 +22,40 @@ export enum SectionType {
   PLUGINS = "plugins",
 }
 
-type DirInfo = {
-  "section-type": SectionType;
-  "section-title": string;
-  order: string[];
-};
+type OrderType =
+  | string
+  | {
+      href: string;
+      label: string;
+    };
 
-type Layout = {
-  title: string;
-  folders: string[];
+interface DirInfo {
+  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
+  [DirInfoConfigKeys.SECTION_TITLE]: string;
+  [DirInfoConfigKeys.ORDER]: OrderType[];
+}
+
+interface Layout {
+  [LayoutsConfigKeys.TITLE]: string;
+  [LayoutsConfigKeys.FOLDERS]: string[];
   layoutKey?: string;
-};
+}
 
-type LayoutsInfo = {
+interface LayoutsInfo {
   [layoutKey: string]: Layout;
-};
+}
 
-type FolderInfo = {
+interface FolderInfo {
   path: string;
   files: Array<{ file: string; href: string }>;
-};
+}
 
-type FolderType = {
-  "section-title": string;
-  "section-type": SectionType;
+interface FolderType {
+  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
+  [DirInfoConfigKeys.SECTION_TITLE]: string;
+  [DirInfoConfigKeys.ORDER]: OrderType[];
   path: string;
-  order: Array<{ title: string; href: string } | string>;
-};
+}
 
 type FoldersConfig = Array<{
   path: string;
@@ -54,22 +65,22 @@ type FoldersConfig = Array<{
   };
 }>;
 
-type TocSubitem = {
+interface TocSubitem {
   label: string;
   href: string;
   type?: SectionType;
   next?: TocSubitem;
   prev?: TocSubitem;
-};
+}
 
-type TocItem = {
+interface TocItem {
   label: string;
   type: SectionType;
   href?: string;
   children?: TocSubitem[];
   next?: TocSubitem;
   prev?: TocSubitem;
-};
+}
 
 const toCapitalCase = (str: string): string => {
   // @ts-ignore
@@ -79,8 +90,8 @@ const toCapitalCase = (str: string): string => {
 
 const getDefaultConfig = (folder: FolderInfo): DirInfo => {
   const config = {
-    "section-type": SectionType.GROUP,
-    "section-title": toCapitalCase(folder.path),
+    [DirInfoConfigKeys.SECTION_TYPE]: SectionType.GROUP,
+    [DirInfoConfigKeys.SECTION_TITLE]: toCapitalCase(folder.path),
     order: folder.files.map(({ file }) =>
       file.replace(/\.mdx?$/, "").replace(new RegExp(`^${folder.path}`), "")
     ),
@@ -199,8 +210,8 @@ const getSubitems = (
 
 const generateGroupSection = (folder: FolderType) => {
   const tocItem = {
-    label: folder["section-title"],
-    type: folder["section-type"],
+    label: folder[DirInfoConfigKeys.SECTION_TITLE],
+    type: folder[DirInfoConfigKeys.SECTION_TYPE],
     children: folder.order?.length
       ? getSubitems(folder.path, folder.order)
       : undefined,
@@ -211,9 +222,9 @@ const generateGroupSection = (folder: FolderType) => {
 
 const generateSingleSection = (folder: FolderType) => {
   const tocItem = {
-    label: folder["section-title"],
+    label: folder[DirInfoConfigKeys.SECTION_TITLE],
     href: `/${folder.path}`,
-    type: folder["section-type"],
+    type: folder[DirInfoConfigKeys.SECTION_TYPE],
     children: folder.order?.length
       ? getSubitems(folder.path, folder.order)
       : undefined,
@@ -226,8 +237,9 @@ const generateHiddenSection = () => null;
 
 const generatePluginsSection = (folder: FolderType) => {
   const tocItem = {
-    label: folder["section-title"] || toCapitalCase(folder.path),
-    type: folder["section-type"],
+    label:
+      folder[DirInfoConfigKeys.SECTION_TITLE] || toCapitalCase(folder.path),
+    type: folder[DirInfoConfigKeys.SECTION_TYPE],
     children: undefined,
   };
 
@@ -245,7 +257,9 @@ const generateTocItem = (fld: null | FolderType): TocItem | null => {
   if (!fld) {
     return null;
   }
-  const sectionType = fld["section-type"] as SectionType | string;
+  const sectionType = fld[DirInfoConfigKeys.SECTION_TYPE] as
+    | SectionType
+    | string;
   // @ts-ignore
   const sectionGenerator = sectionTypeGeneratorsMap[sectionType];
 
