@@ -20,7 +20,6 @@ const StyledCode = styled.code`
   font-family: ChivoLight, sans-serif;
   font-weight: 600;
   line-height: 1.7;
-  letter-spacing: 2px;
   color: ${tm(({ colors }) => colors.codeColor)};
 
   h3 & {
