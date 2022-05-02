@@ -13,14 +13,9 @@ import {
   ThemeProvider,
 } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import { IDocumentationSidebarStructure, ISeo } from "./types";
+import { FooterNavigation, IDocumentationSidebarStructure, ISeo } from "./types";
 import Sidebar from "./Sidebar";
-import {
-  DocumentationSidebarStructure,
-  menuItemsList,
-  socialsItems,
-  bannerContent,
-} from "../config";
+import { menuItemsList, socialsItems, bannerContent } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
 import DocumentationFooter from "./DocumentationFooter";
 
@@ -184,6 +179,7 @@ const Content = styled.section`
 type Props = React.PropsWithChildren<{
   seo: ISeo;
   sidebarLayout: IDocumentationSidebarStructure;
+  footerNavigation: FooterNavigation;
 }>;
 
 const DocumentationLayout = ({

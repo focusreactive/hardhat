@@ -1,10 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import { FooterNavigation } from "./types";
 
-type Props = {
-  next: {};
-  prev: {};
-};
+type Props = FooterNavigation;
 
 const DocumentationFooter = ({ next, prev }: Props) => {
   return (
@@ -19,6 +17,7 @@ const DocumentationFooter = ({ next, prev }: Props) => {
       {prev ? (
         <div>
           <Link href={prev.href}>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a>
               <span>{"<<<"}</span>
               {prev.label}
@@ -29,6 +28,7 @@ const DocumentationFooter = ({ next, prev }: Props) => {
       {next ? (
         <div>
           <Link href={next.href}>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a>
               {next.label}
               <span>{">>>"}</span>

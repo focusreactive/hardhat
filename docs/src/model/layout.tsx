@@ -155,7 +155,7 @@ const matchFoldersToLayouts = (
 
   // @ts-ignore
   return [...allFolderPaths].map((path) => {
-    const lt = layoutsList.find(({ folders }) => folders.includes(path));
+    const lt = layoutsList.find(({ folders: ff }) => ff.includes(path));
     if (!lt) {
       throw new Error(
         `Folder ${path} isn't included to any layout. Please specify it in ${DOCS_PATH}/layouts.yaml file. If you don't want to list it in the sidebar, use "section-type: hidden" in _dirinfo.yaml`
@@ -245,7 +245,8 @@ const generateTocItem = (fld: null | FolderType): TocItem | null => {
   if (!fld) {
     return null;
   }
-  const sectionType = fld["section-type"];
+  const sectionType = fld["section-type"] as SectionType | string;
+  // @ts-ignore
   const sectionGenerator = sectionTypeGeneratorsMap[sectionType];
 
   if (!sectionGenerator) {

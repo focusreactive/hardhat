@@ -26,5 +26,7 @@ module.exports = {
     "react/no-array-index-key": "off",
     "import/no-extraneous-dependencies": "off",
     "react/no-danger": "off",
+    "1@typescript-eslint/consistent-type-definitions": ["off", "type"],
+    "no-console": ["error", { allow: ["warn", "error"] }]
   },
 };

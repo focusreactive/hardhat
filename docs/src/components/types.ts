@@ -14,4 +14,15 @@ interface IDocumentationSidebarSection {
   children?: IDocumentationSidebarSectionChild[];
 }
 
+export interface NavOption {
+  href: string;
+  label: string;
+}
+
+export interface FooterNavigation  {
+  next?: NavOption;
+  prev?: NavOption;
+};
+
+// TODO: Check do we need this type for UI components. If not - remove it.
 export type IDocumentationSidebarStructure = IDocumentationSidebarSection[];

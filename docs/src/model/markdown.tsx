@@ -222,7 +222,7 @@ export const getSidebarConfig = () => {
     return { layoutConfigs, layoutsMap };
   } catch (err) {
     console.error(err);
-    throw new Error(`Can't read sidebar configs`);
+    throw new Error(`Can't read sidebar configs. See the error above`);
   }
 };
 

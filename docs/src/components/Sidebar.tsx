@@ -87,10 +87,6 @@ const SidebarSubLinksList = styled.ul`
 `;
 
 const Sidebar = ({ elementsList }: Props) => {
-  console.log(
-    "🚀 ~ file: Sidebar.tsx ~ line 90 ~ Sidebar ~ elementsList",
-    elementsList
-  );
   const router = useRouter();
   return (
     <Container>
