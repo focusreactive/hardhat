@@ -2,7 +2,13 @@ import React from "react";
 import { styled } from "linaria/react";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 
-interface Props {
+interface CodeProps {
+  children: string | JSX.Element[] | JSX.Element;
+  lang?: string;
+  highlightedLines?: string;
+}
+
+interface PreProps {
   children: string | JSX.Element[] | JSX.Element;
 }
 
@@ -87,11 +93,19 @@ const StyledPre = styled.pre`
   }
 `;
 
-const Code = ({ children }: Props) => {
-  return <StyledCode lang="js">{children}</StyledCode>;
+const Code = ({ children, lang, highlightedLines }: CodeProps) => {
+  return (
+    <StyledCode
+      lang={lang ?? ""}
+      data-language={lang ?? ""}
+      data-line={highlightedLines ?? ""}
+    >
+      {children}
+    </StyledCode>
+  );
 };
 
-const Pre = ({ children }: Props) => {
+const Pre = ({ children }: PreProps) => {
   return <StyledPre>{children}</StyledPre>;
 };
 

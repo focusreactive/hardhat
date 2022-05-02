@@ -5,7 +5,6 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import rehypeHighlight from "rehype-highlight";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import {
@@ -27,6 +26,8 @@ import MDLink from "../components/mdxComponents/MDLink";
 import Table from "../components/mdxComponents/Table";
 import MDImage from "../components/mdxComponents/MDImage";
 import OrderedList from "../components/mdxComponents/OrderedList";
+
+const rehypePrism = require("@mapbox/rehype-prism");
 
 const components = {
   h1: Title.H1,
@@ -70,13 +71,25 @@ function createCustomNodes() {
   };
 }
 
-/** @type {import('unified').Plugin<Array<void>, import('hast').Root>} */
-function rehypeMetaAsAttributes() {
+/** @type {import('unified').Plugin<[], import('mdast').Root>} */
+function addLanguageAndHighlightedLinesToCodeBlocks() {
   // @ts-ignore
   return (tree) => {
-    visit(tree, "element", (node) => {
-      if (node.tagName === "code" && node?.data?.meta) {
-        node.properties.meta = node.data.meta;
+    visit(tree, (node) => {
+      if (node.type === "code") {
+        // eslint-disable-next-line
+        const data = node.data || (node.data = {});
+        const [lang, highlightedLines] = !node.lang
+          ? ["", ""]
+          : node.lang.replace("}", "").split("{");
+
+        // @ts-ignore
+        data.hProperties = {
+          lang,
+          highlightedLines,
+        };
+        // eslint-disable-next-line
+        node.lang = lang;
       }
     });
   };
@@ -124,20 +137,13 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const mdxSource = await serialize(formattedContent, {
     mdxOptions: {
       remarkPlugins: [
+        addLanguageAndHighlightedLinesToCodeBlocks,
         remarkGfm,
         remarkDirective,
         createCustomNodes,
         remarkUnwrapImages,
       ],
-      rehypePlugins: [
-        [
-          rehypeHighlight,
-          {
-            subset: false,
-          },
-        ],
-        rehypeMetaAsAttributes,
-      ],
+      rehypePlugins: [rehypePrism],
     },
   });
 

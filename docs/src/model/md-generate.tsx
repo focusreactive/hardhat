@@ -78,8 +78,7 @@ export const readFileContent = (pathname: string) => {
 };
 
 export const getFileExtensionFromPathname = (pathname: string) => {
-  const fileExtension = pathname.substring(pathname.lastIndexOf(".") + 1);
-  return fileExtension === "sol" ? "js" : fileExtension;
+  return pathname.substring(pathname.lastIndexOf(".") + 1);
 };
 
 export const withInsertedCodeFromLinks = (content: string) => {
