@@ -53,19 +53,18 @@ const StyledPre = styled.pre`
 
   & code {
     padding: 0;
-    color: ${tm(({ colors }) => colors.codeColor)};
+    color: ${tm(({ colors }) => colors.preCodeColor)};
     line-height: 1.4;
-    font-size: 14px;
-    font-family: Menlo, sans-serif;
+    font-size: 0.85em;
+    font-family: "Menlo", sans-serif;
     font-weight: 300;
-    letter-spacing: 2px;
   }
 
   ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
     border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
     & code {
-      color: ${tmDark(({ colors }) => colors.codeColor)};
+      color: ${tmDark(({ colors }) => colors.preCodeColor)};
     }
   }
 
@@ -73,7 +72,7 @@ const StyledPre = styled.pre`
     background-color: ${tmHCDark(({ colors }) => colors.codeBlockBackground)};
     border: 1px solid ${tmHCDark(({ colors }) => colors.codeBlockBorder)};
     & code {
-      color: ${tmHCDark(({ colors }) => colors.codeColor)};
+      color: ${tmHCDark(({ colors }) => colors.preCodeColor)};
     }
   }
 
@@ -82,7 +81,7 @@ const StyledPre = styled.pre`
       background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
       border: 1px solid ${tmDark(({ colors }) => colors.codeBlockBorder)};
       & code {
-        color: ${tmDark(({ colors }) => colors.codeColor)};
+        color: ${tmDark(({ colors }) => colors.preCodeColor)};
       }
     }
   }

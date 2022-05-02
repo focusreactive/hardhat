@@ -26,6 +26,11 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="true"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
+        ></link>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
       </Head>
       <body>
         <script

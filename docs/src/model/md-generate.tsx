@@ -21,12 +21,13 @@ export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
   return mdFilePath;
 };
 
-export const withCodeElementWrapper = (content: string) =>
-  `
-   \`\`\` 
-    ${content}   
-    \`\`\`
-  `;
+export const withCodeElementWrapper = (
+  content: string,
+  extension: string = ""
+) =>
+  `\`\`\`${extension}
+${content}
+  \`\`\``;
 
 export const getEntriesInfo = (
   line: string
@@ -76,6 +77,11 @@ export const readFileContent = (pathname: string) => {
   }
 };
 
+export const getFileExtensionFromPathname = (pathname: string) => {
+  const fileExtension = pathname.substring(pathname.lastIndexOf(".") + 1);
+  return fileExtension === "sol" ? "js" : fileExtension;
+};
+
 export const withInsertedCodeFromLinks = (content: string) => {
   return content
     .split(newLineDividerRegEx)
@@ -85,9 +91,9 @@ export const withInsertedCodeFromLinks = (content: string) => {
       const { pathname, rowsNumbers } = getEntriesInfo(line);
 
       const fileContent = readFileContent(pathname);
-
+      const fileExtension = getFileExtensionFromPathname(pathname);
       const contentFromRange = getContentFromRange(fileContent, rowsNumbers);
-      return withCodeElementWrapper(contentFromRange);
+      return withCodeElementWrapper(contentFromRange, fileExtension);
     })
     .join("\n");
 };

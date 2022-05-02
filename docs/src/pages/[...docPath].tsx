@@ -5,6 +5,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
+import rehypeHighlight from "rehype-highlight";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import {
@@ -69,6 +70,18 @@ function createCustomNodes() {
   };
 }
 
+/** @type {import('unified').Plugin<Array<void>, import('hast').Root>} */
+function rehypeMetaAsAttributes() {
+  // @ts-ignore
+  return (tree) => {
+    visit(tree, "element", (node) => {
+      if (node.tagName === "code" && node?.data?.meta) {
+        node.properties.meta = node.data.meta;
+      }
+    });
+  };
+}
+
 interface IFrontMatter {
   title: string;
   description: string;
@@ -116,7 +129,15 @@ export const getStaticProps: GetStaticProps = async (props) => {
         createCustomNodes,
         remarkUnwrapImages,
       ],
-      rehypePlugins: [],
+      rehypePlugins: [
+        [
+          rehypeHighlight,
+          {
+            subset: false,
+          },
+        ],
+        rehypeMetaAsAttributes,
+      ],
     },
   });
 
