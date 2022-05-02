@@ -26,7 +26,7 @@ type OrderType =
   | string
   | {
       href: string;
-      label: string;
+      title: string;
     };
 
 interface DirInfo {
@@ -43,6 +43,11 @@ interface Layout {
 
 interface LayoutsInfo {
   [layoutKey: string]: Layout;
+}
+
+interface FolderWithFiles {
+  path: string;
+  files: string[];
 }
 
 interface FolderInfo {
@@ -78,6 +83,13 @@ interface TocItem {
   type: SectionType;
   href?: string;
   children?: TocSubitem[];
+  // next?: TocSubitem;
+  // prev?: TocSubitem;
+}
+
+interface FlatTocItem {
+  label: string;
+  href: string;
   next?: TocSubitem;
   prev?: TocSubitem;
 }
@@ -132,7 +144,7 @@ export const getFoldersInfo = (infoFiles: InfoFiles): FoldersConfig =>
     config: getYamlData(path),
   }));
 
-export const getAllFolders = (mdFiles: string[]): FolderInfo[] => {
+export const getAllFolders = (mdFiles: string[]): FolderWithFiles[] => {
   const filesWithPaths = mdFiles.map((fileName) => ({
     fileName,
     path: fileName.replace(/\/.*\.mdx?$/, ""),
@@ -150,7 +162,7 @@ export const getAllFolders = (mdFiles: string[]): FolderInfo[] => {
 };
 
 const matchFoldersToLayouts = (
-  folders: FolderInfo[],
+  folders: FolderWithFiles[],
   layouts: LayoutsInfo,
   foldersInfo: FoldersConfig
 ): Array<FolderInfo & { layout: Layout }> => {
@@ -271,14 +283,21 @@ const generateTocItem = (fld: null | FolderType): TocItem | null => {
 };
 
 const getItemByHref =
-  (flatTocList: TocItem[]) =>
-  (href: string): TocItem | TocSubitem | {} =>
+  (flatTocList: FlatTocItem[]) =>
+  (href: string): FlatTocItem | {} =>
     flatTocList.find((item) => item.href === href) || {};
 
 const getLayoutToc = (
   layout: Layout,
-  foldersStructure: FoldersConfig
-): { tocItems: TocItem[]; flatTocList: TocItem[] } => {
+  foldersStructure: {
+    path: string;
+    files: Array<{
+      file: string;
+      href: string;
+    }>;
+    layout: Layout;
+  }[]
+): { tocItems: TocItem[]; flatTocList: FlatTocItem[] } => {
   const tocItems = layout.folders
     .map((fldName: string) => {
       const fld = foldersStructure.find(
@@ -291,9 +310,9 @@ const getLayoutToc = (
     .filter(Boolean) as TocItem[];
 
   const flatTocList = tocItems
-    .flatMap((item: TocItem) => {
-      if (item.children) {
-        return item.children;
+    .flatMap((item: TocItem | TocSubitem) => {
+      if ((item as TocItem).children) {
+        return (item as TocItem).children;
       }
       return [item];
     })
@@ -305,7 +324,7 @@ const getLayoutToc = (
         prev,
         next,
       };
-    });
+    }) as FlatTocItem[];
 
   return { tocItems, flatTocList };
 };
@@ -356,7 +375,7 @@ export const createLayouts = () => {
     .map((folder) =>
       folder.files?.map((fileEntry) => {
         const navigation = getNavigation(`/${fileEntry.href}`);
-        const { prev, next } = navigation;
+        const { prev, next } = navigation as FlatTocItem;
         return {
           file: fileEntry.file,
           href: fileEntry.href,

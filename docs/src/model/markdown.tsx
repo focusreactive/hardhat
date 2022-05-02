@@ -8,7 +8,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { DOCS_PATH } from "../config";
+import { DOCS_PATH, TEMP_PATH } from "../config";
 
 export const newLineDividerRegEx = /\r\n|\n/;
 
