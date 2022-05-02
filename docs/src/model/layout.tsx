@@ -53,6 +53,7 @@ interface FolderWithFiles {
 interface FolderInfo {
   path: string;
   files: Array<{ file: string; href: string }>;
+  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
 }
 
 interface FolderType {
@@ -185,12 +186,16 @@ const matchFoldersToLayouts = (
       );
     }
     const fld = folders.find((f) => f.path === path);
+    const fldInfo = foldersInfo.find((f) => f.folder === path);
     const files =
       fld?.files?.map((file) => ({ file, href: getHrefByFile(file) })) || null;
     return {
       path,
       files,
       layout: lt,
+      [DirInfoConfigKeys.SECTION_TYPE]: fldInfo?.config
+        ? fldInfo?.config[DirInfoConfigKeys.SECTION_TYPE]
+        : undefined,
     };
   });
 };
@@ -284,8 +289,36 @@ const generateTocItem = (fld: null | FolderType): TocItem | null => {
 
 const getItemByHref =
   (flatTocList: FlatTocItem[]) =>
-  (href: string): FlatTocItem | {} =>
-    flatTocList.find((item) => item.href === href) || {};
+  (
+    href: string,
+    needSkipSearch: boolean
+  ):
+    | {
+        prev: TocSubitem;
+        next: TocSubitem;
+      }
+    | {} => {
+    if (needSkipSearch) {
+      return {};
+    }
+    const items = flatTocList.filter((item) => {
+      if (!item?.href) {
+        return false;
+      }
+      const itemHref = item.href.replace(/#.*$/, "").replace(/\/$/, "");
+      return itemHref === href;
+    });
+    if (!items.length) {
+      // throw new Error(`Can't find menu entry for ${href} URL`);
+      return {};
+    }
+    const first = items[0] as FlatTocItem;
+    const last = items[items.length - 1] as FlatTocItem;
+    return {
+      prev: first.prev,
+      next: last.next,
+    };
+  };
 
 const getLayoutToc = (
   layout: Layout,
@@ -336,6 +369,7 @@ export const createLayouts = () => {
   const folders = getAllFolders(mdFiles);
 
   const layouts = getLayoutsInfo();
+
   const foldersWithLayouts = matchFoldersToLayouts(
     folders,
     layouts,
@@ -374,8 +408,11 @@ export const createLayouts = () => {
   const layoutsMap = foldersWithLayouts
     .map((folder) =>
       folder.files?.map((fileEntry) => {
-        const navigation = getNavigation(`/${fileEntry.href}`);
-        const { prev, next } = navigation as FlatTocItem;
+        // @ts-ignore
+        const { prev, next } = getNavigation(
+          `/${fileEntry.href}`,
+          folder[DirInfoConfigKeys.SECTION_TYPE] === SectionType.HIDDEN
+        );
         return {
           file: fileEntry.file,
           href: fileEntry.href,
