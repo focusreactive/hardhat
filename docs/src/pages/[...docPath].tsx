@@ -45,7 +45,6 @@ interface IFrontMatter {
   seoDescription: string;
 }
 
-/** @type {import('unified').Plugin<[], import('mdast').Root>} */
 interface IFooterNavigation {
   href: string;
   label: string;
