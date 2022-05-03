@@ -3,6 +3,7 @@ const path = require("path");
 const withLinaria = require("next-linaria");
 const withPlugins = require("next-compose-plugins");
 
+const customRedirects = require("./redirects.config");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -22,6 +23,7 @@ const linariaConfig = withLinaria({
         destination: "/:slug*",
         permanent: true,
       },
+      ...customRedirects,
     ];
   },
   reactStrictMode: true,
