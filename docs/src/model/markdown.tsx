@@ -9,7 +9,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { DOCS_PATH, TEMP_PATH } from "../config";
+import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
 
 export const newLineDividerRegEx = /\r\n|\n/;
 
@@ -245,4 +245,9 @@ export const getCommitDate = (fileName: string): string => {
     `git log -1 --pretty="format:%cI" ${fileName}`
   ).toString();
   return output;
+};
+
+export const getEditLink = (fileName: string): string => {
+  // https://github.com/NomicFoundation/hardhat/edit/master/docs/hardhat-network/guides/mainnet-forking.md
+  return fileName.replace(DOCS_PATH, REPO_URL);
 };

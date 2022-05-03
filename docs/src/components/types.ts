@@ -23,6 +23,7 @@ export interface FooterNavigation {
   next?: NavOption;
   prev?: NavOption;
   lastEditDate: string;
+  editLink: string;
 }
 
 // TODO: Check do we need this type for UI components. If not - remove it.

@@ -265,6 +265,7 @@ const DocumentationLayout = ({
                 next={footerNavigation.next}
                 prev={footerNavigation.prev}
                 lastEditDate={footerNavigation.lastEditDate}
+                editLink={footerNavigation.editLink}
               />
             </Content>
           </View>

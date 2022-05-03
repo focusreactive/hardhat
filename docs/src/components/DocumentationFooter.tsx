@@ -4,7 +4,7 @@ import { FooterNavigation } from "./types";
 
 type Props = FooterNavigation;
 
-const DocumentationFooter = ({ next, prev, lastEditDate }: Props) => {
+const DocumentationFooter = ({ next, prev, lastEditDate, editLink }: Props) => {
   const date = lastEditDate ? new Date(lastEditDate).toLocaleString() : "";
   return (
     <div
@@ -24,6 +24,13 @@ const DocumentationFooter = ({ next, prev, lastEditDate }: Props) => {
               {prev.label}
             </a>
           </Link>
+        </div>
+      ) : null}
+      {editLink ? (
+        <div>
+          <a href={editLink} target="_blank" rel="noopener noreferrer">
+            Help us improve this page
+          </a>
         </div>
       ) : null}
       {date ? <div>{`Last Updated: ${date}`}</div> : null}
