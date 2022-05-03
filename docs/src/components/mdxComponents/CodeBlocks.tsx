@@ -22,6 +22,12 @@ const StyledCode = styled.code`
   line-height: 1.7;
   color: ${tm(({ colors }) => colors.codeColor)};
 
+  &[data-language=""] {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New,
+      monospace;
+    font-weight: normal;
+  }
+
   h3 & {
     font-size: inherit;
     font-family: inherit;
