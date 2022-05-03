@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
 import { useRouter } from "next/router";
+import { MDXRemote } from "next-mdx-remote";
+
 import SEO from "./SEO";
 import Navigation from "./Navigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
@@ -22,6 +24,16 @@ import Sidebar from "./Sidebar";
 import { menuItemsList, socialsItems, bannerContent } from "../config";
 import MobileSidebarMenu from "./MobileSidebarMenu";
 import DocumentationFooter from "./DocumentationFooter";
+import Title from "./mdxComponents/Title";
+import Paragraph from "./mdxComponents/Paragraph";
+import CodeBlocks from "./mdxComponents/CodeBlocks";
+import Admonition from "./mdxComponents/Admonition";
+import UnorderedList from "./mdxComponents/UnorderedList";
+import HorizontalRule from "./mdxComponents/HorizontalRule";
+import MDLink from "./mdxComponents/MDLink";
+import Table from "./mdxComponents/Table";
+import MDImage from "./mdxComponents/MDImage";
+import OrderedList from "./mdxComponents/OrderedList";
 
 const Container = styled.div`
   position: relative;
@@ -180,14 +192,35 @@ const Content = styled.section`
   }
 `;
 
+const components = {
+  h1: Title.H1,
+  h2: Title.H2,
+  h3: Title.H3,
+  h4: Title.H4,
+  h5: Title.H5,
+  p: Paragraph,
+  code: CodeBlocks.Code,
+  pre: CodeBlocks.Pre,
+  tip: Admonition.Tip,
+  warning: Admonition.Warning,
+  ul: UnorderedList,
+  ol: OrderedList,
+  hr: HorizontalRule,
+  a: MDLink,
+  table: Table,
+  img: MDImage,
+};
+
 type Props = React.PropsWithChildren<{
   seo: ISeo;
   sidebarLayout: IDocumentationSidebarStructure;
-  footerNavigation: FooterNavigation;
+  footerNavigation?: FooterNavigation;
+  mdxSource: unknown;
 }>;
 
 const DocumentationLayout = ({
   children,
+  mdxSource,
   seo,
   sidebarLayout,
   footerNavigation,
@@ -260,11 +293,18 @@ const DocumentationLayout = ({
           </SidebarContainer>
           <View ref={docViewRef}>
             <Content>
-              {children}
-              <DocumentationFooter
-                next={footerNavigation.next}
-                prev={footerNavigation.prev}
-              />
+              {children ? (
+                children
+              ) : (
+                // @ts-ignore
+                <MDXRemote {...mdxSource} components={components} />
+              )}
+              {footerNavigation ? (
+                <DocumentationFooter
+                  next={footerNavigation.next}
+                  prev={footerNavigation.prev}
+                />
+              ) : null}
             </Content>
           </View>
         </main>

@@ -20,6 +20,7 @@ export const withIndexURL = (pathname: string): string[] => {
   return docPath;
 };
 
+// TODO: check do we need `isIndex`
 export const withIndexFile = (docPath: string[], isIndex: boolean): string => {
   const mdFilePath = path.join(
     DOCS_PATH,
