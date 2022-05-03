@@ -1,4 +1,6 @@
-import { getSidebarConfig } from "./markdown";
+import path from "path";
+
+import { getSidebarConfig, readFileContent } from "./markdown";
 import { OrderType, SectionType, TocItem, TocSubitem } from "./types";
 
 /**
@@ -61,4 +63,17 @@ export const getPluginsPaths = (): Array<{ params: { plugin: string } }> => {
       `Error while generation plugin page paths. See details above`
     );
   }
+};
+
+const getPluginReadmeFilename = (pluginSlug: string): string => {
+  const folderName = pluginSlug.replace(/nomiclabs-/, "");
+  const rootPath = process.cwd().toString();
+  const filename = path.join(rootPath, "../packages/", folderName, "README.md");
+  return filename;
+};
+
+export const getPluginMDSource = (pluginSlug: string) => {
+  const readmeFilename = getPluginReadmeFilename(pluginSlug);
+  const source = readFileContent(readmeFilename).toString();
+  return source;
 };

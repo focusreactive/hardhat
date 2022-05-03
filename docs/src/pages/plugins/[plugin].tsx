@@ -1,13 +1,16 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import DocumentationLayout from "../../components/DocumentationLayout";
-import { IDocumentationSidebarStructure, IFooterNavigation } from "../../components/types";
+import {
+  IDocumentationSidebarStructure,
+  IFooterNavigation,
+} from "../../components/types";
 import {
   getLayout,
   prepareMdContent,
   readMDFileFromPathOrIndex,
   withIndexFile,
 } from "../../model/markdown";
-import { getPluginsPaths } from "../../model/plugins";
+import { getPluginMDSource, getPluginsPaths } from "../../model/plugins";
 
 interface Props {
   mdxSource: string;
@@ -42,15 +45,14 @@ const PluginPage: NextPage<Props> = ({
 export default PluginPage;
 
 export const getStaticProps: GetStaticProps = async (props) => {
-  // const { params } = props;
+  const { params } = props;
 
-  const fullName = withIndexFile(["guides", "deploying"], false);
-  const { source, fileName } = readMDFileFromPathOrIndex(fullName);
+  const source = getPluginMDSource(params.plugin);
 
   const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
     source
   );
-  const { layout, next, prev } = getLayout(fileName);
+  const { layout, next, prev } = getLayout("/mnt/nvme0n1p7/projects/Hardhat/react-project/docs/src/content/advanced/building-plugins.md");
   // const { layout, next, prev } = getLayout();
 
   return {
