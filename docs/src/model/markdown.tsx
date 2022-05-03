@@ -1,6 +1,7 @@
 import path from "path";
 import glob from "glob";
 import fs from "fs";
+import { execSync } from "child_process";
 import matter from "gray-matter";
 import remarkDirective from "remark-directive";
 import { serialize } from "next-mdx-remote/serialize";
@@ -237,4 +238,11 @@ export const getLayout = (fileName: string) => {
   const fileNameKey = fileName.replace(DOCS_PATH, "");
   const { layout, prev = null, next = null } = layoutsMap[fileNameKey];
   return { layout: layoutConfigs[layout], prev, next };
+};
+
+export const getCommitDate = (fileName: string): string => {
+  const output = execSync(
+    `git log -1 --pretty="format:%cI" ${fileName}`
+  ).toString();
+  return output;
 };
