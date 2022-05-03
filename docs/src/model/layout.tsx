@@ -8,92 +8,24 @@ import {
   parseMdFile,
   readMDFileFromPathOrIndex,
 } from "./markdown";
+import { DirInfoConfigKeys, DOCS_PATH, TEMP_PATH } from "../config";
+import { getPluginsSubitems } from "./plugins";
+
 import {
-  DirInfoConfigKeys,
-  DOCS_PATH,
-  LayoutsConfigKeys,
-  TEMP_PATH,
-} from "../config";
-
-export enum SectionType {
-  SINGLE = "single",
-  GROUP = "group",
-  HIDDEN = "hidden",
-  PLUGINS = "plugins",
-}
-
-type OrderType =
-  | string
-  | {
-      href: string;
-      title: string;
-    };
-
-interface DirInfo {
-  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
-  [DirInfoConfigKeys.SECTION_TITLE]: string;
-  [DirInfoConfigKeys.ORDER]: OrderType[];
-}
-
-interface Layout {
-  [LayoutsConfigKeys.TITLE]: string;
-  [LayoutsConfigKeys.FOLDERS]: string[];
-  layoutKey?: string;
-}
-
-interface LayoutsInfo {
-  [layoutKey: string]: Layout;
-}
-
-interface FolderWithFiles {
-  path: string;
-  files: string[];
-}
-
-interface FolderInfo {
-  path: string;
-  files: Array<{ file: string; href: string }>;
-  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
-}
-
-interface FolderType {
-  [DirInfoConfigKeys.SECTION_TYPE]: SectionType;
-  [DirInfoConfigKeys.SECTION_TITLE]: string;
-  [DirInfoConfigKeys.ORDER]: OrderType[];
-  path: string;
-}
-
-type FoldersConfig = Array<{
-  path: string;
-  folder: string;
-  config: {
-    [key: string]: any;
-  };
-}>;
-
-interface TocSubitem {
-  label: string;
-  href: string;
-  type?: SectionType;
-  next?: TocSubitem;
-  prev?: TocSubitem;
-}
-
-interface TocItem {
-  label: string;
-  type: SectionType;
-  href?: string;
-  children?: TocSubitem[];
-  // next?: TocSubitem;
-  // prev?: TocSubitem;
-}
-
-interface FlatTocItem {
-  label: string;
-  href: string;
-  next?: TocSubitem;
-  prev?: TocSubitem;
-}
+  SectionType,
+  OrderType,
+  DirInfo,
+  Layout,
+  LayoutsInfo,
+  FolderWithFiles,
+  FolderInfo,
+  FolderType,
+  FoldersConfig,
+  TocSubitem,
+  TocItem,
+  FlatTocItem,
+  InfoFiles,
+} from "./types";
 
 const toCapitalCase = (str: string): string => {
   // @ts-ignore
@@ -119,8 +51,6 @@ const getLayoutsInfo = (): LayoutsInfo => {
   const yamlData = yaml.load(yamlText) as LayoutsInfo;
   return yamlData;
 };
-
-type InfoFiles = Array<{ path: string }>;
 
 export const getDirInfoFiles = (): InfoFiles =>
   glob
@@ -200,10 +130,7 @@ const matchFoldersToLayouts = (
   });
 };
 
-const getSubitems = (
-  path: string,
-  order: Array<{ title: string; href: string } | string>
-): TocSubitem[] => {
+const getSubitems = (path: string, order: OrderType[]): TocSubitem[] => {
   const items = order.map((item) => {
     if (typeof item === "object") {
       return {
@@ -257,7 +184,7 @@ const generatePluginsSection = (folder: FolderType) => {
     label:
       folder[DirInfoConfigKeys.SECTION_TITLE] || toCapitalCase(folder.path),
     type: folder[DirInfoConfigKeys.SECTION_TYPE],
-    children: undefined,
+    children: getPluginsSubitems(folder.path, folder.order),
   };
 
   return tocItem;
