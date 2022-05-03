@@ -8,6 +8,22 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const linariaConfig = withLinaria({
+  async redirects() {
+    return [
+      {
+        /**
+         * NOTE: this removes '.html' extensions from URLs
+         * e.g. https://hardhat.org/hardhat-network/explanation/mining-modes.html becomes
+         * https://hardhat.org/hardhat-network/explanation/mining-modes
+         *
+         * We need this to keep the links of the pervious version workable
+         */
+        source: "/:slug*.html",
+        destination: "/:slug*",
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   future: {
     webpack5: true,
