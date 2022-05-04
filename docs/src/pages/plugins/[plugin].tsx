@@ -4,12 +4,7 @@ import {
   IDocumentationSidebarStructure,
   IFooterNavigation,
 } from "../../components/types";
-import {
-  getLayout,
-  prepareMdContent,
-  readMDFileFromPathOrIndex,
-  withIndexFile,
-} from "../../model/markdown";
+import { getLayout, prepareMdContent } from "../../model/markdown";
 import { getPluginMDSource, getPluginsPaths } from "../../model/plugins";
 
 interface Props {
@@ -47,12 +42,15 @@ export default PluginPage;
 export const getStaticProps: GetStaticProps = async (props) => {
   const { params } = props;
 
-  const source = getPluginMDSource(params.plugin);
+  // @ts-ignore
+  const source = getPluginMDSource(params?.plugin);
 
   const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
     source
   );
-  const { layout, next, prev } = getLayout("/mnt/nvme0n1p7/projects/Hardhat/react-project/docs/src/content/advanced/building-plugins.md");
+  const { layout, next, prev } = getLayout(
+    "/mnt/nvme0n1p7/projects/Hardhat/react-project/docs/src/content/advanced/building-plugins.md"
+  );
   // const { layout, next, prev } = getLayout();
 
   return {

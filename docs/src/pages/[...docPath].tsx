@@ -9,13 +9,15 @@ import {
 } from "../model/markdown";
 import DocumentationLayout from "../components/DocumentationLayout";
 import { createLayouts } from "../model/layout";
-import { IDocumentationSidebarStructure, IFooterNavigation } from "../components/types";
+import {
+  IDocumentationSidebarStructure,
+  IFooterNavigation,
+} from "../components/types";
 
 interface IFrontMatter {
   seoTitle: string;
   seoDescription: string;
 }
-
 
 interface IDocPage {
   mdxSource: string;

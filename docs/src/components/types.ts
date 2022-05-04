@@ -31,4 +31,3 @@ export interface IFooterNavigation {
   href: string;
   label: string;
 }
-

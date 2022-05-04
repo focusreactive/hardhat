@@ -20,7 +20,7 @@ export const generateSlug = (pluginName: string): string =>
   pluginName.replace(/^@/, "").replace(/\//g, "-");
 
 export const getPluginsSubitems = (
-  path: string,
+  folderPath: string,
   order: OrderType[]
 ): TocSubitem[] => {
   return order.map((item: OrderType) => {
@@ -32,7 +32,7 @@ export const getPluginsSubitems = (
     }
     return {
       label: item,
-      href: `/${path}/${generateSlug(item)}`,
+      href: `/${folderPath}/${generateSlug(item)}`,
     };
   });
 };

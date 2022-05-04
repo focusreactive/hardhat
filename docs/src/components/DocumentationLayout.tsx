@@ -293,7 +293,7 @@ const DocumentationLayout = ({
           </SidebarContainer>
           <View ref={docViewRef}>
             <Content>
-              {children ? (
+              {children !== undefined ? (
                 children
               ) : (
                 // @ts-ignore

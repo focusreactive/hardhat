@@ -4,6 +4,7 @@ import DocumentationLayout from "../../components/DocumentationLayout";
 
 const Plugins: NextPage = () => {
   return (
+    // @ts-ignore
     <DocumentationLayout
       seo={{
         title: "Plugins",
