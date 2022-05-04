@@ -11,6 +11,7 @@ const ImageContainer = styled.div`
   display: inline;
   max-width: 100%;
   position: relative;
+  width: ${({ width }) => width};
   height: auto;
   & .md-img {
     position: relative !important;
@@ -21,9 +22,11 @@ const ImageContainer = styled.div`
   }
 `;
 
+const isBadge = (src: string): boolean => /img\.shields\.io/.test(src);
+
 const MDImage = ({ src, alt }: Props) => {
   return (
-    <ImageContainer>
+    <ImageContainer width={isBadge(src) ? "80px" : null}>
       <Image
         className="md-img"
         src={src}
