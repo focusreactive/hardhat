@@ -4,6 +4,7 @@ import {
   IDocumentationSidebarStructure,
   IFooterNavigation,
 } from "../../components/types";
+import { createLayouts } from "../../model/layout";
 import { getLayout, prepareMdContent } from "../../model/markdown";
 import { getPluginMDSource, getPluginsPaths } from "../../model/plugins";
 
@@ -72,6 +73,7 @@ export const getStaticProps: GetStaticProps = async (props) => {
   };
 };
 export const getStaticPaths: GetStaticPaths = async () => {
+  createLayouts();
   const paths = getPluginsPaths();
 
   return {
