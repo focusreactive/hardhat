@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Children } from "react";
 import { styled } from "linaria/react";
 
 import Section from "../Section";
-import { media, tm } from "../../themes";
+import { breakpoints, media, tm } from "../../themes";
+import useWindowSize from "../../hooks/useWindowSize";
 
 type Props = React.PropsWithChildren<{
   content: { title: string };
@@ -13,12 +14,13 @@ const Container = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid ${tm(({ colors }) => colors.neutral400)};
   border-left: 1px solid ${tm(({ colors }) => colors.neutral400)};
   padding-top: 52px;
-  margin-top: 130px;
-  ${media.lg} {
+  margin-top: 162px;
+  ${media.md} {
     border-left: unset;
+    margin-top: 200px;
+    border-top: 1px solid ${tm(({ colors }) => colors.neutral400)};
   }
 `;
 
@@ -26,6 +28,7 @@ const Title = styled.h2`
   position: absolute;
   padding: 24px;
   background-color: ${tm(({ colors }) => colors.neutral0)};
+  color: ${tm(({ colors }) => colors.neutral900)};
   left: 0;
   top: 0;
   transform: translateY(-50%);
@@ -35,37 +38,47 @@ const Title = styled.h2`
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.2em;
-  ${media.lg} {
+  margin-bottom: 32px;
+  ${media.md} {
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 24px;
   }
 `;
 
 const TopBrackets = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 24px;
+  width: calc(100% - 24px);
   height: 32px;
+  border-top: 1px solid ${tm(({ colors }) => colors.neutral400)};
   border-left: 1px solid ${tm(({ colors }) => colors.neutral400)};
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
-  ${media.lg} {
+  ${media.md} {
     height: 36px;
+    border-top: none;
+    width: 100%;
+    border-top: none;
+    left: 0;
   }
 `;
 const BottomBrackets = styled.div`
   position: absolute;
-  left: 0;
+  left: 0px;
   bottom: 0;
   width: 32px;
   height: 32px;
   border-bottom: 1px solid ${tm(({ colors }) => colors.neutral400)};
-  ${media.lg} {
+  ${media.md} {
     display: none;
   }
 `;
 
 const WhyHardhatBlock = ({ content, children }: Props) => {
+  const windowSize = useWindowSize();
+  const isDesktop = breakpoints.md <= windowSize.width;
+
   return (
     <Section>
       <Container>
