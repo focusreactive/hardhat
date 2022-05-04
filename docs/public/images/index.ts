@@ -5,9 +5,9 @@ import TextureBrick from "./texture-brick";
 // FIXME: This is a temporary solution to pass images "as is" to the bundle. We will need to optimize this on the performance optimization phase.
 
 const Images = {
-  HeroPetsImage,
-  HeroGraphicsImage,
-  TextureBrick,
+  HeroPetsImage: () => null,
+  HeroGraphicsImage: () => null,
+  TextureBrick: () => null,
 };
 
 export default Images;
