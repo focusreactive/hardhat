@@ -1,9 +1,8 @@
-import React, { Children } from "react";
+import React from "react";
 import { styled } from "linaria/react";
 
 import Section from "../Section";
-import { breakpoints, media, tm } from "../../themes";
-import useWindowSize from "../../hooks/useWindowSize";
+import { media, tm } from "../../themes";
 
 type Props = React.PropsWithChildren<{
   content: { title: string };
@@ -76,9 +75,6 @@ const BottomBrackets = styled.div`
 `;
 
 const WhyHardhatBlock = ({ content, children }: Props) => {
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.md <= windowSize.width;
-
   return (
     <Section>
       <Container>
