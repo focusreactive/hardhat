@@ -13,14 +13,18 @@ interface Props {
   layout: IDocumentationSidebarStructure;
   prev: IFooterNavigation;
   next: IFooterNavigation;
+  lastEditDate: string;
+  editLink: string;
 }
 
 const PluginPage: NextPage<Props> = ({
   mdxSource,
   layout,
-  // frontMatter,
+  // frontMatter
   prev,
   next,
+  lastEditDate,
+  editLink,
 }): JSX.Element => {
   return (
     <DocumentationLayout
@@ -30,7 +34,7 @@ const PluginPage: NextPage<Props> = ({
         description: "frontMatter.seoDescription",
       }}
       sidebarLayout={layout}
-      footerNavigation={{ prev, next }}
+      footerNavigation={{ prev, next, lastEditDate, editLink }}
     >
       {/* @ts-ignore */}
     </DocumentationLayout>

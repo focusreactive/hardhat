@@ -305,7 +305,6 @@ const DocumentationLayout = ({
                   editLink={footerNavigation.editLink}
                 />
               ) : null}
-                
             </Content>
           </View>
         </main>
