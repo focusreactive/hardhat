@@ -29,6 +29,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
   main {
     flex: 1 1 auto;
     display: flex;
@@ -257,15 +260,13 @@ const DocumentationLayout = ({
             </MobileSidebarMenuMask>
           </SidebarContainer>
           <View ref={docViewRef}>
-            <Content>
-              {children}
-              <DocumentationFooter
-                next={footerNavigation.next}
-                prev={footerNavigation.prev}
-                lastEditDate={footerNavigation.lastEditDate}
-                editLink={footerNavigation.editLink}
-              />
-            </Content>
+            <Content>{children}</Content>
+            <DocumentationFooter
+              next={footerNavigation.next}
+              prev={footerNavigation.prev}
+              lastEditDate={footerNavigation.lastEditDate}
+              editLink={footerNavigation.editLink}
+            />
           </View>
         </main>
       </Container>
