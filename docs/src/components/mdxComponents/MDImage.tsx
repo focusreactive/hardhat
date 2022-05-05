@@ -10,7 +10,6 @@ interface Props {
 
 // TODO: solve the issue with badges
 const ImageContainer = styled.div`
-  display: block;
   max-width: 100%;
   position: relative;
   width: ${({ width }) => width};
@@ -42,6 +41,7 @@ const MDImage = ({ src, alt }: Props) => {
         blurDataURL={src}
         width="100%"
         height="100%"
+        quality={100}
         layout="responsive"
         objectFit="contain"
       />
