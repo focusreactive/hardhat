@@ -1,4 +1,5 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import DocumentationLayout from "../../components/DocumentationLayout";
 import {
   IDocumentationSidebarStructure,
@@ -7,10 +8,11 @@ import {
 import { createLayouts } from "../../model/layout";
 import { getLayout, prepareMdContent } from "../../model/markdown";
 import { getPluginMDSource, getPluginsPaths } from "../../model/plugins";
+import { IFrontMatter } from "../../model/types";
 
 interface Props {
-  mdxSource: string;
-  // frontMatter: IFrontMatter;
+  mdxSource: MDXRemoteSerializeResult;
+  frontMatter: IFrontMatter;
   layout: IDocumentationSidebarStructure;
   prev: IFooterNavigation;
   next: IFooterNavigation;
@@ -21,7 +23,7 @@ interface Props {
 const PluginPage: NextPage<Props> = ({
   mdxSource,
   layout,
-  // frontMatter
+  frontMatter,
   prev,
   next,
   lastEditDate,
@@ -45,18 +47,18 @@ const PluginPage: NextPage<Props> = ({
 export default PluginPage;
 
 export const getStaticProps: GetStaticProps = async (props) => {
-  const { params } = props;
+  const pluginSlug = props?.params?.plugin as string;
+  const pluginName =  pluginSlug?.replace(
+    /nomiclabs-/,
+    "@nomiclabs/"
+  );
 
-  // @ts-ignore
-  const source = getPluginMDSource(params?.plugin);
+  const source = getPluginMDSource(pluginSlug);
 
   const { mdxSource, data, seoTitle, seoDescription } = await prepareMdContent(
     source
   );
-  const { layout, next, prev } = getLayout(
-    "/mnt/nvme0n1p7/projects/Hardhat/react-project/docs/src/content/advanced/building-plugins.md"
-  );
-  // const { layout, next, prev } = getLayout();
+  const { layout, next, prev } = getLayout(pluginName);
 
   return {
     props: {

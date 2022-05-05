@@ -15,11 +15,9 @@ import {
   IDocumentationSidebarStructure,
   IFooterNavigation,
 } from "../components/types";
+import { IFrontMatter } from "../model/types";
 
-interface IFrontMatter {
-  seoTitle: string;
-  seoDescription: string;
-}
+
 
 interface IDocPage {
   mdxSource: string;

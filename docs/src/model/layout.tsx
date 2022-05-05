@@ -247,6 +247,21 @@ const getItemByHref =
     };
   };
 
+const getPluginsItems = (
+  flatTocList: FlatTocItem[],
+  folder: FolderInfo & {
+    layout: Layout;
+  }
+): Array<FlatTocItem & { file: string }> => {
+  const pluginItems = flatTocList.filter(({ href }) => /\/plugins/.test(href));
+  return pluginItems.map((item) => ({
+    ...item,
+    file: item.label,
+    folder: folder.path,
+    layout: folder.layout.layoutKey,
+  }));
+};
+
 const getLayoutToc = (
   layout: Layout,
   foldersStructure: Array<{
@@ -334,21 +349,28 @@ export const createLayouts = () => {
 
   const layoutsMap = foldersWithLayouts
     .map((folder) =>
-      folder.files?.map((fileEntry) => {
-        // @ts-ignore
-        const { prev, next } = getNavigation(
-          `/${fileEntry.href}`,
-          folder[DirInfoConfigKeys.SECTION_TYPE] === SectionType.HIDDEN
-        );
-        return {
-          file: fileEntry.file,
-          href: fileEntry.href,
-          folder: folder.path,
-          layout: folder.layout.layoutKey,
-          prev,
-          next,
-        };
-      })
+      folder.files
+        ?.map((fileEntry) => {
+          if (folder[DirInfoConfigKeys.SECTION_TYPE] === SectionType.PLUGINS) {
+            return getPluginsItems(layoutNavigations, folder);
+          }
+          // @ts-ignore
+          const { prev, next } = getNavigation(
+            `/${fileEntry.href}`,
+            folder[DirInfoConfigKeys.SECTION_TYPE] === SectionType.HIDDEN
+          );
+          return [
+            {
+              file: fileEntry.file,
+              href: fileEntry.href,
+              folder: folder.path,
+              layout: folder.layout.layoutKey,
+              prev,
+              next,
+            },
+          ];
+        })
+        .flat()
     )
     .filter(Boolean)
     .flat()

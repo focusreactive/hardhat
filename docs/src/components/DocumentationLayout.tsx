@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
 import { useRouter } from "next/router";
-import { MDXRemote } from "next-mdx-remote";
+import {
+  MDXRemote,
+  MDXRemoteSerializeResult,
+} from "next-mdx-remote";
 
 import SEO from "./SEO";
 import Navigation from "./Navigation";
@@ -34,6 +37,10 @@ import MDLink from "./mdxComponents/MDLink";
 import Table from "./mdxComponents/Table";
 import MDImage from "./mdxComponents/MDImage";
 import OrderedList from "./mdxComponents/OrderedList";
+import {
+  MDXProviderComponents,
+  MDXProviderComponentsProp,
+} from "@mdx-js/react";
 
 const Container = styled.div`
   position: relative;
@@ -213,7 +220,7 @@ type Props = React.PropsWithChildren<{
   seo: ISeo;
   sidebarLayout: IDocumentationSidebarStructure;
   footerNavigation?: FooterNavigation;
-  mdxSource: unknown;
+  mdxSource: MDXRemoteSerializeResult;
 }>;
 
 const DocumentationLayout = ({
@@ -291,12 +298,8 @@ const DocumentationLayout = ({
           </SidebarContainer>
           <View ref={docViewRef}>
             <Content>
-              {children !== undefined ? (
-                children
-              ) : (
-                // @ts-ignore
-                <MDXRemote {...mdxSource} components={components} />
-              )}
+              {/* @ts-ignore */}
+              <MDXRemote {...mdxSource} components={components} />
               {footerNavigation ? (
                 <DocumentationFooter
                   next={footerNavigation.next}

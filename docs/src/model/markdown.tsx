@@ -10,6 +10,8 @@ import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
+import { IMdxSource } from "./types";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 const rehypePrism = require("@mapbox/rehype-prism");
 
@@ -202,7 +204,16 @@ export const parseMdFile = (source: string) => {
   };
 };
 
-export const prepareMdContent = async (source: string) => {
+export const prepareMdContent = async (
+  source: string
+): Promise<{
+  mdxSource: MDXRemoteSerializeResult;
+  data: {
+    [key: string]: any;
+  };
+  seoTitle: string;
+  seoDescription: string;
+}> => {
   const { formattedContent, ...props } = parseMdFile(source);
   const mdxSource = await serialize(formattedContent, {
     mdxOptions: {

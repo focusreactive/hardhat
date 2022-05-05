@@ -81,3 +81,8 @@ export interface FlatTocItem {
 }
 
 export type InfoFiles = Array<{ path: string }>;
+
+export interface IFrontMatter {
+  seoTitle: string;
+  seoDescription: string;
+}
