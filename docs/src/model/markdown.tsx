@@ -2,6 +2,7 @@ import path from "path";
 import glob from "glob";
 import fs from "fs";
 import { execSync } from "child_process";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import matter from "gray-matter";
 import remarkDirective from "remark-directive";
 import { serialize } from "next-mdx-remote/serialize";
@@ -9,11 +10,12 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
-import { IMdxSource } from "./types";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
+// @ts-ignore
+import rehypePrism from "@mapbox/rehype-prism";
 
-const rehypePrism = require("@mapbox/rehype-prism");
+import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
+
+// const rehypePrism = require("@mapbox/rehype-prism");
 
 export const newLineDividerRegEx = /\r\n|\n/;
 

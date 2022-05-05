@@ -33,14 +33,12 @@ const PluginPage: NextPage<Props> = ({
     <DocumentationLayout
       mdxSource={mdxSource}
       seo={{
-        title: "frontMatter.seoTitle",
-        description: "frontMatter.seoDescription",
+        title: frontMatter.seoTitle,
+        description: frontMatter.seoDescription,
       }}
       sidebarLayout={layout}
       footerNavigation={{ prev, next, lastEditDate, editLink }}
-    >
-      {/* @ts-ignore */}
-    </DocumentationLayout>
+    />
   );
 };
 
@@ -48,10 +46,7 @@ export default PluginPage;
 
 export const getStaticProps: GetStaticProps = async (props) => {
   const pluginSlug = props?.params?.plugin as string;
-  const pluginName =  pluginSlug?.replace(
-    /nomiclabs-/,
-    "@nomiclabs/"
-  );
+  const pluginName = pluginSlug?.replace(/nomiclabs-/, "@nomiclabs/");
 
   const source = getPluginMDSource(pluginSlug);
 

@@ -14,11 +14,7 @@ import {
   ThemeProvider,
 } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import {
-  FooterNavigation,
-  IDocumentationSidebarStructure,
-  ISeo,
-} from "./types";
+import { ISeo } from "./types";
 import { bannerContent } from "../config";
 
 const Container = styled.div`

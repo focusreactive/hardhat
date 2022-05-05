@@ -117,6 +117,27 @@ const matchFoldersToLayouts = (
     }
     const fld = folders.find((f) => f.path === path);
     const fldInfo = foldersInfo.find((f) => f.folder === path);
+    if (
+      fldInfo &&
+      fldInfo.config[DirInfoConfigKeys.SECTION_TYPE] === SectionType.PLUGINS
+    ) {
+      const virtualFiles = fldInfo?.config?.order?.map((file: string | {}) => {
+        if (typeof file === "object") {
+          return file;
+        }
+        return {
+          file,
+          href: file,
+        };
+      });
+
+      return {
+        path,
+        files: virtualFiles,
+        layout: lt,
+        [DirInfoConfigKeys.SECTION_TYPE]: SectionType.PLUGINS,
+      };
+    }
     const files =
       fld?.files?.map((file) => ({ file, href: getHrefByFile(file) })) || null;
     return {
@@ -248,12 +269,15 @@ const getItemByHref =
   };
 
 const getPluginsItems = (
-  flatTocList: FlatTocItem[],
+  layoutNavigations: FlatTocItem[],
   folder: FolderInfo & {
     layout: Layout;
   }
 ): Array<FlatTocItem & { file: string }> => {
-  const pluginItems = flatTocList.filter(({ href }) => /\/plugins/.test(href));
+  const pluginItems = layoutNavigations.filter(({ href }) =>
+    /\/plugins/.test(href)
+  );
+
   return pluginItems.map((item) => ({
     ...item,
     file: item.label,
@@ -352,7 +376,8 @@ export const createLayouts = () => {
       folder.files
         ?.map((fileEntry) => {
           if (folder[DirInfoConfigKeys.SECTION_TYPE] === SectionType.PLUGINS) {
-            return getPluginsItems(layoutNavigations, folder);
+            const pluginItems = getPluginsItems(layoutNavigations, folder);
+            return pluginItems;
           }
           // @ts-ignore
           const { prev, next } = getNavigation(

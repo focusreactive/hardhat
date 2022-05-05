@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { styled } from "linaria/react";
 import { useRouter } from "next/router";
-import {
-  MDXRemote,
-  MDXRemoteSerializeResult,
-} from "next-mdx-remote";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import SEO from "./SEO";
 import Navigation from "./Navigation";
@@ -37,10 +34,6 @@ import MDLink from "./mdxComponents/MDLink";
 import Table from "./mdxComponents/Table";
 import MDImage from "./mdxComponents/MDImage";
 import OrderedList from "./mdxComponents/OrderedList";
-import {
-  MDXProviderComponents,
-  MDXProviderComponentsProp,
-} from "@mdx-js/react";
 
 const Container = styled.div`
   position: relative;
@@ -216,15 +209,14 @@ const components = {
   img: MDImage,
 };
 
-type Props = React.PropsWithChildren<{
+interface Props {
   seo: ISeo;
   sidebarLayout: IDocumentationSidebarStructure;
   footerNavigation?: FooterNavigation;
   mdxSource: MDXRemoteSerializeResult;
-}>;
+}
 
 const DocumentationLayout = ({
-  children,
   mdxSource,
   seo,
   sidebarLayout,

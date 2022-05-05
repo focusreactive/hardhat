@@ -1,4 +1,5 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import {
   getCommitDate,
@@ -17,10 +18,8 @@ import {
 } from "../components/types";
 import { IFrontMatter } from "../model/types";
 
-
-
 interface IDocPage {
-  mdxSource: string;
+  mdxSource: MDXRemoteSerializeResult;
   frontMatter: IFrontMatter;
   layout: IDocumentationSidebarStructure;
   prev: IFooterNavigation;
