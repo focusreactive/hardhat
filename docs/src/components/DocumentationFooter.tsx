@@ -13,12 +13,19 @@ const Footer = styled.footer`
   width: 100%;
   flex-direction: column;
   margin-top: 74px;
-  padding: 0 140px;
+  padding: 0 34px;
+  font-size: 10px;
+
   & a {
     cursor: pointer;
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  ${media.md} {
+    padding: 0 140px;
+    font-size: 16px;
   }
 `;
 
@@ -28,7 +35,6 @@ const PageEdit = styled.div`
   justify-content: space-between;
   padding-bottom: 16px;
   font-weight: 700;
-  font-size: 16px;
   line-height: 150%;
   border-bottom: 1px solid ${tm(({ colors }) => colors.editPageColor)};
   color: ${tm(({ colors }) => colors.editPageColor)};
@@ -88,18 +94,35 @@ const PageNavigationLinkWrapper = styled.div`
 
 const ImprovePageLinkWrapper = styled.div`
   & > a {
-    display: inline-flex;
-    align-items: center;
     & > span {
-      margin-right: 10px;
+      max-width: 100px;
+      display: flex;
+      align-items: center;
+      & > svg {
+        min-width: 20px;
+        ${media.sm} {
+          margin-left: 10px;
+        }
+      }
+      ${media.sm} {
+        max-width: unset;
+      }
     }
   }
 `;
 
 const LastUpdatedWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 80px;
   & > span:last-child {
     font-weight: 300;
     margin-left: 8px;
+  }
+  ${media.sm} {
+    max-width: unset;
   }
 `;
 
@@ -111,8 +134,9 @@ const DocumentationFooter = ({ next, prev, lastEditDate, editLink }: Props) => {
         {editLink ? (
           <ImprovePageLinkWrapper>
             <a href={editLink} target="_blank" rel="noopener noreferrer">
-              <span>Help us improve this page</span>
-              <ExternalLinkIcon />
+              <span>
+                Help us improve this page <ExternalLinkIcon />
+              </span>
             </a>
           </ImprovePageLinkWrapper>
         ) : (
