@@ -10,9 +10,9 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
 // @ts-ignore
 import rehypePrism from "@mapbox/rehype-prism";
+import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
 
 export const newLineDividerRegEx = /\r\n|\n/;
 
