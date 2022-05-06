@@ -3,7 +3,7 @@ import { styled } from "linaria/react";
 import { useRouter } from "next/router";
 
 import SEO from "./SEO";
-import Navigation from "./Navigation";
+import DocsNavigation from "./DocsNavigation";
 import Banner, { DefaultBanner } from "./ui/Banner";
 import {
   tm,
@@ -139,7 +139,7 @@ const PluginsLayout = ({ children, seo }: Props) => {
             <DefaultBanner content={content} />
           )}
         />
-        <Navigation
+        <DocsNavigation
           isSidebarOpen={isSidebarOpen}
           onSidebarOpen={setIsSidebarOpen}
         />

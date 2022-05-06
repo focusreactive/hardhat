@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
+import Searching from "../Searching";
 
 const MenuContainer = styled.section<{ isDocumentation: boolean }>`
   user-select: none;
@@ -140,7 +141,7 @@ const SocialLinksItem = styled.li`
   }
 `;
 
-const Menu = ({
+const DesktopMenu = ({
   menuItems,
   socialsItems,
   isDocumentation = false,
@@ -150,6 +151,7 @@ const Menu = ({
   return (
     <MenuContainer isDocumentation={isDocumentation}>
       <MenuList>
+        {isDocumentation ? <Searching /> : null}
         {menuItems.map((menuItem: MenuItemType) => {
           return (
             <MenuItem key={menuItem.label}>
@@ -178,4 +180,4 @@ const Menu = ({
   );
 };
 
-export default Menu;
+export default DesktopMenu;
