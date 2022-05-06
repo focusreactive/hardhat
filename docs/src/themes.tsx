@@ -12,15 +12,13 @@ export enum ThemesEnum {
 export const breakpoints = {
   xs: 360,
   sm: 412,
-  md: 1020,
-  lg: 1440,
+  md: 1000,
 };
 
 export const media = {
   xs: `@media screen and (min-width: ${breakpoints.xs}px)`,
   sm: `@media screen and (min-width: ${breakpoints.sm}px)`,
   md: `@media screen and (min-width: ${breakpoints.md}px)`,
-  lg: `@media screen and (min-width: ${breakpoints.lg}px)`,
   mqDark: "@media (prefers-color-scheme: dark)",
 };
 
@@ -57,6 +55,7 @@ export const lightPalette = {
   warningBackgroundColor: "#FEF6F1",
   codeBackground: "rgba(27,31,35,.05)",
   codeColor: "#4A4D54",
+  preCodeColor: "#FFFFFF",
   codeBlockBackground: "#282c34",
   codeBlockBorder: "#282c34",
   complementary600: "#E9DEFA",
@@ -77,6 +76,7 @@ export const lightPalette = {
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
+  autoThemeButton: "#6C6F74",
 };
 
 export const darkPalette = {
@@ -106,6 +106,7 @@ export const darkPalette = {
   warningBackgroundColor: "#282C34",
   codeBackground: "#20232A",
   codeColor: "#8e9094",
+  preCodeColor: "#8e9094",
   codeBlockBackground: "#16181D",
   codeBlockBorder: "#6c6f74",
   complementary600: "#E9DEFA",
@@ -126,6 +127,7 @@ export const darkPalette = {
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
+  autoThemeButton: "#6C6F74",
 } as Palette;
 
 export const hcDarkPalette = {
@@ -155,6 +157,7 @@ export const hcDarkPalette = {
   warningBackgroundColor: "#282C34",
   codeBackground: "#20232a",
   codeColor: "#8e9094",
+  preCodeColor: "#8e9094",
   codeBlockBackground: "#20232a",
   codeBlockBorder: "#6c6f74",
   complementary600: "#E9DEFA",
@@ -175,6 +178,7 @@ export const hcDarkPalette = {
   neutralBackground:
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
+  autoThemeButton: "#6C6F74",
 } as Palette;
 
 type Palette = typeof lightPalette;
