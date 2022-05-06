@@ -36,22 +36,22 @@ export const menuItemsList: MenuItemType[] = [
       {
         prefix: "Hardhat",
         label: "Runner",
-        href: "/tools/runner",
+        href: "/#tools?tool=RUNNER",
       },
       {
         prefix: "Hardhat",
         label: "Ignition",
-        href: "/tools/ignition",
+        href: "/#tools?tool=IGNITION",
       },
       {
         prefix: "Hardhat",
         label: "Network",
-        href: "/tools/network",
+        href: "/#tools?tool=NETWORK",
       },
       {
         prefix: "Hardhat",
-        label: "Solidity",
-        href: "/tools/solidity",
+        label: "VS Code",
+        href: "/#tools?tool=VS_CODE",
       },
     ],
   },

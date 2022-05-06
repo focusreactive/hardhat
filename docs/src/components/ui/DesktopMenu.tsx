@@ -151,10 +151,14 @@ const Menu = ({
     <MenuContainer isDocumentation={isDocumentation}>
       <MenuList>
         {menuItems.map((menuItem: MenuItemType) => {
+          const isSelected =
+            menuItem.href === "/"
+              ? router?.asPath === menuItem.href
+              : router?.asPath.includes(menuItem.href);
           return (
             <MenuItem key={menuItem.label}>
               <Link href={menuItem.href} passHref>
-                <MenuButton data-current={router?.asPath === menuItem.href}>
+                <MenuButton data-current={isSelected}>
                   {menuItem.label}
                 </MenuButton>
               </Link>

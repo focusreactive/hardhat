@@ -85,6 +85,7 @@ const LandingNavigation: FC = () => {
         menuItems={menuItemsList}
         socialsItems={socialsItems}
         isOpen={isMobileMenuOpen}
+        closeMobileMenu={() => setIsMobileMenuOpen(false)}
       />
     </Navigation>
   );

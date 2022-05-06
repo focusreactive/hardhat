@@ -73,6 +73,7 @@ const SidebarMask = styled.div`
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
+  min-height: 85vh;
   ${tmSelectors.hcDark} {
     border-right: 1px solid ${tmHCDark(({ colors }) => colors.border)};
   }
@@ -157,6 +158,7 @@ const View = styled.section`
   width: 100%;
   height: 85vh;
   overflow-y: scroll;
+  scroll-behavior: smooth;
   ${media.md} {
     padding-left: 366px;
   }

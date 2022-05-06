@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import Section from "../Section";
@@ -129,9 +130,17 @@ const ToolDescription = ({ content, companyName }: ToolProps) => {
 
 const ToolsBlock = ({ content }: BlockProps) => {
   const [selectedTool, setSelectedTool] = useState(Tools.RUNNER);
+  const router = useRouter();
+
+  useEffect(() => {
+    // const { tool } = router.query as { tool: Tools; [key: string]: string };
+    const tool = router.asPath.split("tool=")[1] as Tools;
+    if (!tool) return;
+    setSelectedTool(tool);
+  });
 
   return (
-    <Section>
+    <Section id="tools">
       <Container>
         <ToolsIconsBlock>
           <IconsBlockTitle>{content.title}</IconsBlockTitle>
