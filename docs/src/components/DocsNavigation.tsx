@@ -19,7 +19,6 @@ import ThemeSwitcher from "../assets/icons/theme-switcher";
 interface Props {
   isSidebarOpen: boolean;
   onSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isSearchingHidden: boolean;
 }
 
 const NavigationStyled = styled.nav`

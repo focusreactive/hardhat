@@ -151,7 +151,11 @@ const DesktopMenu = ({
   return (
     <MenuContainer isDocumentation={isDocumentation}>
       <MenuList>
-        {isDocumentation ? <Searching /> : null}
+        {isDocumentation ? (
+          <MenuItem>
+            <Searching />
+          </MenuItem>
+        ) : null}
         {menuItems.map((menuItem: MenuItemType) => {
           return (
             <MenuItem key={menuItem.label}>
