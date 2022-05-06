@@ -77,6 +77,7 @@ export const lightPalette = {
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
   autoThemeButton: "#6C6F74",
+  searchShadow: "#16181D90",
 };
 
 export const darkPalette = {
@@ -128,6 +129,7 @@ export const darkPalette = {
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
   autoThemeButton: "#6C6F74",
+  searchShadow: "#B0B2B590",
 } as Palette;
 
 export const hcDarkPalette = {
@@ -179,6 +181,7 @@ export const hcDarkPalette = {
     "linear-gradient(180deg, #FFFFFF 7.96%, rgba(255, 255, 255, 0.484844) 18.71%, rgba(255, 255, 255, 0) 28.83%, rgba(255, 255, 255, 0) 68.82%, #FFFFFF 91.43%);",
   link: "#CCB200",
   autoThemeButton: "#6C6F74",
+  searchShadow: "#B0B2B590",
 } as Palette;
 
 type Palette = typeof lightPalette;
