@@ -25,7 +25,7 @@ const Container = styled.div`
   display: flex;
   --docsearch-searchbox-shadow-custom: ${tm(
     ({ colors }) => colors.searchShadow
-  )}
+  )};
   --docsearch-searchbox-background: ${tm(({ colors }) => colors.neutral0)};
   --docsearch-primary-color: ${tm(({ colors }) => colors.accent700)};
   --docsearch-text-color: ${tm(({ colors }) => colors.neutral800)};
@@ -34,7 +34,8 @@ const Container = styled.div`
   )};
   --docsearch-highlight-color: var(--docsearch-primary-color);
   --docsearch-muted-color: var(--docsearch-text-color);
-  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--docsearch-searchbox-shadow-custom);
+  --docsearch-searchbox-shadow: inset 0 0 0 2px
+    var(--docsearch-searchbox-shadow-custom);
   --docsearch-spacing: 12px;
 
   ${tmSelectors.hcDark} {
@@ -46,9 +47,9 @@ const Container = styled.div`
     --docsearch-searchbox-focus-background: ${tmHCDark(
       ({ colors }) => colors.neutral0
     )};
-      --docsearch-searchbox-shadow-custom: ${tmHCDark(
-        ({ colors }) => colors.searchShadow
-      )}
+    --docsearch-searchbox-shadow-custom: ${tmHCDark(
+      ({ colors }) => colors.searchShadow
+    )};
   }
   ${tmSelectors.dark} {
     --docsearch-searchbox-background: ${tmDark(
@@ -61,7 +62,7 @@ const Container = styled.div`
     )};
     --docsearch-searchbox-shadow-custom: ${tmDark(
       ({ colors }) => colors.searchShadow
-    )}
+    )};
   }
   ${media.mqDark} {
     ${tmSelectors.auto} {
@@ -73,9 +74,9 @@ const Container = styled.div`
       --docsearch-searchbox-focus-background: ${tmDark(
         ({ colors }) => colors.neutral0
       )};
-        --docsearch-searchbox-shadow-custom: ${tmDark(
-          ({ colors }) => colors.searchShadow
-        )}
+      --docsearch-searchbox-shadow-custom: ${tmDark(
+        ({ colors }) => colors.searchShadow
+      )};
     }
   }
 `;
