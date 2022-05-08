@@ -69,9 +69,10 @@ const Container = styled.div`
   min-width: 320px;
 `;
 
-const SidebarMask = styled.div`
+export const SidebarMask = styled.div`
   display: flex;
   flex-direction: column;
+  height: 85vh;
   border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
   ${tmSelectors.hcDark} {
     border-right: 1px solid ${tmHCDark(({ colors }) => colors.border)};
@@ -85,9 +86,10 @@ const SidebarMask = styled.div`
     }
   }
 `;
-const MobileSidebarMenuMask = styled.div`
+export const MobileSidebarMenuMask = styled.div`
   display: flex;
   flex-direction: column;
+  height: 85vh;
   position: absolute;
   width: 100%;
   left: -100%;
@@ -121,7 +123,7 @@ const MobileSidebarMenuMask = styled.div`
   }
 `;
 
-const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
+export const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   flex-direction: column;
   width: 366px;
   position: fixed;
@@ -194,7 +196,7 @@ const Content = styled.section`
   }
 `;
 
-const components = {
+export const components = {
   h1: Title.H1,
   h2: Title.H2,
   h3: Title.H3,

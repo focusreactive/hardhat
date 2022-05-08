@@ -14,8 +14,15 @@ import {
   ThemeProvider,
 } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
-import { ISeo } from "./types";
-import { bannerContent } from "../config";
+import { IDocumentationSidebarStructure, ISeo } from "./types";
+import { bannerContent, menuItemsList, socialsItems } from "../config";
+import {
+  MobileSidebarMenuMask,
+  SidebarContainer,
+  SidebarMask,
+} from "./DocumentationLayout";
+import Sidebar from "./Sidebar";
+import MobileSidebarMenu from "./MobileSidebarMenu";
 
 const Container = styled.div`
   position: relative;
@@ -23,6 +30,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
   main {
     flex: 1 1 auto;
     display: flex;
@@ -94,15 +104,16 @@ const Content = styled.section`
 
 type Props = React.PropsWithChildren<{
   seo: ISeo;
+  sidebarLayout: IDocumentationSidebarStructure;
 }>;
 
-const PluginsLayout = ({ children, seo }: Props) => {
+const PluginsLayout = ({ children, seo, sidebarLayout }: Props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter();
-  const docViewRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const pluginsViewRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
-    docViewRef.current.scrollTo(0, 0);
+    pluginsViewRef.current.scrollTo(0, 0);
   }, [router.asPath]);
 
   useEffect(() => {
@@ -146,7 +157,26 @@ const PluginsLayout = ({ children, seo }: Props) => {
         <SEO seo={seo} />
 
         <main>
-          <View ref={docViewRef}>
+          <SidebarContainer
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            isSidebarOpen={isSidebarOpen}
+          >
+            {sidebarLayout.length > 0 && (
+              <SidebarMask>
+                <Sidebar elementsList={sidebarLayout} />
+              </SidebarMask>
+            )}
+            <MobileSidebarMenuMask data-open={isSidebarOpen}>
+              <MobileSidebarMenu
+                menuItems={menuItemsList}
+                socialsItems={socialsItems}
+                sidebarElementsList={sidebarLayout}
+              />
+            </MobileSidebarMenuMask>
+          </SidebarContainer>
+          <View ref={pluginsViewRef}>
             <Content>{children}</Content>
           </View>
         </main>

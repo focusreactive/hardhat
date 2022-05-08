@@ -186,7 +186,7 @@ export const generateTitleFromContent = (content: string) => {
   return content
     .split(newLineDividerRegEx)
     .filter((line) => line.startsWith("#"))[0]
-    .replace(/[#]*/g, "")
+    ?.replace(/[#]*/g, "")
     .trim();
 };
 
