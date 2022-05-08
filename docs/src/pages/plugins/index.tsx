@@ -117,10 +117,6 @@ const SectionTitleDescription = styled.span`
   }
 `;
 
-const PluginsView = styled.section`
-  padding: 0 34px;
-`;
-
 const Plugins: NextPage<IPluginsPage> = ({ mdxSource, sortedPlugins }) => {
   return (
     <PluginsLayout
@@ -130,7 +126,7 @@ const Plugins: NextPage<IPluginsPage> = ({ mdxSource, sortedPlugins }) => {
       }}
       sidebarLayout={[]}
     >
-      <PluginsView>
+      <div>
         <PageTitle>Plugins</PageTitle>
         {/* @ts-ignore */}
         <MDXRemote {...mdxSource} components={components} />
@@ -165,7 +161,7 @@ const Plugins: NextPage<IPluginsPage> = ({ mdxSource, sortedPlugins }) => {
             />
           );
         })}
-      </PluginsView>
+      </div>
     </PluginsLayout>
   );
 };

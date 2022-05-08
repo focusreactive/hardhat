@@ -75,7 +75,7 @@ const Content = styled.section`
   flex-direction: column;
   width: 100%;
   max-width: 774px;
-  padding-left: 34px;
+  padding: 0 34px;
   color: ${tm(({ colors }) => colors.neutral900)};
   & h2:not(:first-of-type) {
     padding-top: 80px;
