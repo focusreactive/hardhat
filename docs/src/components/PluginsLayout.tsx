@@ -64,7 +64,7 @@ const View = styled.section`
   align-items: center;
   padding-top: 24px;
   width: 100%;
-  height: 85vh;
+  height: calc(100vh - 136px);
   overflow-y: scroll;
   ${media.md} {
     padding-left: 366px;
@@ -162,6 +162,7 @@ const PluginsLayout = ({ children, seo, sidebarLayout }: Props) => {
               e.stopPropagation();
             }}
             isSidebarOpen={isSidebarOpen}
+            data-no-border={!isSidebarOpen && sidebarLayout.length === 0}
           >
             {sidebarLayout.length > 0 && (
               <SidebarMask>

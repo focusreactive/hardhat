@@ -4,7 +4,7 @@
 //
 // If your plugin's `name` is not it's package name, you can add an optional
 // `npmPackage` field.
-import { IPlugin } from "../model/types";
+import { IPlugin } from "../../model/types";
 
 const communityPlugins: IPlugin[] = [
   {
@@ -546,10 +546,7 @@ const officialPlugins: IPlugin[] = [
     tags: ["Vyper", "Compiler"],
   },
   // Don't add community plugins here. They should be placed in the other array.
-].map((p) => ({
-  ...p,
-  normalizedName: p.name.split("/").join("-").replace(/^@/, ""),
-}));
+];
 
 const plugins = {
   communityPlugins,

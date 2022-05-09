@@ -17,6 +17,7 @@ interface Props {
 const MobileSidebarContainer = styled.section`
   display: flex;
   flex-direction: column;
+  height: 100%;
   background-color: ${tm(({ colors }) => colors.neutral0)};
   ${tmSelectors.hcDark} {
     background-color: ${tmHCDark(({ colors }) => colors.neutral0)};

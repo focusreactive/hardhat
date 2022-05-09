@@ -1,10 +1,8 @@
 import path from "path";
-import fs from "fs";
 import { request } from "undici";
 import { getSidebarConfig, readFileContent } from "./markdown";
 import { IPlugin, OrderType, SectionType, TocItem, TocSubitem } from "./types";
-import plugins from "../content/plugins";
-import { TEMP_PATH } from "../config";
+import plugins from "../content/plugins/plugins";
 
 /**
  * NOTE: here we assumes that "Plugins" menu items only belongs to ${PLUGINS_LAYOUT} layout.
@@ -100,7 +98,7 @@ export const sortPluginsByDownloads = (
   return pluginsD;
 };
 
-async function getLastMonthDownloads(npmPackage: string): Promise<number> {
+const getLastMonthDownloads = async (npmPackage: string): Promise<number> => {
   const res = await request(
     `https://api.npmjs.org/downloads/point/last-month/${npmPackage}`,
     {
@@ -119,11 +117,9 @@ async function getLastMonthDownloads(npmPackage: string): Promise<number> {
   const json = (await res.body.json()) as { downloads: number };
 
   return json.downloads;
-}
+};
 
-export async function generatePluginsDownloadsInfoFile(
-  pluginsD: typeof plugins
-) {
+export const generatePluginsDownloads = async (pluginsD: typeof plugins) => {
   const downloads: Array<{ [plugin: string]: number }> = await Promise.all(
     [...pluginsD.officialPlugins, ...pluginsD.communityPlugins].map(
       async (p: any) => ({
@@ -135,8 +131,12 @@ export async function generatePluginsDownloadsInfoFile(
   downloads.sort((p1, p2) => Object.values(p2)[0] - Object.values(p1)[0]);
 
   const result = Object.assign({}, ...downloads);
-  fs.writeFileSync(
-    `${TEMP_PATH}/plugin-downloads.json`,
-    JSON.stringify(result, undefined, 2)
-  );
-}
+  return result;
+};
+
+export const addNormalizedName = (pluginsList: IPlugin[]) => {
+  return pluginsList.map((p) => ({
+    ...p,
+    normalizedName: p.name.split("/").join("-").replace(/^@/, ""),
+  }));
+};
