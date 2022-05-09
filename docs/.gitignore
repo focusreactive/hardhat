@@ -18,6 +18,8 @@
 # production
 /build
 /storybook-static
+/temp/sidebarConfig.json
+/temp/plugin-downloads.json
 
 # misc
 .DS_Store
