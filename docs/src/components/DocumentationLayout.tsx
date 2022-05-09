@@ -34,6 +34,8 @@ import MDLink from "./mdxComponents/MDLink";
 import Table from "./mdxComponents/Table";
 import MDImage from "./mdxComponents/MDImage";
 import OrderedList from "./mdxComponents/OrderedList";
+import TabsGroup from "./mdxComponents/TabsGroup";
+import Tab from "./mdxComponents/Tab";
 
 const Container = styled.div`
   position: relative;
@@ -196,6 +198,8 @@ export const components = {
   a: MDLink,
   table: Table,
   img: MDImage,
+  tabsgroup: TabsGroup,
+  tab: Tab,
 };
 
 interface Props {

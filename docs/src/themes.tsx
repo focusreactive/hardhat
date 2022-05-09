@@ -79,6 +79,9 @@ export const lightPalette = {
   autoThemeButton: "#6C6F74",
   editPageColor: "#C4C4C4",
   tagBackground: "#E5E6E7",
+  tabBackground: "#FBFBFB",
+  tabBackgroundHover: "#48484d",
+  tabBackgroundSelected: "#282C34",
 };
 
 export const darkPalette = {
@@ -132,6 +135,9 @@ export const darkPalette = {
   autoThemeButton: "#6C6F74",
   editPageColor: "#D2D3D5",
   tagBackground: "#16181D",
+  tabBackground: "#181A1F",
+  tabBackgroundHover: "#282C34",
+  tabBackgroundSelected: "#E5E6E7",
 } as Palette;
 
 export const hcDarkPalette = {
@@ -185,6 +191,9 @@ export const hcDarkPalette = {
   autoThemeButton: "#6C6F74",
   editPageColor: "#B0B2B5",
   tagBackground: "#20232A",
+  tabBackground: "#282C34",
+  tabBackgroundHover: "#181A1F",
+  tabBackgroundSelected: "#E5E6E7",
 } as Palette;
 
 type Palette = typeof lightPalette;
