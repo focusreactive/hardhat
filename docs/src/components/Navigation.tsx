@@ -169,7 +169,7 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           menuItems={menuItemsList}
           socialsItems={socialsItems}
         />
-        <ThemeButton onClick={() => changeTheme()}>
+        <ThemeButton onClick={changeTheme} aria-label="change color theme">
           {theme === ThemesEnum.AUTO && "Auto "}
           <ThemeIconWrapper data-theme={theme}>
             <ThemeSwitcher />
