@@ -78,6 +78,9 @@ const StyledTabsContainer = styled.div`
   display: flex;
   width: 100%;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   & > div {
     margin-right: 8px;
     &:last-child {
