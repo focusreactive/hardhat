@@ -173,7 +173,12 @@ const DesktopMenu = ({
           const { Icon } = social;
           return (
             <SocialLinksItem key={social.name}>
-              <SocialLink target="_blank" rel="noreferrer" href={social.href}>
+              <SocialLink
+                target="_blank"
+                rel="noreferrer"
+                href={social.name}
+                aria-label={social.name}
+              >
                 <Icon />
               </SocialLink>
             </SocialLinksItem>
