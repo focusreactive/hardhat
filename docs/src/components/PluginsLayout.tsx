@@ -164,11 +164,6 @@ const PluginsLayout = ({ children, seo, sidebarLayout }: Props) => {
             isSidebarOpen={isSidebarOpen}
             data-no-border={!isSidebarOpen && sidebarLayout.length === 0}
           >
-            {sidebarLayout.length > 0 && (
-              <SidebarMask>
-                <Sidebar elementsList={sidebarLayout} />
-              </SidebarMask>
-            )}
             <MobileSidebarMenuMask data-open={isSidebarOpen}>
               <MobileSidebarMenu
                 menuItems={menuItemsList}

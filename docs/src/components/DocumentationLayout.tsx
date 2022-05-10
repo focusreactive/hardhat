@@ -92,7 +92,7 @@ export const MobileSidebarMenuMask = styled.div`
 
 export const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   flex-direction: column;
-  width: 366px;
+  width: min(366px, 100%);
   position: fixed;
   top: 136px;
   left: ${(props) => (props.isSidebarOpen ? "0px" : "-120vw")};
@@ -101,23 +101,41 @@ export const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   overflow-y: scroll;
   transition: all ease-out 0.25s;
   z-index: 1;
+  background-color: ${tm(({ colors }) => colors.neutral0)};
+
   ${media.md} {
     left: 0;
   }
-  :not(&[data-no-border]) {
+  :not(&[data-no-border="true"]) {
     border-right: 1px solid ${tm(({ colors }) => colors.neutral400)};
     ${tmSelectors.hcDark} {
       border-right: 1px solid ${tmHCDark(({ colors }) => colors.border)};
+      background-color: ${tmHCDark(({ colors }) => colors.neutral0)};
     }
     ${tmSelectors.dark} {
       border-right: 1px solid ${tmDark(({ colors }) => colors.border)};
+      background-color: ${tmDark(({ colors }) => colors.neutral0)};
     }
     ${media.mqDark} {
       ${tmSelectors.auto} {
         border-right: 1px solid ${tmDark(({ colors }) => colors.border)};
+        background-color: ${tmDark(({ colors }) => colors.neutral0)};
       }
     }
   }
+
+  ${tmSelectors.hcDark} {
+    background-color: ${tmHCDark(({ colors }) => colors.neutral0)};
+  }
+  ${tmSelectors.dark} {
+    background-color: ${tmDark(({ colors }) => colors.neutral0)};
+  }
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      background-color: ${tmDark(({ colors }) => colors.neutral0)};
+    }
+  }
+
   ${SidebarMask} {
     display: none;
     ${media.md} {
@@ -131,7 +149,7 @@ export const SidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
     }
   }
 
-  &[data-no-border] {
+  &[data-no-border="true"] {
     border-right: none;
   }
 `;
