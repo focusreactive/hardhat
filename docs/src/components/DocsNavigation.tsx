@@ -14,7 +14,7 @@ import {
 } from "../themes";
 import logo from "../assets/hardhat-logo.svg";
 import Hamburger from "./ui/Hamburger";
-import Menu from "./ui/DesktopMenu";
+import DesktopMenu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
 import ThemeSwitcher from "../assets/icons/theme-switcher";
 
@@ -145,7 +145,7 @@ const ThemeIconWrapper = styled.div`
   }
 `;
 
-const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
+const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
   return (
@@ -166,7 +166,7 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           </Link>
         </HamburgerLogoWrapper>
 
-        <Menu
+        <DesktopMenu
           isDocumentation
           menuItems={menuItemsList}
           socialsItems={socialsItems}
@@ -182,4 +182,4 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   );
 };
 
-export default Navigation;
+export default DocsNavigation;
