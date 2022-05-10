@@ -111,16 +111,14 @@ const PersonImage = styled.div`
   min-width: 110px;
   width: 110px;
   height: 110px;
-  background-size: 110px;
-  background-repeat: no-repeat;
   border-radius: 100px;
+  overflow: hidden;
 
   ${media.md} {
     min-height: 150px;
     min-width: 150px;
     width: 150px;
     height: 150px;
-    background-size: 150px;
     margin-bottom: 10px;
   }
 `;
@@ -275,9 +273,9 @@ const ReviewsBlock = ({ content }: Props) => {
           {content.map((item) => (
             <SlideContainer key={item.name}>
               <ImageWithCaptionContainer>
-                <PersonImage
-                  style={{ backgroundImage: `url(${item.personImage})` }}
-                />
+                <PersonImage>
+                  <Image src={item.personImage}/>
+                </PersonImage>
                 <PersonCaption>
                   <NamePositionBlock>
                     <p>{item.name},</p>
