@@ -70,7 +70,7 @@ const LandingNavigation: FC = () => {
     <Navigation>
       <ControlsContainer>
         <Link href="/" passHref>
-          <LogoContainer>
+          <LogoContainer aria-label="home page">
             <HardhatLogo />
           </LogoContainer>
         </Link>
