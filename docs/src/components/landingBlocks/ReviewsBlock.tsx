@@ -11,7 +11,7 @@ interface Props {
   content: Array<{
     name: string;
     position: string;
-    personImage: string;
+    personImage: StaticImageData;
     companyImage: string;
     alt: string;
     comment: string;
@@ -274,7 +274,7 @@ const ReviewsBlock = ({ content }: Props) => {
             <SlideContainer key={item.name}>
               <ImageWithCaptionContainer>
                 <PersonImage>
-                  <Image src={item.personImage}/>
+                  <Image src={item.personImage} alt="Picture of the author" />
                 </PersonImage>
                 <PersonCaption>
                   <NamePositionBlock>

@@ -4,10 +4,12 @@ import justin from "./justin.webp";
 import rahul from "./rahul.webp";
 import victor from "./victor.webp";
 
-export default {
+const images = {
   brett,
   esteban,
   justin,
   rahul,
   victor,
 };
+
+export default images;
