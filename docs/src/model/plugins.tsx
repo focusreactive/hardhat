@@ -79,23 +79,20 @@ export const getPluginMDSource = (pluginSlug: string) => {
   return source;
 };
 
-export const sortPluginsByDownloads = (
-  pluginsD: typeof plugins,
-  downloadsD: { [key: string]: number }
-) => {
+export const sortPluginsByDownloads = (downloadsD: {
+  [key: string]: number;
+}) => {
   try {
-    pluginsD.officialPlugins.sort(
+    plugins.officialPlugins.sort(
       (p1: IPlugin, p2: IPlugin) => downloadsD[p2.name] - downloadsD[p1.name]
     );
 
-    pluginsD.communityPlugins.sort(
+    plugins.communityPlugins.sort(
       (p1: IPlugin, p2: IPlugin) => downloadsD[p2.name] - downloadsD[p1.name]
     );
   } catch {
     // we just don't sort here
   }
-
-  return pluginsD;
 };
 
 const getLastMonthDownloads = async (npmPackage: string): Promise<number> => {
@@ -140,3 +137,12 @@ export const addNormalizedName = (pluginsList: IPlugin[]) => {
     normalizedName: p.name.split("/").join("-").replace(/^@/, ""),
   }));
 };
+
+export const getPlugins = async () => {
+  const generatedPluginsDownloads = await generatePluginsDownloads(plugins);
+  sortPluginsByDownloads(generatedPluginsDownloads);
+  plugins.officialPlugins = addNormalizedName(plugins.officialPlugins);
+  return plugins;
+};
+
+export type PluginsList = typeof plugins;

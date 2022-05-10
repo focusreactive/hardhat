@@ -9,18 +9,14 @@ import {
   readMDFileFromPathOrIndex,
 } from "../../model/markdown";
 import { PLUGINS_PATH } from "../../config";
-import plugins from "../../content/plugins/plugins";
-import {
-  addNormalizedName,
-  generatePluginsDownloads,
-  sortPluginsByDownloads,
-} from "../../model/plugins";
+
+import { getPlugins, PluginsList } from "../../model/plugins";
 import { IPlugin } from "../../model/types";
 import PluginSnippet from "../../components/PluginSnippet";
 
 interface IPluginsPage {
   mdxSource: MDXRemoteSerializeResult;
-  sortedPlugins: typeof plugins;
+  sortedPlugins: PluginsList;
 }
 
 const PageTitle = styled.h3`
@@ -169,17 +165,9 @@ const Plugins: NextPage<IPluginsPage> = ({ mdxSource, sortedPlugins }) => {
 export default Plugins;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const generatedPluginsDownloads = await generatePluginsDownloads(plugins);
+  const sortedPlugins = await getPlugins();
   const { source } = readMDFileFromPathOrIndex(`${PLUGINS_PATH}/index.md`);
   const { mdxSource } = await prepareMdContent(source);
-  const sortedPlugins = sortPluginsByDownloads(
-    plugins,
-    generatedPluginsDownloads
-  );
-
-  sortedPlugins.officialPlugins = addNormalizedName(
-    sortedPlugins.officialPlugins
-  );
 
   return {
     props: {
