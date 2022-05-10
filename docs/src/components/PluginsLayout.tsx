@@ -16,12 +16,7 @@ import {
 import { DefaultBannerProps } from "./ui/types";
 import { IDocumentationSidebarStructure, ISeo } from "./types";
 import { bannerContent, menuItemsList, socialsItems } from "../config";
-import {
-  MobileSidebarMenuMask,
-  SidebarContainer,
-  SidebarMask,
-} from "./DocumentationLayout";
-import Sidebar from "./Sidebar";
+import { MobileSidebarMenuMask, SidebarContainer } from "./DocumentationLayout";
 import MobileSidebarMenu from "./MobileSidebarMenu";
 
 const Container = styled.div`
