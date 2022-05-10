@@ -127,11 +127,11 @@ const Background = () => {
     <StyledBackground>
       {isDesktop && (
         <TextureBrickWrapper className="left">
-          <Image src={bl} />
+          <Image src={bl} alt="decorations" />
         </TextureBrickWrapper>
       )}
       <TextureBrickWrapper>
-        <Image src={br} />
+        <Image src={br} alt="decorations" />
       </TextureBrickWrapper>
       <StyledTopGradient />
       <StyledBottomGradient />
