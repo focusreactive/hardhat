@@ -16,6 +16,8 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   main {
+    overflow-x: hidden;
+    min-height: 100vh;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;

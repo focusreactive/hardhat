@@ -5,6 +5,7 @@ import CTA from "../ui/CTA";
 import { breakpoints, media, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
 import { CTAType } from "../ui/types";
+import DesktopAnimation from "../DesktopAnimation";
 
 interface Props {
   content: {
@@ -40,10 +41,7 @@ const Block = styled.div`
       width: 60%;
     }
     padding: 0;
-    & svg {
-      position: relative;
-      right: -10%;
-    }
+    position: relative;
   }
 `;
 
@@ -90,35 +88,7 @@ const HeroBlock = ({ content }: Props) => {
           <CTA href={content.cta.url}>{content.cta.title}</CTA>
         </Block>
         <Block>
-          {isDesktop ? (
-            <div
-              style={{
-                fontSize: 48,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                width: "100%",
-                textAlign: "center",
-              }}
-            >
-              DESKTOP ANIMATION MOCK
-            </div>
-          ) : (
-            <div
-              style={{
-                fontSize: 48,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                width: "100%",
-                textAlign: "center",
-              }}
-            >
-              MOBILE ANIMATION MOCK
-            </div>
-          )}
+          <DesktopAnimation />
         </Block>
       </Container>
     </Section>
