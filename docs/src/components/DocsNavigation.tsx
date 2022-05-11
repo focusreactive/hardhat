@@ -1,6 +1,8 @@
 import React, { FC, useContext } from "react";
 import { styled } from "linaria/react";
 import Link from "next/link";
+import Image from "next/image";
+
 import {
   media,
   ThemeContext,
@@ -10,9 +12,9 @@ import {
   tmHCDark,
   tmSelectors,
 } from "../themes";
-import HardhatLogo from "../assets/hardhat-logo";
+import logo from "../assets/hardhat-logo.svg";
 import Hamburger from "./ui/Hamburger";
-import Menu from "./ui/DesktopMenu";
+import DesktopMenu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
 import ThemeSwitcher from "../assets/icons/theme-switcher";
 
@@ -143,7 +145,7 @@ const ThemeIconWrapper = styled.div`
   }
 `;
 
-const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
+const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
   return (
@@ -158,18 +160,18 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           </HamburgerWrapper>
 
           <Link href="/" passHref>
-            <LogoContainer>
-              <HardhatLogo />
+            <LogoContainer aria-label="home page">
+              <Image src={logo} alt="logo" />
             </LogoContainer>
           </Link>
         </HamburgerLogoWrapper>
 
-        <Menu
+        <DesktopMenu
           isDocumentation
           menuItems={menuItemsList}
           socialsItems={socialsItems}
         />
-        <ThemeButton onClick={() => changeTheme()}>
+        <ThemeButton onClick={changeTheme} aria-label="change color theme">
           {theme === ThemesEnum.AUTO && "Auto "}
           <ThemeIconWrapper data-theme={theme}>
             <ThemeSwitcher />
@@ -180,4 +182,4 @@ const Navigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
   );
 };
 
-export default Navigation;
+export default DocsNavigation;

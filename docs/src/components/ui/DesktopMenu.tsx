@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { MenuProps, MenuItemType, SocialsItem } from "./types";
 import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
+import Searching from "../Searching";
 
 const MenuContainer = styled.section<{ isDocumentation: boolean }>`
   user-select: none;
@@ -140,7 +141,7 @@ const SocialLinksItem = styled.li`
   }
 `;
 
-const Menu = ({
+const DesktopMenu = ({
   menuItems,
   socialsItems,
   isDocumentation = false,
@@ -150,6 +151,11 @@ const Menu = ({
   return (
     <MenuContainer isDocumentation={isDocumentation}>
       <MenuList>
+        {isDocumentation ? (
+          <MenuItem>
+            <Searching />
+          </MenuItem>
+        ) : null}
         {menuItems.map((menuItem: MenuItemType) => {
           const isSelected =
             menuItem.href === "/"
@@ -171,7 +177,12 @@ const Menu = ({
           const { Icon } = social;
           return (
             <SocialLinksItem key={social.name}>
-              <SocialLink target="_blank" rel="noreferrer" href={social.href}>
+              <SocialLink
+                target="_blank"
+                rel="noreferrer"
+                href={social.name}
+                aria-label={social.name}
+              >
                 <Icon />
               </SocialLink>
             </SocialLinksItem>
@@ -182,4 +193,4 @@ const Menu = ({
   );
 };
 
-export default Menu;
+export default DesktopMenu;
