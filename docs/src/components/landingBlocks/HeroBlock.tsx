@@ -6,6 +6,7 @@ import { breakpoints, media, tm } from "../../themes";
 import useWindowSize from "../../hooks/useWindowSize";
 import { CTAType } from "../ui/types";
 import DesktopAnimation from "../DesktopAnimation";
+import MobileAnimation from "../MobileAnimation";
 
 interface Props {
   content: {
@@ -32,6 +33,7 @@ const Block = styled.div`
   display: flex;
   flex-direction: column;
   padding: 40px 0 24px;
+  min-height: 100px;
   & svg {
     margin: 0 auto;
   }
@@ -87,9 +89,7 @@ const HeroBlock = ({ content }: Props) => {
           <Title>{content.title}</Title>
           <CTA href={content.cta.url}>{content.cta.title}</CTA>
         </Block>
-        <Block>
-          <DesktopAnimation />
-        </Block>
+        <Block>{isDesktop ? <DesktopAnimation /> : <MobileAnimation />}</Block>
       </Container>
     </Section>
   );

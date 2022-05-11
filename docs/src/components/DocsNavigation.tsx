@@ -114,7 +114,7 @@ const ThemeButton = styled.button`
   border: none;
   cursor: pointer;
   transform-origin: center;
-  min-width: 64px;
+  min-width: 45px;
   transition: transform ease-in-out 0.25s;
   &:hover {
     opacity: 0.8;
@@ -172,7 +172,7 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           socialsItems={socialsItems}
         />
         <ThemeButton onClick={changeTheme} aria-label="change color theme">
-          {theme === ThemesEnum.AUTO && "Auto "}
+          {theme === ThemesEnum.AUTO && "A "}
           <ThemeIconWrapper data-theme={theme}>
             <ThemeSwitcher />
           </ThemeIconWrapper>
