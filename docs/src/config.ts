@@ -26,7 +26,7 @@ export const REPO_URL =
   "https://github.com/NomicFoundation/hardhat/edit/master/docs/";
 
 // Regular expression to find tool in query string.
-export const toolRegExp = new RegExp("tool=[A-Z_]+");
+export const toolRegExp = /tool=[A-Z_]+/;
 
 export const menuItemsList: MenuItemType[] = [
   {

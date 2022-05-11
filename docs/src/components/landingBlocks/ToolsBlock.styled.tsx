@@ -56,6 +56,7 @@ const Container = styled.div`
 
 const ToolsIconsBlock = styled.div`
   position: relative;
+  padding-bottom: 40px;
 
   &:before {
     position: absolute;

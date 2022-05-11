@@ -135,6 +135,8 @@ const ToolsBlock = ({ content }: BlockProps) => {
 
   useEffect(() => {
     const queryTool = toolRegExp.exec(router.asPath);
+    console.log(queryTool);
+
     if (!queryTool) return;
     const tool = queryTool[0].replace("tool=", "") as Tools;
     setSelectedTool(tool);
