@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { toolRegExp } from "../../config";
 
 import Section from "../Section";
 import { Tools } from "../ui/types";
@@ -133,11 +134,11 @@ const ToolsBlock = ({ content }: BlockProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    // const { tool } = router.query as { tool: Tools; [key: string]: string };
-    const tool = router.asPath.split("tool=")[1] as Tools;
-    if (!tool) return;
+    const queryTool = toolRegExp.exec(router.asPath);
+    if (!queryTool) return;
+    const tool = queryTool[0].replace("tool=", "") as Tools;
     setSelectedTool(tool);
-  });
+  }, [router.asPath]);
 
   return (
     <Section id="tools">

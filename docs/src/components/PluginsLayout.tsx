@@ -18,6 +18,7 @@ import { IDocumentationSidebarStructure, ISeo } from "./types";
 import { bannerContent, menuItemsList, socialsItems } from "../config";
 import { MobileSidebarMenuMask, SidebarContainer } from "./DocumentationLayout";
 import MobileSidebarMenu from "./MobileSidebarMenu";
+import { Header } from "./LandingLayout";
 
 const Container = styled.div`
   position: relative;
@@ -29,6 +30,7 @@ const Container = styled.div`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   main {
+    padding-top: 136px;
     flex: 1 1 auto;
     display: flex;
     justify-content: flex-start;
@@ -139,16 +141,19 @@ const PluginsLayout = ({ children, seo, sidebarLayout }: Props) => {
   return (
     <ThemeProvider>
       <Container>
-        <Banner
-          content={bannerContent}
-          renderContent={({ content }: DefaultBannerProps) => (
-            <DefaultBanner content={content} />
-          )}
-        />
-        <DocsNavigation
-          isSidebarOpen={isSidebarOpen}
-          onSidebarOpen={setIsSidebarOpen}
-        />
+        <Header>
+          <Banner
+            content={bannerContent}
+            renderContent={({ content }: DefaultBannerProps) => (
+              <DefaultBanner content={content} />
+            )}
+          />
+          <DocsNavigation
+            isSidebarOpen={isSidebarOpen}
+            onSidebarOpen={setIsSidebarOpen}
+          />
+        </Header>
+
         <SEO seo={seo} />
 
         <main>

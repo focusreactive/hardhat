@@ -25,6 +25,9 @@ export const TEMP_PATH = path.join(process.cwd(), "temp/");
 export const REPO_URL =
   "https://github.com/NomicFoundation/hardhat/edit/master/docs/";
 
+// Regular expression to find tool in query string.
+export const toolRegExp = new RegExp("tool=[A-Z_]+");
+
 export const menuItemsList: MenuItemType[] = [
   {
     label: "Home",
@@ -37,22 +40,22 @@ export const menuItemsList: MenuItemType[] = [
       {
         prefix: "Hardhat",
         label: "Runner",
-        href: "/#tools?tool=RUNNER",
+        href: "/?tool=RUNNER#tools",
       },
       {
         prefix: "Hardhat",
         label: "Ignition",
-        href: "/#tools?tool=IGNITION",
+        href: "/?tool=IGNITION#tools",
       },
       {
         prefix: "Hardhat",
         label: "Network",
-        href: "/#tools?tool=NETWORK",
+        href: "/?tool=NETWORK#tools",
       },
       {
         prefix: "Hardhat",
         label: "VS Code",
-        href: "/#tools?tool=VS_CODE",
+        href: "/?tool=VS_CODE#tools",
       },
     ],
   },

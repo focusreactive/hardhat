@@ -153,7 +153,12 @@ const MobileMenu = ({
                           closeMobileMenu();
                         }}
                       >
-                        <Link href={subItem.href} passHref scroll={false}>
+                        <Link
+                          href={subItem.href}
+                          passHref
+                          scroll={false}
+                          prefetch={false}
+                        >
                           <MobileMenuSubItemButton>
                             {Boolean(subItem.prefix) && (
                               <span className="prefix">{subItem.prefix}</span>

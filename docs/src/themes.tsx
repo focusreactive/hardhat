@@ -257,7 +257,8 @@ export const ThemeProvider = ({
   );
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as ThemesEnum;
+    const savedTheme =
+      (localStorage.getItem("theme") as ThemesEnum) || ThemesEnum.AUTO;
     setTheme(savedTheme);
   }, []);
 

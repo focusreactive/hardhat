@@ -93,7 +93,7 @@ const MenuButton = styled.a`
 `;
 
 const MenuSocialsList = styled.ul`
-  width: 80px;
+  min-width: 80px;
   display: flex;
   height: 32px;
   align-items: center;
