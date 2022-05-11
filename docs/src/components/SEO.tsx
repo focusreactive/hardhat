@@ -22,10 +22,7 @@ const SEO = ({ seo }: Props) => {
       <meta property="og:url" content="https://hardhat.org" />
       <meta property="og:image" content="/card.jpg" />
       <meta property="og:title" content={title} />
-      <meta
-        property="og:description"
-        content={seo.description}
-      />
+      <meta property="og:description" content={seo.description} />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
   );

@@ -15,8 +15,6 @@ import rehypePrism from "@mapbox/rehype-prism";
 
 import { DOCS_PATH, REPO_URL, TEMP_PATH } from "../config";
 
-// const rehypePrism = require("@mapbox/rehype-prism");
-
 export const newLineDividerRegEx = /\r\n|\n/;
 
 export const withIndexURL = (pathname: string): string[] => {
@@ -195,7 +193,7 @@ export const parseMdFile = (source: string) => {
   const formattedContent = withoutComments(withInsertedCodeFromLinks(content));
 
   const tocTitle = data.title ?? generateTitleFromContent(formattedContent);
-  const seoTitle = [tocTitle, "Hardhat"].filter(Boolean).join(" | ");
+  const seoTitle = tocTitle || "Hardhat";
   const seoDescription =
     data.title ||
     "Ethereum development environment for professionals by Nomic Foundation";
