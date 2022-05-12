@@ -43,8 +43,8 @@ const MascotsContainer = styled.span<{ anchorPosition: number }>`
   bottom: ${({ anchorPosition }) => `${anchorPosition}px`};
   left: 5px;
   & .he-eyes {
-    bottom: 50px;
-    left: 185px;
+    bottom: 48px;
+    left: 182px;
     animation: blink 8s linear infinite;
     animation-delay: 1s;
     position: absolute;
