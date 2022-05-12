@@ -32,8 +32,11 @@ const Block = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 40px 0 24px;
+  padding: 0 0 24px;
   min-height: 100px;
+  &.content {
+    z-index: 1000;
+  }
   & svg {
     margin: 0 auto;
   }
@@ -84,7 +87,7 @@ const HeroBlock = ({ content }: Props) => {
   return (
     <Section>
       <Container>
-        <Block>
+        <Block className="content">
           <TagLine>{content.tagline}</TagLine>
           <Title>{content.title}</Title>
           <CTA href={content.cta.url}>{content.cta.title}</CTA>

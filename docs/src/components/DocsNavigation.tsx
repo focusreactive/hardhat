@@ -16,7 +16,9 @@ import logo from "../assets/hardhat-logo.svg";
 import Hamburger from "./ui/Hamburger";
 import DesktopMenu from "./ui/DesktopMenu";
 import { menuItemsList, socialsItems } from "../config";
-import ThemeSwitcher from "../assets/icons/theme-switcher";
+import ThemeSwitcher from "../assets/icons/theme-switcher.svg";
+import ThemeSwitcherDark from "../assets/icons/theme-switcher-dark.svg";
+import ThemeSwitcherHCDark from "../assets/icons/theme-switcher-hc-dark.svg";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -134,13 +136,36 @@ const ThemeButton = styled.button`
 
 const ThemeIconWrapper = styled.div`
   transition: transform ease-in-out 0.25s;
-  &[data-theme="DARK"],
-  &[data-theme="HC_DARK"] {
-    transform: scaleX(-1);
+  & > span {
+    display: none;
+  }
+  & > .light {
+    display: inline;
+  }
+  ${tmSelectors.hcDark} {
+    & > .light {
+      display: none;
+    }
+    & > .hc-dark {
+      display: inline;
+    }
+  }
+  ${tmSelectors.dark} {
+    & > .light {
+      display: none;
+    }
+    & > .dark {
+      display: inline;
+    }
   }
   ${media.mqDark} {
     ${tmSelectors.auto} {
-      transform: scaleX(-1);
+      & > .light {
+        display: none;
+      }
+      & > .dark {
+        display: inline;
+      }
     }
   }
 `;
@@ -173,8 +198,16 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
         />
         <ThemeButton onClick={changeTheme} aria-label="change color theme">
           {theme === ThemesEnum.AUTO && "A "}
-          <ThemeIconWrapper data-theme={theme}>
-            <ThemeSwitcher />
+          <ThemeIconWrapper>
+            <span className="light">
+              <Image src={ThemeSwitcher} alt="theme-switcher" />
+            </span>
+            <span className="dark">
+              <Image src={ThemeSwitcherDark} alt="theme-switcher" />
+            </span>
+            <span className="hc-dark">
+              <Image src={ThemeSwitcherHCDark} alt="theme-switcher" />
+            </span>
           </ThemeIconWrapper>
         </ThemeButton>
       </ControlsContainer>
