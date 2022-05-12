@@ -24,6 +24,12 @@ const AnimationContainer = styled.section`
 
   & > span {
     position: absolute;
+    z-index: 1;
+  }
+
+  & .back-texture,
+  & .back-reflect {
+    z-index: 0;
   }
 
   & .mascots-ethereum-logo {
