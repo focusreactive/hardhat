@@ -31,7 +31,7 @@ const Container = styled.div`
 
   ${media.md} {
     flex-direction: row;
-    margin-top: 200px;
+    margin-top: 250px;
 
     &:before {
       width: 36px;
