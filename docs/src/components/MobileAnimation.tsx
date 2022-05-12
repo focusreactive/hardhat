@@ -14,6 +14,7 @@ const AnimationContainer = styled.section`
   position: fixed;
   bottom: 0;
   left: 50%;
+  z-index: 1;
   transform: translateX(-30%) scale(0.6);
   pointer-events: none;
   transform-origin: bottom center;
