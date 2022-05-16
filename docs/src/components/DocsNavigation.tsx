@@ -139,6 +139,10 @@ const ThemeIconWrapper = styled.div`
   & > span {
     display: none;
   }
+  & > .theme-switcher {
+    position: relative;
+    bottom: -3px;
+  }
   & > .light {
     display: inline;
   }
@@ -199,14 +203,19 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
         <ThemeButton onClick={changeTheme} aria-label="change color theme">
           {theme === ThemesEnum.AUTO && "A "}
           <ThemeIconWrapper>
-            <span className="light">
+            <span className="light theme-switcher">
               <Image src={ThemeSwitcher} alt="theme-switcher" />
             </span>
-            <span className="dark">
+            <span className="dark theme-switcher">
               <Image src={ThemeSwitcherDark} alt="theme-switcher" />
             </span>
-            <span className="hc-dark">
-              <Image src={ThemeSwitcherHCDark} alt="theme-switcher" />
+            <span className="hc-dark theme-switcher">
+              <Image
+                src={ThemeSwitcherHCDark}
+                alt="theme-switcher"
+                width={32}
+                height={32}
+              />
             </span>
           </ThemeIconWrapper>
         </ThemeButton>
