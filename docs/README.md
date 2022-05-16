@@ -160,3 +160,47 @@ We use two CI/CD providers:
 
 Each branch triggers own process on CI/CD so you can see a code check details on Github and preview the current branch on Vercel.
 
+## Tabs
+
+---
+
+We use plugin `remark-directive` in order to provide tabs functionality.
+
+### Use
+
+---
+
+#### `tabsgroup`
+
+`tabsgroup` is wrapper that wraps a group of tabs and sets all possible values of tabs.
+
+```
+::::tabsgroup{options=<options-list> type=<type>}
+    ...
+::::
+```
+
+#### Parameters
+
+All parameters is passed in curly braces.
+
+`options-list` - required parameter. Comma separated strings, which is provided in tabs' `value` parameter. `type` - required parameter. String that will be a key of the global object which is contain global state of selected tabs.
+
+#### `tab`
+
+`tab` is wrapper that wraps a codeblock (or some other element).
+
+```
+:::tab{value=<value>}
+    ...
+:::
+:::tab{value=<value>}
+    ...
+:::
+```
+
+#### Parameters
+
+All parameters is passed in curly braces.
+
+`value` - required parameter. It should be provided as an option in `options-list` in `tabsgroup`.
