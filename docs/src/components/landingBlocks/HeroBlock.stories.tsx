@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import HeroBlock from "./HeroBlock";
 import homepageContent from "../../content/home";
 
@@ -8,4 +8,7 @@ export default {
   title: "Landing Blocks/Hero",
 };
 
-export const Default = () => <HeroBlock content={heroBlockContent} />;
+export const Default = () => {
+  const ref = useRef(null);
+  return <HeroBlock content={heroBlockContent} mainRef={ref} />;
+};

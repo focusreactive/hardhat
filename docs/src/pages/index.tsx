@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-
+import { useRef } from "react";
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import FeatureCard from "../components/ui/FeatureCard";
 import GetStartedBlock from "../components/landingBlocks/GetStartedBlock";
@@ -11,7 +11,6 @@ import ReviewsBlock from "../components/landingBlocks/ReviewsBlock";
 import ToolsBlock from "../components/landingBlocks/ToolsBlock";
 import homepageContent from "../content/home";
 import LandingLayout from "../components/LandingLayout";
-import { useRef } from "react";
 
 const Home: NextPage = () => {
   const mainRef = useRef<HTMLElement>(null);

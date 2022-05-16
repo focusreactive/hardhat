@@ -120,7 +120,7 @@ const MobileAnimation = ({ mainRef }: Props) => {
     return () => {
       main.removeEventListener("scroll", listener);
     };
-  }, []);
+  }, [mainRef]);
 
   return (
     <>
