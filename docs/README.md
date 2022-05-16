@@ -162,13 +162,9 @@ Each branch triggers own process on CI/CD so you can see a code check details on
 
 ## Tabs
 
----
-
 We use plugin `remark-directive` in order to provide tabs functionality.
 
 ### Use
-
----
 
 #### `tabsgroup`
 
