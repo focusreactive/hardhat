@@ -201,7 +201,7 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           socialsItems={socialsItems}
         />
         <ThemeButton onClick={changeTheme} aria-label="change color theme">
-          {theme === ThemesEnum.AUTO && "A "}
+          {theme === ThemesEnum.AUTO && "A"}
           <ThemeIconWrapper>
             <span className="light theme-switcher">
               <Image src={ThemeSwitcher} alt="theme-switcher" />

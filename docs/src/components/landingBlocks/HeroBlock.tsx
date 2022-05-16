@@ -2,8 +2,7 @@ import React from "react";
 import { styled } from "linaria/react";
 import Section from "../Section";
 import CTA from "../ui/CTA";
-import { breakpoints, media, tm } from "../../themes";
-import useWindowSize from "../../hooks/useWindowSize";
+import { media, tm } from "../../themes";
 import { CTAType } from "../ui/types";
 import DesktopAnimation from "../DesktopAnimation";
 import MobileAnimation from "../MobileAnimation";
@@ -14,6 +13,7 @@ interface Props {
     tagline: string;
     cta: CTAType;
   };
+  mainRef: React.RefObject<HTMLElement>;
 }
 
 const Container = styled.section`
@@ -81,9 +81,7 @@ const Title = styled.h1`
   }
 `;
 
-const HeroBlock = ({ content }: Props) => {
-  const windowSize = useWindowSize();
-  const isDesktop = breakpoints.md <= windowSize.width;
+const HeroBlock = ({ content, mainRef }: Props) => {
   return (
     <Section>
       <Container>
@@ -92,7 +90,10 @@ const HeroBlock = ({ content }: Props) => {
           <Title>{content.title}</Title>
           <CTA href={content.cta.url}>{content.cta.title}</CTA>
         </Block>
-        <Block>{isDesktop ? <DesktopAnimation /> : <MobileAnimation />}</Block>
+        <Block>
+          <DesktopAnimation />
+          <MobileAnimation mainRef={mainRef} />
+        </Block>
       </Container>
     </Section>
   );

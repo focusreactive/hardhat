@@ -11,17 +11,20 @@ import ReviewsBlock from "../components/landingBlocks/ReviewsBlock";
 import ToolsBlock from "../components/landingBlocks/ToolsBlock";
 import homepageContent from "../content/home";
 import LandingLayout from "../components/LandingLayout";
+import { useRef } from "react";
 
 const Home: NextPage = () => {
+  const mainRef = useRef<HTMLElement>(null);
   return (
     <LandingLayout
+      mainRef={mainRef}
       seo={{
         title: "Hardhat",
         description:
           "Hardhat is an Ethereum development environment. Compile your contracts and run them on a development network. Get Solidity stack traces, console.log and more.",
       }}
     >
-      <HeroBlock content={homepageContent.heroBlockContent} />
+      <HeroBlock content={homepageContent.heroBlockContent} mainRef={mainRef} />
       <ToolsBlock content={homepageContent.toolsBlockContent} />
       <WhyHardhatBlock content={homepageContent.whyHardhatContent}>
         <FeatureCard

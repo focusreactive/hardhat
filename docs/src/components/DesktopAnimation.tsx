@@ -10,11 +10,16 @@ import sheHead from "../assets/animation/desktop/she-head.svg";
 import heEyesOpen from "../assets/animation/desktop/he-eyes_open.svg";
 import sheEyesOpen from "../assets/animation/desktop/she-eyes_open.svg";
 import shadow from "../assets/animation/desktop/shadow.svg";
+import { media } from "../themes";
 
 const AnimationContainer = styled.section`
+  display: none;
   width: 580px;
   height: 685px;
   position: absolute;
+  ${media.md} {
+    display: block;
+  }
   & > .bounce {
     & > span {
       position: absolute;

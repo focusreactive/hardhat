@@ -22,6 +22,9 @@ const AnimationContainer = styled.section`
   ${media.sm} {
     transform: translateX(-50%) scale(1);
   }
+  ${media.md} {
+    display: none;
+  }
 `;
 
 const Anchor = styled.span`
@@ -31,6 +34,9 @@ const Anchor = styled.span`
   position: absolute;
   top: 0;
   left: 0;
+  ${media.md} {
+    display: block;
+  }
 `;
 
 const EthereumLogoContainer = styled.span<{ anchorPosition: number }>`
@@ -86,12 +92,16 @@ const validateAnchorPosition = (
     : anchorPosition - defaultAnchorPosition;
 };
 
-const MobileAnimation = () => {
+interface Props {
+  mainRef: React.RefObject<HTMLElement>;
+}
+
+const MobileAnimation = ({ mainRef }: Props) => {
   const [anchorPosition, setAnchorPosition] = useState(0);
   const anchorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const main = document.getElementById("main");
+    const main = mainRef.current;
     if (!main) return;
     const listener = () => {
       const anchorTopPosition =

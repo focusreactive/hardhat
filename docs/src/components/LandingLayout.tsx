@@ -35,9 +35,10 @@ type Props = React.PropsWithChildren<{
     title: string;
     description: string;
   };
+  mainRef: React.RefObject<HTMLElement>;
 }>;
 
-const LandingLayout = ({ children, seo }: Props) => {
+const LandingLayout = ({ children, seo, mainRef }: Props) => {
   return (
     <ThemeProvider>
       <Container className="landing">
@@ -49,7 +50,7 @@ const LandingLayout = ({ children, seo }: Props) => {
         />
         <LandingNavigation />
         <SEO seo={seo} />
-        <main id="main">
+        <main id="main" ref={mainRef}>
           {children}
           <LandingFooter />
         </main>
