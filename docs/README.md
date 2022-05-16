@@ -72,6 +72,36 @@ All documentation content is represented by `*.md` files with Markdown syntax. B
 
 Redirects allow you to redirect an incoming request path to a different destination path. Redirects settings are located in `redirects.config.js` file. It exports an array of objects. Each object represents a single redirect option. We utilize [NextJS Redirects](https://nextjs.org/docs/api-reference/next.config.js/redirects) API for that.
 
+### Tabs
+
+We use plugin `remark-directive` in order to provide tabs functionality.
+
+#### Use
+
+#### `tabsgroup` and `tab`
+
+`tabsgroup` is wrapper that wraps a group of tabs and sets all possible values of tabs. `tab` is wrapper that wraps a codeblock (or some other element).
+
+#### Example:
+
+```
+::::tabsgroup{`options`=npm,yarn}
+    :::tab{`value`=npm}
+        `npm start`
+    :::
+
+    :::tab{`value`=yarn}
+        `yarn start`
+    :::
+::::
+```
+
+#### Parameters
+
+Parameters is passed in curly braces.
+
+`options-list` - required parameter. Comma separated strings, which is provided in tabs' `value` parameter. `value` - required parameter. It should be provided as an option in `options-list` in `tabsgroup`.
+
 ## Development
 
 This website is an SSG application based on Next.js. To learn more about Next.js, take a look at the following resources:
@@ -159,44 +189,3 @@ We use two CI/CD providers:
 - Vercel to deploy app
 
 Each branch triggers own process on CI/CD so you can see a code check details on Github and preview the current branch on Vercel.
-
-## Tabs
-
-We use plugin `remark-directive` in order to provide tabs functionality.
-
-### Use
-
-#### `tabsgroup`
-
-`tabsgroup` is wrapper that wraps a group of tabs and sets all possible values of tabs.
-
-```
-::::tabsgroup{options=<options-list> type=<type>}
-    ...
-::::
-```
-
-#### Parameters
-
-All parameters is passed in curly braces.
-
-`options-list` - required parameter. Comma separated strings, which is provided in tabs' `value` parameter. `type` - required parameter. String that will be a key of the global object which is contain global state of selected tabs.
-
-#### `tab`
-
-`tab` is wrapper that wraps a codeblock (or some other element).
-
-```
-:::tab{value=<value>}
-    ...
-:::
-:::tab{value=<value>}
-    ...
-:::
-```
-
-#### Parameters
-
-All parameters is passed in curly braces.
-
-`value` - required parameter. It should be provided as an option in `options-list` in `tabsgroup`.
