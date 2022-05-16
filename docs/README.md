@@ -80,18 +80,20 @@ We use plugin `remark-directive` in order to provide tabs functionality.
 
 #### `tabsgroup` and `tab`
 
-`tabsgroup` is wrapper that wraps a group of tabs and sets all possible values of tabs. `tab` is wrapper that wraps a codeblock (or some other element).
+`tabsgroup` is wrapper that wraps a group of tabs and sets all possible values of tabs.
+
+`tab` is wrapper that wraps a codeblock (or some other element).
 
 #### Example:
 
 ```
-::::tabsgroup{`options`=npm,yarn}
-    :::tab{`value`=npm}
-        `npm start`
+::::tabsgroup{options=npm,yarn}
+    :::tab{value=npm}
+        npm start
     :::
 
-    :::tab{`value`=yarn}
-        `yarn start`
+    :::tab{value=yarn}
+        yarn start
     :::
 ::::
 ```
