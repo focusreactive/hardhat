@@ -89,11 +89,11 @@ We use plugin `remark-directive` in order to provide tabs functionality.
 ```
 ::::tabsgroup{options=npm,yarn}
     :::tab{value=npm}
-        npm start
+        // Codeblock or some other element
     :::
 
     :::tab{value=yarn}
-        yarn start
+        // Codeblock or some other element
     :::
 ::::
 ```
