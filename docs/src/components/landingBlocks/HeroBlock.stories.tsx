@@ -9,6 +9,5 @@ export default {
 };
 
 export const Default = () => {
-  const ref = useRef(null);
-  return <HeroBlock content={heroBlockContent} mainRef={ref} />;
+  return <HeroBlock content={heroBlockContent} />;
 };
