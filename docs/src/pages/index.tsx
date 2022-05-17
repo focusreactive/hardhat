@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useRef } from "react";
 import HeroBlock from "../components/landingBlocks/HeroBlock";
 import FeatureCard from "../components/ui/FeatureCard";
 import GetStartedBlock from "../components/landingBlocks/GetStartedBlock";

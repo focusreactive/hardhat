@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import HeroBlock from "./HeroBlock";
 import homepageContent from "../../content/home";
 
