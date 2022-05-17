@@ -39,10 +39,11 @@ const MenuItem = styled.li`
 `;
 
 const MenuButton = styled.a`
+  --text-color: ${tm(({ colors }) => colors.neutral900)};
   text-transform: uppercase;
   text-align: center;
   border: none;
-  color: ${tm(({ colors }) => colors.neutral900)};
+  color: var(--text-color);
   background-color: ${tm(({ colors }) => colors.transparent)};
   font-size: 15px;
   line-height: 15px;
@@ -57,7 +58,7 @@ const MenuButton = styled.a`
     content: " ";
     width: 0;
     height: 1px;
-    background-color: ${tm(({ colors }) => colors.neutral900)};
+    background-color: var(--text-color);
   }
   &:hover {
     &:after {
@@ -71,23 +72,14 @@ const MenuButton = styled.a`
   }
   :not(.landing &) {
     ${tmSelectors.hcDark} {
-      color: ${tmHCDark(({ colors }) => colors.neutral900)};
-      &:after {
-        background-color: ${tmHCDark(({ colors }) => colors.neutral900)};
-      }
+      --text-color: ${tmHCDark(({ colors }) => colors.neutral900)};
     }
     ${tmSelectors.dark} {
-      color: ${tmDark(({ colors }) => colors.neutral900)};
-      &:after {
-        background-color: ${tmDark(({ colors }) => colors.neutral900)};
-      }
+      --text-color: ${tmDark(({ colors }) => colors.neutral900)};
     }
     ${media.mqDark} {
       ${tmSelectors.auto} {
-        color: ${tmDark(({ colors }) => colors.neutral900)};
-      }
-      &:after {
-        background-color: ${tmDark(({ colors }) => colors.neutral900)};
+        --text-color: ${tmDark(({ colors }) => colors.neutral900)};
       }
     }
   }
