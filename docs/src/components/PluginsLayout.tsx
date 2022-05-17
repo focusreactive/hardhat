@@ -50,6 +50,12 @@ const Container = styled.div`
         background-color: ${tmDark(({ colors }) => colors.neutral0)};
       }
     }
+
+    ${media.md} {
+      & aside {
+        display: none;
+      }
+    }
   }
   height: 100vh;
   min-width: 320px;
@@ -63,9 +69,6 @@ const View = styled.section`
   width: 100%;
   height: calc(100vh - 136px);
   overflow-y: scroll;
-  ${media.md} {
-    padding-left: 366px;
-  }
 `;
 const Content = styled.section`
   display: flex;

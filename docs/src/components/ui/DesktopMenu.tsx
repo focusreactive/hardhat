@@ -7,6 +7,7 @@ import { media, tm, tmDark, tmHCDark, tmSelectors } from "../../themes";
 import Searching from "../Searching";
 
 const MenuContainer = styled.section<{ isDocumentation: boolean }>`
+  font-family: ChivoRegular;
   user-select: none;
   width: 607px;
   display: none;

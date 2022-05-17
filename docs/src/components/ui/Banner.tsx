@@ -12,6 +12,7 @@ import useWindowSize, { WindowSizeState } from "../../hooks/useWindowSize";
 import { BannerProps, DefaultBannerProps } from "./types";
 
 const BannerContainer = styled.section`
+  font-family: ChivoRegular;
   user-select: none;
   z-index: 100;
   width: 100%;

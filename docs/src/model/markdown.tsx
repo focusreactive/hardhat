@@ -33,11 +33,9 @@ export const withIndexFile = (docPath: string[]): string => {
 export const withCodeElementWrapper = (
   content: string,
   extension: string = "",
-  highlightedLinesNumbers: string | null
+  highlightedLinesNumbers: string = ""
 ) =>
-  `\`\`\`${extension}${
-    highlightedLinesNumbers ? `{${highlightedLinesNumbers}}` : ""
-  }
+  `\`\`\`${extension}${highlightedLinesNumbers}
 ${content}
   \`\`\``;
 
@@ -45,11 +43,11 @@ export const getEntriesInfo = (
   line: string
 ): {
   pathname: string;
-  highlightedLinesNumbers: string | null;
+  highlightedLinesNumbers: string;
 } => {
   const highlightedLinesNumbers: string | null = line.includes("{")
     ? line.substring(line.indexOf("{")).replace(/[{}]/g, "")
-    : null;
+    : "";
 
   const pathname = (
     highlightedLinesNumbers ? line.substring(0, line.indexOf("{")) : line

@@ -79,7 +79,7 @@ export const lightPalette = {
   link: "#CCB200",
   autoThemeButton: "#6C6F74",
   searchShadow: "#16181D90",
-  editPageColor: "#C4C4C4",
+  editPageColor: "#484E5E",
   tagBackground: "#E5E6E7",
   tabBackground: "#FBFBFB",
   tabBackgroundHover: "#48484d",
