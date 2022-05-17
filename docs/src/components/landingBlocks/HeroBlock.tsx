@@ -13,7 +13,6 @@ interface Props {
     tagline: string;
     cta: CTAType;
   };
-  mainRef: React.RefObject<HTMLElement>;
 }
 
 const Container = styled.section`
@@ -81,7 +80,7 @@ const Title = styled.h1`
   }
 `;
 
-const HeroBlock = ({ content, mainRef }: Props) => {
+const HeroBlock = ({ content }: Props) => {
   return (
     <Section>
       <Container>
@@ -92,7 +91,7 @@ const HeroBlock = ({ content, mainRef }: Props) => {
         </Block>
         <Block>
           <DesktopAnimation />
-          <MobileAnimation mainRef={mainRef} />
+          <MobileAnimation />
         </Block>
       </Container>
     </Section>

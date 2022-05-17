@@ -13,17 +13,15 @@ import homepageContent from "../content/home";
 import LandingLayout from "../components/LandingLayout";
 
 const Home: NextPage = () => {
-  const mainRef = useRef<HTMLElement>(null);
   return (
     <LandingLayout
-      mainRef={mainRef}
       seo={{
         title: "Hardhat",
         description:
           "Hardhat is an Ethereum development environment. Compile your contracts and run them on a development network. Get Solidity stack traces, console.log and more.",
       }}
     >
-      <HeroBlock content={homepageContent.heroBlockContent} mainRef={mainRef} />
+      <HeroBlock content={homepageContent.heroBlockContent} />
       <ToolsBlock content={homepageContent.toolsBlockContent} />
       <WhyHardhatBlock content={homepageContent.whyHardhatContent}>
         <FeatureCard

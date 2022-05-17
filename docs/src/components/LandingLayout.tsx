@@ -17,7 +17,6 @@ const Container = styled.div`
   align-items: center;
   main {
     overflow-x: hidden;
-    min-height: 100vh;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
@@ -26,7 +25,6 @@ const Container = styled.div`
     background-color: ${tm(({ colors }) => colors.neutral0)};
     width: 100%;
   }
-  height: 100vh;
   min-width: 320px;
 `;
 
@@ -35,10 +33,9 @@ type Props = React.PropsWithChildren<{
     title: string;
     description: string;
   };
-  mainRef: React.RefObject<HTMLElement>;
 }>;
 
-const LandingLayout = ({ children, seo, mainRef }: Props) => {
+const LandingLayout = ({ children, seo }: Props) => {
   return (
     <ThemeProvider>
       <Container className="landing">
@@ -50,7 +47,7 @@ const LandingLayout = ({ children, seo, mainRef }: Props) => {
         />
         <LandingNavigation />
         <SEO seo={seo} />
-        <main id="main" ref={mainRef}>
+        <main>
           {children}
           <LandingFooter />
         </main>

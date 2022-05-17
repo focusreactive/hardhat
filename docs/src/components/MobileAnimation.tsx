@@ -92,17 +92,11 @@ const validateAnchorPosition = (
     : anchorPosition - defaultAnchorPosition;
 };
 
-interface Props {
-  mainRef: React.RefObject<HTMLElement>;
-}
-
-const MobileAnimation = ({ mainRef }: Props) => {
+const MobileAnimation = () => {
   const [anchorPosition, setAnchorPosition] = useState(0);
   const anchorRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const main = mainRef.current;
-    if (!main) return;
     const listener = () => {
       const anchorTopPosition =
         anchorRef.current?.getBoundingClientRect()?.top ?? 0;
@@ -114,13 +108,13 @@ const MobileAnimation = ({ mainRef }: Props) => {
 
       setAnchorPosition(validatedAnchorPosition);
     };
-    main.addEventListener("scroll", listener);
+    document.addEventListener("scroll", listener);
 
     // eslint-disable-next-line
     return () => {
-      main.removeEventListener("scroll", listener);
+      document.removeEventListener("scroll", listener);
     };
-  }, [mainRef]);
+  }, []);
 
   return (
     <>
