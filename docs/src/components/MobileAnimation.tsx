@@ -15,12 +15,12 @@ const AnimationContainer = styled.section`
   bottom: 0;
   left: 50%;
   z-index: 1;
-  transform: translateX(-30%) scale(0.6);
+  transform: translateX(-30%) scale(0.7);
   pointer-events: none;
   transform-origin: bottom center;
 
-  ${media.sm} {
-    transform: translateX(-50%) scale(1);
+  ${media.xxs} {
+    transform: translateX(-50%) scale(0.85);
   }
   ${media.md} {
     display: none;
@@ -81,7 +81,7 @@ const MascotsContainer = styled.span<{ anchorPosition: number }>`
   }
 `;
 
-const defaultTopPosition = 136;
+const defaultTopPosition = 140;
 
 const validateAnchorPosition = (
   anchorPosition: number,

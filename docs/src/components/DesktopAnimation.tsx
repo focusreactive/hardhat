@@ -31,8 +31,11 @@ const AnimationContainer = styled.section`
     position: absolute;
     z-index: 1;
   }
+  & .back-texture {
+    top: -100px;
+    left: 50px;
+  }
 
-  & .back-texture,
   & .back-reflect {
     z-index: 0;
   }
@@ -54,13 +57,13 @@ const AnimationContainer = styled.section`
     animation-delay: 1s;
   }
   & .she-head {
-    top: 130px;
-    left: 142px;
+    top: 134px;
+    left: 145.5px;
     animation: headShake 8s linear infinite;
   }
   & .she-eyes {
-    top: 240px;
-    left: 195px;
+    top: 243px;
+    left: 198px;
     animation: blink 8s linear infinite;
   }
   & .shadow {
@@ -136,7 +139,13 @@ const DesktopAnimation = () => {
         <Image src={heroBackTextureReflect} alt="back reflect" />
       </span>
       <span className="back-texture">
-        <Image src={heroBackTexture} alt="back texture" />
+        <Image
+          src={heroBackTexture}
+          alt="back texture"
+          width={813}
+          height={840}
+          layout={"fixed"}
+        />
       </span>
       <div className="bounce">
         <span className="mascots-ethereum-logo">
