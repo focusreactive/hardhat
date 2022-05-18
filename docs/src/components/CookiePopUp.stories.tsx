@@ -11,6 +11,7 @@ export const Cookie = () => (
   <CookiePopUp
     content={homepageContent.cookiePopUp}
     closePopUp={() => {
+      // eslint-disable-next-line
       return console.log("cookie pop up closed");
     }}
   />

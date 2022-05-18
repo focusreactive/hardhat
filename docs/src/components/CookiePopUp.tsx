@@ -53,10 +53,10 @@ const ReadMoreLink = styled.a`
   }
 `;
 
-type Props = {
+interface Props {
   content: typeof homepageContent.cookiePopUp;
   closePopUp: () => void;
-};
+}
 
 const CookiePopUp = ({ content, closePopUp }: Props) => {
   return (
@@ -69,7 +69,7 @@ const CookiePopUp = ({ content, closePopUp }: Props) => {
       <ButtonsContainer>
         <CTAWrapper>
           <CTA
-            href={""}
+            href=""
             variant="secondary full-padding"
             onClick={() => {
               closePopUp();
@@ -80,7 +80,7 @@ const CookiePopUp = ({ content, closePopUp }: Props) => {
         </CTAWrapper>
         <CTAWrapper>
           <CTA
-            href={""}
+            href=""
             onClick={() => {
               closePopUp();
             }}
