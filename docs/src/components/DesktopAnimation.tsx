@@ -144,7 +144,7 @@ const DesktopAnimation = () => {
           alt="back texture"
           width={813}
           height={840}
-          layout={"fixed"}
+          layout="fixed"
         />
       </span>
       <div className="bounce">
