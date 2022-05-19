@@ -112,10 +112,12 @@ The front matter must be the first thing in the markdown file and must take the 
 ---
 title: Overview
 description: Hardhat | Ethereum development environment for professionals
+prev: false
+next: false
 ---
 ```
 
-You can specify `title` and `description` for SEO manually by using Front Matter.
+You can specify `title`, `description` for SEO manually or disable `prev` and `next` links for Footer Navigation by using Front Matter.
 
 ## Development
 
