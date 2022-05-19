@@ -1,8 +1,11 @@
+import React from "react";
+
 export interface MenuItemType {
   label: string;
   href: string;
   subItems?: MenuItemType[];
   prefix?: string;
+  icon?: React.FC;
 }
 
 export enum SocialsEnum {
