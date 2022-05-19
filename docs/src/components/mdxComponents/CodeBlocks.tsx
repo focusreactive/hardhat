@@ -35,7 +35,6 @@ const StyledCode = styled.code`
 
   ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.codeBlockBackground)};
-
     color: ${tmDark(({ colors }) => colors.codeColor)};
   }
 

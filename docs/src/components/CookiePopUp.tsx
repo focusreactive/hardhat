@@ -1,15 +1,24 @@
 import React from "react";
 import { styled } from "linaria/react";
-import { tm } from "../themes";
+import { media, tm } from "../themes";
 import homepageContent from "../content/home";
 import CTA from "./ui/CTA";
 
 const Container = styled.section`
-  width: 630px;
+  z-index: 100;
+  position: fixed;
+  bottom: 24px;
+  right: 0px;
+  width: auto;
   padding: 60px 50px 40px;
   background-color: ${tm(({ colors }) => colors.cookiePopUpBackground)};
   display: flex;
   flex-direction: column;
+  margin: 0px 24px;
+  max-width: 630px;
+  ${media.md} {
+    width: 630px;
+  }
 `;
 
 const Title = styled.h3`
@@ -80,6 +89,7 @@ const CookiePopUp = ({ content, closePopUp }: Props) => {
         </CTAWrapper>
         <CTAWrapper>
           <CTA
+            variant="full-padding"
             href=""
             onClick={() => {
               closePopUp();

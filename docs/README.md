@@ -104,6 +104,19 @@ Parameters is passed in curly braces.
 
 `options-list` - required parameter. Comma separated strings, which is provided in tabs' `value` parameter. `value` - required parameter. It should be provided as an option in `options-list` in `tabsgroup`.
 
+### Front Matter
+
+The front matter must be the first thing in the markdown file and must take the form of valid YAML set between triple-dashed lines. Here is an example:
+
+```
+---
+title: Overview
+description: Hardhat | Ethereum development environment for professionals
+---
+```
+
+You can specify `title` and `description` for SEO manually by using Front Matter.
+
 ## Development
 
 This website is an SSG application based on Next.js. To learn more about Next.js, take a look at the following resources:

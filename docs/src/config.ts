@@ -15,6 +15,7 @@ export const BANNER_LINK =
 
 export const bannerContent = {
   text: "Join the Hardhat team! Nomic Labs is hiring",
+  shortText: "Join the Hardhat team! We are hiring",
   href: BANNER_LINK,
 };
 
