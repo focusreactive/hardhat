@@ -19,6 +19,7 @@ const StyledCode = styled.code`
   font-weight: 400;
   line-height: 1.7;
   color: ${tm(({ colors }) => colors.codeColor)};
+  letter-spacing: 0.05em;
 
   &[data-language=""] {
     font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New,
@@ -26,7 +27,11 @@ const StyledCode = styled.code`
     font-weight: normal;
   }
 
-  h3 & {
+  h1 &,
+  h2 &,
+  h3 &,
+  h4 &,
+  h5 & {
     font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
