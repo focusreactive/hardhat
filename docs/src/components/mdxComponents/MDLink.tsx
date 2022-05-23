@@ -16,11 +16,18 @@ const StyledMdLinkContainer = styled.span`
     color: var(--code-link);
   }
   margin: 0 2px;
-  display: inline-flex;
-  align-items: center;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
+  }
+
+  & > a {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  & .hardhat-badge + svg {
+    margin-left: -30px;
   }
 
   & code {
@@ -73,6 +80,7 @@ const renderLinkByType = ({
     return (
       <a href={href} target="_blank" rel="noreferrer">
         {children}
+        <ExternalLinkIcon />
       </a>
     );
   }
@@ -95,7 +103,6 @@ const MDLink = ({ children, href }: Props) => {
   return (
     <StyledMdLinkContainer>
       {renderLinkByType({ href, children, isAnchor, isExternalLink })}
-      {isExternalLink && <ExternalLinkIcon />}
     </StyledMdLinkContainer>
   );
 };
