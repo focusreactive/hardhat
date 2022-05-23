@@ -5,7 +5,8 @@ export interface MenuItemType {
   href: string;
   subItems?: MenuItemType[];
   prefix?: string;
-  icon?: React.FC;
+  icon?: React.FC<any>;
+  iconDark?: React.FC<any>;
 }
 
 export enum SocialsEnum {
@@ -36,7 +37,7 @@ export enum Tools {
   RUNNER = "RUNNER",
   IGNITION = "IGNITION",
   NETWORK = "NETWORK",
-  VS_CODE = "VS_CODE",
+  SOLIDITY = "SOLIDITY",
 }
 
 interface DefaultBannerContent {

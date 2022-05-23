@@ -146,12 +146,10 @@ const MenuItemDropDownWrapper = styled.div`
 
 const MenuItemDropdown = styled.div`
   --bg-color: ${tm(({ colors }) => colors.neutral0)};
-  --border-color: ${tm(({ colors }) => colors.transparent)};
-  --svg-blend-mode: normal;
   width: 494px;
   height: 176px;
   box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
-  filter: drop-shadow(0px 6px 50px rgba(10, 10, 10, 0.08));
+  filter: drop-shadow(0px 6px 50px rgba(10, 11, 13, 0.41));
   border-radius: 4px;
   background-color: var(--bg-color);
   padding: 24px 32px;
@@ -161,13 +159,11 @@ const MenuItemDropdown = styled.div`
   transform: translateX(-50%);
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid var(--border-color);
   z-index: 1;
   & svg {
     border-radius: 4px;
     width: 42px;
     height: 42px;
-    mix-blend-mode: var(--svg-blend-mode);
   }
   &::after {
     z-index: -1;
@@ -177,28 +173,20 @@ const MenuItemDropdown = styled.div`
     transform: translateX(-50%) rotate(45deg);
     transform-origin: center;
     content: " ";
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
     background-color: var(--bg-color);
-    border-left: 1px solid var(--border-color);
-    border-top: 1px solid var(--border-color);
   }
   :not(.landing &) {
     ${tmSelectors.hcDark} {
       --bg-color: ${tmHCDark(({ colors }) => colors.neutral0)};
-      --border-color: ${tmHCDark(({ colors }) => colors.border)};
-      --svg-blend-mode: exclusion;
     }
     ${tmSelectors.dark} {
       --bg-color: ${tmDark(({ colors }) => colors.neutral0)};
-      --border-color: ${tmDark(({ colors }) => colors.border)};
-      --svg-blend-mode: exclusion;
     }
     ${media.mqDark} {
       ${tmSelectors.auto} {
         --bg-color: ${tmDark(({ colors }) => colors.neutral0)};
-        --border-color: ${tmDark(({ colors }) => colors.border)};
-        --svg-blend-mode: exclusion;
       }
     }
   }
@@ -210,6 +198,37 @@ const DropdownItem = styled.a`
   padding: 10.5px 20.5px;
   display: flex;
   align-items: center;
+  .icon.dark {
+    display: none;
+  }
+  :not(.landing &) {
+    ${tmSelectors.hcDark} {
+      .light {
+        display: none;
+      }
+      .dark {
+        display: inline;
+      }
+    }
+    ${tmSelectors.dark} {
+      .light {
+        display: none;
+      }
+      .dark {
+        display: inline;
+      }
+    }
+    ${media.mqDark} {
+      ${tmSelectors.auto} {
+        .light {
+          display: none;
+        }
+        .dark {
+          display: inline;
+        }
+      }
+    }
+  }
 `;
 
 const ButtonNameContainer = styled.div`
@@ -314,7 +333,12 @@ const DesktopMenu = ({
                           scroll={false}
                         >
                           <DropdownItem>
-                            {subItem.icon && <subItem.icon />}
+                            {subItem.icon && (
+                              <subItem.icon className="icon light" />
+                            )}
+                            {subItem.iconDark && (
+                              <subItem.iconDark className="icon dark" />
+                            )}
                             <ButtonNameContainer>
                               <ButtonCompanyName>
                                 {subItem.prefix}
