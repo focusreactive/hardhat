@@ -90,6 +90,8 @@ export const lightPalette = {
   tabBackgroundSelected: "#282C34",
   cookiePopUpBackground: "#FBFAEF",
   cookieTextColor: "#4B4B59",
+  cookieShadow: "#0A0A0A14",
+  cookieDropShadow: "#0A0B0D69",
 };
 
 export const darkPalette = {
@@ -149,8 +151,10 @@ export const darkPalette = {
   tabBackground: "#181A1F",
   tabBackgroundHover: "#282C34",
   tabBackgroundSelected: "#E5E6E7",
-  cookiePopUpBackground: "#FBFAEF",
-  cookieTextColor: "#4B4B59",
+  cookiePopUpBackground: "#20232A",
+  cookieTextColor: "#D2D3D5",
+  cookieShadow: "#0A0A0A14",
+  cookieDropShadow: "#0A0B0D69",
 } as Palette;
 
 export const hcDarkPalette = {
@@ -210,8 +214,10 @@ export const hcDarkPalette = {
   tabBackground: "#282C34",
   tabBackgroundHover: "#181A1F",
   tabBackgroundSelected: "#E5E6E7",
-  cookiePopUpBackground: "#FBFAEF",
-  cookieTextColor: "#4B4B59",
+  cookiePopUpBackground: "#20232A",
+  cookieTextColor: "#D2D3D5",
+  cookieShadow: "#0A0A0A14",
+  cookieDropShadow: "#0A0B0D69",
 } as Palette;
 
 type Palette = typeof lightPalette;
