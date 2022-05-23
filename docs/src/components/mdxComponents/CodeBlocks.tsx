@@ -76,7 +76,7 @@ const StyledPre = styled.pre`
 
   & .remark-highlight-code-line {
     display: block;
-    width: 100%;
+    min-width: 100%;
     background-color: var(--remark-highlight-color);
     position: relative;
     &::after {
@@ -124,8 +124,20 @@ const StyledPre = styled.pre`
   }
 `;
 
+const ContentWrapper = styled.span`
+  position: relative;
+  width: max-content;
+  pre > code & {
+    display: block;
+  }
+`;
+
 const Code = ({ children }: CodeProps) => {
-  return <StyledCode>{children}</StyledCode>;
+  return (
+    <StyledCode>
+      <ContentWrapper>{children}</ContentWrapper>
+    </StyledCode>
+  );
 };
 
 const Pre = ({ children, className }: PreProps) => {
