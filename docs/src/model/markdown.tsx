@@ -146,6 +146,7 @@ function setDefaultLang() {
   return (tree) => {
     visit(tree, (node) => {
       if (node.type === "code" && !node.lang) {
+        // eslint-disable-next-line
         node.lang = "markup";
       }
     });

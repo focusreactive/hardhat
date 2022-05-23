@@ -85,7 +85,7 @@ const LandingFooter = () => {
       </SupportedBy>
       <Legal>
         Copyright 2021 Nomic Labs LLC |
-        <Link href={PRIVACY_POLICY_PATH}>
+        <Link href={PRIVACY_POLICY_PATH} passHref>
           <PrivacyPolicyLink>Privacy Policy</PrivacyPolicyLink>
         </Link>
       </Legal>
