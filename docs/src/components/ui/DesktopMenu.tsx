@@ -145,13 +145,12 @@ const MenuItemDropDownWrapper = styled.div`
 `;
 
 const MenuItemDropdown = styled.div`
-  --bg-color: ${tm(({ colors }) => colors.neutral0)};
   width: 494px;
   height: 176px;
   box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
   filter: drop-shadow(0px 6px 50px rgba(10, 11, 13, 0.41));
   border-radius: 4px;
-  background-color: var(--bg-color);
+  background-color: ${tm(({ colors }) => colors.neutral0)};
   padding: 24px 32px;
   position: relative;
   top: 25px;
@@ -175,18 +174,18 @@ const MenuItemDropdown = styled.div`
     content: " ";
     width: 16px;
     height: 16px;
-    background-color: var(--bg-color);
+    background-color: inherit;
   }
   :not(.landing &) {
     ${tmSelectors.hcDark} {
-      --bg-color: ${tmHCDark(({ colors }) => colors.neutral0)};
+      background-color: ${tmHCDark(({ colors }) => colors.neutral0)};
     }
     ${tmSelectors.dark} {
-      --bg-color: ${tmDark(({ colors }) => colors.neutral0)};
+      background-color: ${tmDark(({ colors }) => colors.neutral0)};
     }
     ${media.mqDark} {
       ${tmSelectors.auto} {
-        --bg-color: ${tmDark(({ colors }) => colors.neutral0)};
+        background-color: ${tmDark(({ colors }) => colors.neutral0)};
       }
     }
   }
