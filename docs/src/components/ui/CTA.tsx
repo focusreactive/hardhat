@@ -55,12 +55,15 @@ type Props = React.PropsWithChildren<{
 }>;
 
 const CTA = ({ children, href, variant = "", onClick }: Props) => {
+  if ((href === "" || href === undefined || href === null) && !onClick) {
+    throw new Error("CTA should have a href prop or a onClick prop");
+  }
   return (
     <A
       as={onClick ? "button" : "a"}
       className={variant}
-      href={href || undefined}
-      onClick={onClick || undefined}
+      href={href ?? undefined}
+      onClick={onClick ?? undefined}
     >
       {children}
     </A>

@@ -4,7 +4,7 @@ import CookiePopUp from "./CookiePopUp";
 import { GDPR } from "../config";
 import { loadAnalyticsScript } from "./GDPRNotice.model";
 
-enum gdprStatus {
+enum GDPRStatus {
   ACCEPTED = "accepted",
   REJECTED = "rejected",
   UNKNOWN = "unknown",
@@ -23,24 +23,24 @@ const useGDPR = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const acceptedStatus = (localStorage.getItem(ITEM_KEY) ||
-      gdprStatus.UNKNOWN) as gdprStatus;
-    if (acceptedStatus === gdprStatus.UNKNOWN) {
+    const acceptedStatus = (localStorage.getItem(ITEM_KEY) ??
+      GDPRStatus.UNKNOWN) as GDPRStatus;
+    if (acceptedStatus === GDPRStatus.UNKNOWN) {
       setIsOpen(true);
     }
-    if (acceptedStatus === gdprStatus.ACCEPTED) {
+    if (acceptedStatus === GDPRStatus.ACCEPTED) {
       loadAnalyticsScript();
     }
-  });
+  }, []);
 
   const handleAccept = () => {
-    localStorage.setItem(ITEM_KEY, gdprStatus.ACCEPTED);
+    localStorage.setItem(ITEM_KEY, GDPRStatus.ACCEPTED);
     setIsOpen(false);
     loadAnalyticsScript();
   };
 
   const handleReject = () => {
-    localStorage.setItem(ITEM_KEY, gdprStatus.REJECTED);
+    localStorage.setItem(ITEM_KEY, GDPRStatus.REJECTED);
     setIsOpen(false);
   };
 
@@ -51,9 +51,7 @@ const useGDPR = () => {
   };
 };
 
-type Props = {};
-
-const GDPRNotice = (props: Props) => {
+const GDPRNotice = () => {
   const manageGDPR = useGDPR();
 
   if (!manageGDPR.isOpen) {
