@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 import { menuItemsList, socialsItems as defaultSocialItems } from "../config";
 import ExternalLinkIcon from "../assets/icons/external-link-icon";
 import { IDocumentationSidebarStructure } from "./types";
-import { SocialsEnum, SocialsItem } from "./ui/types";
+import { SocialsEnum } from "./ui/types";
 
 interface Props {
   sidebarElementsList: IDocumentationSidebarStructure;
@@ -148,7 +148,7 @@ const MobileSidebarMenu: FC<Props> = ({
 
   useEffect(() => {
     closeSidebar();
-  }, [router.asPath]);
+  }, [router.asPath, closeSidebar]);
 
   return (
     <MobileSidebarContainer>
