@@ -2,6 +2,15 @@ import React from "react";
 import { styled } from "linaria/react";
 import CookiePopUp from "./CookiePopUp";
 import { GDPR } from "../config";
+import { loadAnalyticsScript } from "./GDPRNotice.model";
+
+enum gdprStatus {
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+  UNKNOWN = "unknown",
+}
+
+const ITEM_KEY = "GDPR_ACCEPTED";
 
 const Container = styled.div`
   position: fixed;
@@ -11,13 +20,27 @@ const Container = styled.div`
 `;
 
 const useGDPR = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const acceptedStatus = (localStorage.getItem(ITEM_KEY) ||
+      gdprStatus.UNKNOWN) as gdprStatus;
+    if (acceptedStatus === gdprStatus.UNKNOWN) {
+      setIsOpen(true);
+    }
+    if (acceptedStatus === gdprStatus.ACCEPTED) {
+      loadAnalyticsScript();
+    }
+  });
 
   const handleAccept = () => {
+    localStorage.setItem(ITEM_KEY, gdprStatus.ACCEPTED);
     setIsOpen(false);
+    loadAnalyticsScript();
   };
 
   const handleReject = () => {
+    localStorage.setItem(ITEM_KEY, gdprStatus.REJECTED);
     setIsOpen(false);
   };
 
