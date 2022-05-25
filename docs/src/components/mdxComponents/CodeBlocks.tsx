@@ -57,8 +57,6 @@ const StyledCode = styled.code`
 `;
 
 const StyledPre = styled.pre`
-  --remark-highlight-color: ${tm(({ colors }) => colors.codeLineHighlight)};
-
   margin: 16px 0;
   padding: 20px 24px;
   background-color: ${tm(({ colors }) => colors.codeBlockBackground)};
@@ -77,7 +75,7 @@ const StyledPre = styled.pre`
   & .remark-highlight-code-line {
     display: block;
     min-width: 100%;
-    background-color: var(--remark-highlight-color);
+    background-color: ${tm(({ colors }) => colors.codeLineHighlight)};
     position: relative;
     &::after {
       content: " ";
@@ -85,7 +83,7 @@ const StyledPre = styled.pre`
       position: absolute;
       top: 0;
       right: -1.2em;
-      background-color: var(--remark-highlight-color);
+      background-color: ${tm(({ colors }) => colors.codeLineHighlight)};
     }
     &::before {
       content: " ";
@@ -93,7 +91,7 @@ const StyledPre = styled.pre`
       position: absolute;
       top: 0;
       left: -1.2em;
-      background-color: var(--remark-highlight-color);
+      background-color: ${tm(({ colors }) => colors.codeLineHighlight)};
     }
   }
 

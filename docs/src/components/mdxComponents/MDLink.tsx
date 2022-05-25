@@ -10,10 +10,8 @@ interface Props {
 }
 
 const StyledMdLinkContainer = styled.span`
-  --code-link: ${tm(({ colors }) => colors.link)};
-  --stroke-color: ${tmDark(({ colors }) => colors.neutral800)};
   & > a {
-    color: var(--code-link);
+    color: ${tm(({ colors }) => colors.link)};
   }
   margin: 0 2px;
   cursor: pointer;
@@ -31,30 +29,36 @@ const StyledMdLinkContainer = styled.span`
   }
 
   & code {
-    color: var(--code-link);
+    color: ${tm(({ colors }) => colors.link)};
   }
   & svg {
     margin-left: 2px;
-    stroke: var(--stroke-color);
+    stroke: ${tmDark(({ colors }) => colors.neutral800)};
   }
 
   ${tmSelectors.hcDark} {
-    --stroke-color: ${tmHCDark(({ colors }) => colors.neutral800)};
+    & svg {
+      stroke: ${tmHCDark(({ colors }) => colors.neutral800)};
+    }
     & code {
-      color: var(--code-link);
+      color: ${tm(({ colors }) => colors.link)};
     }
   }
   ${tmSelectors.dark} {
-    --stroke-color: ${tmDark(({ colors }) => colors.neutral800)};
+    & svg {
+      stroke: ${tmDark(({ colors }) => colors.neutral800)};
+    }
     & code {
-      color: var(--code-link);
+      color: ${tm(({ colors }) => colors.link)};
     }
   }
   ${media.mqDark} {
     ${tmSelectors.auto} {
-      --stroke-color: ${tmDark(({ colors }) => colors.neutral800)};
+      & svg {
+        stroke: ${tmDark(({ colors }) => colors.neutral800)};
+      }
       & code {
-        color: var(--code-link);
+        color: ${tm(({ colors }) => colors.link)};
       }
     }
   }
