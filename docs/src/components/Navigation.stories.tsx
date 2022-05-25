@@ -24,6 +24,7 @@ export const MobileSidebar = () => (
 
 export const SidebarMenu = () => (
   <Sidebar
+    closeSidebar={() => {}}
     elementsList={
       DocumentationSidebarStructure as IDocumentationSidebarStructure
     }

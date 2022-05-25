@@ -113,6 +113,7 @@ const Sidebar = ({ elementsList, closeSidebar }: Props) => {
 
                   const isAnchor = subItem.href.includes("#");
                   return (
+                    // eslint-disable-next-line
                     <li key={subItem.label} onClick={() => closeSidebar()}>
                       <Link passHref href={subItem.href}>
                         <SidebarLinkWrapper
