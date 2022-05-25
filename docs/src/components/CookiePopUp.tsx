@@ -22,7 +22,7 @@ const Title = styled.h3`
 `;
 
 const Text = styled.p`
-  font-family: ChivoLight;
+  font-family: ChivoLight, sans-serif;
   margin-top: 16px;
   font-weight: 400;
   font-size: 16px;
@@ -42,7 +42,7 @@ const CTAWrapper = styled.div`
 `;
 
 const ReadMoreLink = styled.a`
-  font-family: ChivoRegular;
+  font-family: ChivoRegular, sans-serif;
   color: ${tm(({ colors }) => colors.neutral900)};
   font-weight: 800;
   margin-left: 6px;
