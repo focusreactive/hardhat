@@ -7,6 +7,7 @@ const A = styled.a`
   justify-content: center;
   align-items: center;
   padding: 10px 22px;
+  border: none;
   border-radius: 4px;
   width: fit-content;
   font-size: 12px;
@@ -31,7 +32,6 @@ const A = styled.a`
 
   &.secondary {
     width: 100%;
-    padding: 12px 0;
     border: 1px solid ${tm(({ colors }) => colors.neutral700)};
     text-align: center;
     background: ${tm(({ colors }) => colors.transparent)};
@@ -49,7 +49,7 @@ const A = styled.a`
 `;
 
 type Props = React.PropsWithChildren<{
-  href: string;
+  href?: string;
   variant?: string;
   onClick?: () => void;
 }>;
@@ -57,13 +57,10 @@ type Props = React.PropsWithChildren<{
 const CTA = ({ children, href, variant = "", onClick }: Props) => {
   return (
     <A
+      as={onClick ? "button" : "a"}
       className={variant}
-      href={href}
-      onClick={(event) => {
-        if (!onClick) return;
-        event.preventDefault();
-        onClick();
-      }}
+      href={href || undefined}
+      onClick={onClick || undefined}
     >
       {children}
     </A>

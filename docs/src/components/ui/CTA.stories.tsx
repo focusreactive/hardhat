@@ -8,7 +8,7 @@ export default {
 export const Primary = () => <CTA href="/">primary button</CTA>;
 
 export const Secondary = () => (
-  <CTA href="/" variant="secondary">
+  <CTA href="/" variant="secondary full-padding">
     secondary button
   </CTA>
 );

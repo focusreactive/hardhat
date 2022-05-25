@@ -8,6 +8,7 @@ import Banner, { DefaultBanner } from "./ui/Banner";
 import { ThemeProvider, tm } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { bannerContent } from "../config";
+import GDPRNotice from "./GDPRNotice";
 
 const Container = styled.div`
   position: relative;
@@ -66,6 +67,7 @@ const LandingLayout = ({ children, seo }: Props) => {
           <LandingFooter />
         </main>
       </Container>
+      <GDPRNotice />
     </ThemeProvider>
   );
 };

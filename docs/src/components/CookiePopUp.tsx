@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "linaria/react";
 import { tm } from "../themes";
-import homepageContent from "../content/home";
 import CTA from "./ui/CTA";
 
 const Container = styled.section`
@@ -54,39 +53,35 @@ const ReadMoreLink = styled.a`
 `;
 
 interface Props {
-  content: typeof homepageContent.cookiePopUp;
-  closePopUp: () => void;
+  title: string;
+  text: string;
+  readMoreHref: string;
+  onAccept: () => void;
+  onReject: () => void;
 }
 
-const CookiePopUp = ({ content, closePopUp }: Props) => {
+const CookiePopUp = ({
+  title,
+  text,
+  readMoreHref,
+  onAccept,
+  onReject,
+}: Props) => {
   return (
     <Container>
-      <Title>{content.title}</Title>
+      <Title>{title}</Title>
       <Text>
-        {content.text}
-        <ReadMoreLink href={content.readMoreHref}>Read More</ReadMoreLink>
+        {text}
+        <ReadMoreLink href={readMoreHref}>Read More</ReadMoreLink>
       </Text>
       <ButtonsContainer>
         <CTAWrapper>
-          <CTA
-            href=""
-            variant="secondary full-padding"
-            onClick={() => {
-              closePopUp();
-            }}
-          >
+          <CTA variant="secondary" onClick={onReject}>
             Reject all
           </CTA>
         </CTAWrapper>
         <CTAWrapper>
-          <CTA
-            href=""
-            onClick={() => {
-              closePopUp();
-            }}
-          >
-            Accept all
-          </CTA>
+          <CTA onClick={onAccept}>Accept all</CTA>
         </CTAWrapper>
       </ButtonsContainer>
     </Container>
