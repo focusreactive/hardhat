@@ -19,6 +19,7 @@ const A = styled.a`
   color: ${tm(({ colors }) => colors.neutral900)};
   background-color: ${tm(({ colors }) => colors.accent800)};
   transition: all ease-out 0.3s;
+  cursor: pointer;
   &:hover {
     background-color: ${tm(({ colors }) => colors.accent200)};
   }
