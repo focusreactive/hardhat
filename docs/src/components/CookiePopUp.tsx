@@ -6,11 +6,12 @@ import CTA from "./ui/CTA";
 const Container = styled.section`
   z-index: 100;
   position: fixed;
-  bottom: 0px;
+  bottom: 24px;
   right: 0px;
   width: auto;
-  padding: 60px 50px 40px;
+  padding: 16px 20px;
   border-radius: 4px;
+  margin: 0px 24px;
   background-color: ${tm(({ colors }) => colors.cookiePopUpBackground)};
   box-shadow: 0px 6px 50px ${tm(({ colors }) => colors.cookieShadow)};
   filter: drop-shadow(
@@ -18,11 +19,11 @@ const Container = styled.section`
   );
   display: flex;
   flex-direction: column;
-  max-width: 630px;
+  max-width: 332px;
   ${media.md} {
-    width: 630px;
+    width: 332spx;
     margin: 0px 24px;
-    bottom: 24px;
+    left: unset;
   }
   ${tmSelectors.dark} {
     background-color: ${tmDark(({ colors }) => colors.cookiePopUpBackground)};
@@ -41,7 +42,7 @@ const Container = styled.section`
 
 const Title = styled.h3`
   font-weight: 400;
-  font-size: 20px;
+  font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -66,8 +67,8 @@ const Text = styled.p`
   font-family: ChivoLight, sans-serif;
   margin-top: 16px;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
+  font-size: 12px;
+  line-height: 140%;
   color: ${tm(({ colors }) => colors.cookieTextColor)};
 
   ${tmSelectors.dark} {
@@ -87,7 +88,7 @@ const Text = styled.p`
 
 const ButtonsContainer = styled.div`
   display: flex;
-  margin-top: 32px;
+  margin-top: 16px;
 
   & .secondary {
     ${tmSelectors.dark} {
@@ -107,8 +108,13 @@ const ButtonsContainer = styled.div`
 `;
 
 const CTAWrapper = styled.div`
+  & > button {
+    font-size: 10px;
+    padding: 10px 12px;
+    height: 32px;
+  }
   &:first-child {
-    margin-right: 32px;
+    margin-right: 16px;
   }
 `;
 
