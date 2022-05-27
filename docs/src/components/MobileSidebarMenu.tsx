@@ -154,7 +154,7 @@ const MobileSidebarMenu: FC<Props> = ({
             <MenuItem
               key={menuItem.label}
               data-current={router?.asPath === menuItem.href}
-              onClick={() => closeSidebar()}
+              onClick={closeSidebar}
             >
               <Link href={menuItem.href}>{menuItem.label}</Link>
             </MenuItem>

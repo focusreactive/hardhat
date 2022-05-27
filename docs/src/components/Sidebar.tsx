@@ -8,7 +8,7 @@ import { IDocumentationSidebarStructure } from "./types";
 
 interface Props {
   elementsList: IDocumentationSidebarStructure;
-  closeSidebar: () => void;
+  closeSidebar?: () => void;
 }
 
 const Container = styled.ul`
@@ -92,7 +92,7 @@ const Sidebar = ({ elementsList, closeSidebar }: Props) => {
           <SidebarItem
             key={sidebarItem.label}
             className={sidebarItem.type}
-            onClick={() => closeSidebar()}
+            onClick={closeSidebar}
           >
             {sidebarItem.href !== undefined ? (
               <Link passHref href={sidebarItem.href}>
@@ -114,7 +114,7 @@ const Sidebar = ({ elementsList, closeSidebar }: Props) => {
                   const isAnchor = subItem.href.includes("#");
                   return (
                     // eslint-disable-next-line
-                    <li key={subItem.label} onClick={() => closeSidebar()}>
+                    <li key={subItem.label} onClick={closeSidebar}>
                       <Link passHref href={subItem.href}>
                         <SidebarLinkWrapper
                           data-active={isSubLinkActive}
