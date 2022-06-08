@@ -108,7 +108,7 @@ const HamburgerWrapper = styled.div`
 const ThemeButton = styled.button`
   font-size: 15px;
   line-height: 13px;
-  display: flex;
+  display: none;
   justify-content: flex-end;
   align-items: center;
   background-color: ${tm(({ colors }) => colors.transparent)};
@@ -128,6 +128,9 @@ const ThemeButton = styled.button`
     ${tmSelectors.auto} {
       color: ${tmDark(({ colors }) => colors.autoThemeButton)};
     }
+  }
+  ${media.md} {
+    display: flex;
   }
 `;
 
@@ -170,13 +173,6 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
     <NavigationStyled data-theme={theme}>
       <ControlsContainer>
         <HamburgerLogoWrapper>
-          <HamburgerWrapper>
-            <Hamburger
-              isOpen={isSidebarOpen}
-              onClick={() => onSidebarOpen(!isSidebarOpen)}
-            />
-          </HamburgerWrapper>
-
           <Link href="/" passHref>
             <LogoContainer aria-label="home page">
               <span className="light-logo">
@@ -189,11 +185,7 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
           </Link>
         </HamburgerLogoWrapper>
 
-        <DesktopMenu
-          isDocumentation
-          menuItems={menuItemsList}
-          socialsItems={socialsItems}
-        />
+        <DesktopMenu menuItems={menuItemsList} socialsItems={socialsItems} />
         <ThemeButton onClick={changeTheme} aria-label="change color theme">
           {theme === ThemesEnum.AUTO && "A"}
           <ThemeIconWrapper>
@@ -205,6 +197,13 @@ const DocsNavigation: FC<Props> = ({ isSidebarOpen, onSidebarOpen }) => {
             </span>
           </ThemeIconWrapper>
         </ThemeButton>
+
+        <HamburgerWrapper>
+          <Hamburger
+            isOpen={isSidebarOpen}
+            onClick={() => onSidebarOpen(!isSidebarOpen)}
+          />
+        </HamburgerWrapper>
       </ControlsContainer>
     </NavigationStyled>
   );

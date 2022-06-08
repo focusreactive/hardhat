@@ -12,6 +12,10 @@ import FastIterationImageMobile from "../assets/feature-cards/Mobile/FastIterati
 import FastIterationImageDesktop from "../assets/feature-cards/Desktop/FastIterationImage.png";
 import { Tools } from "../components/ui/types";
 import reviewsBlock from "../assets/homepage-assets/reviews-block";
+import RunnerIconDark from "../assets/tools/runner-dark";
+import IgnitionIconDark from "../assets/tools/ignition-dark";
+import NetworkIconDark from "../assets/tools/network-dark";
+import SolidityIconDark from "../assets/tools/solidity-dark";
 
 const whyHardhatContent = {
   title: "Why hardhat",
@@ -173,6 +177,7 @@ const toolsBlockContent = {
   infoItems: [
     {
       icon: RunnerIcon,
+      iconDark: RunnerIconDark,
       title: "Runner",
       value: Tools.RUNNER,
       mottos: ["compile", "test", "extend"],
@@ -182,6 +187,7 @@ const toolsBlockContent = {
     },
     {
       icon: IgnitionIcon,
+      iconDark: IgnitionIconDark,
       title: "Ignition",
       value: Tools.IGNITION,
       mottos: ["deploy", "distribute"],
@@ -191,6 +197,7 @@ const toolsBlockContent = {
     },
     {
       icon: NetworkIcon,
+      iconDark: NetworkIconDark,
       title: "Network",
       value: Tools.NETWORK,
       mottos: ["debug", "deploy", "simulate"],
@@ -200,6 +207,7 @@ const toolsBlockContent = {
     },
     {
       icon: SolidityIcon,
+      iconDark: SolidityIconDark,
       title: "Solidity",
       value: Tools.SOLIDITY,
       mottos: ["code", "refactor"],

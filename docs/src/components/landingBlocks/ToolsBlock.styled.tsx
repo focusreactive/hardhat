@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 150px;
   &:before {
     width: 100%;
     height: 32px;
@@ -48,6 +49,7 @@ const Container = styled.div`
   ${media.md} {
     flex-direction: row;
     margin-bottom: 200px;
+    margin-top: 150px;
 
     &:before {
       width: 36px;
@@ -229,6 +231,28 @@ const ButtonContainer = styled.div`
         height: 72px;
         padding: 0px;
         transform: scale(1);
+      }
+    }
+  }
+  .dark {
+    display: none;
+  }
+
+  ${tmSelectors.dark} {
+    .light {
+      display: none;
+    }
+    .dark {
+      display: inline;
+    }
+  }
+  ${media.mqDark} {
+    ${tmSelectors.auto} {
+      .light {
+        display: none;
+      }
+      .dark {
+        display: inline;
       }
     }
   }

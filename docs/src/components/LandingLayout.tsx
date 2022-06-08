@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "linaria/react";
 
 import SEO from "./SEO";
-import LandingNavigation from "./LandingNavigation";
 import LandingFooter from "./LandingFooter";
 import Banner, { DefaultBanner } from "./ui/Banner";
 import { media, ThemeProvider, tm, tmDark, tmSelectors } from "../themes";
 import { DefaultBannerProps } from "./ui/types";
 import { bannerContent } from "../config";
 import GDPRNotice from "./GDPRNotice";
+import DocsNavigation from "./DocsNavigation";
 
 const Container = styled.div`
   position: relative;
@@ -57,6 +57,32 @@ export const Header = styled.header`
 `;
 
 const LandingLayout = ({ children, seo }: Props) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) return;
+
+    if (isSidebarOpen) {
+      // Disable scroll
+      body.style.overflow = "hidden";
+    } else {
+      // Enable scroll
+      body.style.overflow = "auto";
+    }
+  }, [isSidebarOpen]);
+
+  useEffect(() => {
+    const listener = () => {
+      if (isSidebarOpen) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("click", listener);
+
+    return () => document.removeEventListener("click", listener);
+  }, [isSidebarOpen]);
   return (
     <ThemeProvider>
       <Container className="landing">
@@ -67,7 +93,10 @@ const LandingLayout = ({ children, seo }: Props) => {
               <DefaultBanner content={content} />
             )}
           />
-          <LandingNavigation />
+          <DocsNavigation
+            isSidebarOpen={isSidebarOpen}
+            onSidebarOpen={setIsSidebarOpen}
+          />
         </Header>
 
         <SEO seo={seo} />

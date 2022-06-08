@@ -41,11 +41,13 @@ const MobileNavigationContainer = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  padding: 8px 24px;
+  padding: 8px 32px;
   display: flex;
   align-items: center;
-  font-size: 18px;
-  text-transform: capitalize;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-family: ChivoRegular, sans-serif;
+  cursor: pointer;
   &:hover {
     color: ${tm(({ colors }) => colors.accent700)};
 
