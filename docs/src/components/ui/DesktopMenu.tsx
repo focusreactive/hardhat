@@ -338,7 +338,7 @@ const DesktopMenu = ({ menuItems, socialsItems }: MenuProps) => {
               <SocialLink
                 target="_blank"
                 rel="noreferrer"
-                href={social.name}
+                href={social.href}
                 aria-label={social.name}
               >
                 <Icon />
