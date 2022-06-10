@@ -339,7 +339,7 @@ const MobileSidebarMenuModal: FC<ModalProps> = ({
           {modalState?.subItems?.map((subItem) => {
             return (
               <ToolsListItem key={subItem.href}>
-                <Link href={subItem.href}>
+                <Link passHref scroll={false} href={subItem.href}>
                   {/* eslint-disable-next-line */}
                   <a onClick={closeSidebar}>{`${subItem.prefix as string} ${
                     subItem.label
