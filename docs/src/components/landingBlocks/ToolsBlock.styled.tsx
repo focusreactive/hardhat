@@ -408,6 +408,9 @@ const DescriptionLink = styled.a`
   font-size: 15px;
   font-weight: 500;
   color: ${tm(({ colors }) => colors.neutral600)};
+  &:hover {
+    opacity: 0.8;
+  }
   ${tmSelectors.dark} {
     color: ${tmDark(({ colors }) => colors.neutral600)};
   }
@@ -422,7 +425,7 @@ const DescriptionLink = styled.a`
     position: absolute;
     width: 7px;
     height: 7px;
-    background: #fff;
+    background: ${tm(({ colors }) => colors.transparent)};
     border-top: 1px solid ${tm(({ colors }) => colors.neutral600)};
     border-left: 1px solid ${tm(({ colors }) => colors.neutral600)};
     right: -18px;

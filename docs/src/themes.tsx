@@ -95,6 +95,7 @@ export const lightPalette = {
   cookieTextColor: "#4B4B59",
   cookieShadow: "#0A0A0A14",
   cookieDropShadow: "#0A0B0D69",
+  backButton: "#6E6F70",
 };
 
 export const darkPalette = {
@@ -160,6 +161,7 @@ export const darkPalette = {
   cookieTextColor: "#D2D3D5",
   cookieShadow: "#0A0A0A14",
   cookieDropShadow: "#0A0B0D69",
+  backButton: "#F2F2F2",
 } as Palette;
 
 type Palette = typeof lightPalette;

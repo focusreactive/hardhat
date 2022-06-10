@@ -169,7 +169,7 @@ const Sidebar = ({ elementsList, closeSidebar }: Props) => {
               <Link passHref href={sidebarItem.href}>
                 <SidebarLinkWrapper
                   data-active={isLinkActive}
-                  className={"heading"}
+                  className="heading"
                 >
                   {sidebarItem.label}
                 </SidebarLinkWrapper>

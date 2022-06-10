@@ -24,6 +24,7 @@ const MenuList = styled.ul`
   display: flex;
   list-style-type: none;
   align-items: center;
+  margin-right: 65px;
 `;
 
 const MenuItem = styled.li`
@@ -85,11 +86,11 @@ const MenuButton = styled.a`
 
 const MenuSocialsList = styled.ul`
   min-width: 80px;
+  width: 80px;
   display: flex;
   height: 32px;
   align-items: center;
   list-style-type: none;
-  margin-left: 65px;
   justify-content: space-between;
 `;
 
@@ -124,6 +125,10 @@ const SocialLinksItem = styled.li`
   & svg {
     width: 22px;
     height: 22px;
+  }
+  &[data-mobile="true"] {
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -262,6 +267,34 @@ const ButtonToolName = styled.span`
   white-space: nowrap;
 `;
 
+export const SocialsList = ({
+  socialsItems,
+  isMobile = false,
+}: {
+  socialsItems: SocialsItem[];
+  isMobile?: boolean;
+}) => {
+  return (
+    <MenuSocialsList>
+      {socialsItems.map((social: SocialsItem) => {
+        const { Icon } = social;
+        return (
+          <SocialLinksItem key={social.name} data-mobile={isMobile}>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer"
+              href={social.href}
+              aria-label={social.name}
+            >
+              <Icon />
+            </SocialLink>
+          </SocialLinksItem>
+        );
+      })}
+    </MenuSocialsList>
+  );
+};
+
 const DesktopMenu = ({ menuItems, socialsItems }: MenuProps) => {
   const router = useRouter();
   const [shownDropdown, setShownDropdown] = useState<string | null>(null);
@@ -330,23 +363,7 @@ const DesktopMenu = ({ menuItems, socialsItems }: MenuProps) => {
           );
         })}
       </MenuList>
-      <MenuSocialsList>
-        {socialsItems.map((social: SocialsItem) => {
-          const { Icon } = social;
-          return (
-            <SocialLinksItem key={social.name}>
-              <SocialLink
-                target="_blank"
-                rel="noreferrer"
-                href={social.href}
-                aria-label={social.name}
-              >
-                <Icon />
-              </SocialLink>
-            </SocialLinksItem>
-          );
-        })}
-      </MenuSocialsList>
+      <SocialsList socialsItems={socialsItems} />
     </MenuContainer>
   );
 };
