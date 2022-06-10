@@ -26,6 +26,7 @@ const {
 
 interface InfoItem {
   icon: React.FC<any>;
+  iconDark: React.FC<any>;
   title: string;
   value: Tools;
   mottos: string[];
@@ -44,6 +45,7 @@ interface ToolProps {
   content:
     | {
         icon: React.FC<any>;
+        iconDark: React.FC<any>;
         title: string;
         value: Tools;
         mottos: string[];
