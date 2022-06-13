@@ -21,7 +21,7 @@ import ExtensibleImageDesktopDark from "../assets/feature-cards/Desktop/Extensib
 import FastIterationImageMobileDark from "../assets/feature-cards/Mobile/FastIterationImageDark.svg";
 import FastIterationImageDesktopDark from "../assets/feature-cards/Desktop/FastIterationImageDark.png";
 
-import { Tools } from "../components/ui/types";
+import { NavigationPagesPaths, Tools } from "../components/ui/types";
 import reviewsBlock from "../assets/homepage-assets/reviews-block";
 import RunnerIconDark from "../assets/tools/runner-dark";
 import IgnitionIconDark from "../assets/tools/ignition-dark";
@@ -74,7 +74,10 @@ const featureCardsContent = {
     desktopImgDark: ExtensibleImageDesktopDark,
     mobileImg: ExtensibleImageMobile,
     desktopImg: ExtensibleImageDesktop,
-    cta: { url: "/plugins", title: "Get started with plugins" },
+    cta: {
+      url: NavigationPagesPaths.PLUGINS,
+      title: "Get started with plugins",
+    },
     articleOne: {
       title: "Fully extensible",
       text: "A tooling platform designed to be extended, Hardhat has all the utilities you need to address your project-specific needs.",
@@ -109,7 +112,7 @@ const heroBlockContent = {
   tagline: "Flexible. Extensible. Fast.",
   cta: {
     title: "Get started",
-    url: "/getting-started",
+    url: NavigationPagesPaths.DOCUMENTATION,
   },
 };
 
@@ -118,7 +121,7 @@ const getStartedBlockContent = {
   subtitle: "Experience the new way of building Ethereum software.",
   cta: {
     title: "Get started",
-    url: "/getting-started",
+    url: NavigationPagesPaths.DOCUMENTATION,
   },
 };
 

@@ -152,7 +152,14 @@ const ToolsBlock = ({ content }: BlockProps) => {
                 className={selectedTool === button.value ? "active" : ""}
               >
                 <button.icon
-                  className={selectedTool === button.value ? "active" : ""}
+                  className={`${
+                    selectedTool === button.value ? "active" : ""
+                  } light`}
+                />
+                <button.iconDark
+                  className={`${
+                    selectedTool === button.value ? "active" : ""
+                  } dark`}
                 />
                 <ButtonNameContainer>
                   <ButtonCompanyName>{content.companyName}</ButtonCompanyName>
